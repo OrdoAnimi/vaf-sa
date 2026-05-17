@@ -101,8 +101,6 @@ vaf-sa/
 
 ## Licence
 
-© Myint Enterprises Pty Ltd. All rights reserved.
-
 Velocity Architecture Framework™ is a registered trademark.
 
 No part of this framework may be reproduced, distributed, or transmitted without written permission from Myint Enterprises Pty Ltd.
