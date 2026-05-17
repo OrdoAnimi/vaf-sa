@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 4 — Artefacts</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0c0d10;
+  --forge: #13151a;
+  --steel: #1a1e28;
+  --wire: #252b3a;
+  --wire-light: #323a50;
+  --amber: #c97d0a;
+  --amber-hot: #e8920f;
+  --amber-dim: rgba(201,125,10,0.1);
+  --cold: #3d8fb5;
+  --cold-light: #5aafd4;
+  --signal: #c45228;
+  --green: #2e9e68;
+  --green-light: #4aba84;
+  --purple: #7c5cbf;
+  --purple-light: #a07de0;
+  --purple-dim: rgba(124,92,191,0.1);
+  --fog: #7a8299;
+  --mist: #a8b0c4;
+  --ghost: #d0d6e4;
+  --white: #eef0f5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(124,92,191,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,92,191,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+
+/* HEADER */
+.doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
+.doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--purple-light); text-transform:uppercase; }
+.doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
+.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+.doc-title span { color:var(--purple-light); }
+.doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+.doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag.purple { border-color:rgba(124,92,191,0.4); color:var(--purple-light); }
+.tag.amber { border-color:rgba(201,125,10,0.4); color:var(--amber); }
+
+/* SECTION */
+.section { margin-bottom:52px; }
+.section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
+.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(124,92,191,0.2); min-width:44px; padding-top:2px; }
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--purple-light); margin-bottom:4px; }
+.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
+.body-text { font-family:'DM Sans', sans-serif; font-size:13.5px; color:var(--ghost); line-height:1.75; margin-bottom:16px; }
+.body-text strong { color:var(--white); font-weight:600; }
+.callout { background:var(--forge); border:1px solid var(--wire); border-left:3px solid var(--purple); padding:16px 20px; margin:20px 0; font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.7; }
+.callout.amber { border-left-color:var(--amber); }
+.callout.signal { border-left-color:var(--signal); }
+.callout.green { border-left-color:var(--green); }
+.divider { height:1px; background:linear-gradient(to right, var(--purple), transparent); margin:40px 0; opacity:0.3; }
+
+/* ALTITUDE MAP */
+.altitude-map { display:grid; grid-template-columns:1fr; gap:6px; margin:20px 0; }
+.alt-row { display:grid; grid-template-columns:120px 1fr 1fr 1fr; gap:0; border:1px solid var(--wire); overflow:hidden; }
+@media(max-width:600px) { .alt-row { grid-template-columns:1fr; } }
+.alt-label { padding:16px 18px; border-right:1px solid var(--wire); display:flex; align-items:center; }
+.alt-label-text { font-family:'Bebas Neue', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1.2; }
+.alt-row.ba .alt-label { background:rgba(201,125,10,0.08); }
+.alt-row.sa .alt-label { background:rgba(46,158,104,0.08); }
+.alt-row.del .alt-label { background:rgba(61,143,181,0.08); }
+.alt-row.ea .alt-label { background:rgba(124,92,191,0.08); }
+.alt-row.ba .alt-label-text { color:var(--amber); }
+.alt-row.sa .alt-label-text { color:var(--green-light); }
+.alt-row.del .alt-label-text { color:var(--cold-light); }
+.alt-row.ea .alt-label-text { color:var(--purple-light); }
+.alt-cell { padding:14px 16px; border-right:1px solid var(--wire); }
+.alt-cell:last-child { border-right:none; }
+.alt-cell-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--fog); margin-bottom:4px; }
+.alt-cell-value { font-weight:600; font-size:11px; color:var(--white); }
+.alt-cell-desc { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); margin-top:3px; line-height:1.5; }
+
+/* ARTEFACT CARDS */
+.artefact-card { background:var(--forge); border:1px solid var(--wire); margin-bottom:20px; overflow:hidden; }
+.artefact-header { display:grid; grid-template-columns:64px 1fr auto; border-bottom:1px solid var(--wire); }
+.art-num { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--wire); font-family:'Bebas Neue', sans-serif; font-size:28px; padding:20px 0; }
+.artefact-card:nth-child(1) .art-num { background:rgba(201,125,10,0.08); color:var(--amber); }
+.artefact-card:nth-child(2) .art-num { background:rgba(46,158,104,0.08); color:var(--green-light); }
+.artefact-card:nth-child(3) .art-num { background:rgba(196,82,40,0.08); color:var(--signal); }
+.artefact-card:nth-child(4) .art-num { background:rgba(61,143,181,0.08); color:var(--cold-light); }
+.art-title-block { padding:16px 20px; }
+.art-eyebrow { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fog); margin-bottom:4px; }
+.art-name { font-family:'Bebas Neue', sans-serif; font-size:24px; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:4px; }
+.art-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
+.art-badge { display:flex; align-items:center; justify-content:center; padding:0 20px; border-left:1px solid var(--wire); }
+.badge-pill { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.12em; text-transform:uppercase; padding:5px 10px; border:1px solid; white-space:nowrap; }
+.artefact-card:nth-child(1) .badge-pill { color:var(--amber); border-color:rgba(201,125,10,0.4); }
+.artefact-card:nth-child(2) .badge-pill { color:var(--green-light); border-color:rgba(46,158,104,0.4); }
+.artefact-card:nth-child(3) .badge-pill { color:var(--signal); border-color:rgba(196,82,40,0.4); }
+.artefact-card:nth-child(4) .badge-pill { color:var(--cold-light); border-color:rgba(61,143,181,0.4); }
+.artefact-body { padding:20px 24px; }
+.art-desc { font-family:'DM Sans', sans-serif; font-size:13px; color:var(--ghost); line-height:1.7; margin-bottom:16px; }
+.art-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+@media(max-width:540px) { .art-grid { grid-template-columns:1fr; } }
+.art-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fog); margin-bottom:6px; }
+.art-col-list { list-style:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.9; }
+.art-col-list li::before { content:'→ '; color:var(--wire-light); }
+.art-rule { padding:12px 16px; background:var(--steel); border-left:2px solid var(--purple); font-family:'DM Mono', monospace; font-size:10px; color:var(--mist); line-height:1.6; }
+.artefact-card:nth-child(1) .art-rule { border-color:var(--amber); }
+.artefact-card:nth-child(2) .art-rule { border-color:var(--green); }
+.artefact-card:nth-child(3) .art-rule { border-color:var(--signal); }
+.artefact-card:nth-child(4) .art-rule { border-color:var(--cold); }
+
+/* TEMPLATE BLOCKS */
+.template-block { background:var(--steel); border:1px solid var(--wire-light); margin:20px 0; overflow:hidden; }
+.template-header { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:var(--forge); border-bottom:1px solid var(--wire); }
+.template-label { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--purple-light); }
+.template-size { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
+.template-body { padding:20px 24px; }
+.template-section { margin-bottom:16px; }
+.tpl-heading { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; display:inline-block; margin-bottom:8px; }
+.tpl-cis-1 { background:rgba(201,125,10,0.12); color:var(--amber); }
+.tpl-cis-2 { background:rgba(196,82,40,0.12); color:var(--signal); }
+.tpl-cis-3 { background:rgba(46,158,104,0.12); color:var(--green-light); }
+.tpl-cis-4 { background:rgba(61,143,181,0.12); color:var(--cold-light); }
+.tpl-cis-5 { background:rgba(124,92,191,0.12); color:var(--purple-light); }
+.tpl-field { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.8; padding-left:4px; }
+.tpl-field strong { color:var(--white); }
+
+/* ADR TEMPLATE */
+.adr-grid { display:grid; grid-template-columns:1fr; gap:8px; margin:16px 0; }
+.adr-field { display:grid; grid-template-columns:160px 1fr; gap:0; border:1px solid var(--wire); overflow:hidden; }
+@media(max-width:540px) { .adr-field { grid-template-columns:1fr; } }
+.adr-key { background:rgba(61,143,181,0.08); border-right:1px solid rgba(61,143,181,0.2); padding:10px 14px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--cold-light); display:flex; align-items:center; }
+.adr-val { padding:10px 16px; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.6; }
+
+/* LIVING DOC */
+.living-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+@media(max-width:540px) { .living-grid { grid-template-columns:1fr; } }
+.living-card { background:var(--forge); border:1px solid var(--wire); padding:16px 18px; }
+.living-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+.living-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
+.living-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+/* CHECKLIST */
+.checklist { background:var(--forge); border:1px solid var(--wire); padding:24px 28px; margin:20px 0; }
+.checklist-header { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
+.checklist-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+.check-item { display:flex; align-items:flex-start; gap:12px; padding:10px 14px; margin-bottom:8px; background:var(--steel); border:1px solid var(--wire); }
+.check-box { width:16px; height:16px; min-width:16px; border:1px solid var(--wire-light); margin-top:1px; }
+.check-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--mist); line-height:1.5; }
+.check-text strong { color:var(--white); }
+
+/* FOOTER */
+.doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
+.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+.footer-brand span { color:var(--purple-light); }
+.footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--purple-dim); border:1px solid rgba(124,92,191,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--purple-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 04 OF 06<br>VAFSA-M04-ARTEFACTS<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 04<br><span>ARTEFACTS</span></div>
+  <div class="doc-subtitle">Four deliverables. One principle. Everything the engagement needs. Nothing it does not.</div>
+  <div class="doc-tags">
+    <span class="tag purple">Four Artefacts</span>
+    <span class="tag purple">One Page Each</span>
+    <span class="tag amber">CBA® — Business Layer</span>
+    <span class="tag amber">PRINCE2 — Gate Discipline</span>
+    <span class="tag">ADR — Industry Standard</span>
+    <span class="tag">Living Documentation</span>
+  </div>
+</div>
+
+<!-- 4.0 PURPOSE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">What artefacts do, what they do not do, and where VAF·SA sits in the broader VAF ecosystem</div>
+    </div>
+  </div>
+
+  <p class="body-text">An artefact is not documentation. Documentation records what happened. An artefact drives what happens next. Every artefact exists to produce a decision, unlock an action, or protect an outcome. None of those three things? Not an artefact. Overhead.</p>
+
+  <p class="body-text">VAF·SA produces four artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
+
+  <div class="callout">
+    The VAF Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. VAF·SA produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
+  </div>
+
+  <p class="body-text">The relationship between VAF EA and VAF·SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, VAF·SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — VAF·SA artefacts stand alone as the authoritative record of the engagement.</p>
+
+  <div class="altitude-map">
+    <div class="alt-row ea">
+      <div class="alt-label"><div class="alt-label-text">VAF EA</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">Guardrail Canvas</div><div class="alt-cell-desc">Strategic intent and governance boundaries</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">Trade-off Matrix</div><div class="alt-cell-desc">EA-level decision trade-offs</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">ADR + Fitness Functions</div><div class="alt-cell-desc">Governed architectural decisions</div></div>
+    </div>
+    <div class="alt-row ba">
+      <div class="alt-label"><div class="alt-label-text">VAF·SA BA</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact 01</div><div class="alt-cell-value">Customer Impact Statement</div><div class="alt-cell-desc">Business intent locked in plain language</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">Executive · Business Leads</div><div class="alt-cell-desc">Anyone who funds or approves</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page</div><div class="alt-cell-desc">No exceptions</div></div>
+    </div>
+    <div class="alt-row sa">
+      <div class="alt-label"><div class="alt-label-text">VAF·SA SA</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact 02</div><div class="alt-cell-value">Architecture on a Page</div><div class="alt-cell-desc">Solution visible to all audiences</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact 03</div><div class="alt-cell-value">Heat Map</div><div class="alt-cell-desc">Nine domains. Forensic instrument.</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Each</div><div class="alt-cell-desc">No exceptions</div></div>
+    </div>
+    <div class="alt-row del">
+      <div class="alt-label"><div class="alt-label-text">VAF·SA Delivery</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Artefact 04</div><div class="alt-cell-value">Architecture Decision Record</div><div class="alt-cell-desc">SA-level. Why this was decided.</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">All · Future Architects</div><div class="alt-cell-desc">Decision rationale preserved</div></div>
+      <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Per Decision</div><div class="alt-cell-desc">No exceptions</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.1 CIS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Artefact 01 — Business Architecture Altitude</div>
+      <div class="section-title">Customer Impact Statement</div>
+      <div class="section-desc">The problem. The solution. The outcome. The cost of failure. One page. Plain language. Before any diagram is drawn.</div>
+    </div>
+  </div>
+
+  <div class="artefact-card">
+    <div class="artefact-header">
+      <div class="art-num">01</div>
+      <div class="art-title-block">
+        <div class="art-eyebrow">Primary Artefact — BA Altitude</div>
+        <div class="art-name">Customer Impact Statement</div>
+        <div class="art-sub">CIS · One page · Produced before design begins · Updated if intent changes</div>
+      </div>
+      <div class="art-badge"><div class="badge-pill">Intent Lock</div></div>
+    </div>
+    <div class="artefact-body">
+      <p class="art-desc">The Customer Impact Statement is the artefact that locks business intent before any technical work begins. It is written in plain language. It contains no technical architecture. It can be read by a CFO in under two minutes and understood by a DBA in the same time. If either of those audiences cannot understand it, it has been written at the wrong altitude.</p>
+      <p class="art-desc">The CIS is not a business case. It is not a requirements document. It is not a project brief. It is the answer to one question: <strong>what are we actually trying to achieve, and what happens if we fail?</strong> Everything else in the engagement flows from that answer.</p>
+      <div class="art-grid">
+        <div>
+          <div class="art-col-label">What It Contains</div>
+          <ul class="art-col-list">
+            <li>The problem — in the business's language</li>
+            <li>The cost of inaction — time, money, risk</li>
+            <li>The proposed solution — one paragraph</li>
+            <li>The expected outcome — measurable</li>
+            <li>The cost of failure — what happens if this fails again</li>
+            <li>The decision required — from whom, by when</li>
+          </ul>
+        </div>
+        <div>
+          <div class="art-col-label">What It Does Not Contain</div>
+          <ul class="art-col-list">
+            <li>Technical architecture or system names</li>
+            <li>Framework references or methodology</li>
+            <li>Jargon of any kind</li>
+            <li>More than one page of content</li>
+            <li>Anything the executive cannot act on</li>
+            <li>Assumptions not confirmed in Module 2</li>
+          </ul>
+        </div>
+      </div>
+      <div class="art-rule"><strong>The test:</strong> Hand it to the most senior non-technical person in the engagement. If they cannot read it, understand it, and tell you what decision they need to make — rewrite it. The CIS has failed if anyone needs it explained to them.</div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-header">
+      <div class="template-label">CIS Template — One Page Structure</div>
+      <div class="template-size">Max 400 words · Plain language throughout</div>
+    </div>
+    <div class="template-body">
+      <div class="template-section">
+        <div class="tpl-heading tpl-cis-1">The Problem</div>
+        <div class="tpl-field"><strong>[Organisation name]</strong> is currently experiencing <strong>[specific problem in business language]</strong>. This has been the case for <strong>[duration]</strong>. Previous attempts to resolve it include <strong>[brief summary of prior attempts]</strong>. None succeeded because <strong>[plain-language reason]</strong>.</div>
+      </div>
+      <div class="template-section">
+        <div class="tpl-heading tpl-cis-2">The Cost of Inaction</div>
+        <div class="tpl-field">If this remains unresolved: <strong>[financial cost per period]</strong> in ongoing expense. <strong>[operational impact]</strong> on service delivery. <strong>[risk exposure]</strong> in compliance or security terms. The organisation has already spent <strong>[amount]</strong> attempting to solve this. Each month of inaction adds <strong>[monthly cost]</strong>.</div>
+      </div>
+      <div class="template-section">
+        <div class="tpl-heading tpl-cis-3">The Proposed Solution</div>
+        <div class="tpl-field"><strong>[One paragraph. No technical terms. What will be done, not how it will be done.]</strong> The solution addresses the problem by <strong>[plain-language description]</strong>. It replaces <strong>[what]</strong> with <strong>[what]</strong> and enables <strong>[business outcome]</strong>.</div>
+      </div>
+      <div class="template-section">
+        <div class="tpl-heading tpl-cis-4">The Expected Outcome</div>
+        <div class="tpl-field">Within <strong>[timeframe]</strong>: <strong>[measurable outcome 1]</strong>. Within <strong>[timeframe]</strong>: <strong>[measurable outcome 2]</strong>. The solution will be considered successful when <strong>[specific, testable condition]</strong>.</div>
+      </div>
+      <div class="template-section">
+        <div class="tpl-heading tpl-cis-5">The Decision Required</div>
+        <div class="tpl-field"><strong>[Name or role]</strong> is asked to approve <strong>[specific decision]</strong> by <strong>[date]</strong>. Without this decision, <strong>[specific consequence]</strong> will follow. This document has been prepared by <strong>[architect name]</strong> and reviewed by <strong>[stakeholder name]</strong>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.2 AOAP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Artefact 02 — Solution Architecture Altitude</div>
+      <div class="section-title">Architecture on a Page</div>
+      <div class="section-desc">One screen. Every audience. The solution visible from intent to delivery in a single view.</div>
+    </div>
+  </div>
+
+  <div class="artefact-card">
+    <div class="artefact-header">
+      <div class="art-num">02</div>
+      <div class="art-title-block">
+        <div class="art-eyebrow">Primary Artefact — SA Altitude</div>
+        <div class="art-name">Architecture on a Page</div>
+        <div class="art-sub">AoaP · One page · Three zones · All audiences · Primary Lucidchart deliverable</div>
+      </div>
+      <div class="art-badge"><div class="badge-pill">Solution Lock</div></div>
+    </div>
+    <div class="artefact-body">
+      <p class="art-desc">The Architecture on a Page is the single deliverable that the entire engagement has been building toward. It contains the business intent, the solution structure, and the delivery roadmap — visible simultaneously on one page to every audience who needs to act on it. The executive reads the top. The architect reads the middle. The delivery team reads the bottom.</p>
+      <p class="art-desc">It is produced in Lucidchart for stakeholder-facing presentation. It references the C4 Context diagram from Module 3. It reflects the current state of the heat map. It is the evidence that the architect has understood the problem, designed the solution, and identified the path to delivery.</p>
+      <div class="art-grid">
+        <div>
+          <div class="art-col-label">Zone 1 — Top (Business)</div>
+          <ul class="art-col-list">
+            <li>Business objective — one sentence</li>
+            <li>Success criteria — two or three measurable items</li>
+            <li>Key constraints — what cannot be changed</li>
+          </ul>
+        </div>
+        <div>
+          <div class="art-col-label">Zone 2 — Middle (Architecture)</div>
+          <ul class="art-col-list">
+            <li>C4 Context diagram — named systems, named connections</li>
+            <li>Current state — what is being replaced or extended</li>
+            <li>Target state — what the solution looks like</li>
+            <li>Key decisions — ADR references where applicable</li>
+          </ul>
+        </div>
+      </div>
+      <div class="art-grid">
+        <div>
+          <div class="art-col-label">Zone 3 — Bottom (Delivery)</div>
+          <ul class="art-col-list">
+            <li>Roadmap — three phases maximum</li>
+            <li>Phase 1: what unlocks the solution</li>
+            <li>Phase 2: what builds it</li>
+            <li>Phase 3: what operationalises it</li>
+          </ul>
+        </div>
+        <div>
+          <div class="art-col-label">Right Margin — Risks</div>
+          <ul class="art-col-list">
+            <li>Top three risks — named and owned</li>
+            <li>Heat map status — red items visible</li>
+            <li>Open decisions — pending items that could change design</li>
+          </ul>
+        </div>
+      </div>
+      <div class="art-rule"><strong>The test:</strong> Place it in front of three people simultaneously — the CIO, the lead architect, and the project manager. All three should be able to read what concerns them without asking for clarification. If any of the three needs something explained, the zone for their audience has been designed at the wrong altitude.</div>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    The Architecture on a Page is not the same as an architecture diagram. An architecture diagram shows how a system is built. The AoaP shows why a solution was chosen, what it looks like, and how it will be delivered — for every audience who needs to act on that information simultaneously.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.3 HEAT MAP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Artefact 03 — Forensic Instrument</div>
+      <div class="section-title">Heat Map</div>
+      <div class="section-desc">Nine domains. Every concern visible. No blank cells. The artefact that makes obfuscation structurally impossible.</div>
+    </div>
+  </div>
+
+  <div class="artefact-card">
+    <div class="artefact-header">
+      <div class="art-num">03</div>
+      <div class="art-title-block">
+        <div class="art-eyebrow">Forensic Instrument — SA Altitude</div>
+        <div class="art-name">Heat Map</div>
+        <div class="art-sub">HM · Nine domains · Red / Amber / Green / Grey · Updated throughout engagement · Not a diagram</div>
+      </div>
+      <div class="art-badge"><div class="badge-pill">Risk Lock</div></div>
+    </div>
+    <div class="artefact-body">
+      <p class="art-desc">The heat map is not produced at the end of an engagement. It is created at the beginning of Module 3 and updated continuously through Modules 3 and 4. By the time it reaches its final state, every cell has been answered, challenged, and independently verified. A heat map with no red cells at the end of a complex engagement is not evidence of a complete solution — it is evidence that the cells were accepted without interrogation.</p>
+      <div class="art-grid">
+        <div>
+          <div class="art-col-label">Nine Domains</div>
+          <ul class="art-col-list">
+            <li>01 — Security and Cybersecurity</li>
+            <li>02 — Data Flow and Sovereignty</li>
+            <li>03 — Compliance and Regulatory</li>
+            <li>04 — Networking and Connectivity</li>
+            <li>05 — Cloud and Infrastructure</li>
+            <li>06 — Integration and APIs</li>
+            <li>07 — Vendor and Commercial</li>
+            <li>08 — Operations and Support</li>
+            <li>09 — Non-Functional Requirements</li>
+          </ul>
+        </div>
+        <div>
+          <div class="art-col-label">Cell Status</div>
+          <ul class="art-col-list">
+            <li>RED — open risk. Decision required before design proceeds</li>
+            <li>AMBER — partially addressed. Owner assigned. Deadline set.</li>
+            <li>GREEN — confirmed. Documented. Independently verified.</li>
+            <li>GREY — not applicable. Reason documented.</li>
+            <li>BLANK — not permitted. Ever.</li>
+          </ul>
+          <div class="art-col-label" style="margin-top:12px;">Final State Rule</div>
+          <ul class="art-col-list">
+            <li>All red cells: named owner, named deadline</li>
+            <li>All green cells: independently verified</li>
+            <li>All grey cells: documented reason</li>
+            <li>Zero blank cells — no exceptions</li>
+          </ul>
+        </div>
+      </div>
+      <div class="art-rule"><strong>The forensic function:</strong> Place the heat map in front of the vendor or the withholding stakeholder. Every blank cell is named aloud. Every red cell is assigned an owner and a deadline in the meeting. The map makes silence visible. It makes deflection structural rather than conversational. You cannot deflect a named cell the way you can deflect an open question.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.4 ADR -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Artefact 04 — Decision Record</div>
+      <div class="section-title">Architecture Decision Record</div>
+      <div class="section-desc">Why this was decided. What was rejected. What changes this. The institutional memory the engagement cannot afford to lose.</div>
+    </div>
+  </div>
+
+  <div class="artefact-card">
+    <div class="artefact-header">
+      <div class="art-num">04</div>
+      <div class="art-title-block">
+        <div class="art-eyebrow">Industry Standard — SA Altitude</div>
+        <div class="art-name">Architecture Decision Record</div>
+        <div class="art-sub">ADR · One page per decision · Numbered sequentially · Status tracked · Never deleted</div>
+      </div>
+      <div class="art-badge"><div class="badge-pill">Decision Lock</div></div>
+    </div>
+    <div class="artefact-body">
+      <p class="art-desc">The ADR solves the most pervasive problem in solution architecture: decision rationale gets lost. Systems are built to reflect decisions nobody on the current team remembers making. New architects repeat analysis already completed. Governance reviews lack evidence of past reasoning. Vendors exploit the gap between what was decided and what was documented.</p>
+      <p class="art-desc">In every one of the four engagement archetypes, the absence of ADRs contributed to the failure. The vendor who obfuscated did so partly because no prior decision about data egress had been formally recorded. The organisation with institutional paralysis had no record of why prior attempts failed. The ADR exists so that the next architect, the next audit, and the next vendor engagement has the evidence in writing.</p>
+      <p class="art-desc"><strong>VAF·SA ADRs are SA-level.</strong> They are lighter than the EA-level ADR with fitness functions. One page. Written at the time of the decision. Numbered. Versioned. Status tracked. Never modified — only superseded by a new ADR that references the original.</p>
+      <div class="art-rule"><strong>When to write an ADR:</strong> Any decision that, if reversed, would require significant rework. Any decision that could be challenged in governance. Any decision involving a vendor commitment. Any decision about data flow, security controls, or integration patterns. When in doubt — write one. The cost of writing one is minutes. The cost of not having one can be months.</div>
+    </div>
+  </div>
+
+  <div class="template-block">
+    <div class="template-header">
+      <div class="template-label">ADR Template — SA Level · One Page</div>
+      <div class="template-size">Max 300 words · Status tracked · Never deleted</div>
+    </div>
+    <div class="template-body">
+      <div class="adr-grid">
+        <div class="adr-field">
+          <div class="adr-key">ADR Number</div>
+          <div class="adr-val">ADR-[NNN] — sequential, engagement-scoped. E.g. ADR-001, ADR-002.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Title</div>
+          <div class="adr-val">One line. States the decision, not the topic. E.g. "Use Azure Blob Storage for long-term data archival" not "Storage decision."</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Status</div>
+          <div class="adr-val">Proposed — under discussion. Accepted — active and governing. Superseded — replaced by ADR-[NNN]. Never deleted.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Date</div>
+          <div class="adr-val">Date the decision was made. Not the date the document was written.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Decision Makers</div>
+          <div class="adr-val">Named individuals who made or approved this decision. Role and name. Not just role.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Context</div>
+          <div class="adr-val">What forced this decision. The situation as it existed at the time — including constraints, risks, and what was already known from the heat map and intelligence gathering.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Decision</div>
+          <div class="adr-val">One or two sentences. What was decided. Plain language. No ambiguity. The decision that will govern subsequent work.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Alternatives Considered</div>
+          <div class="adr-val">What else was evaluated. Why it was rejected. This is the most important field — it prevents future architects from re-evaluating options already ruled out and documents the trade-off that was accepted.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">Consequences</div>
+          <div class="adr-val">What this decision creates, enables, or closes off. What would need to change if this decision were reversed. Any downstream decisions it triggers.</div>
+        </div>
+        <div class="adr-field">
+          <div class="adr-key">What Changes This</div>
+          <div class="adr-val">Named conditions that would require this decision to be reviewed. E.g. "Vendor changes hosting model" or "Regulatory requirement changes data classification."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.5 LIVING DOC -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Principle — Not an Artefact</div>
+      <div class="section-title">Living Documentation</div>
+      <div class="section-desc">Artefacts are not static files. They are versioned, linked to delivery, and updated when reality changes.</div>
+    </div>
+  </div>
+
+  <p class="body-text">A document that is accurate on the day it is produced and outdated within a month is not a living artefact. It is a historical record with a future expiry date. Every artefact produced in VAF·SA is treated as a living document — versioned, dated, and updated when the engagement conditions change.</p>
+
+  <p class="body-text">This is not about maintaining a documentation system. It is about maintaining the integrity of the artefact as the authoritative record of what was decided and why. A CIS that reflects the original intent and not the evolved one has failed its purpose. An ADR marked Accepted for a decision that has since been superseded — without a new ADR referencing it — has broken the decision chain.</p>
+
+  <div class="living-grid">
+    <div class="living-card">
+      <div class="living-label">Principle 01</div>
+      <div class="living-title">Every Artefact is Dated and Versioned</div>
+      <div class="living-body">Version number. Date. Author. Status. On every document. When it changes — new version, new date, change documented. The version history is the audit trail.</div>
+    </div>
+    <div class="living-card">
+      <div class="living-label">Principle 02</div>
+      <div class="living-title">ADRs Are Never Deleted</div>
+      <div class="living-body">A superseded ADR remains in the record. The new ADR references the old one. The chain of decisions is unbroken. Future architects can trace every significant decision back to its context.</div>
+    </div>
+    <div class="living-card">
+      <div class="living-label">Principle 03</div>
+      <div class="living-title">Artefacts Are Linked to Delivery</div>
+      <div class="living-body">The AoaP references the roadmap phases. The roadmap phases reference the backlog. The backlog references the ADRs that constrain each workstream. The chain from intent to delivery is traceable in both directions.</div>
+    </div>
+    <div class="living-card">
+      <div class="living-label">Principle 04</div>
+      <div class="living-title">Reality Changes the Artefact</div>
+      <div class="living-body">When the engagement changes — vendor exits, requirements shift, new constraints emerge — the artefact changes too. A CIS that no longer reflects the current problem is not a CIS. It is a liability.</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    The VAF Agentic Architect already generates and commits VP1, VP2, and VP3 artefacts to GitHub automatically. VAF·SA artefacts — CIS, AoaP, Heat Map, ADR — are the next generation of targets for agentic generation. The framework teaches the human method first. The agent automates it second.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.6 GATE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.6</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Gate</div>
+      <div class="section-title">Module 4 Completion Checklist</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 5 — Communication</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <div class="checklist-header">Artefact Gate</div>
+    <div class="checklist-sub">MODULE 4 IS NOT COMPLETE UNTIL ALL FOUR ARTEFACTS EXIST AND ALL ITEMS ARE CONFIRMED</div>
+
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Customer Impact Statement produced</strong> — one page, plain language, no technical content, named decision required from named person by named date.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS test passed</strong> — most senior non-technical stakeholder can read it, understand it, and state the decision required without explanation.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Architecture on a Page produced</strong> — three zones populated: business intent top, C4 Context and current/target state middle, roadmap bottom, risks right margin.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>AoaP test passed</strong> — CIO reads zone 1, lead architect reads zone 2, project manager reads zone 3, none require clarification from the other's zone.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map finalised</strong> — all nine domains addressed, zero blank cells, all red cells have named owner and named deadline, all green cells independently verified.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>ADRs written</strong> — one per significant decision made in the engagement. Status set. Decision makers named. Alternatives documented. Consequences stated.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>All artefacts versioned and dated</strong> — version number, date, author, status on every document.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Artefacts linked to delivery</strong> — AoaP roadmap phases traceable to workstreams, ADRs referenced from affected design decisions.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>All four artefacts consistent with each other</strong> — CIS intent matches AoaP business zone, heat map risks visible in AoaP right margin, ADRs referenced where relevant.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Artefact set ready for Module 5</strong> — all four artefacts can now be presented to every room. Module 5 teaches how to present them.</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 05 — COMMUNICATION · Every Room. Every Audience. Plain Language. Every Time.</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-nav">VAFSA-M04-ARTEFACTS<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

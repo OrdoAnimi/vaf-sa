@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 6 — The Velocity Loop</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0c0d10;
+  --forge: #13151a;
+  --steel: #1a1e28;
+  --wire: #252b3a;
+  --wire-light: #323a50;
+  --gold: #c8a84b;
+  --gold-hot: #e0be5a;
+  --gold-dim: rgba(200,168,75,0.1);
+  --amber: #c97d0a;
+  --cold: #3d8fb5;
+  --cold-light: #5aafd4;
+  --signal: #c45228;
+  --green: #2e9e68;
+  --green-light: #4aba84;
+  --fog: #7a8299;
+  --mist: #a8b0c4;
+  --ghost: #d0d6e4;
+  --white: #eef0f5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(200,168,75,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,168,75,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+
+/* HEADER */
+.doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
+.doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; }
+.doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
+.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+.doc-title span { color:var(--gold-hot); }
+.doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+.doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag.gold { border-color:rgba(200,168,75,0.4); color:var(--gold); }
+
+/* SECTION */
+.section { margin-bottom:52px; }
+.section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
+.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(200,168,75,0.2); min-width:44px; padding-top:2px; }
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
+
+/* PHIL'S VOICE — body text */
+.p { font-family:'DM Sans', sans-serif; font-size:13.5px; color:var(--ghost); line-height:1.65; margin-bottom:14px; }
+.p strong { color:var(--white); font-weight:600; }
+.p em { color:var(--gold); font-style:normal; }
+
+.divider { height:1px; background:linear-gradient(to right, var(--gold), transparent); margin:40px 0; opacity:0.3; }
+
+/* CALLOUT */
+.callout { background:var(--forge); border:1px solid var(--wire); border-left:3px solid var(--gold); padding:16px 20px; margin:20px 0; font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.7; }
+.callout.signal { border-left-color:var(--signal); }
+.callout.green { border-left-color:var(--green); }
+
+/* THE LOOP DIAGRAM */
+.loop-diagram {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:8px;
+  margin:24px 0;
+  position:relative;
+}
+
+@media(max-width:560px) { .loop-diagram { grid-template-columns:1fr; } }
+
+.loop-cell {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:20px 22px;
+  position:relative;
+  overflow:hidden;
+}
+
+.loop-cell::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+}
+
+.loop-cell.observe::before { background:var(--amber); }
+.loop-cell.orient::before { background:var(--cold); }
+.loop-cell.decide::before { background:var(--green); }
+.loop-cell.act::before { background:var(--signal); }
+
+.loop-letter {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:52px;
+  line-height:1;
+  margin-bottom:6px;
+  opacity:0.15;
+  position:absolute;
+  right:16px;
+  top:12px;
+}
+
+.loop-cell.observe .loop-letter { color:var(--amber); }
+.loop-cell.orient .loop-letter { color:var(--cold); }
+.loop-cell.decide .loop-letter { color:var(--green); }
+.loop-cell.act .loop-letter { color:var(--signal); }
+
+.loop-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.loop-cell.observe .loop-label { color:var(--amber); }
+.loop-cell.orient .loop-label { color:var(--cold-light); }
+.loop-cell.decide .loop-label { color:var(--green-light); }
+.loop-cell.act .loop-label { color:var(--signal); }
+
+.loop-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:24px; letter-spacing:0.04em;
+  color:var(--white); margin-bottom:8px;
+}
+
+.loop-module {
+  font-family:'DM Mono', monospace;
+  font-size:8px; color:var(--fog);
+  letter-spacing:0.1em; margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.loop-desc {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog);
+  line-height:1.7;
+}
+
+.loop-connector {
+  grid-column: 1 / -1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:8px 0;
+}
+
+.loop-arrow {
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--gold);
+  letter-spacing:0.2em; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+
+.loop-arrow::before { content:''; flex:1; width:60px; height:1px; background:var(--gold); opacity:0.3; }
+.loop-arrow::after { content:''; flex:1; width:60px; height:1px; background:var(--gold); opacity:0.3; }
+
+/* PRINCIPLES */
+.principles-stack { display:flex; flex-direction:column; gap:6px; margin:20px 0; }
+
+.principle-row {
+  display:grid;
+  grid-template-columns: 48px 1fr;
+  gap:0;
+  background:var(--forge);
+  border:1px solid var(--wire);
+  overflow:hidden;
+}
+
+.pr-num {
+  display:flex; align-items:center; justify-content:center;
+  background:var(--gold-dim);
+  border-right:1px solid rgba(200,168,75,0.2);
+  font-family:'Bebas Neue', sans-serif;
+  font-size:20px; color:var(--gold);
+  padding:16px 0;
+}
+
+.pr-body { padding:14px 18px; }
+
+.pr-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:18px; letter-spacing:0.04em;
+  color:var(--white); margin-bottom:6px;
+}
+
+.pr-text {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+/* WHEN TO LOOP BACK */
+.loop-back-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0; }
+@media(max-width:600px) { .loop-back-grid { grid-template-columns:1fr; } }
+
+.lb-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:16px 18px;
+}
+
+.lb-trigger {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:6px;
+}
+
+.lb-title {
+  font-weight:600; font-size:12px;
+  color:var(--white); margin-bottom:8px;
+}
+
+.lb-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+.lb-step {
+  margin-top:8px; padding:8px 12px;
+  background:var(--steel);
+  border-left:2px solid rgba(200,168,75,0.3);
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--gold);
+}
+
+.lb-step::before { content:'ADJUST: '; color:rgba(200,168,75,0.5); }
+
+/* WITHOUT SUPPORT */
+.support-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+@media(max-width:540px) { .support-grid { grid-template-columns:1fr; } }
+
+.support-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  border-top:2px solid var(--gold);
+  padding:16px 18px;
+}
+
+.sc-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:6px;
+}
+
+.sc-title {
+  font-weight:600; font-size:12px;
+  color:var(--white); margin-bottom:8px;
+}
+
+.sc-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+/* WHAT DONE MEANS */
+.done-block {
+  background:var(--steel);
+  border:1px solid var(--wire);
+  border-left:3px solid var(--gold);
+  padding:24px 28px;
+  margin:20px 0;
+}
+
+.done-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:26px; letter-spacing:0.04em;
+  color:var(--gold-hot); margin-bottom:16px;
+}
+
+.done-items { display:flex; flex-direction:column; gap:8px; }
+
+.done-item {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:10px 14px;
+  background:var(--ink);
+  border:1px solid var(--wire);
+}
+
+.done-check {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--gold);
+  min-width:20px; padding-top:1px;
+}
+
+.done-text {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--mist); line-height:1.5;
+}
+
+.done-text strong { color:var(--white); }
+
+/* FINAL STATEMENT */
+.final-statement {
+  background:var(--forge);
+  border:1px solid rgba(200,168,75,0.3);
+  padding:32px 36px;
+  margin:40px 0;
+  text-align:center;
+}
+
+.fs-text {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:clamp(20px, 3vw, 32px);
+  letter-spacing:0.06em;
+  color:var(--white);
+  line-height:1.4;
+}
+
+.fs-text span { color:var(--gold-hot); }
+
+/* COLOUR STRIP */
+.module-strip {
+  display:flex; gap:4px; margin:24px 0;
+}
+
+.strip-block {
+  flex:1; height:4px;
+}
+
+.strip-block:nth-child(1) { background:var(--amber); }
+.strip-block:nth-child(2) { background:var(--cold); }
+.strip-block:nth-child(3) { background:var(--green); }
+.strip-block:nth-child(4) { background:#7c5cbf; }
+.strip-block:nth-child(5) { background:var(--signal); }
+.strip-block:nth-child(6) { background:var(--gold); }
+
+/* FOOTER */
+.doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
+.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+.footer-brand span { color:var(--gold); }
+.footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--gold-dim); border:1px solid rgba(200,168,75,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 06 OF 06<br>VAFSA-M06-VELOCITY-LOOP<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 06<br><span>THE VELOCITY LOOP</span></div>
+  <div class="doc-subtitle">Think fast. Decide fast. Deliver fast. With or without anyone's help.</div>
+  <div class="doc-tags">
+    <span class="tag gold">Six Modules — One Cycle</span>
+    <span class="tag gold">OODA Applied</span>
+    <span class="tag gold">Operating Without Support</span>
+    <span class="tag gold">Four Principles</span>
+    <span class="tag">What Done Means</span>
+  </div>
+
+  <div class="module-strip" style="margin-top:20px;">
+    <div class="strip-block"></div>
+    <div class="strip-block"></div>
+    <div class="strip-block"></div>
+    <div class="strip-block"></div>
+    <div class="strip-block"></div>
+    <div class="strip-block"></div>
+  </div>
+</div>
+
+<!-- 6.0 PURPOSE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">Six modules. One cycle. This is how they connect.</div>
+    </div>
+  </div>
+
+  <p class="p">The Velocity Loop is not a new methodology. You have been running it since Module 1.</p>
+
+  <p class="p">Module 1 was Observe. Module 2 was Orient. Module 3 was Decide. Modules 4 and 5 were Act. This module names what you were doing — and teaches you to run it faster next time.</p>
+
+  <p class="p">The loop has one purpose: compress the time between entering an environment and delivering the solution. Not by skipping steps. By running each step with enough precision that you do not need to repeat it.</p>
+
+  <p class="p">Two engagements take three months. Both started on the same day. One architect is still writing a requirements document. The other has an Architecture on a Page, a signed Customer Impact Statement, and a delivery team in Sprint 1. The difference is not intelligence. It is not resources. It is not seniority.</p>
+
+  <p class="p"><em>It is the speed of the loop.</em></p>
+
+  <div class="callout">
+    Speed without precision produces rework. Precision without speed produces reports nobody reads. The Velocity Loop produces neither. It produces the right artefact for the right audience at the right moment — and moves on.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.1 THE LOOP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">The Cycle</div>
+      <div class="section-title">Observe. Orient. Decide. Act.</div>
+      <div class="section-desc">Four steps. Not four phases. Not four meetings. Four continuous actions running in parallel.</div>
+    </div>
+  </div>
+
+  <p class="p">John Boyd built the OODA loop for fighter pilots. The pilot who completed the cycle faster than the enemy controlled the engagement. The enemy was always one step behind because they were always responding to the previous moment.</p>
+
+  <p class="p">The same principle applies in every engagement you will ever walk into. The architect who observes, orients, decides, and acts faster than the environment changes — holds the ground. The architect who waits for certainty before acting is always reacting. Always behind.</p>
+
+  <p class="p">You do not need certainty. You need enough information to move. The loop handles the rest.</p>
+
+  <div class="loop-diagram">
+
+    <div class="loop-cell observe">
+      <div class="loop-letter">O</div>
+      <div class="loop-label">Step 01</div>
+      <div class="loop-title">Observe</div>
+      <div class="loop-module">Module 1 — Orientation</div>
+      <div class="loop-desc">Read the environment before anyone briefs you on it. Five intake questions. Four archetypes. Document inventory. Stakeholder map. You are not discovering — you are pattern-matching against what you already know.</div>
+    </div>
+
+    <div class="loop-cell orient">
+      <div class="loop-letter">O</div>
+      <div class="loop-label">Step 02</div>
+      <div class="loop-title">Orient</div>
+      <div class="loop-module">Module 2 — Intelligence</div>
+      <div class="loop-desc">Get what you need from people who may not want to give it. Ten questions. Plain speech. Vendor interrogation. Information gap map. You know the shape of the answer before you ask the question. Confirm or expose. Nothing else.</div>
+    </div>
+
+    <div class="loop-connector">
+      <div class="loop-arrow">LOOP RUNS CONTINUOUSLY</div>
+    </div>
+
+    <div class="loop-cell decide">
+      <div class="loop-letter">D</div>
+      <div class="loop-label">Step 03</div>
+      <div class="loop-title">Decide</div>
+      <div class="loop-module">Module 3 — Design</div>
+      <div class="loop-desc">Build the solution. Right tool. Right level. Right audience. C4 Context. Heat map. Three altitudes. Current state. Target state. Gap. Security embedded. Observability specified. You decide what the solution is. Then you move.</div>
+    </div>
+
+    <div class="loop-cell act">
+      <div class="loop-letter">A</div>
+      <div class="loop-label">Step 04</div>
+      <div class="loop-title">Act</div>
+      <div class="loop-module">Modules 4 and 5 — Artefacts and Communication</div>
+      <div class="loop-desc">Produce the artefacts. Present them to every room. Raise concerns in writing. Hold the line. The artefact is the action. It drives the next decision. The loop starts again from whatever the response reveals.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.2 WHEN TO LOOP BACK -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Discipline</div>
+      <div class="section-title">When to Loop Back</div>
+      <div class="section-desc">New information changes one step. Not all of them. Know which one.</div>
+    </div>
+  </div>
+
+  <p class="p">New information arrives. Something changes. The vendor reveals the data is egress, not ingress. The CISO blocks the integration pattern you chose. The business changes the success criteria after the CIS was signed.</p>
+
+  <p class="p">You do not restart the engagement. You do not rerun the full loop. You identify which step the new information belongs to and adjust from there.</p>
+
+  <p class="p">This is precision. Not rigidity. The loop is not a conveyor belt. It is a targeting system. You move it to where the problem is.</p>
+
+  <div class="loop-back-grid">
+
+    <div class="lb-card">
+      <div class="lb-trigger">Trigger</div>
+      <div class="lb-title">Something you did not know about the environment</div>
+      <div class="lb-body">A system that was not disclosed. A prior attempt that was hidden. A political dynamic that only became visible after the first workshop. A document that existed and was withheld.</div>
+      <div class="lb-step">Observe. Re-run Module 1 against the new information. Update the archetype diagnosis if it has changed.</div>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-trigger">Trigger</div>
+      <div class="lb-title">The intelligence you gathered was wrong or incomplete</div>
+      <div class="lb-body">The vendor confirmed something in a meeting that their written documentation contradicts. A stakeholder answered a question one way and a document answers it differently. The data flow is not what was described.</div>
+      <div class="lb-step">Orient. Re-run Module 2. Closed questions. Written confirmation. Independent verification. Adjust the heat map.</div>
+    </div>
+
+    <div class="lb-card">
+      <div class="lb-trigger">Trigger</div>
+      <div class="lb-title">The design decision needs to change</div>
+      <div class="lb-body">A constraint emerged that the design does not satisfy. A security control was mandated that changes the integration pattern. An NFR was confirmed that the current architecture cannot meet.</div>
+      <div class="lb-step">Decide. Re-run Module 3 for the affected domain. Issue an ADR that supersedes the previous decision. Update the AoaP.</div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    The loop is efficient because it only touches what changed. If the vendor lied about data direction — you re-run Orient and Decide. You do not restart the entire engagement. The artefacts from the clean steps stand. Only the affected domain moves.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.3 OPERATING WITHOUT SUPPORT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Field Condition</div>
+      <div class="section-title">Operating Without Support</div>
+      <div class="section-desc">The EA did not show up. The practice manager is not available. The head of architecture has not engaged. You work anyway.</div>
+    </div>
+  </div>
+
+  <p class="p">This is not an edge case. It is the common condition.</p>
+
+  <p class="p">Across every engagement archetype in this framework — Obfuscation, Negligent Void, Institutional Paralysis, Silo — the EA governance layer was absent. Position papers existed. Standards were published. Nobody applied them. The solution architect inherited the environment and was expected to deliver without the authority the environment assumed they had.</p>
+
+  <p class="p">VAF·SA does not require EA support to function. It was built for exactly this condition.</p>
+
+  <div class="support-grid">
+
+    <div class="support-card">
+      <div class="sc-label">The Authority</div>
+      <div class="sc-title">The artefact holds the line when no one else will</div>
+      <div class="sc-body">You do not need a title to produce a Customer Impact Statement. You do not need EA sign-off to run a workshop and produce an Architecture on a Page. The artefact is the authority. It holds the line because it is the evidence — and evidence does not require a job title.</div>
+    </div>
+
+    <div class="support-card">
+      <div class="sc-label">The Pressure</div>
+      <div class="sc-title">Silence under pressure is not inaction</div>
+      <div class="sc-body">Three months of immersion while they say you have not moved. Two weeks of intelligence gathering while the vendor pushes for sign-off. The Velocity Loop is running the entire time. You are not stalled. You are Observing and Orienting. The Act step will come. It will be precise. It will be faster than anything they attempted before.</div>
+    </div>
+
+    <div class="support-card">
+      <div class="sc-label">The Escalation</div>
+      <div class="sc-title">Document the absence. Formally.</div>
+      <div class="sc-body">If EA support is required and not provided — write it down. Not as a complaint. As an ADR. "This decision was made at SA altitude because EA governance was unavailable." The record shows who was absent. The record shows the decision was not made in a vacuum. The record protects you.</div>
+    </div>
+
+    <div class="support-card">
+      <div class="sc-label">The Standard</div>
+      <div class="sc-title">Your output is the benchmark</div>
+      <div class="sc-body">When you deliver what nobody else could — in three months, in the Archetype 3 environment, after twenty-four months of institutional paralysis — the artefact set becomes the standard the organisation measures against next time. Not because you told them. Because the evidence speaks for itself.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.4 FOUR PRINCIPLES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Operating Code</div>
+      <div class="section-title">The Four Principles</div>
+      <div class="section-desc">Not guidelines. Not recommendations. The conditions under which this framework operates.</div>
+    </div>
+  </div>
+
+  <p class="p">These are not aspirational statements. Every decision in every module of this framework was made against one of these four principles. When a decision felt uncertain — when the vendor was pushing, when the practice manager was absent, when the timeline was shrinking — one of these four is the answer.</p>
+
+  <div class="principles-stack">
+
+    <div class="principle-row">
+      <div class="pr-num">I</div>
+      <div class="pr-body">
+        <div class="pr-title">No Process First. Outcome Leads.</div>
+        <div class="pr-text">The framework is the vehicle. The outcome is the destination. TOGAF, SABSA, PRINCE2, C4 — all instruments. None of them is the work. The work is delivering a solution. When the framework starts to feel like the goal, the principle is being violated. Stop. Return to the outcome. Ask what the client needs to see by Friday. Work backwards from that.</div>
+      </div>
+    </div>
+
+    <div class="principle-row">
+      <div class="pr-num">II</div>
+      <div class="pr-body">
+        <div class="pr-title">Decision Altitude. Every Decision at the Right Level.</div>
+        <div class="pr-text">Business decisions belong at business altitude. Technical decisions belong at technical altitude. When a technical decision is being made in a business room, stop the meeting. Name the altitude. Move the decision to the right room. When a business decision is being made by a technical team, do the same. The altitude discipline is not bureaucracy. It is the thing that prevents two years of wasted motion.</div>
+      </div>
+    </div>
+
+    <div class="principle-row">
+      <div class="pr-num">III</div>
+      <div class="pr-body">
+        <div class="pr-title">One Artefact. If It Does Not Fit On One Page, The Thinking Is Not Done.</div>
+        <div class="pr-text">The second page is where incomplete thinking hides. The third page is where nobody reads anymore. One page forces precision. It forces the removal of everything that does not drive a decision. The test is simple: place it in front of the room. If they need a second page to act on it, the first page has not done its job. Rewrite the first page.</div>
+      </div>
+    </div>
+
+    <div class="principle-row">
+      <div class="pr-num">IV</div>
+      <div class="pr-body">
+        <div class="pr-title">Velocity Over Volume. Insight Delivered Fast Beats Documentation Delivered Late.</div>
+        <div class="pr-text">A complete requirements document produced six weeks after the decision was made changes nothing. An Architecture on a Page produced in week two changes everything. Volume without velocity is overhead. Velocity without accuracy is noise. VAF·SA produces accurate insight at speed — because the loop is running from day one and the artefacts are built on evidence, not on hope.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.5 WHAT DONE MEANS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">The Gate</div>
+      <div class="section-title">What Done Means</div>
+      <div class="section-desc">Not the client saying it. Not the timeline saying it. This.</div>
+    </div>
+  </div>
+
+  <p class="p">Done is not when the project manager marks the deliverable complete. Done is not when the client stops asking questions. Done is not when the timeline runs out.</p>
+
+  <p class="p">Done is when the artefact set is complete, the loop has run clean, and the delivery team has everything they need to build without you in the room.</p>
+
+  <p class="p">That is a specific, testable condition. Every item below is either true or it is not.</p>
+
+  <div class="done-block">
+    <div class="done-title">VAF·SA Engagement Complete</div>
+    <div class="done-items">
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>All six module gates passed.</strong> Every checklist item confirmed across Modules 1 through 5. No items carried forward as "to be resolved."</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>Customer Impact Statement signed.</strong> Decision confirmed. Named person. Named date. In writing.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>Architecture on a Page confirmed by all three zones.</strong> Executive, architect, and PM have each read their zone and confirmed it is accurate.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>Heat map has no blank cells.</strong> All red cells have a named owner and a named deadline. All green cells have been independently verified. All grey cells have a documented reason.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>ADRs cover every significant decision.</strong> Status set. Decision makers named. Alternatives documented. Nothing significant decided without a record.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>All concerns are in writing with owners and deadlines.</strong> No verbal-only concerns. No unassigned risks. No undocumented objections.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>The delivery team can operate without you.</strong> They have the artefacts. They have the ADRs. They have the heat map. They know what each red cell means and who owns it. They do not need you in every meeting to know what was decided and why.</div>
+      </div>
+
+      <div class="done-item">
+        <div class="done-check">→</div>
+        <div class="done-text"><strong>The loop ran clean.</strong> No information emerged late that changed the design without a corresponding ADR. No architectural decision was made informally. The record is coherent from first workshop to final artefact.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="callout green">
+    The engagement is not done when you leave. It is done when the artefacts can answer every question the delivery team will ask after you leave. Build that record. Then leave.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FINAL STATEMENT -->
+<div class="final-statement">
+  <div class="fs-text">
+    Six modules.<br>
+    <span>Two pillars.</span><br>
+    One loop.<br><br>
+    How to think.<br>
+    <span>How to talk.</span><br><br>
+    Thirty years.<br>
+    Sixty-two certifications.<br>
+    <span>One page.</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 06 — VELOCITY LOOP · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: PREFACE — INFLUENCE WITHOUT AUTHORITY · The Operating Philosophy</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-nav">VAFSA-M06-VELOCITY-LOOP<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

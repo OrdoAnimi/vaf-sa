@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 3 — Design</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0c0d10;
+  --forge: #13151a;
+  --steel: #1a1e28;
+  --wire: #252b3a;
+  --wire-light: #323a50;
+  --amber: #c97d0a;
+  --amber-hot: #e8920f;
+  --cold: #3d8fb5;
+  --cold-light: #5aafd4;
+  --signal: #c45228;
+  --green: #2e9e68;
+  --green-light: #4aba84;
+  --green-dim: rgba(46,158,104,0.1);
+  --fog: #7a8299;
+  --mist: #a8b0c4;
+  --ghost: #d0d6e4;
+  --white: #eef0f5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(46,158,104,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,158,104,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+
+/* HEADER */
+.doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
+
+.doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--green); text-transform:uppercase; }
+
+.doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
+
+.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+
+.doc-title span { color:var(--green-light); }
+
+.doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+
+.doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
+
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag.green { border-color:rgba(46,158,104,0.4); color:var(--green-light); }
+.tag.amber { border-color:rgba(201,125,10,0.4); color:var(--amber); }
+
+/* SECTION */
+.section { margin-bottom:52px; }
+
+.section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
+
+.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(46,158,104,0.2); min-width:44px; padding-top:2px; }
+
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--green-light); margin-bottom:4px; }
+
+.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+
+.section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
+
+.body-text { font-family:'DM Sans', sans-serif; font-size:13.5px; color:var(--ghost); line-height:1.75; margin-bottom:16px; }
+.body-text strong { color:var(--white); font-weight:600; }
+
+.callout { background:var(--forge); border:1px solid var(--wire); border-left:3px solid var(--green); padding:16px 20px; margin:20px 0; font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.7; }
+.callout.amber { border-left-color:var(--amber); }
+.callout.signal { border-left-color:var(--signal); }
+
+.divider { height:1px; background:linear-gradient(to right, var(--green), transparent); margin:40px 0; opacity:0.3; }
+
+/* PHILOSOPHY PRINCIPLE */
+.philosophy-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0; }
+
+@media(max-width:600px) { .philosophy-row { grid-template-columns:1fr; } }
+
+.phil-card { background:var(--forge); border:1px solid var(--wire); border-top:2px solid var(--green); padding:18px 20px; }
+
+.phil-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+
+.phil-title { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:8px; }
+
+.phil-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+/* TOOL SELECTION */
+.tool-grid { display:flex; flex-direction:column; gap:8px; margin:20px 0; }
+
+.tool-row { display:grid; grid-template-columns:160px 1fr 1fr; gap:0; background:var(--forge); border:1px solid var(--wire); overflow:hidden; }
+
+@media(max-width:600px) { .tool-row { grid-template-columns:1fr; } }
+
+.tool-name-block { background:var(--green-dim); border-right:1px solid rgba(46,158,104,0.2); padding:16px 18px; display:flex; flex-direction:column; justify-content:center; }
+
+.tool-name { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.04em; color:var(--green-light); line-height:1; margin-bottom:4px; }
+
+.tool-type { font-family:'DM Mono', monospace; font-size:8px; color:var(--fog); letter-spacing:0.1em; }
+
+.tool-when { padding:14px 18px; border-right:1px solid var(--wire); }
+
+.tool-when-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+
+.tool-when-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+.tool-not { padding:14px 18px; }
+
+.tool-not-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--signal); margin-bottom:6px; }
+
+.tool-not-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+/* C4 LEVELS */
+.c4-stack { display:flex; flex-direction:column; gap:8px; margin:20px 0; }
+
+.c4-level { display:grid; grid-template-columns:56px 1fr auto; gap:0; overflow:hidden; border:1px solid; }
+
+.c4-level.use { border-color:rgba(46,158,104,0.3); }
+.c4-level.conditional { border-color:rgba(201,125,10,0.3); }
+.c4-level.never { border-color:rgba(196,82,40,0.2); }
+
+.c4-num { display:flex; align-items:center; justify-content:center; padding:0; font-family:'Bebas Neue', sans-serif; font-size:20px; border-right:1px solid; }
+
+.c4-level.use .c4-num { background:rgba(46,158,104,0.1); border-color:rgba(46,158,104,0.2); color:var(--green-light); }
+.c4-level.conditional .c4-num { background:rgba(201,125,10,0.08); border-color:rgba(201,125,10,0.2); color:var(--amber); }
+.c4-level.never .c4-num { background:rgba(196,82,40,0.06); border-color:rgba(196,82,40,0.15); color:var(--signal); }
+
+.c4-body { padding:14px 18px; }
+
+.c4-title { font-weight:600; font-size:13px; color:var(--white); margin-bottom:4px; }
+
+.c4-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.6; }
+
+.c4-verdict { display:flex; align-items:center; justify-content:center; padding:0 18px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; white-space:nowrap; }
+
+.c4-level.use .c4-verdict { color:var(--green-light); }
+.c4-level.conditional .c4-verdict { color:var(--amber); }
+.c4-level.never .c4-verdict { color:var(--signal); }
+
+/* HEAT MAP */
+.heatmap-intro { margin-bottom:20px; }
+
+.heatmap-legend { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 20px; }
+
+.legend-item { display:flex; align-items:center; gap:8px; padding:6px 12px; border:1px solid var(--wire); background:var(--forge); }
+
+.legend-dot { width:10px; height:10px; border-radius:50%; }
+.legend-dot.red { background:#c0392b; }
+.legend-dot.amber { background:#d68910; }
+.legend-dot.green { background:#27ae60; }
+.legend-dot.grey { background:var(--wire-light); }
+
+.legend-text { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
+
+.heatmap-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:20px 0; }
+
+@media(max-width:560px) { .heatmap-grid { grid-template-columns:1fr; } }
+
+.hm-domain { background:var(--forge); border:1px solid var(--wire); padding:14px 16px; }
+
+.hm-domain-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+
+.hm-domain-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:6px; }
+
+.hm-questions { list-style:none; font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); line-height:1.8; }
+
+.hm-questions li::before { content:'◆ '; color:var(--wire-light); font-size:7px; }
+
+.hm-status-row { display:flex; gap:6px; margin-top:8px; }
+
+.hm-cell { padding:3px 8px; font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.08em; border:1px solid; }
+
+.hm-cell.red { background:rgba(192,57,43,0.15); border-color:rgba(192,57,43,0.4); color:#e74c3c; }
+.hm-cell.amber { background:rgba(214,137,16,0.12); border-color:rgba(214,137,16,0.4); color:#e8920f; }
+.hm-cell.green { background:rgba(39,174,96,0.12); border-color:rgba(39,174,96,0.4); color:#4aba84; }
+.hm-cell.grey { background:rgba(50,58,80,0.5); border-color:var(--wire-light); color:var(--fog); }
+
+/* THREE ALTITUDE STACK */
+.altitude-stack { display:flex; flex-direction:column; gap:0; margin:20px 0; }
+
+.altitude-level { display:grid; grid-template-columns:140px 1fr; gap:0; border:1px solid var(--wire); margin-bottom:4px; overflow:hidden; }
+
+.alt-label-block { padding:20px 18px; border-right:1px solid var(--wire); display:flex; flex-direction:column; justify-content:center; }
+
+.alt-num { font-family:'Bebas Neue', sans-serif; font-size:32px; line-height:1; margin-bottom:4px; }
+
+.altitude-level:nth-child(1) .alt-num { color:rgba(201,125,10,0.4); }
+.altitude-level:nth-child(2) .alt-num { color:rgba(46,158,104,0.4); }
+.altitude-level:nth-child(3) .alt-num { color:rgba(61,143,181,0.4); }
+
+.alt-name { font-family:'Bebas Neue', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1; }
+
+.altitude-level:nth-child(1) .alt-name { color:var(--amber); }
+.altitude-level:nth-child(2) .alt-name { color:var(--green-light); }
+.altitude-level:nth-child(3) .alt-name { color:var(--cold-light); }
+
+.alt-audience { font-family:'DM Mono', monospace; font-size:8px; color:var(--fog); letter-spacing:0.1em; margin-top:6px; }
+
+.alt-body { padding:18px 22px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+
+@media(max-width:560px) { .alt-body { grid-template-columns:1fr; } }
+
+.alt-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--fog); margin-bottom:6px; }
+
+.alt-col-value { font-family:'DM Sans', sans-serif; font-size:12px; font-weight:600; color:var(--white); margin-bottom:4px; }
+
+.alt-col-desc { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); line-height:1.6; }
+
+/* CURRENT/TARGET/GAP */
+.ctg-grid { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:0; margin:20px 0; align-items:stretch; }
+
+@media(max-width:600px) { .ctg-grid { grid-template-columns:1fr; gap:8px; } .ctg-arrow { display:none; } }
+
+.ctg-block { background:var(--forge); border:1px solid var(--wire); padding:18px 20px; }
+
+.ctg-arrow { display:flex; align-items:center; justify-content:center; padding:0 12px; font-family:'Bebas Neue', sans-serif; font-size:24px; color:var(--wire-light); }
+
+.ctg-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:8px; }
+
+.ctg-block:nth-child(1) .ctg-label { color:var(--signal); }
+.ctg-block:nth-child(3) .ctg-label { color:var(--green-light); }
+.ctg-block:nth-child(5) .ctg-label { color:var(--amber); }
+
+.ctg-title { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:10px; }
+
+.ctg-list { list-style:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.8; }
+
+.ctg-list li::before { content:'— '; color:var(--wire-light); }
+
+/* SECURITY LAYER */
+.security-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+
+@media(max-width:540px) { .security-grid { grid-template-columns:1fr; } }
+
+.sec-card { background:var(--forge); border:1px solid var(--wire); border-left:2px solid var(--signal); padding:16px 18px; }
+
+.sec-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--signal); margin-bottom:6px; }
+
+.sec-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
+
+.sec-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+.sec-principle { margin-top:10px; padding:8px 12px; background:var(--steel); font-family:'DM Mono', monospace; font-size:9px; color:var(--mist); line-height:1.5; border-left:2px solid rgba(196,82,40,0.4); }
+
+/* INTEGRATION PATTERNS */
+.pattern-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0; }
+
+@media(max-width:600px) { .pattern-grid { grid-template-columns:1fr; } }
+
+.pattern-card { background:var(--forge); border:1px solid var(--wire); padding:16px 18px; }
+
+.pattern-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--cold-light); margin-bottom:6px; }
+
+.pattern-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
+
+.pattern-use { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); line-height:1.7; margin-bottom:8px; }
+
+.pattern-when { font-family:'DM Mono', monospace; font-size:9px; color:var(--green-light); }
+
+.pattern-when::before { content:'USE WHEN: '; color:var(--green); }
+
+/* CHECKLIST */
+.checklist { background:var(--forge); border:1px solid var(--wire); padding:24px 28px; margin:20px 0; }
+
+.checklist-header { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
+
+.checklist-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+
+.check-item { display:flex; align-items:flex-start; gap:12px; padding:10px 14px; margin-bottom:8px; background:var(--steel); border:1px solid var(--wire); }
+
+.check-box { width:16px; height:16px; min-width:16px; border:1px solid var(--wire-light); margin-top:1px; }
+
+.check-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--mist); line-height:1.5; }
+
+.check-text strong { color:var(--white); }
+
+/* FOOTER */
+.doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
+
+.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+
+.footer-brand span { color:var(--green-light); }
+
+.footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--green-dim); border:1px solid rgba(46,158,104,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--green-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03-DESIGN<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 03<br><span>DESIGN</span></div>
+  <div class="doc-subtitle">Right tool. Right level. Right audience. How to build the solution that solves the actual problem.</div>
+  <div class="doc-tags">
+    <span class="tag green">C4 Model</span>
+    <span class="tag green">Heat Map</span>
+    <span class="tag green">Three-Altitude Stack</span>
+    <span class="tag amber">SABSA Security Layer</span>
+    <span class="tag amber">ISO 27001</span>
+    <span class="tag">Azure · AWS · GCP</span>
+    <span class="tag">API-led Architecture</span>
+    <span class="tag">Mermaid · Lucidchart</span>
+  </div>
+</div>
+
+<!-- 3.0 PURPOSE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">What design means in VAF·SA — and what it does not mean</div>
+    </div>
+  </div>
+
+  <p class="body-text">Design in VAF·SA is not about producing the most detailed diagram. It is not about demonstrating the full depth of your technical knowledge. It is not about filling every box in a framework template.</p>
+
+  <p class="body-text"><strong>Design is about producing the clearest possible picture of the solution — for the audience that needs to act on it — using the minimum tool necessary to achieve that clarity.</strong></p>
+
+  <p class="body-text">Draw a component diagram for an executive. You have not demonstrated expertise. You have demonstrated that you do not know your audience. Produce a one-page context diagram that a CEO and a DBA can both read. That is design operating correctly.</p>
+
+  <div class="callout">
+    The most effective solution architecture diagram is not the most detailed one. It is the one that makes the right decision obvious to the right person at the right moment.
+  </div>
+
+  <div class="philosophy-row">
+    <div class="phil-card">
+      <div class="phil-label">Principle 01</div>
+      <div class="phil-title">Right Tool</div>
+      <div class="phil-body">62 certifications means 62 tools available. The skill is selecting the one that fits the engagement — not deploying all of them. More tools do not produce a better solution. The right tool produces a faster one.</div>
+    </div>
+    <div class="phil-card">
+      <div class="phil-label">Principle 02</div>
+      <div class="phil-title">Right Level</div>
+      <div class="phil-body">Every design decision sits at an altitude. Business intent at business altitude. System structure at architecture altitude. Implementation detail at delivery altitude. Never let the wrong detail appear at the wrong level.</div>
+    </div>
+    <div class="phil-card">
+      <div class="phil-label">Principle 03</div>
+      <div class="phil-title">Right Audience</div>
+      <div class="phil-body">Every diagram has one primary audience. Design for them first. If the same diagram needs to serve multiple audiences — you have drawn at the wrong level. Draw again at the level where all audiences can read it simultaneously.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.1 TOOL SELECTION -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Protocol</div>
+      <div class="section-title">Tool Selection Protocol</div>
+      <div class="section-desc">When to use which tool. Why. And when to put it down.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Every tool in the architect's stack has a purpose and a limit. Reach for the wrong tool. Waste time, produce confusion, signal that you do not understand the problem. Select the right one. Produce clarity in the time others spend setting up the wrong one.</p>
+
+  <div class="tool-grid">
+
+    <div class="tool-row">
+      <div class="tool-name-block">
+        <div class="tool-name">C4 Model</div>
+        <div class="tool-type">Structural · Communication</div>
+      </div>
+      <div class="tool-when">
+        <div class="tool-when-label">Use When</div>
+        <div class="tool-when-text">You need to show what a system is, who uses it, and what it connects to — at any level of detail. Context for stakeholders. Container for architects. Component when designing internals. The universal architectural language.</div>
+      </div>
+      <div class="tool-not">
+        <div class="tool-not-label">Do Not Use When</div>
+        <div class="tool-not-text">You need to show process flow or time sequence. C4 shows structure, not behaviour. For behaviour use Mermaid sequence or flowchart.</div>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <div class="tool-name-block">
+        <div class="tool-name">Heat Map</div>
+        <div class="tool-type">Forensic · Risk</div>
+      </div>
+      <div class="tool-when">
+        <div class="tool-when-label">Use When</div>
+        <div class="tool-when-text">You need to surface every concern domain and force an answer from every party in the room. Security, data, compliance, vendor, networking — every domain visible simultaneously. Every blank cell is an open risk.</div>
+      </div>
+      <div class="tool-not">
+        <div class="tool-not-label">Do Not Use When</div>
+        <div class="tool-not-text">You need to show system structure or process. The heat map is a diagnostic instrument, not an architecture diagram. Use it before design, alongside design, to confirm design is complete.</div>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <div class="tool-name-block">
+        <div class="tool-name">Mermaid</div>
+        <div class="tool-type">Workflow · Sequence · Process</div>
+      </div>
+      <div class="tool-when">
+        <div class="tool-when-label">Use When</div>
+        <div class="tool-when-text">You need to show how something happens over time. Process flows. Sequence diagrams. State transitions. Deployment pipelines. Anywhere the question is "then what?" rather than "what is this?"</div>
+      </div>
+      <div class="tool-not">
+        <div class="tool-not-label">Do Not Use When</div>
+        <div class="tool-not-text">The audience is non-technical and needs a visual first impression. Mermaid is text-rendered and reads as technical. Use Lucidchart for stakeholder-facing presentation of the same content.</div>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <div class="tool-name-block">
+        <div class="tool-name">Lucidchart</div>
+        <div class="tool-type">Visual · Stakeholder</div>
+      </div>
+      <div class="tool-when">
+        <div class="tool-when-label">Use When</div>
+        <div class="tool-when-text">The primary audience includes business stakeholders, executives, or anyone outside the architecture practice. Polished, visual, navigable. Used for the Architecture on a Page and any board-facing deliverable.</div>
+      </div>
+      <div class="tool-not">
+        <div class="tool-not-label">Do Not Use When</div>
+        <div class="tool-not-text">Speed is more important than presentation quality. In an active workshop or design session, whiteboard or Mermaid first. Lucidchart is the clean output, not the thinking tool.</div>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <div class="tool-name-block">
+        <div class="tool-name">Cloud Platform Diagrams</div>
+        <div class="tool-type">Azure · AWS · GCP · Technical</div>
+      </div>
+      <div class="tool-when">
+        <div class="tool-when-label">Use When</div>
+        <div class="tool-when-text">The audience is a technical delivery team who need to know which specific services are in scope. Use the native platform icon sets. Name the services precisely. This is Container or Component level — never Context.</div>
+      </div>
+      <div class="tool-not">
+        <div class="tool-not-label">Do Not Use When</div>
+        <div class="tool-not-text">The audience includes anyone outside the delivery team. Azure icons in a board presentation signal that the presenter does not know their audience. Translate to C4 Context before the room changes.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.2 C4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Primary Tool</div>
+      <div class="section-title">The C4 Model — Applied</div>
+      <div class="section-desc">Four levels. Know when to use each. Know when to stop.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The C4 Model is the primary structural tool in VAF·SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
+
+  <p class="body-text">Most architectural presentations fail because they start at the wrong level. Too detailed for the executive. Too abstract for the developer. C4 solves this by making the level explicit and the zoom deliberate.</p>
+
+  <div class="c4-stack">
+
+    <div class="c4-level use">
+      <div class="c4-num">C1</div>
+      <div class="c4-body">
+        <div class="c4-title">Context Diagram — Always Start Here</div>
+        <div class="c4-desc">The system in its environment. Who uses it. What external systems it connects to. No technology. No implementation. No internal structure. Just: what is this, who uses it, and what does it talk to. Every stakeholder in every room can read a Context diagram. Draw this first for every engagement. Draw it last to confirm nothing has changed.</div>
+      </div>
+      <div class="c4-verdict">Always Use</div>
+    </div>
+
+    <div class="c4-level conditional">
+      <div class="c4-num">C2</div>
+      <div class="c4-body">
+        <div class="c4-title">Container Diagram — When the Audience Is Technical</div>
+        <div class="c4-desc">The deployable units inside the system. Applications, databases, APIs, services. Technology choices become visible here. Deployment and runtime view. Used when architects, DevOps, or platform teams need to see how the system is actually built and where each part lives. Not for executive audiences. Not for vendor negotiations.</div>
+      </div>
+      <div class="c4-verdict">Conditional</div>
+    </div>
+
+    <div class="c4-level conditional">
+      <div class="c4-num">C3</div>
+      <div class="c4-body">
+        <div class="c4-title">Component Diagram — Only When Designing One Container's Internals</div>
+        <div class="c4-desc">The components inside a single container and how they depend on each other. Used only when you are designing or reviewing the internal structure of a specific service or application. Audience is developers and technical leads for that specific system. Never produce this for a full-system audience.</div>
+      </div>
+      <div class="c4-verdict">Rarely</div>
+    </div>
+
+    <div class="c4-level never">
+      <div class="c4-num">C4</div>
+      <div class="c4-body">
+        <div class="c4-title">Code Diagram — Not In This Framework</div>
+        <div class="c4-desc">Class diagrams. Database schemas. Internal implementation detail. This is developer territory. The solution architect does not produce Code diagrams — the development team does. If a solution requires Code-level documentation to be understood by the architecture audience, the design has not been explained at the right altitude.</div>
+      </div>
+      <div class="c4-verdict">Never Here</div>
+    </div>
+
+  </div>
+
+  <div class="callout">
+    The C4 Context diagram is the one diagram that never needs an explanation. If you have drawn it correctly, every person in every room — business, technical, vendor, executive — reads it the same way. That is the standard to design to.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.3 HEAT MAP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Forensic Instrument</div>
+      <div class="section-title">The Heat Map</div>
+      <div class="section-desc">Not a diagram. A forcing function. Every blank cell is an unanswered question. Every red cell is an unresolved risk.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The heat map is the instrument that Module 2 populates and Module 3 uses to confirm that the design is complete. Every domain that the solution touches must be mapped. Every cell must have a status. A blank cell is not "to be confirmed" — it is an open risk sitting in the design unaddressed.</p>
+
+  <p class="body-text">In the vendor obfuscation case study: the heat map was placed in front of the vendor. Every blank cell was named. Every unanswered question was documented. The vendor could not deflect a blank cell the way they could deflect an open question. The map made lying structurally difficult.</p>
+
+  <div class="heatmap-legend">
+    <div class="legend-item"><div class="legend-dot red"></div><div class="legend-text">RED — Open risk. Decision required before design proceeds.</div></div>
+    <div class="legend-item"><div class="legend-dot amber"></div><div class="legend-text">AMBER — Partially addressed. Owner assigned. Deadline set.</div></div>
+    <div class="legend-item"><div class="legend-dot green"></div><div class="legend-text">GREEN — Confirmed. Documented. Evidence held.</div></div>
+    <div class="legend-item"><div class="legend-dot grey"></div><div class="legend-text">GREY — Not applicable to this engagement. Documented why.</div></div>
+  </div>
+
+  <div class="heatmap-grid">
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 01</div>
+      <div class="hm-domain-title">Security and Cybersecurity</div>
+      <ul class="hm-questions">
+        <li>What is the threat model for this solution?</li>
+        <li>What security controls are mandated by policy?</li>
+        <li>Essential Eight compliance status?</li>
+        <li>Who is the security authority for this engagement?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell red">Access Control</div>
+        <div class="hm-cell amber">Threat Model</div>
+        <div class="hm-cell green">E8 Status</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 02</div>
+      <div class="hm-domain-title">Data — Flow and Sovereignty</div>
+      <ul class="hm-questions">
+        <li>Where does data originate and where does it go?</li>
+        <li>Is data egress or ingress — and to where?</li>
+        <li>What classification applies to this data?</li>
+        <li>What retention and archival obligations exist?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell red">Data Egress</div>
+        <div class="hm-cell red">Classification</div>
+        <div class="hm-cell amber">Retention</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 03</div>
+      <div class="hm-domain-title">Compliance and Regulatory</div>
+      <ul class="hm-questions">
+        <li>What regulatory obligations apply?</li>
+        <li>Privacy impact assessment completed?</li>
+        <li>ISO 27001 / SOC2 / ISM controls in scope?</li>
+        <li>Audit trail requirements documented?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell green">Regulatory</div>
+        <div class="hm-cell amber">Privacy</div>
+        <div class="hm-cell red">Audit Trail</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 04</div>
+      <div class="hm-domain-title">Networking and Connectivity</div>
+      <ul class="hm-questions">
+        <li>What network paths does this solution require?</li>
+        <li>Firewall rules — what is open, what needs to be opened?</li>
+        <li>SD-WAN or MPLS implications?</li>
+        <li>Latency and bandwidth requirements documented?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell amber">Firewall Rules</div>
+        <div class="hm-cell green">Network Path</div>
+        <div class="hm-cell grey">SD-WAN</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 05</div>
+      <div class="hm-domain-title">Cloud and Infrastructure</div>
+      <ul class="hm-questions">
+        <li>Which cloud platform? Mandated or selected?</li>
+        <li>Hosting model — IaaS, PaaS, SaaS?</li>
+        <li>HA and DR requirements confirmed?</li>
+        <li>FinOps — cost model understood and approved?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell green">Platform</div>
+        <div class="hm-cell amber">HA/DR</div>
+        <div class="hm-cell red">Cost Model</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 06</div>
+      <div class="hm-domain-title">Integration and APIs</div>
+      <ul class="hm-questions">
+        <li>What systems must this solution integrate with?</li>
+        <li>API contracts confirmed with each integration point?</li>
+        <li>Event-driven or synchronous — and why?</li>
+        <li>API security and authentication model confirmed?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell amber">API Contracts</div>
+        <div class="hm-cell red">Auth Model</div>
+        <div class="hm-cell green">Integration Map</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 07</div>
+      <div class="hm-domain-title">Vendor and Commercial</div>
+      <ul class="hm-questions">
+        <li>Vendor commitments confirmed in writing?</li>
+        <li>Contractual obligations reviewed?</li>
+        <li>Vendor roadmap alignment verified?</li>
+        <li>Vendor exit strategy considered?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell red">Written Commitment</div>
+        <div class="hm-cell amber">Roadmap</div>
+        <div class="hm-cell grey">Exit Strategy</div>
+      </div>
+    </div>
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 08</div>
+      <div class="hm-domain-title">Operations and Support</div>
+      <ul class="hm-questions">
+        <li>Who operates this solution post-delivery?</li>
+        <li>Monitoring and alerting designed?</li>
+        <li>Runbooks and support documentation in scope?</li>
+        <li>Business continuity and DR tested?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell red">Operations Owner</div>
+        <div class="hm-cell red">Monitoring</div>
+        <div class="hm-cell amber">DR Plan</div>
+      </div>
+    </div>
+
+
+    <div class="hm-domain">
+      <div class="hm-domain-label">Domain 09 — Added</div>
+      <div class="hm-domain-title">Non-Functional Requirements</div>
+      <ul class="hm-questions">
+        <li>Performance thresholds defined — response time, throughput?</li>
+        <li>Scalability model confirmed — vertical, horizontal, elastic?</li>
+        <li>Availability target — uptime SLA agreed with business?</li>
+        <li>Disaster recovery RTO and RPO defined and tested?</li>
+      </ul>
+      <div class="hm-status-row">
+        <div class="hm-cell red">Performance</div>
+        <div class="hm-cell red">Availability SLA</div>
+        <div class="hm-cell amber">RTO/RPO</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout amber">
+    A heat map with no red cells is not evidence of a complete design. It is evidence that the cells were answered without being challenged. The architect's job is to verify every green cell independently before it leaves the map. Trust but verify is not VAF·SA. Verify, then trust.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.4 THREE ALTITUDE STACK -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Framework</div>
+      <div class="section-title">The Three-Altitude Design Stack</div>
+      <div class="section-desc">Business Architecture → Solution Architecture → Delivery. Each altitude. Each tool. Each audience. Each artefact.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Every design decision in VAF·SA belongs to an altitude. Making the wrong decision at the wrong altitude — or letting the wrong audience make a decision that belongs at a different level — produces the failure modes the four archetypes describe. The three-altitude stack is the structural discipline that prevents that.</p>
+
+  <div class="altitude-stack">
+
+    <div class="altitude-level">
+      <div class="alt-label-block">
+        <div class="alt-num">01</div>
+        <div class="alt-name">Business Architecture</div>
+        <div class="alt-audience">Audience: Executive · Business Leads · Sponsors</div>
+      </div>
+      <div class="alt-body">
+        <div>
+          <div class="alt-col-label">What Gets Decided Here</div>
+          <div class="alt-col-value">Business Intent</div>
+          <div class="alt-col-desc">Why this matters. What winning looks like. The cost of inaction. Business goals, constraints, and success criteria. Nothing technical crosses this altitude.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Primary Tool</div>
+          <div class="alt-col-value">Customer Impact Statement</div>
+          <div class="alt-col-desc">One page. Problem, solution, outcome, cost of failure. Written in plain language. No jargon. Readable by any executive in under two minutes.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Design Output</div>
+          <div class="alt-col-value">Intent Locked</div>
+          <div class="alt-col-desc">Business objective confirmed. Success criteria agreed. Before any architecture diagram is drawn, intent is documented and signed off at this altitude.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="altitude-level">
+      <div class="alt-label-block">
+        <div class="alt-num">02</div>
+        <div class="alt-name">Solution Architecture</div>
+        <div class="alt-audience">Audience: Architects · Technical Leads · Platform Teams</div>
+      </div>
+      <div class="alt-body">
+        <div>
+          <div class="alt-col-label">What Gets Decided Here</div>
+          <div class="alt-col-value">Structure and Approach</div>
+          <div class="alt-col-desc">What gets built, how it connects, what it replaces or extends. Technology choices visible here. Governance constraints from EA applied here, not debated here.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Primary Tool</div>
+          <div class="alt-col-value">C4 Context + Heat Map</div>
+          <div class="alt-col-desc">C4 Context shows the structure. Heat map confirms every concern domain is addressed. Container level added when delivery teams need deployment detail.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Design Output</div>
+          <div class="alt-col-value">Solution Defined</div>
+          <div class="alt-col-desc">Named systems. Named connections. Named data flows. Named security controls. Named integration points. Architecture Decision Records where decisions require a formal record.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="altitude-level">
+      <div class="alt-label-block">
+        <div class="alt-num">03</div>
+        <div class="alt-name">Delivery Architecture</div>
+        <div class="alt-audience">Audience: DevOps · Developers · Project Teams</div>
+      </div>
+      <div class="alt-body">
+        <div>
+          <div class="alt-col-label">What Gets Decided Here</div>
+          <div class="alt-col-value">Sequence and Phasing</div>
+          <div class="alt-col-desc">What gets built first. What dependencies exist between components. What the rollback position is. Sprint-compatible artefacts. UAT and go-live readiness.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Primary Tool</div>
+          <div class="alt-col-value">Roadmap + Mermaid</div>
+          <div class="alt-col-desc">Roadmap shows the phased sequence. Mermaid shows process flows, sequence diagrams, and pipeline architecture for the delivery team.</div>
+        </div>
+        <div>
+          <div class="alt-col-label">Design Output</div>
+          <div class="alt-col-value">Delivery Sequenced</div>
+          <div class="alt-col-desc">Three phases maximum on the roadmap. Each phase with a named outcome. Dependencies mapped. Owner per workstream. Go-live criteria defined before build begins.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.5 CURRENT/TARGET/GAP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Methodology</div>
+      <div class="section-title">Current State · Target State · Gap</div>
+      <div class="section-desc">Three views. Every engagement. In that order. Never skip current state.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Every design begins with an honest picture of what exists. Not what the documentation says exists. Not what the vendor claims exists. What actually exists — confirmed through Module 1 immersion and Module 2 intelligence. From there, target state is designed. The gap between them is what gets delivered.</p>
+
+  <div class="ctg-grid">
+    <div class="ctg-block">
+      <div class="ctg-label">Current State</div>
+      <div class="ctg-title">What Exists</div>
+      <ul class="ctg-list">
+        <li>Named systems in production</li>
+        <li>Actual data flows — confirmed</li>
+        <li>Integration points — mapped</li>
+        <li>Known technical debt</li>
+        <li>Security posture — actual</li>
+        <li>Cost of current state — monthly</li>
+        <li>What is failing and why</li>
+      </ul>
+    </div>
+    <div class="ctg-arrow">→</div>
+    <div class="ctg-block">
+      <div class="ctg-label">Target State</div>
+      <div class="ctg-title">What Is Needed</div>
+      <ul class="ctg-list">
+        <li>Solution at C4 Context level</li>
+        <li>Named target systems</li>
+        <li>Designed data flows</li>
+        <li>Integration architecture</li>
+        <li>Security controls in design</li>
+        <li>Cost of target state — modelled</li>
+        <li>What success looks like</li>
+      </ul>
+    </div>
+    <div class="ctg-arrow">→</div>
+    <div class="ctg-block">
+      <div class="ctg-label">Gap</div>
+      <div class="ctg-title">What Gets Delivered</div>
+      <ul class="ctg-list">
+        <li>Delta between current and target</li>
+        <li>Named owner per gap item</li>
+        <li>Dependency sequence mapped</li>
+        <li>Risks per gap item</li>
+        <li>Roadmap phases aligned to gap</li>
+        <li>Decision required per blocker</li>
+        <li>Escalation path if stalled</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    Never design target state without documenting current state first. The practitioner who skips current state designs a solution for the problem they were told about — not the problem that actually exists. These are rarely the same.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.6 SECURITY LAYER -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.6</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Embedded Layer</div>
+      <div class="section-title">Security — Embedded Not Bolted On</div>
+      <div class="section-desc">Security is not a separate workstream. It is a design constraint applied from the first box drawn.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Security architecture in VAF·SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first C4 context box. SABSA provides the threat and risk lens. ISO 27001 and Essential Eight provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
+
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-label">SABSA Lens</div>
+      <div class="sec-title">Threat and Risk Context</div>
+      <div class="sec-body">Applied at business architecture altitude. What are the threats to the business — not just to the system. What risk appetite applies. What security attributes the solution must demonstrate.</div>
+      <div class="sec-principle">Ask: what does the attacker want, and what does this solution do to prevent them getting it?</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-label">Essential Eight</div>
+      <div class="sec-title">Control Baseline</div>
+      <div class="sec-body">Applied at solution architecture altitude. Eight controls. Maturity level matched to the organisation's risk profile. Every design confirms which controls are addressed and which require additional work.</div>
+      <div class="sec-principle">Ask: which of the eight controls does this solution affect — positively or negatively?</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-label">ISO 27001</div>
+      <div class="sec-title">Governance Framework</div>
+      <div class="sec-body">Applied when a formal compliance obligation exists. Information security management system alignment. Audit trail requirements. Risk treatment documentation. Not always in scope — but always checked against the heat map.</div>
+      <div class="sec-principle">Ask: what evidence does this design produce that satisfies the control requirement?</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-label">API Security Architect</div>
+      <div class="sec-title">Integration Security</div>
+      <div class="sec-body">Applied at every integration point. Authentication model confirmed. Token lifecycle managed. API contracts documented with security attributes. No unnamed API dependency leaves the design without a named security control.</div>
+      <div class="sec-principle">Ask: who can call this API, what can they do, and how do we know it is them?</div>
+    </div>
+  </div>
+
+  <div class="callout signal">
+    Zero Trust is not a product. It is a design posture: assume breach, verify explicitly, enforce least privilege. Every connection in the design — internal or external — is treated as untrusted until verified. Apply this to every named relationship in the C4 Context diagram before design is considered complete.
+  </div>
+
+  <div class="security-grid" style="grid-template-columns:1fr;">
+    <div class="sec-card">
+      <div class="sec-label">Zero Trust — Added 2025</div>
+      <div class="sec-title">Trust No Connection by Default</div>
+      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in VAF·SA at every named connection in the C4 Context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
+      <div class="sec-principle">Ask: if this connection were compromised, what could an attacker reach from here — and is that acceptable?</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.7 INTEGRATION PATTERNS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.7</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Selection Guide</div>
+      <div class="section-title">Integration Patterns</div>
+      <div class="section-desc">Three patterns. Know which one the problem needs. Know why.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Integration architecture is where most solution designs introduce unnecessary complexity. The practitioner who defaults to event-driven architecture because it is modern, or point-to-point because it is fast, without asking which pattern the problem actually requires — produces a solution that delivers the wrong thing well.</p>
+
+  <div class="pattern-grid">
+    <div class="pattern-card">
+      <div class="pattern-label">Pattern 01</div>
+      <div class="pattern-title">API-Led Integration</div>
+      <div class="pattern-use">Systems communicate through defined, versioned APIs. Each system owns its API contract. Consumers call the API — they do not reach into the system directly. Decoupled. Reusable. Auditable.</div>
+      <div class="pattern-when">multiple consumers need the same capability, or when the integration must be governed and versioned over time</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-label">Pattern 02</div>
+      <div class="pattern-title">Event-Driven Integration</div>
+      <div class="pattern-use">Systems publish events. Other systems subscribe and react. No direct coupling between publisher and subscriber. High throughput. Asynchronous. Resilient to individual system failure.</div>
+      <div class="pattern-when">real-time data distribution is needed across multiple consumers, or when systems must remain decoupled from each other's availability</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-label">Pattern 03</div>
+      <div class="pattern-title">Direct Integration</div>
+      <div class="pattern-use">System A calls System B directly. Simple. Fast to implement. Lowest abstraction. Creates tight coupling — changes in B break A. Appropriate only when the integration is permanent and both systems are stable.</div>
+      <div class="pattern-when">two stable, long-lived systems with a simple, permanent, low-volume integration requirement and no future reuse expected</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.7a OBSERVABILITY -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.7a</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Design Requirement — Added 2025</div>
+      <div class="section-title">Observability</div>
+      <div class="section-desc">Design for visibility from day one. If you cannot see it, you cannot operate it.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Observability is not a monitoring tool configured after deployment. It is a design decision made before the first component is built. The solution architect is responsible for specifying what must be observable — not for implementing the observability stack. That distinction matters. Defining the requirement is architecture. Building the tooling is delivery.</p>
+
+  <p class="body-text"><strong>Three pillars. All three required. None optional.</strong></p>
+
+  <div class="pattern-grid">
+    <div class="pattern-card">
+      <div class="pattern-label">Pillar 01</div>
+      <div class="pattern-title">Logs</div>
+      <div class="pattern-use">Every system event that matters to operations must be logged. Named log sources. Named log destination. Retention period aligned to compliance obligations. Access controls on log data confirmed.</div>
+      <div class="pattern-when">a system event could indicate a failure, a security incident, or a compliance violation — which means always</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-label">Pillar 02</div>
+      <div class="pattern-title">Metrics</div>
+      <div class="pattern-use">Performance, availability, and resource utilisation measured continuously. Thresholds aligned to the NFRs confirmed in the heat map. Alerting configured before go-live — not after the first incident.</div>
+      <div class="pattern-when">an NFR has been defined — which means every engagement. No NFR without a corresponding metric.</div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-label">Pillar 03</div>
+      <div class="pattern-title">Traces</div>
+      <div class="pattern-use">End-to-end request tracing across distributed systems and integration points. Required when the solution includes multiple services or APIs. Enables rapid incident diagnosis without manual log correlation across systems.</div>
+      <div class="pattern-when">the solution crosses more than one system boundary — which in VAF·SA is almost every engagement.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    The operations team inherits what the architect designed. If observability is not in the design, it will not be in the solution. The question is not whether the delivery team will need visibility — they will. The question is whether the architect specified it before anyone had to ask.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.8 GATE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.8</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Gate</div>
+      <div class="section-title">Module 3 Completion Checklist</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 4 — Artefacts</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <div class="checklist-header">Design Gate</div>
+    <div class="checklist-sub">MODULE 3 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED</div>
+
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>C4 Context diagram produced</strong> — all systems named, all users named, all connections named and directional.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map complete</strong> — all eight domains addressed. No blank cells. Red cells documented with owner and deadline. All green cells independently verified.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Current state documented</strong> — confirmed through Module 1 immersion and Module 2 intelligence. Not taken from a document at face value.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Target state designed</strong> — at C4 Context level minimum. Container level added where required by delivery audience.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Gap analysis complete</strong> — named items, named owners, named dependencies, named risks per item.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Three-altitude stack aligned</strong> — business intent at BA altitude, solution structure at SA altitude, delivery sequence at delivery altitude. No altitude crossover.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Security embedded</strong> — SABSA threat model, Essential Eight alignment, API security, and ISO 27001 controls confirmed against heat map.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Integration pattern selected</strong> — pattern named and justified for each integration point. No unnamed or assumed connections.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Data flow direction confirmed</strong> — ingress or egress, internal or external, classification applied, retention obligation documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>NFRs confirmed in heat map Domain 09</strong> — performance thresholds, scalability model, availability SLA, RTO and RPO defined and agreed with business.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Zero Trust applied to every C4 connection</strong> — each named relationship verified: authentication method, minimum privilege, blast radius if compromised.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Observability specified</strong> — logs, metrics, and traces named. Sources, destinations, retention, and alerting thresholds defined before delivery begins.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Design ready for artefact production</strong> — all three artefacts can now be produced: Customer Impact Statement, Architecture on a Page, Heat Map.</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 04 — ARTEFACTS · The Three Templates. One Page. Every Time.</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-nav">VAFSA-M03-DESIGN<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

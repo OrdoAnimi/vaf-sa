@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA — Velocity Architecture Framework · Solution Architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root {
+  --ink:#0c0d10; --forge:#13151a; --steel:#1a1e28; --wire:#252b3a; --wire-light:#323a50;
+  --amber:#c97d0a; --amber-hot:#e8920f; --cold:#3d8fb5; --cold-light:#5aafd4;
+  --signal:#c45228; --green:#2e9e68; --green-light:#4aba84;
+  --m1:#c97d0a; --m2:#3d8fb5; --m3:#2e9e68; --m4:#7c5cbf; --m5:#c45228; --m6:#c8a84b;
+  --fog:#7a8299; --mist:#a8b0c4; --ghost:#d0d6e4; --white:#eef0f5;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(61,143,181,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(61,143,181,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:56px 32px 96px;}
+
+/* HERO */
+.hero{margin-bottom:64px;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,112px);letter-spacing:0.03em;line-height:0.88;margin-bottom:20px;}
+.hero-title .vaf{color:var(--amber);}
+.hero-title .sa{color:var(--white);}
+.hero-title .sub{display:block;font-size:clamp(18px,3vw,32px);color:var(--fog);letter-spacing:0.08em;margin-top:8px;}
+.hero-desc{font-family:'DM Mono',monospace;font-size:12px;color:var(--fog);line-height:1.8;max-width:560px;margin-bottom:24px;}
+.hero-strip{display:flex;gap:4px;height:3px;max-width:400px;margin-bottom:24px;}
+.hero-strip div{flex:1;}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:48px;}
+@media(max-width:480px){.pillars{grid-template-columns:1fr;}}
+.pillar{background:var(--forge);border:1px solid var(--wire);padding:20px 22px;}
+.pillar-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;}
+.pillar:nth-child(1) .pillar-label{color:var(--amber);}
+.pillar:nth-child(2) .pillar-label{color:var(--cold-light);}
+.pillar-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);margin-bottom:8px;}
+.pillar-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+
+/* MODULES */
+.modules-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.modules-label::after{content:'';flex:1;height:1px;background:var(--wire);}
+.modules-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:48px;}
+.module-link{display:grid;grid-template-columns:64px 1fr auto;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;text-decoration:none;transition:border-color 0.15s;}
+.module-link:hover{border-color:var(--wire-light);}
+.ml-num{display:flex;align-items:center;justify-content:center;border-right:1px solid var(--wire);padding:20px 0;font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.module-link:nth-child(1) .ml-num{background:rgba(201,125,10,0.08);color:var(--m1);}
+.module-link:nth-child(2) .ml-num{background:rgba(61,143,181,0.08);color:var(--m2);}
+.module-link:nth-child(3) .ml-num{background:rgba(46,158,104,0.08);color:var(--m3);}
+.module-link:nth-child(4) .ml-num{background:rgba(124,92,191,0.08);color:var(--m4);}
+.module-link:nth-child(5) .ml-num{background:rgba(196,82,40,0.08);color:var(--m5);}
+.module-link:nth-child(6) .ml-num{background:rgba(200,168,75,0.08);color:var(--m6);}
+.ml-body{padding:16px 20px;}
+.ml-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:3px;}
+.ml-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);}
+.ml-arrow{display:flex;align-items:center;padding:0 20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--wire-light);}
+
+/* ARCHETYPES */
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:48px;}
+@media(max-width:480px){.arch-grid{grid-template-columns:1fr;}}
+.arch-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.arch-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--wire-light);line-height:1;margin-bottom:4px;}
+.arch-name{font-weight:600;font-size:12px;color:var(--white);margin-bottom:6px;}
+.arch-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.7;}
+
+/* PRINCIPLES */
+.prin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:48px;}
+@media(max-width:600px){.prin-grid{grid-template-columns:1fr 1fr;}}
+.prin-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--amber);padding:14px 16px;}
+.prin-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(201,125,10,0.2);line-height:1;margin-bottom:4px;}
+.prin-title{font-weight:600;font-size:11px;color:var(--amber-hot);margin-bottom:4px;}
+.prin-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
+
+/* FOUNDATION */
+.foundation{background:var(--steel);border:1px solid var(--wire);padding:24px 28px;margin-bottom:48px;}
+.foundation-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.foundation-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:600px){.foundation-grid{grid-template-columns:1fr;}}
+.found-stat{text-align:center;padding:12px;}
+.found-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--amber);line-height:1;margin-bottom:4px;}
+.found-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;text-transform:uppercase;}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--wire);padding-top:20px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--amber);}
+.footer-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--wire-light);letter-spacing:0.1em;text-align:right;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hero">
+  <div class="hero-eyebrow">Velocity Architecture Framework™ · Solution Architecture</div>
+  <div class="hero-title">
+    <span class="vaf">VAF·SA</span>
+    <span class="sub">The Practitioner Framework</span>
+  </div>
+  <div class="hero-strip">
+    <div style="background:#c97d0a"></div>
+    <div style="background:#3d8fb5"></div>
+    <div style="background:#2e9e68"></div>
+    <div style="background:#7c5cbf"></div>
+    <div style="background:#c45228"></div>
+    <div style="background:#c8a84b"></div>
+  </div>
+  <div class="hero-desc">
+    Six modules. Two pillars. One loop.<br>
+    How to think. How to talk.<br>
+    Everything else follows from those two.
+  </div>
+</div>
+
+<div class="pillars">
+  <div class="pillar">
+    <div class="pillar-label">Pillar One</div>
+    <div class="pillar-title">How to Think</div>
+    <div class="pillar-body">Read the environment before anyone briefs you on it. Know what archetype you are in before the first meeting. Understand what is absent as clearly as what is present. Prepare so thoroughly that calm becomes inevitable.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-label">Pillar Two</div>
+    <div class="pillar-title">How to Talk</div>
+    <div class="pillar-body">Speak plainly to every room. Ask the question you already know the shape of. Never use jargon to seem credible. Hold the position without making it personal. Let the evidence speak. You just place it.</div>
+  </div>
+</div>
+
+<div class="modules-label">Six Modules</div>
+<div class="modules-grid">
+  <a class="module-link" href="modules/module-01-orientation.html">
+    <div class="ml-num">01</div>
+    <div class="ml-body">
+      <div class="ml-name">Orientation</div>
+      <div class="ml-desc">Read the environment before anyone briefs you on it · Four archetypes · Five intake questions · Document immersion</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="modules/module-02-intelligence.html">
+    <div class="ml-num">02</div>
+    <div class="ml-body">
+      <div class="ml-name">Intelligence</div>
+      <div class="ml-desc">Get what you need from people who may not give it · Ten questions · Vendor interrogation · Gap mapping</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="modules/module-03-design.html">
+    <div class="ml-num">03</div>
+    <div class="ml-body">
+      <div class="ml-name">Design</div>
+      <div class="ml-desc">Right tool. Right level. Right audience · C4 · Heat map · Three altitudes · Security embedded · Observability</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="modules/module-04-artefacts.html">
+    <div class="ml-num">04</div>
+    <div class="ml-body">
+      <div class="ml-name">Artefacts</div>
+      <div class="ml-desc">Four deliverables. One page each · CIS · Architecture on a Page · Heat Map · ADR</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="modules/module-05-communication.html">
+    <div class="ml-num">05</div>
+    <div class="ml-body">
+      <div class="ml-name">Communication</div>
+      <div class="ml-desc">Every room. Every audience · Five audiences · Raising concerns · Holding the line · Professional conduct</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="modules/module-06-velocity-loop.html">
+    <div class="ml-num">06</div>
+    <div class="ml-body">
+      <div class="ml-name">The Velocity Loop</div>
+      <div class="ml-desc">Think fast. Decide fast. Deliver fast · OODA applied · Operating without support · What done means</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+</div>
+
+
+<div class="modules-label">Supplementary Resources</div>
+<div class="modules-grid">
+  <a class="module-link" href="preface.html">
+    <div class="ml-num" style="background:rgba(200,168,75,0.08);color:#c8a84b;font-size:14px;letter-spacing:0.05em;">PRE</div>
+    <div class="ml-body">
+      <div class="ml-name">Preface — Influence Without Authority</div>
+      <div class="ml-desc">The operating philosophy · Read before Module 1 · Two pillars · The mental process</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="workshop-playbook.html">
+    <div class="ml-num" style="background:rgba(61,143,181,0.08);color:#5aafd4;font-size:14px;letter-spacing:0.05em;">WS</div>
+    <div class="ml-body">
+      <div class="ml-name">Workshop Playbook</div>
+      <div class="ml-desc">How to design the room · The opening · Conflict management · The E-stop · What leaves the room</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="escalation-protocol.html">
+    <div class="ml-num" style="background:rgba(196,82,40,0.08);color:#c45228;font-size:14px;letter-spacing:0.05em;">ESC</div>
+    <div class="ml-body">
+      <div class="ml-name">Escalation Protocol + Time Guidance</div>
+      <div class="ml-desc">Three escalation layers · The boundary statement · Time per module · Pattern locking</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+  <a class="module-link" href="worked-example.html">
+    <div class="ml-num" style="background:rgba(200,168,75,0.08);color:#c8a84b;font-size:14px;letter-spacing:0.05em;">EX</div>
+    <div class="ml-body">
+      <div class="ml-name">The Worked Example — The Authority Engagement</div>
+      <div class="ml-desc">All six modules · One real engagement · NDA-clean · 90 days · Delivered</div>
+    </div>
+    <div class="ml-arrow">→</div>
+  </a>
+</div>
+
+<div class="modules-label">Four Engagement Archetypes</div>
+<div class="arch-grid">
+  <div class="arch-card">
+    <div class="arch-num">01</div>
+    <div class="arch-name">The Obfuscation Engagement</div>
+    <div class="arch-body">Information exists and is being deliberately withheld. The vendor has a vested interest in preventing full disclosure. The heat map is the forensic instrument. Every blank cell is evidence.</div>
+  </div>
+  <div class="arch-card">
+    <div class="arch-num">02</div>
+    <div class="arch-name">The Negligent Void</div>
+    <div class="arch-body">Nothing has been done. No documentation. No data classification. No vendor alignment. The engagement exists on paper. It has no architectural foundation.</div>
+  </div>
+  <div class="arch-card">
+    <div class="arch-num">03</div>
+    <div class="arch-name">The Institutional Paralysis</div>
+    <div class="arch-body">Multiple attempts. Different parties. No ownership. History withheld. Budget spent. Nothing delivered. Three months of immersion. Silence under pressure. Discharge the work.</div>
+  </div>
+  <div class="arch-card">
+    <div class="arch-num">04</div>
+    <div class="arch-name">The Silo Engagement</div>
+    <div class="arch-body">Capability exists. The solution is achievable. The parties who need to collaborate have never been in the same room. The workshop is the solution.</div>
+  </div>
+</div>
+
+<div class="modules-label">Four Operating Principles</div>
+<div class="prin-grid">
+  <div class="prin-card">
+    <div class="prin-num">I</div>
+    <div class="prin-title">No Process First</div>
+    <div class="prin-body">The framework is the vehicle. The outcome is the destination. Process never leads.</div>
+  </div>
+  <div class="prin-card">
+    <div class="prin-num">II</div>
+    <div class="prin-title">Decision Altitude</div>
+    <div class="prin-body">Every decision at the right level. Business altitude for business decisions. Technical altitude for technical decisions.</div>
+  </div>
+  <div class="prin-card">
+    <div class="prin-num">III</div>
+    <div class="prin-title">One Artefact</div>
+    <div class="prin-body">If it does not fit on one page, the thinking is not done. The second page is where incomplete thinking hides.</div>
+  </div>
+  <div class="prin-card">
+    <div class="prin-num">IV</div>
+    <div class="prin-title">Velocity Over Volume</div>
+    <div class="prin-body">Insight delivered fast beats documentation delivered late. Always.</div>
+  </div>
+</div>
+
+<div class="foundation">
+  <div class="foundation-title">Built On Field Evidence</div>
+  <div class="foundation-grid">
+    <div class="found-stat">
+      <div class="found-num">30</div>
+      <div class="found-label">Years Field Delivery</div>
+    </div>
+    <div class="found-stat">
+      <div class="found-num">62+</div>
+      <div class="found-label">Certifications</div>
+    </div>
+    <div class="found-stat">
+      <div class="found-num">4</div>
+      <div class="found-label">Continents</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework™</div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);margin-top:4px;">Myint Enterprises Pty Ltd · ZenCloud Global Consultants</div>
+  </div>
+  <div class="footer-meta">BRISBANE · AUSTRALIA<br>velocityarchitectureframework.com</div>
+</div>
+
+</div>
+</body>
+</html>

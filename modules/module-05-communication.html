@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 5 — Communication</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0c0d10;
+  --forge: #13151a;
+  --steel: #1a1e28;
+  --wire: #252b3a;
+  --wire-light: #323a50;
+  --amber: #c97d0a;
+  --amber-hot: #e8920f;
+  --cold: #3d8fb5;
+  --cold-light: #5aafd4;
+  --cold-dim: rgba(61,143,181,0.1);
+  --signal: #c45228;
+  --green: #2e9e68;
+  --green-light: #4aba84;
+  --fog: #7a8299;
+  --mist: #a8b0c4;
+  --ghost: #d0d6e4;
+  --white: #eef0f5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(61,143,181,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,82,40,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+
+/* HEADER */
+.doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
+.doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--signal); text-transform:uppercase; }
+.doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
+.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+.doc-title span { color:var(--signal); }
+.doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+.doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag.signal { border-color:rgba(196,82,40,0.4); color:var(--signal); }
+.tag.amber { border-color:rgba(201,125,10,0.4); color:var(--amber); }
+
+/* SECTION */
+.section { margin-bottom:52px; }
+.section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
+.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(196,82,40,0.2); min-width:44px; padding-top:2px; }
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--signal); margin-bottom:4px; }
+.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
+.body-text { font-family:'DM Sans', sans-serif; font-size:13.5px; color:var(--ghost); line-height:1.75; margin-bottom:16px; }
+.body-text strong { color:var(--white); font-weight:600; }
+.callout { background:var(--forge); border:1px solid var(--wire); border-left:3px solid var(--signal); padding:16px 20px; margin:20px 0; font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.7; }
+.callout.amber { border-left-color:var(--amber); }
+.callout.green { border-left-color:var(--green); }
+.callout.cold { border-left-color:var(--cold); }
+.divider { height:1px; background:linear-gradient(to right, var(--signal), transparent); margin:40px 0; opacity:0.3; }
+
+/* AUDIENCE CARDS */
+.audience-stack { display:flex; flex-direction:column; gap:16px; margin:20px 0; }
+
+.audience-card { background:var(--forge); border:1px solid var(--wire); overflow:hidden; }
+
+.audience-header { display:grid; grid-template-columns:56px 1fr auto; align-items:stretch; border-bottom:1px solid var(--wire); }
+
+.aud-icon { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--wire); font-family:'Bebas Neue', sans-serif; font-size:11px; letter-spacing:0.15em; padding:16px 8px; writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg); }
+
+.audience-card:nth-child(1) .aud-icon { background:rgba(201,125,10,0.08); color:var(--amber); }
+.audience-card:nth-child(2) .aud-icon { background:rgba(61,143,181,0.08); color:var(--cold-light); }
+.audience-card:nth-child(3) .aud-icon { background:rgba(196,82,40,0.08); color:var(--signal); }
+.audience-card:nth-child(4) .aud-icon { background:rgba(46,158,104,0.08); color:var(--green-light); }
+.audience-card:nth-child(5) .aud-icon { background:rgba(124,92,191,0.08); color:#a07de0; }
+
+.aud-title-block { padding:14px 18px; }
+.aud-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fog); margin-bottom:4px; }
+.aud-name { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:3px; }
+.aud-desc { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
+
+.aud-rule { display:flex; align-items:center; padding:0 18px; border-left:1px solid var(--wire); }
+.aud-rule-text { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; padding:5px 10px; border:1px solid; white-space:nowrap; }
+
+.audience-card:nth-child(1) .aud-rule-text { color:var(--amber); border-color:rgba(201,125,10,0.3); }
+.audience-card:nth-child(2) .aud-rule-text { color:var(--cold-light); border-color:rgba(61,143,181,0.3); }
+.audience-card:nth-child(3) .aud-rule-text { color:var(--signal); border-color:rgba(196,82,40,0.3); }
+.audience-card:nth-child(4) .aud-rule-text { color:var(--green-light); border-color:rgba(46,158,104,0.3); }
+.audience-card:nth-child(5) .aud-rule-text { color:#a07de0; border-color:rgba(124,92,191,0.3); }
+
+.audience-body { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; }
+@media(max-width:600px) { .audience-body { grid-template-columns:1fr; } }
+
+.aud-col { padding:16px 18px; border-right:1px solid var(--wire); }
+.aud-col:last-child { border-right:none; }
+.aud-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--fog); margin-bottom:8px; }
+.aud-col-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.8; }
+.aud-col-body strong { color:var(--white); display:block; margin-bottom:4px; }
+
+.say-block { margin-top:10px; padding:10px 14px; background:var(--steel); font-family:'DM Mono', monospace; font-size:10px; line-height:1.6; font-style:italic; }
+.audience-card:nth-child(1) .say-block { color:var(--amber); border-left:2px solid rgba(201,125,10,0.4); }
+.audience-card:nth-child(2) .say-block { color:var(--cold-light); border-left:2px solid rgba(61,143,181,0.4); }
+.audience-card:nth-child(3) .say-block { color:var(--signal); border-left:2px solid rgba(196,82,40,0.4); }
+.audience-card:nth-child(4) .say-block { color:var(--green-light); border-left:2px solid rgba(46,158,104,0.4); }
+.audience-card:nth-child(5) .say-block { color:#a07de0; border-left:2px solid rgba(124,92,191,0.4); }
+.say-block::before { content:'SAY: '; font-style:normal; font-weight:500; opacity:0.7; }
+
+/* CONCERN RAISING */
+.concern-steps { display:flex; flex-direction:column; gap:6px; margin:20px 0; }
+.concern-step { display:grid; grid-template-columns:48px 1fr; gap:0; background:var(--forge); border:1px solid var(--wire); overflow:hidden; }
+.cs-num { background:rgba(196,82,40,0.08); border-right:1px solid rgba(196,82,40,0.2); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue', sans-serif; font-size:20px; color:var(--signal); }
+.cs-body { padding:14px 18px; }
+.cs-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:6px; }
+.cs-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+.cs-example { margin-top:8px; padding:8px 12px; background:var(--steel); font-family:'DM Mono', monospace; font-size:10px; color:var(--signal); line-height:1.6; font-style:italic; }
+.cs-example::before { content:'SAY: '; font-style:normal; font-weight:500; color:rgba(196,82,40,0.6); }
+
+/* HOLDING THE LINE */
+.hold-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
+@media(max-width:540px) { .hold-grid { grid-template-columns:1fr; } }
+.hold-card { background:var(--forge); border:1px solid var(--wire); padding:16px 18px; }
+.hold-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px; }
+.hold-card.wrong .hold-label { color:var(--signal); }
+.hold-card.right .hold-label { color:var(--green-light); }
+.hold-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
+.hold-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+.hold-example { margin-top:10px; padding:8px 12px; font-family:'DM Mono', monospace; font-size:10px; line-height:1.6; font-style:italic; }
+.hold-card.wrong .hold-example { background:rgba(196,82,40,0.08); border-left:2px solid rgba(196,82,40,0.3); color:var(--signal); }
+.hold-card.right .hold-example { background:rgba(46,158,104,0.08); border-left:2px solid rgba(46,158,104,0.3); color:var(--green-light); }
+
+/* PRESENTATION */
+.pres-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0; }
+@media(max-width:600px) { .pres-grid { grid-template-columns:1fr; } }
+.pres-card { background:var(--forge); border:1px solid var(--wire); border-top:2px solid var(--signal); padding:16px 18px; }
+.pres-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--signal); margin-bottom:6px; }
+.pres-title { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.04em; color:var(--white); margin-bottom:10px; }
+.pres-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
+
+/* SILENCE */
+.silence-block { background:var(--steel); border:1px solid var(--wire); border-left:3px solid var(--amber); padding:20px 24px; margin:20px 0; }
+.silence-title { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--amber-hot); margin-bottom:8px; }
+.silence-body { font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.8; }
+
+/* CHECKLIST */
+.checklist { background:var(--forge); border:1px solid var(--wire); padding:24px 28px; margin:20px 0; }
+.checklist-header { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
+.checklist-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
+.check-item { display:flex; align-items:flex-start; gap:12px; padding:10px 14px; margin-bottom:8px; background:var(--steel); border:1px solid var(--wire); }
+.check-box { width:16px; height:16px; min-width:16px; border:1px solid var(--wire-light); margin-top:1px; }
+.check-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--mist); line-height:1.5; }
+.check-text strong { color:var(--white); }
+
+/* FOOTER */
+.doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
+.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+.footer-brand span { color:var(--signal); }
+.footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:rgba(196,82,40,0.08); border:1px solid rgba(196,82,40,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--signal); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 05 OF 06<br>VAFSA-M05-COMMUNICATION<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 05<br><span>COMMUNICATION</span></div>
+  <div class="doc-subtitle">Every room. Every audience. Plain language. No jargon. The artefact speaks first. You follow it.</div>
+  <div class="doc-tags">
+    <span class="tag signal">Five Audiences</span>
+    <span class="tag signal">Raising Concerns</span>
+    <span class="tag signal">Holding the Line</span>
+    <span class="tag amber">Influence Without Authority</span>
+    <span class="tag amber">Plain Speech</span>
+    <span class="tag">Carnegie · Sinek · Stoic</span>
+  </div>
+</div>
+
+<!-- 5.0 PURPOSE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">Communication is not what happens after the work. It is the work.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Design the right solution. Fail to communicate it. The engagement is not complete. The design is still in your head. The room where decisions are made never saw it.</p>
+
+  <p class="body-text">Module 5 teaches how to present the artefacts produced in Module 4 to every audience who needs to act on them. It teaches how to raise concerns without losing the room. How to hold a position under pressure without making it personal. How to read a room in real time and adjust without abandoning the position.</p>
+
+  <p class="body-text"><strong>The foundation has been established in Module 2.</strong> Plain questions get real answers. Plain speech outperforms framework language in every room. The less you say, the more they hear. Module 5 applies those principles to the specific communication contexts an SA will encounter — the executive presentation, the technical deep-dive, the vendor negotiation, the project manager update, and the governance escalation.</p>
+
+  <div class="callout">
+    The artefact speaks first. You present the CIS and let it land before you add commentary. You present the Architecture on a Page and let the room read it before you explain it. If the artefact is doing its job, the first sixty seconds of silence after you place it on the table is not awkward. It is working.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.1 FIVE AUDIENCES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Framework</div>
+      <div class="section-title">The Five Audiences</div>
+      <div class="section-desc">Every room you will ever be in. Each one requires a different lead, a different register, and a different artefact.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The same solution. The same artefacts. Five different rooms. In each room, the same plain language applies — but the entry point changes. The executive needs the outcome first. The technical lead needs the constraint first. The vendor needs the named assumption first. The project manager needs the dependency first. The governance body needs the decision first. Get the entry point wrong and the room closes before the artefact is placed on the table.</p>
+
+  <div class="audience-stack">
+
+    <!-- EXECUTIVE -->
+    <div class="audience-card">
+      <div class="audience-header">
+        <div class="aud-icon">Executive</div>
+        <div class="aud-title-block">
+          <div class="aud-label">Audience 01</div>
+          <div class="aud-name">Business Leads and Executives</div>
+          <div class="aud-desc">CIO · CFO · GM · Business owner · Anyone who funds or approves</div>
+        </div>
+        <div class="aud-rule"><div class="aud-rule-text">Lead with outcome</div></div>
+      </div>
+      <div class="audience-body">
+        <div class="aud-col">
+          <div class="aud-col-label">What They Care About</div>
+          <div class="aud-col-body">Cost. Risk. Timeline. Whether this will actually work this time. They have been promised solutions before. They have seen money spent and nothing delivered. Your credibility starts at zero and is built only through precise, honest, unhedged communication.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">How to Enter the Room</div>
+          <div class="aud-col-body"><strong>Lead with outcome. Never lead with technology.</strong> State the problem in their language. State the solution in terms of what it fixes. State the risk in terms of what it costs to ignore. Place the CIS. Let them read it. Then speak.</div>
+          <div class="say-block">Here is what we know, here is what we are recommending, and here is the decision we need from you by Friday. Everything is on this one page.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">What Loses the Room</div>
+          <div class="aud-col-body">Any technical detail in the first five minutes. Framework references. Acronyms without definitions. Hedging language — "it depends", "we will need to investigate", "there are a number of factors." Executives are time-poor and have learned to filter noise. Noise is anything that is not the answer.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNICAL -->
+    <div class="audience-card">
+      <div class="audience-header">
+        <div class="aud-icon">Technical</div>
+        <div class="aud-title-block">
+          <div class="aud-label">Audience 02</div>
+          <div class="aud-name">Technical Leads and Architects</div>
+          <div class="aud-desc">Lead developer · Platform engineer · Security architect · DevOps lead · DBA</div>
+        </div>
+        <div class="aud-rule"><div class="aud-rule-text">Lead with constraint</div></div>
+      </div>
+      <div class="audience-body">
+        <div class="aud-col">
+          <div class="aud-col-label">What They Care About</div>
+          <div class="aud-col-body">What exists. What must be preserved. What can change. What cannot. They have deep knowledge of the current state and they are protective of it — because they are the ones who will be called at 2am when something breaks. Respect the depth before introducing the change.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">How to Enter the Room</div>
+          <div class="aud-col-body"><strong>Lead with constraints. Show the current state first.</strong> Speak in system boundaries and integration patterns, not in product names. Place the Architecture on a Page — middle zone first. Invite challenge. A technical lead who pushes back is engaged. One who goes quiet has disconnected.</div>
+          <div class="say-block">I want to show you what we think the current state looks like and where we are proposing to change it. Tell me where we have got it wrong.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">What Loses the Room</div>
+          <div class="aud-col-body">Presenting a target state without acknowledging the current state. Dismissing technical concerns as business decisions. Using vendor marketing language for technical decisions. Any sign that you have not understood the actual system before proposing to change it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VENDOR -->
+    <div class="audience-card">
+      <div class="audience-header">
+        <div class="aud-icon">Vendor</div>
+        <div class="aud-title-block">
+          <div class="aud-label">Audience 03</div>
+          <div class="aud-name">Vendors and Third Parties</div>
+          <div class="aud-desc">Account executive · Solutions engineer · Implementation partner · Any external party with a commercial interest</div>
+        </div>
+        <div class="aud-rule"><div class="aud-rule-text">Lead with what you know</div></div>
+      </div>
+      <div class="audience-body">
+        <div class="aud-col">
+          <div class="aud-col-label">What They Care About</div>
+          <div class="aud-col-body">Closing the deal. Protecting the existing relationship. Avoiding technical scrutiny that might expose gaps between what was sold and what was delivered. Vendors are not neutral. Engage them as motivated parties — respectfully, professionally, and with full awareness that their interest and your client's interest are not always aligned.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">How to Enter the Room</div>
+          <div class="aud-col-body"><strong>Lead with what you already know.</strong> You have read their documentation. You have independently verified their claims. You ask closed questions with named assumptions they must confirm or deny. Place the heat map. Name the cells that are red. Ask for written confirmation before the meeting ends.</div>
+          <div class="say-block">My understanding from your published documentation is that data in this configuration exits the client environment to your infrastructure. Can you confirm that is correct, and if not, show me where the documentation is incorrect.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">What Loses the Room</div>
+          <div class="aud-col-body">Open questions. Asking the vendor to explain their solution from scratch gives them room to navigate. Accepting verbal commitments without written confirmation. Allowing "we will follow up on that" to close a red cell. A red cell is never closed by a promise. It is closed by documentation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PM -->
+    <div class="audience-card">
+      <div class="audience-header">
+        <div class="aud-icon">Project</div>
+        <div class="aud-title-block">
+          <div class="aud-label">Audience 04</div>
+          <div class="aud-name">Project and Program Managers</div>
+          <div class="aud-desc">PM · Program manager · Delivery lead · Scrum master · Change manager</div>
+        </div>
+        <div class="aud-rule"><div class="aud-rule-text">Lead with dependency</div></div>
+      </div>
+      <div class="audience-body">
+        <div class="aud-col">
+          <div class="aud-col-label">What They Care About</div>
+          <div class="aud-col-body">Dates. Dependencies. Who is blocking what. What decision is needed to unblock delivery. They are managing a timeline and they need the architect to give them precise inputs — not architecture theory, not framework references, but: what is the next decision, who needs to make it, and what happens if they do not.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">How to Enter the Room</div>
+          <div class="aud-col-body"><strong>Lead with the blocking dependency.</strong> What cannot proceed until what decision is made. One action owner per risk. One deadline per open item. Place the AoaP roadmap zone. Point to the phase where the dependency sits. Name the consequence of missing the decision deadline.</div>
+          <div class="say-block">We cannot start Phase 2 until the data sovereignty question is answered. That decision belongs to the CISO. It needs to happen by the 15th or Phase 2 slips three weeks. I need you to get that meeting in the calendar today.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">What Loses the Room</div>
+          <div class="aud-col-body">Architecture theory. Framework references. Design discussions that belong in a different forum. Any communication that does not give the PM a named action, a named owner, and a named deadline. The PM cannot do anything with "it depends." Give them the specific thing they need to move.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPERATIONS -->
+    <div class="audience-card">
+      <div class="audience-header">
+        <div class="aud-icon">Ops</div>
+        <div class="aud-title-block">
+          <div class="aud-label">Audience 05</div>
+          <div class="aud-name">Operations, Support, and Change</div>
+          <div class="aud-desc">Service management · Operations team · End user support · Change advisory board</div>
+        </div>
+        <div class="aud-rule"><div class="aud-rule-text">Lead with impact</div></div>
+      </div>
+      <div class="audience-body">
+        <div class="aud-col">
+          <div class="aud-col-label">What They Care About</div>
+          <div class="aud-col-body">What changes for them. What breaks. What they will need to support that they have never supported before. What the rollback position is. They will live with this solution long after the architect has left the engagement. Their concerns are not obstructions — they are the operational reality the design must survive.</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">How to Enter the Room</div>
+          <div class="aud-col-body"><strong>Lead with what changes.</strong> What they do differently from next Monday. What breaks during the transition and what the fallback is. What training or documentation they need. Place the AoaP — bottom zone for the rollout sequence, right margin for operational risks. Ask what they are worried about and document every answer.</div>
+          <div class="say-block">Here is what changes for your team from go-live. Here is what we have put in place to protect you during the transition. Here is who to call if something breaks. What have I missed?</div>
+        </div>
+        <div class="aud-col">
+          <div class="aud-col-label">What Loses the Room</div>
+          <div class="aud-col-body">Architecture diagrams without operational context. A solution that has not considered the support model. Any implication that operational concerns are less important than design decisions. Operations teams that do not trust the architect will create a hostile go-live environment. Earn the trust by taking their concerns seriously before deployment.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.2 RAISING CONCERNS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Protocol</div>
+      <div class="section-title">Raising Concerns</div>
+      <div class="section-desc">Named concern. Named owner. Named consequence. Named deadline. In writing. Always in writing.</div>
+    </div>
+  </div>
+
+  <p class="body-text">A concern raised verbally in a meeting is a concern that disappears when the meeting ends. A concern raised in writing, with a named owner and a named deadline, is a concern that stays visible until it is resolved or escalated. The architect who raises concerns verbally and accepts verbal reassurance is not protecting the engagement — they are protecting the relationship at the expense of the outcome.</p>
+
+  <p class="body-text">Raising concerns is not confrontational. It is professional. Identify what could go wrong. Force a decision before it does. Fail to raise concerns and you have failed the engagement — regardless of how comfortable the room felt.</p>
+
+  <div class="concern-steps">
+
+    <div class="concern-step">
+      <div class="cs-num">1</div>
+      <div class="cs-body">
+        <div class="cs-title">Name the concern precisely</div>
+        <div class="cs-desc">Not "there are some security concerns." Name the specific concern: the domain, the system, the risk, and the consequence if unresolved. A vague concern cannot be owned or actioned. A precise concern can.</div>
+        <div class="cs-example">The data sovereignty question for Domain 02 of the heat map is currently red. If data egress to the vendor's infrastructure proceeds without resolution, we are in breach of the agency's data classification policy.</div>
+      </div>
+    </div>
+
+    <div class="concern-step">
+      <div class="cs-num">2</div>
+      <div class="cs-body">
+        <div class="cs-title">Name the owner</div>
+        <div class="cs-desc">A concern without an owner is not a concern — it is a floating anxiety. One person. Named. Responsible for resolving or escalating. Not "the security team." The CISO. Not "the vendor." The account executive by name.</div>
+        <div class="cs-example">This needs a decision from the CISO. I am assigning this to [name] as of today's meeting.</div>
+      </div>
+    </div>
+
+    <div class="concern-step">
+      <div class="cs-num">3</div>
+      <div class="cs-body">
+        <div class="cs-title">Name the consequence of inaction</div>
+        <div class="cs-desc">What happens if this is not resolved by the deadline. Not hypothetically — specifically. The phase that slips. The risk that materialises. The approval that cannot be granted. The consequence must be real and specific or it will be ignored.</div>
+        <div class="cs-example">If this is not resolved by the 15th, Phase 2 cannot proceed and the project delivery date moves by at least three weeks.</div>
+      </div>
+    </div>
+
+    <div class="concern-step">
+      <div class="cs-num">4</div>
+      <div class="cs-body">
+        <div class="cs-title">Set the deadline</div>
+        <div class="cs-desc">A specific date. Not "as soon as possible." Not "before Phase 2." A calendar date. Confirmed in the room. Written in the meeting record immediately. The deadline is what converts the concern from a discussion into an action.</div>
+        <div class="cs-example">I need written confirmation from [vendor name] that this cell can be closed by Friday the 15th. Can you confirm that works for you?</div>
+      </div>
+    </div>
+
+    <div class="concern-step">
+      <div class="cs-num">5</div>
+      <div class="cs-body">
+        <div class="cs-title">Put it in writing before you leave the room</div>
+        <div class="cs-desc">A concern raised verbally and not documented is a concern that never happened. Email, meeting notes, or a formal risk register entry — but in writing, same day, sent to all relevant parties. The written record changes the dynamic. It removes the ability to claim the concern was not raised.</div>
+        <div class="cs-example">Following today's meeting, I am documenting the following open item: [concern, owner, deadline, consequence]. This will remain on the risk register until closed.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout amber">
+    You never need to raise your voice to raise a concern. The concern is in the document. The document is the pressure. Your job is to place it precisely, assign it correctly, and follow up at the deadline. The volume of the conversation is irrelevant. The written record is everything.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.3 HOLDING THE LINE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Discipline</div>
+      <div class="section-title">Holding the Line</div>
+      <div class="section-desc">State the position once. Clearly. With evidence. Do not repeat it as an argument. Let the evidence do the work.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Holding the line is not stubbornness. It is the discipline of maintaining a position that is supported by evidence under pressure from parties who have a vested interest in that position not being maintained. The vendor who needs the contract signed. The project manager who needs the phase to start. The executive who does not want to hear the timeline has moved. Holding the line protects the engagement from the interests of the room.</p>
+
+  <p class="body-text">Abandon a correct position under social pressure. You have not been collaborative. You have failed the engagement. Agreement that contradicts evidence is not consensus. It is capitulation.</p>
+
+  <div class="hold-grid">
+    <div class="hold-card wrong">
+      <div class="hold-label">Do Not Do This</div>
+      <div class="hold-title">Arguing the Position</div>
+      <div class="hold-body">Repeating the concern louder. Adding more detail to convince. Debating the framework or the methodology. Appealing to authority. Getting defensive when challenged. These all signal uncertainty. The room reads defensiveness as doubt.</div>
+      <div class="hold-example">But as I said, the TOGAF ADM requires us to complete phase C before we can proceed, and the security implications here are significant because if you look at the diagram you will see that...</div>
+    </div>
+    <div class="hold-card right">
+      <div class="hold-label">Do This Instead</div>
+      <div class="hold-title">Placing the Evidence</div>
+      <div class="hold-body">State the position once. Name the evidence. Offer to document the disagreement formally. Then stop. The formal record changes the dynamic. The person who wants to proceed over the architect's documented objection is now assuming personal accountability for that choice.</div>
+      <div class="hold-example">I understand the urgency. My position remains that Domain 02 needs to be resolved before we proceed. I am happy to document that we are proceeding over my architectural objection if that is the decision being made.</div>
+    </div>
+    <div class="hold-card wrong">
+      <div class="hold-label">Do Not Do This</div>
+      <div class="hold-title">Making It Personal</div>
+      <div class="hold-body">Attributing the resistance to the person rather than the problem. Expressing frustration. Implying bad faith. Taking pushback as a personal affront. Any of these moves the conversation from the professional to the personal — and on that ground, the architect always loses.</div>
+      <div class="hold-example">We have been through this three times already. I cannot keep explaining the same risk to people who are not listening. This is exactly why the last attempt failed.</div>
+    </div>
+    <div class="hold-card right">
+      <div class="hold-label">Do This Instead</div>
+      <div class="hold-title">Staying on the Problem</div>
+      <div class="hold-body">The problem is the problem. Not the person. Not the history. Not the politics. Return to the artefact. Return to the evidence. Name the specific risk. Name the specific consequence. Stay factual. Stay calm. Let the evidence carry the weight.</div>
+      <div class="hold-example">The risk is documented in ADR-003 and Domain 07 of the heat map. Both are available for review. The consequence of proceeding without resolution is [specific outcome]. That is the position.</div>
+    </div>
+  </div>
+
+  <div class="silence-block">
+    <div class="silence-title">The Power of Professional Silence</div>
+    <div class="silence-body">
+      After placing a concern or holding a position — stop talking.<br><br>
+      The practitioner who fills silence after stating a position undermines it. Silence signals that the position has been stated and does not require defence. It places the pressure on the other party to respond. It is not awkward. It is working.<br><br>
+      The person who speaks first after the position is stated reveals their level of discomfort with it. That is useful information. Read it. Respond only to what is said — not to the discomfort behind it.
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.4 PRESENTING THE ARTEFACTS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Mechanics</div>
+      <div class="section-title">Presenting the Artefacts</div>
+      <div class="section-desc">How to place each artefact in front of its audience. The sequence matters. The silence matters. The response tells you everything.</div>
+    </div>
+  </div>
+
+  <div class="pres-grid">
+    <div class="pres-card">
+      <div class="pres-label">Presenting the CIS</div>
+      <div class="pres-title">Place. Pause. Listen.</div>
+      <div class="pres-body">
+        Hand or display the CIS. Say: <em>"This is the one-page summary of where we are and what we need."</em> Then stop. Give the room sixty seconds to read it silently. The first question or comment tells you where the resistance is. Do not pre-empt it by explaining before it is read.<br><br>
+        If no questions come after sixty seconds: <em>"Is the decision required on page two clear?"</em> That is the only prompt you need.
+      </div>
+    </div>
+    <div class="pres-card">
+      <div class="pres-label">Presenting the AoaP</div>
+      <div class="pres-title">Zone by Zone. Audience by Audience.</div>
+      <div class="pres-body">
+        Display the AoaP. Begin at the top zone for the executive audience: <em>"The business objective is here."</em> Move to the middle for the technical audience: <em>"The solution structure is here."</em> Move to the bottom for the delivery team: <em>"The roadmap is here."</em><br><br>
+        Ask each audience to confirm their zone is accurate before moving on. The disagreement that surfaces in this process is the most valuable information in the room.
+      </div>
+    </div>
+    <div class="pres-card">
+      <div class="pres-label">Presenting the Heat Map</div>
+      <div class="pres-title">Name Every Red Cell Aloud.</div>
+      <div class="pres-body">
+        Display the heat map. Read every red cell aloud, by domain name. For each one: <em>"Domain 02 — data sovereignty. This is red. The owner is [name]. The deadline for resolution is [date]."</em><br><br>
+        Do not allow the room to move past a red cell with a vague response. If the owner is unknown — name that too. An unowned red cell becomes a formal escalation item before the meeting ends.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.5 PROFESSIONAL CONDUCT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Operating Principle</div>
+      <div class="section-title">Professional Conduct Under Pressure</div>
+      <div class="section-desc">Never fight. Never complain. Discharge the work. The record speaks when the architect does not.</div>
+    </div>
+  </div>
+
+  <p class="body-text">In every one of the four engagement archetypes, the practitioner operated in an environment that was not set up for their success. The vendor was misleading. The organisation was withholding. The EA practice was absent. The practice manager was not engaged. The pressure was real and consistent.</p>
+
+  <p class="body-text">The operating principle across all four cases was the same: <strong>never air dirty laundry. Never fight back. Discharge the work.</strong> This is not passivity. It is decision altitude applied to personal conduct. The practitioner who stays above the noise and does the job produces the artefact that speaks for them when the noise has stopped.</p>
+
+  <div class="callout green">
+    The practitioner who complains about the environment is asking the environment to change before they can work. The environment will not change. The practitioner who works anyway — who reads every document, runs every workshop, produces every artefact, and holds every line — changes the outcome without changing the environment. That is the VAF·SA operating posture.
+  </div>
+
+  <p class="body-text">Professional conduct is not about being liked. It is about being effective. The architect who maintains professional conduct in an adversarial engagement protects their position, preserves their credibility, and produces a record that outlasts the engagement. The architect who retaliates protects nothing and produces nothing.</p>
+
+  <p class="body-text">Three rules. No exceptions:</p>
+
+  <div class="concern-steps">
+    <div class="concern-step">
+      <div class="cs-num">I</div>
+      <div class="cs-body">
+        <div class="cs-title">Never complain about the engagement to parties inside the engagement</div>
+        <div class="cs-desc">Complaining to the client about their own dysfunction signals that you cannot operate in dysfunction. Every SA engagement involves some level of dysfunction. If you cannot operate in it, you cannot operate. Raise concerns formally through the artefact. Never raise them informally through relationship.</div>
+      </div>
+    </div>
+    <div class="concern-step">
+      <div class="cs-num">II</div>
+      <div class="cs-body">
+        <div class="cs-title">Never fight the political environment directly</div>
+        <div class="cs-desc">The political environment is the operating condition, not the problem to solve. Navigate it. The artefact navigates it better than any direct confrontation. A concern documented formally and unanswered is a political problem for the party who chose not to answer it — not for the architect who documented it.</div>
+      </div>
+    </div>
+    <div class="concern-step">
+      <div class="cs-num">III</div>
+      <div class="cs-body">
+        <div class="cs-title">Discharge the work and let the record speak</div>
+        <div class="cs-desc">The artefact set is the evidence. The CIS, the AoaP, the heat map, and the ADRs collectively tell the story of the engagement — what was known, what was decided, what was raised as a concern, and what was left unresolved. That record survives the engagement. The politics do not.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5.6 GATE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.6</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Gate</div>
+      <div class="section-title">Module 5 Completion Checklist</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 6 — The Velocity Loop</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <div class="checklist-header">Communication Gate</div>
+    <div class="checklist-sub">MODULE 5 IS NOT COMPLETE UNTIL ALL ARTEFACTS HAVE BEEN PRESENTED AND ALL CONCERNS ARE FORMALLY DOCUMENTED</div>
+
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS presented to executive audience</strong> — placed, read silently, decision question confirmed. Response documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>AoaP presented zone by zone</strong> — business zone confirmed by executive, architecture zone confirmed by technical lead, roadmap confirmed by PM. Disagreements documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map presented with all red cells named aloud</strong> — owner assigned, deadline confirmed, formal record created for each red cell.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Vendor engagement completed under interrogation protocol</strong> — closed questions asked, written confirmations received or formally noted as outstanding.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>All concerns raised in writing</strong> — named concern, named owner, named consequence, named deadline. Sent before end of day.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>All positions held under pressure documented</strong> — any instance where the architect maintained a position over pushback is recorded in the risk register or meeting notes.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Operations and support audience briefed</strong> — what changes, what the rollback position is, what training or documentation is required. Their concerns documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Professional conduct maintained throughout</strong> — no complaints, no direct confrontations, all concerns channelled through artefacts and formal records.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Decision required from each audience confirmed</strong> — every party who needs to decide something has been told what that decision is, by when, and what happens if they do not make it.</div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 05 — COMMUNICATION · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 06 — VELOCITY LOOP · Think Fast. Decide Fast. Deliver Fast.</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-nav">VAFSA-M05-COMMUNICATION<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

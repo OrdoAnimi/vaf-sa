@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA — The Worked Example</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--gold:#c8a84b;--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,168,75,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--gold);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title span{color:var(--gold);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.nda-notice{background:rgba(196,82,40,0.08);border:1px solid rgba(196,82,40,0.2);padding:12px 18px;margin-bottom:32px;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
+.nda-notice strong{color:var(--signal);}
+.divider{height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:40px 0;opacity:0.3;}
+.p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.p em{color:var(--gold);font-style:normal;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--gold);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.callout.signal{border-left-color:var(--signal);}
+.callout.green{border-left-color:var(--green);}
+.callout.cold{border-left-color:var(--cold);}
+
+/* ENGAGEMENT PROFILE */
+.profile{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--gold);padding:24px 28px;margin-bottom:40px;}
+.profile-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:560px){.profile-grid{grid-template-columns:1fr;}}
+.profile-item{padding:10px 14px;background:var(--steel);border:1px solid var(--wire);}
+.pi-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:4px;}
+.pi-value{font-weight:600;font-size:12px;color:var(--white);}
+
+/* MODULE SECTIONS */
+.mod-section{margin-bottom:48px;}
+.mod-header{display:grid;grid-template-columns:72px 1fr;gap:0;border:1px solid var(--wire);margin-bottom:20px;overflow:hidden;}
+.mod-num{display:flex;align-items:center;justify-content:center;padding:16px 0;font-family:'Bebas Neue',sans-serif;font-size:32px;border-right:1px solid var(--wire);}
+.mod-section:nth-child(1) .mod-num{background:rgba(201,125,10,0.08);color:var(--amber);}
+.mod-section:nth-child(2) .mod-num{background:rgba(61,143,181,0.08);color:var(--cold-light);}
+.mod-section:nth-child(3) .mod-num{background:rgba(46,158,104,0.08);color:var(--green-light);}
+.mod-section:nth-child(4) .mod-num{background:rgba(124,92,191,0.08);color:#a07de0;}
+.mod-section:nth-child(5) .mod-num{background:rgba(196,82,40,0.08);color:var(--signal);}
+.mod-section:nth-child(6) .mod-num{background:rgba(200,168,75,0.08);color:var(--gold);}
+.mod-title-block{padding:16px 20px;}
+.mod-eyebrow{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:4px;}
+.mod-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:3px;}
+.mod-outcome{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);}
+.what-happened{background:var(--forge);border:1px solid var(--wire);padding:18px 22px;margin-bottom:12px;}
+.wh-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.wh-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.framework-applied{background:var(--steel);border:1px solid var(--wire);border-left:2px solid var(--gold);padding:16px 20px;margin-bottom:12px;}
+.fa-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.fa-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.7;}
+.outcome-block{display:flex;gap:12px;align-items:flex-start;padding:14px 18px;background:rgba(46,158,104,0.06);border:1px solid rgba(46,158,104,0.2);margin-bottom:12px;}
+.ob-check{font-family:'DM Mono',monospace;font-size:12px;color:var(--green-light);min-width:16px;}
+.ob-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.6;}
+.ob-text strong{color:var(--white);}
+.quote-block{border-left:2px solid var(--gold);padding:12px 18px;margin:16px 0;font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.7;font-style:italic;background:var(--forge);}
+.quote-block::before{content:'SAID IN THE ROOM: ';font-style:normal;color:rgba(200,168,75,0.6);font-weight:500;display:block;font-size:8px;letter-spacing:0.15em;margin-bottom:6px;}
+
+/* RESULT */
+.result-banner{background:linear-gradient(135deg,rgba(46,158,104,0.1),rgba(61,143,181,0.08));border:1px solid rgba(46,158,104,0.3);border-left:3px solid var(--green-light);padding:20px 28px;margin:40px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.rb-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--ghost);line-height:1.7;}
+.rb-text strong{color:var(--green-light);}
+.rb-badge{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.06em;color:var(--green-light);white-space:nowrap;}
+
+/* LESSONS */
+.lessons-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:540px){.lessons-grid{grid-template-columns:1fr;}}
+.lesson-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.lc-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(200,168,75,0.2);line-height:1;margin-bottom:4px;}
+.lc-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:6px;}
+.lc-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--gold);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(200,168,75,0.08);border:1px solid rgba(200,168,75,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — The Worked Example</div>
+    <div class="doc-ref">VAFSA-WORKED-EXAMPLE<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">THE<br><span>AUTHORITY</span><br>ENGAGEMENT</div>
+  <div class="doc-subtitle">All six modules. One real engagement. Principles preserved. All identifying information removed.</div>
+</div>
+
+<div class="nda-notice"><strong>NDA NOTE:</strong> This case study draws on real engagement experience. All client names, organisation names, system names, vendor names, and individual names have been removed or fictionalised. The Authority is a composite representative of a major state infrastructure agency. The principles, practice, and outcomes are real.</div>
+
+<!-- PROFILE -->
+<div class="profile">
+  <div class="profile-title">Engagement Profile</div>
+  <div class="profile-grid">
+    <div class="profile-item"><div class="pi-label">Organisation</div><div class="pi-value">The Authority — major state infrastructure agency</div></div>
+    <div class="profile-item"><div class="pi-label">Engagement Type</div><div class="pi-value">Legacy database decommission — enterprise-scale</div></div>
+    <div class="profile-item"><div class="pi-label">Primary Archetype</div><div class="pi-value">Institutional Paralysis + Obfuscation</div></div>
+    <div class="profile-item"><div class="pi-label">Prior History</div><div class="pi-value">24+ months stalled. Multiple failed attempts. No handover.</div></div>
+    <div class="profile-item"><div class="pi-label">Monthly Cost</div><div class="pi-value">Five-figure ongoing operational spend. Nothing delivered.</div></div>
+    <div class="profile-item"><div class="pi-label">Delivered In</div><div class="pi-value">90 working days from engagement start to first artefact sign-off</div></div>
+  </div>
+</div>
+
+<p class="p">The brief on day one: a legacy relational database, no longer needed, needed decommissioning. Simple. Two years and several million dollars in accumulated cost later — still running. Still needed. Nobody owned it.</p>
+
+<p class="p">Nobody volunteered what had been attempted before. The history was there. It had to be found.</p>
+
+<div class="divider"></div>
+
+<!-- MODULE 1 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">01</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 01 Applied</div>
+      <div class="mod-name">Orientation</div>
+      <div class="mod-outcome">Duration: 15 working days · Archetype confirmed: Institutional Paralysis primary, Obfuscation secondary</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">Engagement began with a briefing that described the engagement as straightforward. The database was no longer needed. Decommission it. The briefing contained no history of prior attempts and made no reference to the previous two years.<br><br>
+    Day one: requested the complete document inventory — every report, every attempt, every decision made. The initial response was that there was not much. The inventory that arrived over the following three days told a different story. Three separate working groups. Two vendor assessments. One partial migration attempt. All of it quietly present. None of it volunteered.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>Intake Question 1:</strong> "What has already been attempted?" — received a non-answer verbally. The document inventory answered it instead. Three attempts. Zero handover between them.<br><br>
+    <strong>Intake Question 3:</strong> "Who owns this on paper — and who actually owns it?" — five different names appeared across the documentation as owners. None of them still held the role. The actual owner was nobody.<br><br>
+    <strong>Archetype confirmation:</strong> Institutional Paralysis was clear by day three. The secondary Obfuscation signal — documents existing but not being surfaced voluntarily — was noted and added to the operating posture.</div>
+  </div>
+
+  <div class="callout signal">The pressure started in week two. "You haven't moved yet." Correct. Three months of immersion in a simpler archetype would have been two weeks. This one required fifteen days minimum to map the decision landscape before any design could begin. Silence under pressure is not inaction. It is orientation.</div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> Archetype confirmed. Stakeholder map complete — three categories, all named by role. Document inventory complete. Environment diagnostic across four domains flagged three red items before the first workshop.</div></div>
+</div>
+
+<!-- MODULE 2 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">02</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 02 Applied</div>
+      <div class="mod-name">Intelligence</div>
+      <div class="mod-outcome">Duration: 12 working days · Two workshops · Vendor engagement round one</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">Workshop one: opened with a strawman current-state diagram built from the document inventory. The diagram was deliberately incomplete. Every blank was a question. The room began correcting it within five minutes.<br><br>
+    The incumbent vendor was in the room for the second half of workshop one. Question 7 — data direction — produced the first significant conflict. The vendor described the solution as data ingress. The technical lead challenged it. The vendor maintained the position.<br><br>
+    Post-workshop: went to the vendor's own published documentation. The published architecture showed data egress to a third-party hosting environment. The vendor had described the opposite of what their own documentation stated.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>Workshop opening:</strong> Strawman diagram placed. "This is wrong. Tell me how." Room corrected it. Silence in the first five minutes was broken with a direct closed question to the platform lead: "The data flow I've shown here goes from left to right. Is that correct?" One named person. One closed question. The room opened.<br><br>
+    <strong>Vendor question 7:</strong> "My understanding from your published documentation is that data in this configuration exits the client environment to your hosting infrastructure. Can you confirm that is correct?" The vendor deflected. The question was returned twice more, each time simpler. The third time: "Yes or no — does data leave the client environment?" A non-answer was recorded as a non-answer.<br><br>
+    <strong>Independent verification:</strong> The vendor's own documentation, accessed directly, confirmed egress. ADR-001 was drafted that day.</div>
+  </div>
+
+  <div class="quote-block">Before we left that session I said: "I need you to confirm in writing — where does this data sit, who can access it, and under what terms. I will note this as an open item with a response required before this week ends." They said they would follow up. I said: "I will send you the item in writing today so we have a record." They agreed.</div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> Ten questions answered across two workshops. Vendor non-answer formally documented. Independent verification completed — vendor documentation contradicted verbal claim. Information gap map: Domain 02 Data Sovereignty — red. Domain 07 Vendor Commercial — red.</div></div>
+</div>
+
+<!-- MODULE 3 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">03</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 03 Applied</div>
+      <div class="mod-name">Design</div>
+      <div class="mod-outcome">Duration: 18 working days · C4 Context confirmed · Heat map: 9 domains, 3 red, 4 amber, 2 green</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">Current state: a legacy relational database, enterprise-scale, sitting underneath fourteen dependent application systems — seven of which had not been mapped in any prior attempt. The database was not being used for its original purpose. Three of the fourteen dependent applications were using it as an unofficial data store. None of this was in the briefing.<br><br>
+    Target state: decommission the database. Migrate the three unofficial data stores. Retire the remaining eleven application connections by confirmed cutover date. The solution architecture was not complex. Finding all the moving parts was.<br><br>
+    The heat map placed in front of the vendor at workshop two produced the engagement's defining moment. Domain 02 was red. Domain 07 was red. The vendor was asked to address each cell. Each deflection was recorded. The meeting ended with two red cells still open, two ADRs written, and a formal written request for documentation sent before close of business.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>C4 Context:</strong> Drew the current state at context level first. Fourteen named systems. Named connections. Named data flows — with direction. Every connection the prior attempts had missed was visible because the direction arrows were named. "Direction unknown" was not permitted. Every unknown became a red heat map cell.<br><br>
+    <strong>Security embedded:</strong> Every connection in the C4 diagram was assessed against Zero Trust posture — how is this connection verified, what is the minimum privilege, what is the blast radius if compromised. Three connections failed the assessment. They went red on the heat map before the design was presented to the room.<br><br>
+    <strong>Heat map as forensic instrument:</strong> Placed on screen. Named every red cell aloud. "Domain 02 — data sovereignty — red. The question is: has written confirmation been received from the vendor that data remains within jurisdiction. The answer is no. Who owns this cell and by when?" The vendor representative could not deflect a named cell the way they had deflected an open question.</div>
+  </div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> C4 Context confirmed — 14 systems, all connections named and directional. Heat map: 9 domains assessed, 3 red with named owners and deadlines, 4 amber with owners, 2 green with independent verification. ADR-001 through ADR-004 written. Pattern locked: decommission sequence confirmed, no re-litigation without new technical information.</div></div>
+</div>
+
+<!-- MODULE 4 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">04</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 04 Applied</div>
+      <div class="mod-name">Artefacts</div>
+      <div class="mod-outcome">Duration: 5 working days · Four artefacts produced · CIS signed · AoaP confirmed by all zones</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">The Customer Impact Statement was written in plain language. The problem: a legacy database costing five figures per month, delivering no current-value function, with fourteen downstream dependencies never previously mapped. The cost of inaction: ongoing operational spend with increasing technical debt and three red-rated security and data sovereignty risks. The decision required: approve the decommission programme and assign a named operational owner by a specific date.<br><br>
+    The CIS was placed in front of the executive sponsor. Sixty seconds of silence. Then: "Why has nobody written it this clearly before?" No answer given. The CIS was signed the same day.<br><br>
+    The Architecture on a Page was confirmed in three zones by three audiences across two sessions. The executive read the business zone and confirmed the objective. The platform lead read the architecture zone and marked up two corrections, both incorporated. The delivery lead read the roadmap zone and confirmed the phase sequence was achievable.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>CIS test:</strong> Handed to the most senior non-technical stakeholder in the engagement. They read it. They stated the decision required without prompting. The CIS passed.<br><br>
+    <strong>AoaP zone confirmation:</strong> Each audience confirmed their zone independently. The executive did not need to read the architecture zone. The platform lead did not need to read the business zone. The document served all three simultaneously from one page.<br><br>
+    <strong>Heat map as final artefact:</strong> Presented with all red cells named aloud. By this point, two of the three red cells had moved to amber — owners had engaged and progress was documented. One remained red. It was named, owned, and deadline-confirmed before the artefact review session ended.</div>
+  </div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> CIS signed by executive sponsor. AoaP confirmed by all three zones — corrections incorporated. Heat map: 2 of 3 red cells moved to amber. ADR-001 through ADR-006 written, all accepted. All artefacts versioned and linked to delivery workstreams.</div></div>
+</div>
+
+<!-- MODULE 5 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">05</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 05 Applied</div>
+      <div class="mod-name">Communication</div>
+      <div class="mod-outcome">Continuous · Escalation Protocol Layer 1 and Layer 2 activated · Boundary statement issued</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">The data sovereignty concern — Domain 02, red — was not resolved within the original deadline. The vendor produced a response that did not directly answer the question. The escalation protocol was activated.<br><br>
+    Layer 1: the Domain 02 component was marked as provisional in the Architecture on a Page. The label was explicit. It appeared in every review.<br><br>
+    Layer 2: the Design Authority was briefed. The concern was framed as a governance decision: "We cannot close this design without written confirmation that data remains within jurisdiction. The consequence of proceeding without it is policy breach. The decision belongs to the security authority."<br><br>
+    The security authority reviewed the vendor's written response independently, confirmed it was insufficient, and issued a formal requirement to the vendor. Within five working days, the vendor produced a compliant written statement. Domain 02 moved from red to green. ADR-007 updated.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>Professional conduct:</strong> Throughout the escalation, no complaint was made about the vendor's behaviour. No accusation of deliberate misleading was made publicly. The concern was named precisely: "The written documentation provided does not confirm data sovereignty. We need a statement that does." The problem was named. Not the person.<br><br>
+    <strong>Boundary statement prepared but not required:</strong> The boundary statement was drafted. It stated what could be confirmed and what could not without the vendor's response. When the response arrived, the boundary statement was not needed. It was kept on record.<br><br>
+    <strong>Operations briefed:</strong> The operations team was briefed before delivery began. What changes from go-live. What the rollback position is. What the support model looks like post-decommission. Their concerns — two of them significant — were documented and added to the risk register.</div>
+  </div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> All concerns raised in writing. Escalation Protocol Layer 2 activated and resolved — data sovereignty confirmed in writing by vendor. All five audience types briefed — executive, technical, vendor, project, operations. Professional conduct maintained throughout. No verbal-only concerns remaining.</div></div>
+</div>
+
+<!-- MODULE 6 -->
+<div class="mod-section">
+  <div class="mod-header">
+    <div class="mod-num">06</div>
+    <div class="mod-title-block">
+      <div class="mod-eyebrow">Module 06 Applied</div>
+      <div class="mod-name">The Velocity Loop</div>
+      <div class="mod-outcome">Loop ran twice · One significant re-orientation · One pattern re-opened via ADR · Delivered in 90 working days</div>
+    </div>
+  </div>
+
+  <div class="what-happened">
+    <div class="wh-label">What Happened</div>
+    <div class="wh-text">At week seven, new information arrived. One of the fourteen dependent application systems — listed in the C4 Context diagram as a read-only consumer of the database — was discovered to be writing to it. Not reading. Writing. The discovery came from a junior team member who had never been in a workshop. They mentioned it in passing during a delivery stand-up.<br><br>
+    The information changed the decommission sequence. It did not change the target state. It changed the order of operations and added two dependencies to the gap analysis. The loop was re-run from Orient — not from the beginning. The C4 diagram was updated. ADR-003 was superseded by ADR-008. The AoaP roadmap was updated. The delivery team was briefed within 24 hours.<br><br>
+    The decommission programme completed its first phase on time. The database was offline within the committed window. The ongoing monthly operational cost stopped.</div>
+  </div>
+
+  <div class="framework-applied">
+    <div class="fa-label">Framework Applied</div>
+    <div class="fa-text"><strong>Loop re-run from Orient:</strong> New information changed the orientation, not the design. The C4 diagram was updated. The affected heat map cells were reassessed. The ADR was superseded. The pattern was re-locked with the corrected information. Total re-run time: three working days. No workshop was required because the new information was specific and the design change was contained.<br><br>
+    <strong>What done meant:</strong> The engagement was not done when the database went offline. It was done when the delivery team had all artefacts, all ADRs, and the updated Architecture on a Page — and could answer every question without the solution architect in the room. That condition was reached on day ninety-one. The architect was no longer required for operational queries by day ninety-five.</div>
+  </div>
+
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> All six module gates confirmed. Loop ran twice — second run from Orient, not from start. 8 ADRs written, all accepted or superseded in sequence. Delivery team operating independently. Monthly operational cost: stopped.</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- RESULT -->
+<div class="result-banner">
+  <div class="rb-text">
+    Stalled for: <strong>24+ months</strong><br>
+    Previous attempts: <strong>three</strong><br>
+    Previous handover between attempts: <strong>none</strong><br>
+    Delivered in: <strong>90 working days</strong><br>
+    Monthly cost stopped: <strong>day 91</strong>
+  </div>
+  <div class="rb-badge">DELIVERED</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LESSONS -->
+<p class="p"><strong>What the framework made possible — and what would have happened without it.</strong></p>
+
+<div class="lessons-grid">
+  <div class="lesson-card">
+    <div class="lc-num">01</div>
+    <div class="lc-title">The immersion period was the entire engagement</div>
+    <div class="lc-body">Fifteen days of orientation felt like inaction. It was not. Every hour spent mapping the prior attempts, the withheld documents, the informal system dependencies — that was design time. The design phase was fast because the orientation phase was thorough.</div>
+  </div>
+  <div class="lesson-card">
+    <div class="lc-num">02</div>
+    <div class="lc-title">The strawman opened every room</div>
+    <div class="lc-body">No workshop started with a blank page. The strawman — always incomplete, always partly wrong — gave the room something to react to. People who would not answer open questions would correct a diagram. The correction was the answer.</div>
+  </div>
+  <div class="lesson-card">
+    <div class="lc-num">03</div>
+    <div class="lc-title">The heat map was the instrument that changed the vendor's behaviour</div>
+    <div class="lc-body">Verbal questions could be deflected. A named cell on a heat map, read aloud in a room containing all relevant parties, could not. Domain 02 going from red to green was the moment the engagement turned from adversarial to cooperative.</div>
+  </div>
+  <div class="lesson-card">
+    <div class="lc-num">04</div>
+    <div class="lc-title">The loop re-run took three days because the artefacts were complete</div>
+    <div class="lc-body">The discovery in week seven could have restarted the engagement. It did not because the C4 diagram, the heat map, and the ADRs were complete enough that the new information had a specific, named place to land. Incomplete artefacts would have required a full restart.</div>
+  </div>
+  <div class="lesson-card">
+    <div class="lc-num">05</div>
+    <div class="lc-title">Professional conduct under pressure protected the outcome</div>
+    <div class="lc-body">The vendor was misleading. The organisation had withheld history. The pressure to proceed without resolving Domain 02 was real. None of it was confronted directly. All of it was documented, escalated through the correct channels, and resolved through the artefact. The outcome was better than a confrontation would have produced.</div>
+  </div>
+  <div class="lesson-card">
+    <div class="lc-num">06</div>
+    <div class="lc-title">The junior team member's observation was the most important intelligence</div>
+    <div class="lc-body">The write dependency was not in any document. It was not raised in any workshop. It came from someone who had never been asked. The framework is designed for what is known. The practitioner must remain alert to what surfaces from unexpected sources throughout the entire engagement.</div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">THE WORKED EXAMPLE · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <a class="back-link" href="index.html">← RETURN TO FRAMEWORK</a>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+</div>
+</div>
+</body>
+</html>

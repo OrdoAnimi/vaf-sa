@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA — The Workshop Playbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(61,143,181,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(61,143,181,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--cold-light);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--cold-light);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title span{color:var(--cold-light);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--wire);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(61,143,181,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--cold-light);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);margin-top:4px;letter-spacing:0.05em;}
+.p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--cold);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.callout.amber{border-left-color:var(--amber);}
+.callout.signal{border-left-color:var(--signal);}
+.callout.green{border-left-color:var(--green);}
+.divider{height:1px;background:linear-gradient(to right,var(--cold),transparent);margin:40px 0;opacity:0.3;}
+.step-stack{display:flex;flex-direction:column;gap:8px;margin:20px 0;}
+.step-row{display:grid;grid-template-columns:48px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.st-num{background:rgba(61,143,181,0.08);border-right:1px solid rgba(61,143,181,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--cold-light);padding:16px 0;}
+.st-body{padding:14px 18px;}
+.st-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:6px;}
+.st-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.st-say{margin-top:8px;padding:8px 12px;background:var(--steel);border-left:2px solid rgba(61,143,181,0.4);font-family:'DM Mono',monospace;font-size:10px;color:var(--cold-light);line-height:1.6;font-style:italic;}
+.st-say::before{content:'SAY: ';font-style:normal;color:rgba(61,143,181,0.5);font-weight:500;}
+.conflict-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:540px){.conflict-grid{grid-template-columns:1fr;}}
+.conflict-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.cc-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--cold-light);margin-bottom:6px;}
+.cc-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
+.cc-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.cc-response{margin-top:10px;padding:8px 12px;background:var(--steel);border-left:2px solid;font-family:'DM Mono',monospace;font-size:9px;color:var(--mist);line-height:1.6;}
+.cc-response.do{border-color:var(--green);}
+.cc-response.dont{border-color:var(--signal);}
+.agenda-block{background:var(--forge);border:1px solid var(--wire);overflow:hidden;margin:20px 0;}
+.agenda-header{padding:14px 20px;background:rgba(61,143,181,0.08);border-bottom:1px solid var(--wire);display:flex;justify-content:space-between;align-items:center;}
+.agenda-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--cold-light);}
+.agenda-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);}
+.agenda-rows{display:flex;flex-direction:column;}
+.agenda-row{display:grid;grid-template-columns:80px 1fr 100px;gap:0;border-bottom:1px solid var(--wire);padding:10px 16px;align-items:center;}
+.agenda-row:last-child{border-bottom:none;}
+.a-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--cold-light);}
+.a-item{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);}
+.a-note{font-family:'DM Mono',monospace;font-size:8px;color:var(--wire-light);text-align:right;}
+.estop-block{background:rgba(196,82,40,0.08);border:1px solid rgba(196,82,40,0.3);padding:20px 24px;margin:20px 0;}
+.estop-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--signal);margin-bottom:12px;}
+.estop-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.7;}
+.estop-list{list-style:none;margin-top:10px;}
+.estop-list li{padding:6px 0;border-bottom:1px solid rgba(196,82,40,0.15);font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);}
+.estop-list li:last-child{border:none;}
+.estop-list li::before{content:'⊘ ';color:var(--signal);}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--cold-light);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.next-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(61,143,181,0.08);border:1px solid rgba(61,143,181,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--cold-light);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Supplement to Module 02</div>
+    <div class="doc-ref">VAFSA-WORKSHOP-PLAYBOOK<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">THE WORKSHOP<br><span>PLAYBOOK</span></div>
+  <div class="doc-subtitle">How to design it. How to open it. What to do when it goes sideways.</div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Why the Workshop Exists</div>
+      <div class="section-desc">Not a meeting. Not a discovery session. A decision engine.</div>
+    </div>
+  </div>
+  <p class="p">The workshop is the mechanism that converts information asymmetry into shared understanding. Across all four engagement archetypes, the core problem is the same: the right people have never been in the same room. The workshop puts them there and gives the architecture a forcing function to surface every gap, conflict, and unresolved decision.</p>
+  <p class="p">A meeting discusses. A workshop decides. The difference is design. <strong>If you walk in without a designed structure, you will run a meeting.</strong> Meetings produce follow-up meetings. Workshops produce artefacts.</p>
+  <div class="callout">Never open a workshop with a blank page. Open with a strawman — a draft diagram, a partial current-state map, a preliminary heat map with everything red. People react to something. They do not respond to nothing. The strawman is wrong by design. Getting it wrong together is how shared understanding begins.</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Design</div>
+      <div class="section-title">How to Design the Room</div>
+      <div class="section-desc">Who is in it. Why each person is there. What you need from each of them.</div>
+    </div>
+  </div>
+  <p class="p">The wrong people in the room is worse than no workshop. Every extra person who cannot answer one of the ten questions and cannot make a decision is friction. Design the attendee list against a specific purpose: who holds the information you need, who holds the decision authority you need, and who holds the political keys to the doors that are currently closed.</p>
+
+  <div class="step-stack">
+    <div class="step-row">
+      <div class="st-num">1</div>
+      <div class="st-body">
+        <div class="st-title">Map the three stakeholder categories against the workshop agenda</div>
+        <div class="st-text">Decision holders — need to be in the room when the decision moment arrives. Not the whole session. Just that moment. Information holders — need to be available for the technical depth segments. Operations and vendors — separate stream if possible. Mixed rooms with conflicting interests produce defensive answers.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="st-num">2</div>
+      <div class="st-body">
+        <div class="st-title">Push for the right people, not the available ones</div>
+        <div class="st-text">The first attendee list proposed is always the available list, not the right list. The security architect who is "too busy" holds the information that closes three red cells. The data owner who "cannot make that time" is the only person who can answer Question 7. Push once. Push firmly. Document if they refuse.</div>
+        <div class="st-say">I need the security architect in the room for the first ninety minutes specifically. That is not negotiable if we are going to close the data sovereignty question in this session.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="st-num">3</div>
+      <div class="st-body">
+        <div class="st-title">Brief every attendee on their specific role before they arrive</div>
+        <div class="st-text">Nobody should arrive at a workshop not knowing why they are there. Send a one-paragraph brief per attendee: "You are there because you hold the answer to X. We will need that answer confirmed in the first thirty minutes." People who know their role perform it. People who arrive unclear become observers.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Execution</div>
+      <div class="section-title">The Opening</div>
+      <div class="section-desc">The first ten minutes determine whether the workshop produces artefacts or another meeting.</div>
+    </div>
+  </div>
+
+  <div class="agenda-block">
+    <div class="agenda-header">
+      <div class="agenda-title">Standard Workshop Structure — Half Day</div>
+      <div class="agenda-time">3.5 hours · Adjust to engagement scope</div>
+    </div>
+    <div class="agenda-rows">
+      <div class="agenda-row"><div class="a-time">0:00–0:10</div><div class="a-item">Open with the strawman. Place the draft diagram or partial heat map. Say: "This is wrong. Tell me how."</div><div class="a-note">No preamble</div></div>
+      <div class="agenda-row"><div class="a-time">0:10–0:40</div><div class="a-item">Current state confirmation. Walk the strawman. Corrections from the room build the real picture.</div><div class="a-note">Record everything</div></div>
+      <div class="agenda-row"><div class="a-time">0:40–1:20</div><div class="a-item">Ten questions — business stream. What are you trying to achieve. What does success look like. What has been attempted.</div><div class="a-note">Business leads only</div></div>
+      <div class="agenda-row"><div class="a-time">1:20–2:00</div><div class="a-item">Ten questions — technical stream. Systems. Data flows. Constraints. Integration points.</div><div class="a-note">Technical leads</div></div>
+      <div class="agenda-row"><div class="a-time">2:00–2:30</div><div class="a-item">Vendor engagement. Closed questions with named assumptions. Heat map cells named aloud.</div><div class="a-note">Forensic mode</div></div>
+      <div class="agenda-row"><div class="a-time">2:30–3:00</div><div class="a-item">Open items. Every red cell assigned an owner and a deadline before the room empties.</div><div class="a-note">No cell unassigned</div></div>
+      <div class="agenda-row"><div class="a-time">3:00–3:30</div><div class="a-item">Synthesis read-back. State what you heard, what is agreed, what is open. Confirm in the room before anyone leaves.</div><div class="a-note">Written same day</div></div>
+    </div>
+  </div>
+
+  <p class="p">The opening line matters. Not a welcome. Not a thanks-for-coming. A statement of purpose and a strawman placed on the table.</p>
+  <div class="callout amber">SAY: "I have put a draft of what I think the current state looks like on the screen. I expect most of it is wrong. Let's mark it up together and by the end of this session I want to have confirmed the current state, understand the target, and assign owners to every open question. Let's start at the top left."</div>
+  <p class="p">That opening does four things. States the purpose. Lowers defensiveness by admitting the draft is wrong. Creates a shared task. Gives the room a starting point that is not a blank page.</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Conflict Management</div>
+      <div class="section-title">When the Room Goes Sideways</div>
+      <div class="section-desc">Vendor vs technical lead. Business vs operations. Politics surfacing mid-session. Every response is the same: reframe to constraints and outcomes.</div>
+    </div>
+  </div>
+
+  <div class="conflict-grid">
+    <div class="conflict-card">
+      <div class="cc-type">Conflict Type 01</div>
+      <div class="cc-title">Vendor vs Technical Lead</div>
+      <div class="cc-body">The vendor claims the solution does X. The technical lead says it cannot. Both are asserting position. Neither is producing evidence. The room is heating up and the workshop is becoming a negotiation.</div>
+      <div class="cc-response do"><strong>Do:</strong> Stop both. Reframe. "What are we optimising for here — supportability, risk, or timeline? Let's agree on the constraint and then assess which position satisfies it." Move the argument from ego to engineering.</div>
+    </div>
+    <div class="conflict-card">
+      <div class="cc-type">Conflict Type 02</div>
+      <div class="cc-title">No Resolution After Two Rounds</div>
+      <div class="cc-body">You have reframed twice. Both parties have restated their positions. The conflict has not moved. The workshop is now consuming time it does not have on a single unresolved point.</div>
+      <div class="cc-response do"><strong>Do:</strong> Capture both positions formally. "We have two positions on the table. I am going to record both and elevate this to a governance decision. Neither of you is wrong — this is a decision that needs an authority above this room. We move on."</div>
+    </div>
+    <div class="conflict-card">
+      <div class="cc-type">Conflict Type 03</div>
+      <div class="cc-title">Political Dynamic Surfaces</div>
+      <div class="cc-body">Someone in the room is protecting something. Their answers are consistent with an interest, not with the truth. The workshop is being navigated around something they do not want on the table.</div>
+      <div class="cc-response do"><strong>Do:</strong> Name the heat map cell, not the person. "Domain 07 — Vendor and Commercial — is currently red. The question on the table is: has the vendor commitment been confirmed in writing? Yes or no." The cell is the pressure. Not you.</div>
+    </div>
+    <div class="conflict-card">
+      <div class="cc-type">Conflict Type 04</div>
+      <div class="cc-title">Nobody Is Talking</div>
+      <div class="cc-body">The room opened. Nobody responded to the strawman. Silence. Not productive silence — defensive silence. The room has decided to wait you out.</div>
+      <div class="cc-response do"><strong>Do:</strong> Point to a specific element of the strawman and ask a closed question to one named person. "The data flow I've shown here goes left to right. Is that correct?" One person. One specific element. Closed question. Silence cannot survive a direct, named question.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Discipline</div>
+      <div class="section-title">The E-Stop</div>
+      <div class="section-desc">When to call it. When another workshop is not the answer. When the decision needs a different room.</div>
+    </div>
+  </div>
+  <p class="p">The E-stop is the moment you call an end to workshop-based resolution and escalate to governance. It is not a failure. It is a discipline. The workshop that runs indefinitely without converging is not a productive workshop. It is an avoidance mechanism.</p>
+
+  <div class="estop-block">
+    <div class="estop-title">E-Stop Triggers</div>
+    <div class="estop-body">If any of these conditions are present, the workshop has reached its limit. Stop. Name the condition. Escalate.</div>
+    <ul class="estop-list">
+      <li>The same question has been asked twice across two sessions with no resolution.</li>
+      <li>A conflict has been reframed twice and both parties have returned to their original positions.</li>
+      <li>A decision is required that no one in the room has the authority to make.</li>
+      <li>New issues are surfacing faster than existing ones are being resolved — the engagement is expanding, not converging.</li>
+      <li>The vendor has deferred the same heat map cell twice. A third deferral is a refusal.</li>
+      <li>The workshop has run over time and open items are being carried forward rather than resolved.</li>
+    </ul>
+  </div>
+
+  <p class="p">When the E-stop fires: state what has been resolved, state what has not, name the decision required, name who needs to make it, and set the deadline. Document it before anyone leaves the room. The workshop has done its job. The governance layer now does its job.</p>
+  <div class="callout signal">SAY: "We have reached the limit of what this workshop can resolve. Here is what is confirmed. Here is what is not. This open item requires a decision from the CISO by the 15th. Without it, design cannot proceed. I am documenting that now and it will go into the risk register today."</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">W.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Output</div>
+      <div class="section-title">What Leaves the Room</div>
+      <div class="section-desc">The workshop produces artefacts. Not notes. Not action items. Artefacts.</div>
+    </div>
+  </div>
+  <p class="p">Same day. Before close of business. Three outputs.</p>
+
+  <div class="step-stack">
+    <div class="step-row">
+      <div class="st-num">1</div>
+      <div class="st-body">
+        <div class="st-title">Updated heat map</div>
+        <div class="st-text">Every cell that was discussed has a new status. Every red cell has a named owner and a deadline. Every new cell surfaced during the session is added. This is not a report of the workshop. It is the living artefact updated by it.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="st-num">2</div>
+      <div class="st-body">
+        <div class="st-title">Open items list — sent to all attendees</div>
+        <div class="st-text">Named item. Named owner. Named deadline. Nothing vague. Not "follow up on security concerns." "Data sovereignty — Domain 02 — confirmed in writing by the CISO — deadline Friday the 15th." Three fields. No exceptions.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="st-num">3</div>
+      <div class="st-body">
+        <div class="st-title">Updated current-state diagram</div>
+        <div class="st-text">The strawman, corrected by the room. This is not a polished artefact yet. It is the confirmed picture of the current state, marked up during the session, cleaned up and distributed the same day. The Architecture on a Page will be produced from this in Module 4. The workshop produces the raw material.</div>
+      </div>
+    </div>
+  </div>
+  <div class="callout green">The workshop is not done when the session ends. It is done when the three outputs are distributed. If the outputs are not sent the same day, the decisions made in the room begin to dissolve. Memory is unreliable. Documentation is not.</div>
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">WORKSHOP PLAYBOOK · SUPPLEMENT TO MODULE 02 · MYINT ENTERPRISES PTY LTD</div>
+    <a class="next-link" href="escalation-protocol.html">→ ESCALATION PROTOCOL</a>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+</div>
+</div>
+</body>
+</html>

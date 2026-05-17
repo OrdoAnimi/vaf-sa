@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 2 — Intelligence</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #0c0d10;
+  --forge: #13151a;
+  --steel: #1a1e28;
+  --wire: #252b3a;
+  --wire-light: #323a50;
+  --amber: #c97d0a;
+  --amber-hot: #e8920f;
+  --amber-dim: rgba(201,125,10,0.12);
+  --cold: #3d8fb5;
+  --cold-light: #5aafd4;
+  --signal: #c45228;
+  --green: #2e9e68;
+  --green-light: #4aba84;
+  --fog: #7a8299;
+  --mist: #a8b0c4;
+  --ghost: #d0d6e4;
+  --white: #eef0f5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(61,143,181,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,143,181,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+
+/* HEADER */
+.doc-header {
+  border-bottom: 1px solid var(--wire);
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+}
+
+.doc-meta {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  flex-wrap:wrap; gap:12px; margin-bottom:24px;
+}
+
+.doc-brand {
+  font-family:'DM Mono', monospace;
+  font-size:10px; letter-spacing:0.25em; color:var(--amber);
+  text-transform:uppercase;
+}
+
+.doc-ref {
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--fog); letter-spacing:0.15em;
+  text-align:right;
+}
+
+.doc-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size: clamp(40px,6vw,72px);
+  letter-spacing:0.04em; line-height:0.92;
+  color:var(--white); margin-bottom:8px;
+}
+
+.doc-title span { color:var(--cold-light); }
+
+.doc-subtitle {
+  font-family:'DM Mono', monospace;
+  font-size:11px; color:var(--fog);
+  letter-spacing:0.1em; margin-bottom:20px;
+}
+
+.doc-tags {
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+
+.tag {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.15em; text-transform:uppercase;
+  padding:4px 10px;
+  border:1px solid var(--wire); color:var(--fog);
+}
+
+.tag.cold { border-color:rgba(61,143,181,0.4); color:var(--cold-light); }
+.tag.amber { border-color:rgba(201,125,10,0.4); color:var(--amber); }
+
+/* SECTIONS */
+.section { margin-bottom:52px; }
+
+.section-header {
+  display:flex; align-items:flex-start; gap:16px;
+  margin-bottom:24px; padding-bottom:16px;
+  border-bottom:1px solid var(--wire);
+}
+
+.section-num {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:42px; line-height:1;
+  color:rgba(61,143,181,0.2); min-width:44px;
+  padding-top:2px;
+}
+
+.section-eyebrow {
+  font-family:'DM Mono', monospace;
+  font-size:9px; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--cold-light); margin-bottom:4px;
+}
+
+.section-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:28px; letter-spacing:0.04em;
+  color:var(--white); line-height:1;
+}
+
+.section-desc {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog);
+  margin-top:4px; letter-spacing:0.05em;
+}
+
+.body-text {
+  font-family:'DM Sans', sans-serif;
+  font-size:13.5px; color:var(--ghost);
+  line-height:1.75; margin-bottom:16px;
+}
+
+.body-text strong { color:var(--white); font-weight:600; }
+
+.callout {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  border-left:3px solid var(--cold);
+  padding:16px 20px;
+  margin:20px 0;
+  font-family:'DM Mono', monospace;
+  font-size:11px; color:var(--mist); line-height:1.7;
+}
+
+.callout.amber { border-left-color:var(--amber); }
+.callout.signal { border-left-color:var(--signal); }
+.callout.green { border-left-color:var(--green); }
+
+.divider {
+  height:1px;
+  background:linear-gradient(to right, var(--cold), transparent);
+  margin:40px 0; opacity:0.3;
+}
+
+/* PILLAR BLOCK */
+.pillars {
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  margin:20px 0;
+}
+
+@media(max-width:560px) { .pillars { grid-template-columns:1fr; } }
+
+.pillar {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  border-top:2px solid;
+  padding:20px 22px;
+}
+
+.pillar.think { border-top-color:var(--amber); }
+.pillar.talk { border-top-color:var(--cold); }
+
+.pillar-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.25em; text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.pillar.think .pillar-label { color:var(--amber); }
+.pillar.talk .pillar-label { color:var(--cold-light); }
+
+.pillar-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:24px; letter-spacing:0.04em;
+  color:var(--white); margin-bottom:12px;
+}
+
+.pillar-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.8;
+}
+
+/* QUESTION CARDS */
+.questions-stack {
+  display:flex; flex-direction:column; gap:10px;
+  margin:20px 0;
+}
+
+.q-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  overflow:hidden;
+}
+
+.q-card-header {
+  display:grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items:stretch;
+  gap:0;
+  border-bottom:1px solid var(--wire);
+}
+
+.q-num {
+  background:rgba(61,143,181,0.1);
+  border-right:1px solid rgba(61,143,181,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue', sans-serif;
+  font-size:22px; color:var(--cold-light);
+  padding:14px 0;
+}
+
+.q-text {
+  padding:14px 18px;
+  font-weight:600; font-size:13px;
+  color:var(--white); line-height:1.4;
+  display:flex; align-items:center;
+}
+
+.q-audience {
+  padding:8px 14px;
+  display:flex; align-items:center;
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.12em;
+  color:var(--fog); text-transform:uppercase;
+  border-left:1px solid var(--wire);
+  writing-mode:horizontal-tb;
+  white-space:nowrap;
+}
+
+.q-body {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:0;
+}
+
+@media(max-width:600px) { .q-body { grid-template-columns:1fr; } }
+
+.q-intent {
+  padding:14px 18px;
+  border-right:1px solid var(--wire);
+}
+
+.q-intent-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--cold-light); margin-bottom:6px;
+}
+
+.q-intent-text {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+.q-signal {
+  padding:14px 18px;
+}
+
+.q-signal-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--amber); margin-bottom:6px;
+}
+
+.q-signal-text {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+/* ANSWER READING */
+.response-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+  margin:20px 0;
+}
+
+@media(max-width:600px) { .response-grid { grid-template-columns:1fr; } }
+
+.response-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:16px 18px;
+}
+
+.response-type {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.r-clear { color: var(--green-light); }
+.r-deflect { color: var(--amber); }
+.r-absent { color: var(--signal); }
+
+.response-title {
+  font-weight:600; font-size:12px;
+  color:var(--white); margin-bottom:8px;
+}
+
+.response-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+.response-action {
+  margin-top:10px; padding:8px 12px;
+  background:var(--steel);
+  border-left:2px solid;
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--mist); line-height:1.6;
+}
+
+.r-card-clear .response-action { border-color:var(--green); }
+.r-card-deflect .response-action { border-color:var(--amber); }
+.r-card-absent .response-action { border-color:var(--signal); }
+
+/* VENDOR PROTOCOL */
+.vendor-steps {
+  display:flex; flex-direction:column; gap:0;
+  margin:20px 0;
+}
+
+.vendor-step {
+  display:grid;
+  grid-template-columns: 56px 1fr;
+  gap:0;
+}
+
+.vs-marker {
+  display:flex; flex-direction:column;
+  align-items:center;
+  padding-top:16px;
+}
+
+.vs-num {
+  width:28px; height:28px;
+  background:var(--steel);
+  border:1px solid var(--wire);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue', sans-serif;
+  font-size:14px; color:var(--cold-light);
+  position:relative; z-index:1;
+}
+
+.vs-line {
+  width:1px; flex:1;
+  background:var(--wire);
+  margin:4px 0;
+}
+
+.vs-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  border-left:none;
+  padding:14px 18px;
+  margin-bottom:4px;
+}
+
+.vs-title {
+  font-weight:600; font-size:12px;
+  color:var(--white); margin-bottom:6px;
+}
+
+.vs-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+.vs-example {
+  margin-top:8px; padding:8px 12px;
+  background:rgba(61,143,181,0.06);
+  border:1px solid rgba(61,143,181,0.15);
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--cold-light);
+  line-height:1.6;
+  font-style:italic;
+}
+
+.vs-example::before {
+  content:'SAY: ';
+  font-style:normal;
+  font-weight:500;
+  color:var(--cold);
+}
+
+/* GAP MAP */
+.gap-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  margin:20px 0;
+}
+
+@media(max-width:560px) { .gap-grid { grid-template-columns:1fr; } }
+
+.gap-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:16px 18px;
+}
+
+.gap-type {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.gap-title {
+  font-weight:600; font-size:12px;
+  color:var(--white); margin-bottom:8px;
+}
+
+.gap-body {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--fog); line-height:1.7;
+}
+
+.gap-reads-as {
+  margin-top:10px; padding:8px 12px;
+  background:var(--steel);
+  font-family:'DM Mono', monospace;
+  font-size:9px; line-height:1.6; color:var(--mist);
+}
+
+.gap-reads-as::before {
+  content:'READS AS: ';
+  color:var(--amber-hot); font-weight:500;
+}
+
+/* PLAIN SPEECH EXAMPLES */
+.speech-compare {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  margin:20px 0;
+}
+
+@media(max-width:560px) { .speech-compare { grid-template-columns:1fr; } }
+
+.speech-card {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:16px 18px;
+}
+
+.speech-label {
+  font-family:'DM Mono', monospace;
+  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.speech-bad { color:var(--signal); border-top:2px solid var(--signal); }
+.speech-good { color:var(--green-light); border-top:2px solid var(--green); }
+
+.speech-text {
+  font-family:'DM Mono', monospace;
+  font-size:11px; line-height:1.7;
+}
+
+.speech-bad .speech-text { color:var(--fog); }
+.speech-good .speech-text { color:var(--mist); }
+
+.speech-why {
+  margin-top:10px;
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--fog); line-height:1.6;
+  padding-top:10px; border-top:1px solid var(--wire);
+}
+
+/* CHECKLIST */
+.checklist {
+  background:var(--forge);
+  border:1px solid var(--wire);
+  padding:24px 28px; margin:20px 0;
+}
+
+.checklist-header {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:22px; letter-spacing:0.04em;
+  color:var(--white); margin-bottom:4px;
+}
+
+.checklist-sub {
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--fog); letter-spacing:0.1em;
+  margin-bottom:20px;
+}
+
+.check-item {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:10px 14px; margin-bottom:8px;
+  background:var(--steel);
+  border:1px solid var(--wire);
+}
+
+.check-box {
+  width:16px; height:16px; min-width:16px;
+  border:1px solid var(--wire-light);
+  margin-top:1px;
+}
+
+.check-text {
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--mist); line-height:1.5;
+}
+
+.check-text strong { color:var(--white); }
+
+/* FOOTER */
+.doc-footer {
+  border-top:1px solid var(--wire);
+  padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+  margin-top:64px;
+}
+
+.footer-brand {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:18px; letter-spacing:0.08em;
+  color:var(--wire-light);
+}
+
+.footer-brand span { color:var(--cold-light); }
+
+.footer-nav {
+  font-family:'DM Mono', monospace;
+  font-size:9px; color:var(--fog); letter-spacing:0.1em;
+}
+
+.next-module {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 18px;
+  background:rgba(61,143,181,0.08);
+  border:1px solid rgba(61,143,181,0.3);
+  font-family:'DM Mono', monospace;
+  font-size:10px; color:var(--cold-light);
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-top:8px;
+}
+</style>
+</head>
+<body>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 02 OF 06<br>VAFSA-M02-INTELLIGENCE<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 02<br><span>INTELLIGENCE</span></div>
+  <div class="doc-subtitle">How to get what you need from any room — in plain language, without authority</div>
+  <div class="doc-tags">
+    <span class="tag cold">Influence Without Authority</span>
+    <span class="tag cold">Plain Speech</span>
+    <span class="tag amber">Lean Six Sigma — Define</span>
+    <span class="tag amber">CBA® — Business Context</span>
+    <span class="tag">CBAP — Elicitation</span>
+    <span class="tag">SABSA — Threat Context</span>
+  </div>
+</div>
+
+<!-- 2.0 PURPOSE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">What this module teaches and why it changes everything</div>
+    </div>
+  </div>
+
+  <p class="body-text">Module 2 teaches you how to get the information you need from people who may not want to give it — without aggression, without authority, and without jargon. It is the most human module in the framework. It is also the most decisive. The architect who cannot gather real intelligence cannot design a real solution.</p>
+
+  <p class="body-text">Most architects ask the wrong questions. Not because they are not smart. Because they are trying to sound smart. Framework vocabulary. Methodology references. Performance of expertise. The person across the table closes down. The real information stays hidden.</p>
+
+  <p class="body-text"><strong>Plain questions get real answers.</strong> A vendor who deflects a technical question cannot deflect a simple one. A stakeholder who avoids a requirements workshop will answer a direct conversation. The simpler the question, the harder it is to avoid.</p>
+
+  <div class="callout">
+    You are not in the room to demonstrate knowledge. You are in the room to extract it. Less said. More heard. Direct question. Less room to manoeuvre.
+  </div>
+
+  <div class="pillars">
+    <div class="pillar think">
+      <div class="pillar-label">Pillar One</div>
+      <div class="pillar-title">How to Think</div>
+      <div class="pillar-body">
+        Before you ask anything, know the shape of the answer you expect. You are confirming or exposing — not discovering. Every question is a hypothesis. Every response is evidence. Silence is evidence. Deflection is evidence. Confidence without documentation is evidence.<br><br>
+        Think before you speak. Half the questions. Twice the intelligence.
+      </div>
+    </div>
+    <div class="pillar talk">
+      <div class="pillar-label">Pillar Two</div>
+      <div class="pillar-title">How to Talk</div>
+      <div class="pillar-body">
+        Short sentences. Plain words. No jargon unless it is the only precise term available. Speak to the person, not the room. Ask one question at a time. Wait for the full answer before asking the next one.<br><br>
+        Silence after a question is not awkward. It is pressure. Let it work. The person who fills silence first reveals most.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.1 PLAIN SPEECH -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Principle</div>
+      <div class="section-title">Plain Speech Over Jargon</div>
+      <div class="section-desc">The most powerful professional tool available. Never complicated. Always direct.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Jargon is armour. Plain speech is the mark of someone who already knows the answer and does not need the vocabulary to prove it.</p>
+
+  <p class="body-text">In every room — executive, technical, vendor, operational — plain language wins. Faster. Cannot be deflected with counter-jargon. Signals confidence. Works on every audience simultaneously. No different register for the CFO and the DBA. Speak plainly to both.</p>
+
+  <div class="speech-compare">
+    <div class="speech-card speech-bad">
+      <div class="speech-label">Do Not Say This</div>
+      <div class="speech-text">"We need to align our stakeholder engagement model with the target state architecture and validate the NFRs against the current TOGAF ADM phase before we can progress the solution design."</div>
+      <div class="speech-why">Nobody knows what action to take next. The jargon performed intelligence without communicating anything. The room disengaged.</div>
+    </div>
+    <div class="speech-card speech-good">
+      <div class="speech-label">Say This Instead</div>
+      <div class="speech-text">"Before we design the solution we need three things from you. What the system actually does today. What it needs to do. And who signs off on the decision. Can we get those in this meeting?"</div>
+      <div class="speech-why">Three clear items. One question. Everyone in the room knows exactly what is being asked of them. The meeting has a purpose.</div>
+    </div>
+  </div>
+
+  <div class="speech-compare">
+    <div class="speech-card speech-bad">
+      <div class="speech-label">Do Not Say This</div>
+      <div class="speech-text">"We need to conduct a comprehensive as-is assessment, map the capability gaps against the to-be state, and produce an Architecture Decision Record before progressing to the solution architecture phase."</div>
+      <div class="speech-why">Sounds thorough. Communicates delay. Nobody outside the architecture practice knows what any of those things mean in practical terms.</div>
+    </div>
+    <div class="speech-card speech-good">
+      <div class="speech-label">Say This Instead</div>
+      <div class="speech-text">"I need to understand what you have, what you need, and what has been tried before. Give me two weeks. Then I will tell you exactly what the solution looks like and what it will take to deliver it."</div>
+      <div class="speech-why">Timeline committed. Outcome stated. No jargon. Executive can brief their board with those three sentences. That is the point.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.2 THE 10 QUESTIONS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Protocol</div>
+      <div class="section-title">The 10 Customer Questions</div>
+      <div class="section-desc">In sequence. In plain language. For every engagement without exception.</div>
+    </div>
+  </div>
+
+  <p class="body-text">These are not interview questions. Not a requirements template. A structured conversation — designed so that by question ten, you have everything you need to begin design. The intent behind each question matters as much as the question itself. Know both before you walk in.</p>
+
+  <div class="questions-stack">
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">1</div>
+        <div class="q-text">What is the problem you are actually trying to solve?</div>
+        <div class="q-audience">All</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">The stated problem is rarely the real problem. The first answer tells you what they have prepared to say. The second answer — after you wait — tells you what they actually mean. Ask it. Wait. Ask it again differently if needed. The real problem is always simpler than the stated one.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">A clear answer means they have done some thinking. A long answer full of technical detail means they are hiding the real problem behind complexity. No clear answer means no one has defined it — which means you will define it for them. That is power.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">2</div>
+        <div class="q-text">What does good look like in 90 days?</div>
+        <div class="q-audience">Business</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Not "what is the project plan" — what does the business actually need to see. This surfaces the real success criteria before anyone has written a requirements document. It also reveals whether the business has any clarity about what they want. Often they do not. That is your entry point.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Vague answer — no one has defined success. You define it and confirm it back. Specific answer — there is already an expectation set. Find out who set it and whether it is achievable. Conflict in the room on this question — significant stakeholder alignment issue. Note it immediately.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">3</div>
+        <div class="q-text">What has already been tried?</div>
+        <div class="q-audience">All</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Every engagement has a history. Most of it will not be volunteered. This question forces it into the room. The answer also tells you who is in the room politically — the person who led the last failed attempt will respond differently to this question than the person who replaced them.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">"Nothing" when you know something was attempted — deliberate withholding. Partial answer — test against the documents from Module 1. Detailed answer — someone wants you to understand the history. Listen carefully. They may be telling you where the politics sit without naming it directly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">4</div>
+        <div class="q-text">Why did it stop?</div>
+        <div class="q-audience">All</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">This is the most revealing question in the set. The stated reason for failure is always sanitised. "Budget" means someone did not prioritise it. "Resource constraints" means no one owned it. "Technical complexity" means the vendor could not deliver and the organisation accepted it. Translate the answer.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Confident answer with a clear cause — credible. Uncomfortable silence or a quick deflection to process — political. Multiple different answers from different people in the room — no shared understanding of what went wrong. That is Archetype 3 or 4. Act accordingly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">5</div>
+        <div class="q-text">Who owns this when I leave?</div>
+        <div class="q-audience">Business</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Not the project owner. The operational owner. The person who will be accountable for this in twelve months. If no one can answer this, the engagement has no landing zone. A solution without an owner does not get implemented — it gets archived. Establish this before design begins.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Clear name given immediately — there is organisational commitment. Hesitation, deflection, or "that is still to be decided" — the politics of ownership have not been resolved. You cannot design a solution for an organisation that has not decided who is responsible for it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">6</div>
+        <div class="q-text">What systems touch this — and what do they do?</div>
+        <div class="q-audience">Technical</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Not a systems inventory for documentation purposes. A dependency map for risk purposes. Every system that touches the solution is a potential failure point, a constraint, or a political boundary. Get the full picture in the room — not from a document written eighteen months ago.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Confident complete list — good technical understanding in the room. Partial list with qualifications — there are systems they do not fully control or understand. "It depends" — integration complexity has not been mapped. Add it to the heat map as amber immediately.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">7</div>
+        <div class="q-text">Where does the data go — and in which direction?</div>
+        <div class="q-audience">Technical</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">This is the question that exposes Archetype 1. Data direction is the most frequently obfuscated element in any vendor engagement. Ingress versus egress. Internal versus external. What leaves the organisation and where it goes. This question cannot be answered vaguely. Name the flow. Name the destination.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Clear named data flows — credible. "The data stays internal" without documentation — verify independently before accepting. Any answer involving a third-party hosting solution — map it precisely. If the vendor hesitates on data direction, the heat map goes red on data sovereignty immediately.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">8</div>
+        <div class="q-text">What are you not allowed to do?</div>
+        <div class="q-audience">All</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Security, compliance, regulatory, and contractual constraints. This question surfaces every hard boundary before design begins. It prevents the single most expensive mistake in solution architecture — designing a solution that cannot be approved. Know the constraints before you draw the first box.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Comprehensive answer — mature governance environment. Partial answer — governance gaps that will surface later as blockers. "Nothing that I know of" — go and find out independently. There are always constraints. The absence of a known constraint is not permission. It is a gap.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">9</div>
+        <div class="q-text">What has the vendor told you and what have you seen in writing?</div>
+        <div class="q-audience">Business</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">Verbal commitments and written documentation are different things. What the vendor said in a meeting and what is in the solution paper are frequently not the same. This question forces the client to distinguish between what they were told and what they can prove. That gap is where risk lives.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">All verbal, no documentation — the vendor has been managing relationships not producing evidence. Significant gap between verbal commitments and written documentation — the vendor is overcommitting. Go to the vendor's own published documentation independently and compare. That is your verification.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-num">10</div>
+        <div class="q-text">What happens if this fails again?</div>
+        <div class="q-audience">Business</div>
+      </div>
+      <div class="q-body">
+        <div class="q-intent">
+          <div class="q-intent-label">Why you ask this</div>
+          <div class="q-intent-text">This question does two things. It establishes the cost of inaction — which belongs in the Customer Impact Statement. And it changes the dynamic in the room. The people who have been comfortable with delay suddenly have to face what delay actually means. It is not aggressive. It is honest. And it accelerates decision-making.</div>
+        </div>
+        <div class="q-signal">
+          <div class="q-signal-label">What the answer tells you</div>
+          <div class="q-signal-text">Strong answer with real consequences — there is genuine urgency. You have a motivated client. Vague answer — the cost of failure has never been articulated. You are going to articulate it in the CIS. Silence — the room is uncomfortable. That discomfort is the beginning of ownership.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.3 READING THE ANSWER -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Skill</div>
+      <div class="section-title">Reading the Answer</div>
+      <div class="section-desc">What people say is one data point. How they say it is another. What they do not say is the most important.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The 10 questions generate responses. Reading those responses — accurately, in real time, without projection — is the skill that separates the practitioner who designs the right solution from the one who designs the stated solution.</p>
+
+  <div class="response-grid">
+    <div class="response-card r-card-clear">
+      <div class="response-type r-clear">Response Type 01</div>
+      <div class="response-title">Clear and Direct</div>
+      <div class="response-body">The person answers the question asked. They provide specifics. They do not qualify excessively. They do not redirect.</div>
+      <div class="response-action">Confirm. Document. Move to the next question. Do not over-interrogate a clear answer — it destroys trust and slows the room down.</div>
+    </div>
+    <div class="response-card r-card-deflect">
+      <div class="response-type r-deflect">Response Type 02</div>
+      <div class="response-title">Deflection or Qualification</div>
+      <div class="response-body">The person answers a different question. They over-qualify. They reference process or policy instead of substance. They look to someone else in the room.</div>
+      <div class="response-action">Do not accept the deflection. Return to the original question. Simpler. More direct. "That is useful context — but what I need to know is..." Wait again.</div>
+    </div>
+    <div class="response-card r-card-absent">
+      <div class="response-type r-absent">Response Type 03</div>
+      <div class="response-title">Silence or Absence</div>
+      <div class="response-body">No answer. The question is skipped. The person defers. "We will need to check on that." The question produces discomfort with no resolution.</div>
+      <div class="response-action">Document it as an open item. Assign an owner and a deadline in the room. An unanswered question is a heat map risk. Treat it accordingly.</div>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    Listen more than you speak. Arrive at design with better information than anyone who preceded you. Silence is not awkward. It is working.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.4 VENDOR PROTOCOL -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Protocol</div>
+      <div class="section-title">The Vendor Interrogation Protocol</div>
+      <div class="section-desc">Vendors are not neutral parties. Engage accordingly — in plain language with named assumptions.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Vendors are motivated. That motivation is not always aligned with the client's interest. Treat vendor engagement as a neutral information exchange and you will be misled. Treat it as an interrogation — respectfully, methodically, in plain language — and you will surface the real picture.</p>
+
+  <p class="body-text">You hold certifications in their platform. You have read their documentation. You know their roadmap. You know where they mislead. They do not know that. That is the advantage. Ask closed questions with named assumptions they must confirm or deny. Open questions give them room. Closed questions remove it.</p>
+
+  <div class="vendor-steps">
+
+    <div class="vendor-step">
+      <div class="vs-marker">
+        <div class="vs-num">1</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-title">Read independently before you engage</div>
+        <div class="vs-body">Go to the vendor's published documentation, roadmap, and release notes before the first vendor meeting. Go through unofficial channels — community forums, third-party reviews, independent assessments. Arrive already knowing what their solution does and does not do.</div>
+        <div class="vs-example">I have reviewed your published documentation on Option 4. I want to confirm a few specifics with you directly.</div>
+      </div>
+    </div>
+
+    <div class="vendor-step">
+      <div class="vs-marker">
+        <div class="vs-num">2</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-title">Ask closed questions with named assumptions</div>
+        <div class="vs-body">Open questions give vendors room to navigate. Closed questions with named assumptions remove that room. State what you believe to be true and ask them to confirm or correct. A correction forces them to produce the real answer. A confirmation locks them to a position.</div>
+        <div class="vs-example">My understanding is that in this configuration, data leaves the client environment and is hosted on your infrastructure. Is that correct?</div>
+      </div>
+    </div>
+
+    <div class="vendor-step">
+      <div class="vs-marker">
+        <div class="vs-num">3</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-title">Name the data flow explicitly</div>
+        <div class="vs-body">Every vendor engagement involving data must produce a named, directional data flow statement. Ingress or egress. Internal or external. At rest or in transit. Where it goes. Who has access. Under what contractual and regulatory obligation. This is not negotiable and it is not technical detail — it is a business risk question.</div>
+        <div class="vs-example">I need you to confirm in writing — where does this data sit, who can access it, and under what terms.</div>
+      </div>
+    </div>
+
+    <div class="vendor-step">
+      <div class="vs-marker">
+        <div class="vs-num">4</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-title">Request the solution paper and POC results</div>
+        <div class="vs-body">If a POC has been completed, the results exist in writing. If a solution paper has been produced, it exists in writing. Ask for both. If they are not provided, note the non-provision formally. Documents that exist and are withheld are evidence. Treat them as such.</div>
+        <div class="vs-example">I understand a POC was completed. I would like to review the outputs. Can you share those before our next session?</div>
+      </div>
+    </div>
+
+    <div class="vendor-step">
+      <div class="vs-marker">
+        <div class="vs-num">5</div>
+        <div class="vs-line"></div>
+      </div>
+      <div class="vs-card">
+        <div class="vs-title">Hold the line in plain language</div>
+        <div class="vs-body">When the vendor cannot answer a question on the heat map — do not accept a deferral. "We will follow up" is not an answer. Name the cell. Name the risk it represents. Name the deadline for resolution. Everything in writing. The formal record changes the dynamic immediately.</div>
+        <div class="vs-example">I need that confirmed before we proceed. I will note this as an open item with a response required by Friday. Can you confirm that works for you?</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.5 INFORMATION GAP MAP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Analysis</div>
+      <div class="section-title">Information Gap Map</div>
+      <div class="section-desc">What is absent tells you as much as what is present. Read both.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Every gap in the information you collect is a risk, an unresolved decision, or a deliberate withholding. None are neutral. Map each one before synthesis begins. Gaps not named become assumptions. Assumptions not validated become failures.</p>
+
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="gap-type" style="color:var(--signal)">Gap Type 01</div>
+      <div class="gap-title">Absent Documentation</div>
+      <div class="gap-body">Documents that should exist do not. No requirements document. No security assessment. No vendor proposal in writing. No data classification. No architecture history.</div>
+      <div class="gap-reads-as">Nothing has been done, or what was done has been withheld. Both are risks. Treat them the same way — as open heat map cells requiring a decision before design proceeds.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-type" style="color:var(--amber)">Gap Type 02</div>
+      <div class="gap-title">Contradictory Documentation</div>
+      <div class="gap-body">Two documents covering the same domain contradict each other. The requirements say one thing. The vendor proposal says another. The architecture diagram shows a third configuration.</div>
+      <div class="gap-reads-as">An unresolved decision. Someone chose not to reconcile these. That choice was political. Find out who owns the contradiction and bring them into the workshop to resolve it.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-type" style="color:var(--cold-light)">Gap Type 03</div>
+      <div class="gap-title">Outdated Documentation</div>
+      <div class="gap-body">Documentation exists but predates significant changes — a vendor acquisition, a platform migration, a regulatory update, a change in organisational strategy.</div>
+      <div class="gap-reads-as">A decision was made at some point. The environment changed. The decision was never revisited. It is now being treated as current when it is not. Verify before relying on it.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-type" style="color:var(--green-light)">Gap Type 04</div>
+      <div class="gap-title">Timeline Voids</div>
+      <div class="gap-body">A period of the engagement history has no documentation. Six months passed and nothing was recorded. Work may have been done — or may not. There is no evidence either way.</div>
+      <div class="gap-reads-as">Either nothing happened during that period — which is a cost and accountability question — or something happened that is being concealed. Ask directly about the period. The response is diagnostic.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2.6 GATE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2.6</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Gate</div>
+      <div class="section-title">Module 2 Completion Checklist</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 3 — Design</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <div class="checklist-header">Intelligence Gate</div>
+    <div class="checklist-sub">MODULE 2 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED OR FORMALLY OPEN</div>
+
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Ten questions asked and documented</strong> — responses recorded, response types classified (clear / deflection / absent).</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>All deflections returned and resolved</strong> — or formally noted as unresolved with named owner and deadline.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Vendor engagement completed</strong> — closed questions asked, responses documented, outstanding items listed in writing.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Independent verification completed</strong> — vendor claims checked against their own published documentation and unofficial sources.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Information gap map complete</strong> — all four gap types identified, classified, and added to heat map.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Data flow confirmed</strong> — direction, destination, access, and contractual basis documented in writing from vendor.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Constraints documented</strong> — security, compliance, regulatory, and contractual constraints named and confirmed.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>Cost of inaction established</strong> — what failure means in time, money, and risk. Ready for the Customer Impact Statement.</div>
+    </div>
+    <div class="check-item">
+      <div class="check-box"></div>
+      <div class="check-text"><strong>All open items assigned</strong> — owner named, deadline confirmed, formal record created.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 02 — INTELLIGENCE · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="next-module" style="margin-top:12px;"><a href="module-03-design.html" style="text-decoration:none;color:inherit;">→ MODULE 03 — DESIGN</a> · Tools. Language. Mapping. The Three Altitudes.</div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-nav">VAFSA-M02-INTELLIGENCE<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

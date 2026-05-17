@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA — Escalation Protocol and Time Guidance</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(196,82,40,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(196,82,40,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--signal);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--signal);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,66px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title span{color:var(--signal);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--wire);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(196,82,40,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--signal);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);margin-top:4px;letter-spacing:0.05em;}
+.p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--signal);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.callout.green{border-left-color:var(--green);}
+.callout.amber{border-left-color:var(--amber);}
+.divider{height:1px;background:linear-gradient(to right,var(--signal),transparent);margin:40px 0;opacity:0.3;}
+.esc-layers{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.esc-layer{display:grid;grid-template-columns:100px 1fr;gap:0;border:1px solid var(--wire);margin-bottom:4px;overflow:hidden;}
+.el-label{padding:20px 16px;border-right:1px solid var(--wire);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.esc-layer:nth-child(1) .el-label{background:rgba(196,82,40,0.08);}
+.esc-layer:nth-child(2) .el-label{background:rgba(201,125,10,0.08);}
+.esc-layer:nth-child(3) .el-label{background:rgba(61,143,181,0.08);}
+.el-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;margin-bottom:4px;}
+.esc-layer:nth-child(1) .el-num{color:var(--signal);}
+.esc-layer:nth-child(2) .el-num{color:var(--amber);}
+.esc-layer:nth-child(3) .el-num{color:var(--cold-light);}
+.el-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;}
+.esc-layer:nth-child(1) .el-name{color:var(--signal);}
+.esc-layer:nth-child(2) .el-name{color:var(--amber);}
+.esc-layer:nth-child(3) .el-name{color:var(--cold-light);}
+.el-body{padding:18px 22px;}
+.el-title{font-weight:600;font-size:13px;color:var(--white);margin-bottom:6px;}
+.el-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.el-say{margin-top:10px;padding:8px 12px;background:var(--steel);font-family:'DM Mono',monospace;font-size:10px;line-height:1.6;font-style:italic;}
+.esc-layer:nth-child(1) .el-say{color:var(--signal);border-left:2px solid rgba(196,82,40,0.4);}
+.esc-layer:nth-child(2) .el-say{color:var(--amber);border-left:2px solid rgba(201,125,10,0.4);}
+.esc-layer:nth-child(3) .el-say{color:var(--cold-light);border-left:2px solid rgba(61,143,181,0.4);}
+.el-say::before{content:'SAY: ';font-style:normal;opacity:0.6;font-weight:500;}
+.boundary-block{background:var(--steel);border:1px solid var(--wire);border-left:3px solid var(--green);padding:20px 24px;margin:20px 0;}
+.bb-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:8px;}
+.bb-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.bb-example{margin-top:12px;padding:10px 14px;background:var(--ink);border:1px solid var(--wire);font-family:'DM Mono',monospace;font-size:10px;color:var(--green-light);line-height:1.6;font-style:italic;}
+.bb-example::before{content:'SAY: ';font-style:normal;color:rgba(46,158,104,0.6);font-weight:500;}
+.time-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:20px 0;}
+@media(max-width:600px){.time-grid{grid-template-columns:1fr 1fr;}}
+.time-cell{background:var(--forge);border:1px solid var(--wire);padding:14px 12px;}
+.tc-module{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.tc-name{font-weight:600;font-size:11px;color:var(--white);margin-bottom:8px;line-height:1.3;}
+.tc-time{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--amber);line-height:1;margin-bottom:4px;}
+.tc-unit{font-family:'DM Mono',monospace;font-size:8px;color:var(--fog);}
+.tc-estop{margin-top:8px;padding:4px 8px;background:rgba(196,82,40,0.08);border:1px solid rgba(196,82,40,0.2);font-family:'DM Mono',monospace;font-size:8px;color:var(--signal);}
+.lock-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:480px){.lock-grid{grid-template-columns:1fr;}}
+.lock-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.lc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.lc-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
+.lc-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--signal);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.next-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(196,82,40,0.08);border:1px solid rgba(196,82,40,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--signal);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Supplements to Modules 05 and 06</div>
+    <div class="doc-ref">VAFSA-ESCALATION-TIME<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title"><span>ESCALATION</span><br>PROTOCOL<br>+ TIME<br>GUIDANCE</div>
+  <div class="doc-subtitle">What to do when documentation is not enough. How long each module should run.</div>
+</div>
+
+<!-- ESCALATION -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">E.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Module 05 Supplement</div>
+      <div class="section-title">The Escalation Protocol</div>
+      <div class="section-desc">Three layers. In sequence. The ADR is layer zero — it must exist before any of these apply.</div>
+    </div>
+  </div>
+  <p class="p">The ADR is written. The concern is documented. The deadline passed. Someone said proceed anyway. What happens next is not intuitive. Most architects stop at the documentation layer and call it done. That is not holding the line. That is abandoning it with better paperwork.</p>
+  <p class="p">Escalation has three layers. Each one increases visibility. Each one makes ignoring the risk progressively harder. Use them in sequence. Do not skip to layer three — it signals panic. Move through them deliberately.</p>
+
+  <div class="esc-layers">
+    <div class="esc-layer">
+      <div class="el-label">
+        <div class="el-num">1</div>
+        <div class="el-name">Architectural</div>
+      </div>
+      <div class="el-body">
+        <div class="el-title">Encode the risk into the design</div>
+        <div class="el-text">Mark the affected component as provisional in the architecture diagram. Label it explicitly: "Pending resolution of ADR-[NNN] — data sovereignty confirmation required." The risk is now visible in the design itself. It cannot be silently forgotten because it is in the artefact. Every review of the Architecture on a Page sees it. Every delivery team member working on that component sees it. The risk is not in a document nobody reads. It is in the thing everyone uses.</div>
+        <div class="el-say">I have marked this component as provisional in the AoaP pending the data sovereignty decision. It will stay provisional until ADR-003 is closed. That status is visible to the delivery team and will appear in every design review.</div>
+      </div>
+    </div>
+    <div class="esc-layer">
+      <div class="el-label">
+        <div class="el-num">2</div>
+        <div class="el-name">Governance</div>
+      </div>
+      <div class="el-body">
+        <div class="el-title">Pull it to the governance body with consequences named</div>
+        <div class="el-text">The Design Authority, Architecture Review Board, or equivalent — whatever governance layer exists. Frame it specifically: "We cannot close this design without a decision on X. The consequences of proceeding without it are Y. The decision belongs to Z. We need it by this date." This is not a complaint. It is a structured input to a governance function. The governance body now has a named decision in front of it. Ignoring it is a governance failure, not an architecture failure. That distinction matters when accountability is assigned later.</div>
+        <div class="el-say">I am raising this to the Design Authority. The design cannot be closed without a decision on data sovereignty. The consequence of proceeding is potential breach of the data classification policy. The decision belongs to the CISO. I need it by Friday.</div>
+      </div>
+    </div>
+    <div class="esc-layer">
+      <div class="el-label">
+        <div class="el-num">3</div>
+        <div class="el-name">Social</div>
+      </div>
+      <div class="el-body">
+        <div class="el-title">Make the decision visible in front of the right mix of people</div>
+        <div class="el-text">Raise the open item in a session where the project manager, the security lead, the platform lead, and the vendor representative are all present simultaneously. Not to create conflict. To make the decision visible to all parties at once. Saying "ignore it" in that room is no longer a quiet management choice. It is a named position taken in front of every stakeholder who will be affected by the consequences. Most people will not take that position publicly. The social layer works because visibility changes behaviour.</div>
+        <div class="el-say">Before we move to the next agenda item — Domain 02 on the heat map is still red. Everyone in this room is affected by the consequence if we proceed without closing it. I want to confirm in front of all of you: who is making the call to proceed, and are they aware of the policy implications?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">E.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">The Boundary Statement</div>
+      <div class="section-title">What You Can Sign. What They Must Own.</div>
+      <div class="section-desc">Escalation reached its limit. The decision was made to proceed anyway. This is what you say.</div>
+    </div>
+  </div>
+  <p class="p">All three escalation layers are exhausted. The project is proceeding over your documented architectural objection. This situation requires a boundary statement — not a resignation, not a complaint, not a confrontation. A precise statement of what you can and cannot put your name to.</p>
+
+  <div class="boundary-block">
+    <div class="bb-title">The Boundary Statement</div>
+    <div class="bb-body">State exactly what you can confirm the design satisfies. State exactly what you cannot confirm without the outstanding decision. Assign ownership of the unresolved risk explicitly. Put it in writing. Send it to all relevant parties before delivery begins.</div>
+    <div class="bb-example">I can confirm the solution architecture satisfies all technical requirements in scope, with one exception. Domain 02 — data sovereignty — remains open. Without written confirmation from the vendor that data remains within the jurisdiction, I cannot confirm the architecture satisfies the data classification policy. That risk is now owned by [name / role] as of today's date. This is documented in ADR-003.</div>
+  </div>
+
+  <p class="p">The boundary statement does three things. It protects your professional position. It forces explicit ownership of the risk onto the party who made the decision to proceed. It creates the written record that resolves any future ambiguity about who knew what and when.</p>
+  <div class="callout green">The boundary statement is not defeat. It is precision. You are not walking away from the engagement. You are being exact about what you can and cannot verify — and placing the unverified risk exactly where it belongs.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TIME GUIDANCE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">T.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Module 06 Supplement</div>
+      <div class="section-title">Time Guidance Per Module</div>
+      <div class="section-desc">How long each module should run. When it is taking too long. When to cut it and move.</div>
+    </div>
+  </div>
+  <p class="p">The framework teaches what to do in each module. It does not say how long. That gap creates a specific failure mode: the SA who runs Module 2 for six weeks because nothing says stop. These time ranges are not targets. They are boundaries. Inside the boundary, the work is running. Outside it, the loop has stalled and needs an E-stop.</p>
+
+  <div class="time-grid">
+    <div class="time-cell">
+      <div class="tc-module">Module 01</div>
+      <div class="tc-name">Orientation</div>
+      <div class="tc-time">5–10</div>
+      <div class="tc-unit">Working days</div>
+      <div class="tc-estop">E-stop: Day 14</div>
+    </div>
+    <div class="time-cell">
+      <div class="tc-module">Module 02</div>
+      <div class="tc-name">Intelligence</div>
+      <div class="tc-time">5–15</div>
+      <div class="tc-unit">Working days</div>
+      <div class="tc-estop">E-stop: Day 20</div>
+    </div>
+    <div class="time-cell">
+      <div class="tc-module">Module 03</div>
+      <div class="tc-name">Design</div>
+      <div class="tc-time">10–20</div>
+      <div class="tc-unit">Working days</div>
+      <div class="tc-estop">E-stop: Day 30</div>
+    </div>
+    <div class="time-cell">
+      <div class="tc-module">Module 04</div>
+      <div class="tc-name">Artefacts</div>
+      <div class="tc-time">3–7</div>
+      <div class="tc-unit">Working days</div>
+      <div class="tc-estop">E-stop: Day 10</div>
+    </div>
+    <div class="time-cell">
+      <div class="tc-module">Module 05</div>
+      <div class="tc-name">Communication</div>
+      <div class="tc-time">Continuous</div>
+      <div class="tc-unit">All modules</div>
+      <div class="tc-estop">E-stop: per concern</div>
+    </div>
+    <div class="time-cell">
+      <div class="tc-module">Total</div>
+      <div class="tc-name">Full Engagement</div>
+      <div class="tc-time">30–60</div>
+      <div class="tc-unit">Working days</div>
+      <div class="tc-estop">E-stop: Day 90</div>
+    </div>
+  </div>
+
+  <p class="p">Complex Archetype 3 engagements — Institutional Paralysis — may require up to sixty working days for Modules 1–3 combined, due to the immersion requirement. That is not slow. That is the nature of the archetype. The E-stop is day ninety from engagement start to first artefact delivery. If artefacts are not in the client's hands by day ninety, the loop has broken somewhere.</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">T.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Discipline</div>
+      <div class="section-title">Pattern Locking</div>
+      <div class="section-desc">When to stop revisiting. When good enough is the correct standard.</div>
+    </div>
+  </div>
+  <p class="p">The most expensive time sink in solution architecture is not the complex problem. It is the re-litigated decision. The integration pattern that was agreed in week two and revisited in week six because a new stakeholder has questions. The data flow direction that was confirmed and then challenged by a vendor with a commercial interest in the challenge.</p>
+  <p class="p">Pattern locking is the discipline of declaring a decision closed and defending that closure. Not rigidly — new information that materially changes the decision reopens it through an ADR. But social pressure, repeat questioning, and stakeholder second-guessing do not reopen a locked pattern. The ADR holds it.</p>
+
+  <div class="lock-grid">
+    <div class="lock-card">
+      <div class="lc-label">Lock Condition</div>
+      <div class="lc-title">When to lock a pattern</div>
+      <div class="lc-body">The pattern has been discussed in at least one workshop. The heat map cell is green. The ADR is written and accepted. The decision makers were in the room when the decision was made. Those four conditions met — the pattern is locked.</div>
+    </div>
+    <div class="lock-card">
+      <div class="lc-label">Challenge Response</div>
+      <div class="lc-title">When someone re-litigates a locked pattern</div>
+      <div class="lc-body">Point to the ADR. Name the date. Name who was in the room. State: "This was decided. If you have new information that materially changes the technical case, bring it and we will review. If you have a preference for a different approach, that is a different conversation." Then stop.</div>
+    </div>
+    <div class="lock-card">
+      <div class="lc-label">What Unlocks a Pattern</div>
+      <div class="lc-title">The only valid reasons to reopen</div>
+      <div class="lc-body">New technical information that could not have been known at the time of the decision. A change in regulatory or compliance obligation. A vendor change that materially affects the solution. A business requirement change confirmed at executive level. Not: a new person joining the project who was not briefed. Not: a vendor who prefers a different outcome.</div>
+    </div>
+    <div class="lock-card">
+      <div class="lc-label">The Time Cost</div>
+      <div class="lc-title">What re-litigation actually costs</div>
+      <div class="lc-body">One re-litigated decision in a complex engagement costs between two and five working days on average — workshop time, documentation time, stakeholder re-alignment time. Three re-litigated decisions is a full working fortnight. Pattern locking is not rigidity. It is time management.</div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">ESCALATION PROTOCOL + TIME GUIDANCE · MYINT ENTERPRISES PTY LTD</div>
+    <a class="next-link" href="worked-example.html">→ THE WORKED EXAMPLE</a>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Module 01 — Orientation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(201,125,10,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,125,10,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title span{color:var(--amber);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--wire);color:var(--fog);}
+.tag.amber{border-color:rgba(201,125,10,0.4);color:var(--amber);}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--wire);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(201,125,10,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);margin-top:4px;letter-spacing:0.05em;}
+.p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.callout.signal{border-left-color:var(--signal);}
+.callout.green{border-left-color:var(--green);}
+.divider{height:1px;background:linear-gradient(to right,var(--amber),transparent);margin:40px 0;opacity:0.3;}
+.intake-grid{display:flex;flex-direction:column;gap:8px;margin:20px 0;}
+.intake-row{display:grid;grid-template-columns:36px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.in-num{background:var(--amber-dim);border-right:1px solid rgba(201,125,10,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--amber);padding:14px 0;}
+.in-body{padding:14px 18px;}
+.in-q{font-weight:600;font-size:13px;color:var(--white);margin-bottom:4px;}
+.in-why{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
+.archetype{background:var(--forge);border:1px solid var(--wire);margin-bottom:14px;overflow:hidden;}
+.arch-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--wire);}
+.arch-num{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;color:var(--wire-light);}
+.arch-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);}
+.arch-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid;}
+.arch-tag.del{color:var(--signal);border-color:rgba(196,82,40,0.4);}
+.arch-tag.neg{color:var(--amber);border-color:rgba(201,125,10,0.4);}
+.arch-tag.par{color:var(--cold-light);border-color:rgba(61,143,181,0.4);}
+.arch-tag.sil{color:var(--green-light);border-color:rgba(46,158,104,0.4);}
+.arch-body{padding:16px 20px;}
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;}
+@media(max-width:540px){.arch-grid{grid-template-columns:1fr;}}
+.arch-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.arch-list{list-style:none;font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.8;}
+.arch-list li::before{content:'→ ';color:var(--wire-light);}
+.arch-posture{padding:12px 16px;background:var(--steel);border-left:2px solid var(--amber);font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.6;}
+.phase-timeline{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.phase-item{display:grid;grid-template-columns:60px 1fr;gap:0;margin-bottom:4px;}
+.phase-dot{width:8px;height:8px;background:var(--amber);border:2px solid var(--ink);border-radius:50%;margin:16px auto 0;}
+.phase-days{font-family:'DM Mono',monospace;font-size:8px;color:var(--fog);text-align:center;margin-top:4px;white-space:nowrap;}
+.phase-card{background:var(--forge);border:1px solid var(--wire);padding:14px 18px;margin-bottom:8px;}
+.phase-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--amber-hot);margin-bottom:6px;}
+.phase-items{list-style:none;font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.9;}
+.phase-items li::before{content:'— ';color:var(--wire-light);}
+.sh-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0;}
+@media(max-width:540px){.sh-grid{grid-template-columns:1fr;}}
+.sh-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid;padding:16px 18px;}
+.sh-card:nth-child(1){border-top-color:var(--amber);}
+.sh-card:nth-child(2){border-top-color:var(--cold);}
+.sh-card:nth-child(3){border-top-color:var(--signal);}
+.sh-cat{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:4px;}
+.sh-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:8px;}
+.sh-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:540px){.diag-grid{grid-template-columns:1fr;}}
+.diag-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.diag-domain{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.diag-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
+.diag-questions{list-style:none;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.9;}
+.diag-questions li{border-bottom:1px solid var(--wire);padding:4px 0;}
+.diag-questions li:last-child{border:none;}
+.diag-questions li::before{content:'? ';color:var(--amber-hot);}
+.checklist{background:var(--forge);border:1px solid var(--wire);padding:24px 28px;margin:20px 0;}
+.checklist-header{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:4px;}
+.checklist-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;margin-bottom:8px;background:var(--steel);border:1px solid var(--wire);}
+.check-box{width:16px;height:16px;min-width:16px;border:1px solid var(--wire-light);margin-top:1px;}
+.check-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.5;}
+.check-text strong{color:var(--white);}
+.warning-block{margin-top:20px;background:rgba(196,82,40,0.08);border:1px solid rgba(196,82,40,0.25);border-left:3px solid var(--signal);padding:14px 18px;font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.7;}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--amber);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.next-module{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--amber-dim);border:1px solid rgba(201,125,10,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--amber-hot);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="../index.html">← VAF·SA Framework</a>
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">MODULE 01 OF 06<br>VAFSA-M01-ORIENTATION<br>MYINT ENTERPRISES PTY LTD</div>
+  </div>
+  <div class="doc-title">MODULE 01<br><span>ORIENTATION</span></div>
+  <div class="doc-subtitle">Read the environment before anyone briefs you on it.</div>
+  <div class="doc-tags">
+    <span class="tag amber">Foundational</span>
+    <span class="tag amber">Mandatory</span>
+    <span class="tag">TOGAF Preliminary</span>
+    <span class="tag">ITIL Service Context</span>
+    <span class="tag">Lean Six Sigma Define</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.0</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Foundation</div>
+      <div class="section-title">Purpose</div>
+      <div class="section-desc">Why this module exists and what it costs to skip it</div>
+    </div>
+  </div>
+  <p class="p">Skip Module 1. Spend the first four weeks discovering what it would have told you in two days.</p>
+  <p class="p">That is the cost. Not a theoretical cost. The actual cost, measured in weeks, across every engagement where this step was bypassed.</p>
+  <p class="p">The environment you are entering has a history. Failed attempts. Political decisions. Withheld documents. Vendor commitments made without scrutiny. That history does not disappear because nobody volunteered it in the briefing. <strong>Read it before anyone chooses what to tell you.</strong></p>
+  <div class="callout">Module 1 is not discovery. Discovery assumes you are starting from nothing. Orientation assumes something has already happened — and you need to understand it before you act.</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.1</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Protocol</div>
+      <div class="section-title">The Five Intake Questions</div>
+      <div class="section-desc">Before the first meeting. Before the first email. Before formal acceptance.</div>
+    </div>
+  </div>
+  <p class="p">These five questions are not discovery questions. They orient you to the environment before you enter it. If they cannot be answered before engagement begins, answering them becomes the first output of the first workshop.</p>
+  <div class="intake-grid">
+    <div class="intake-row">
+      <div class="in-num">1</div>
+      <div class="in-body">
+        <div class="in-q">What has already been attempted?</div>
+        <div class="in-why">Every stalled engagement has a history. That history contains the real problem. "Nothing" is itself diagnostic. An incomplete answer means someone is withholding. Both are useful information.</div>
+      </div>
+    </div>
+    <div class="intake-row">
+      <div class="in-num">2</div>
+      <div class="in-body">
+        <div class="in-q">Why did it fail or stall?</div>
+        <div class="in-why">The stated reason is sanitised. "Budget" means someone did not prioritise it. "Resource constraints" means no one owned it. "Technical complexity" means the vendor could not deliver and the organisation accepted it. Translate the answer.</div>
+      </div>
+    </div>
+    <div class="intake-row">
+      <div class="in-num">3</div>
+      <div class="in-body">
+        <div class="in-q">Who owns this on paper — and who actually owns it?</div>
+        <div class="in-why">Formal and informal ownership are rarely the same. The person on the project charter is not necessarily the person whose decision resolves the problem. Identify both before the first meeting.</div>
+      </div>
+    </div>
+    <div class="intake-row">
+      <div class="in-num">4</div>
+      <div class="in-body">
+        <div class="in-q">What documentation exists and where is it?</div>
+        <div class="in-why">Absent documentation is as diagnostic as present documentation. Gaps are evidence. Contradictions are unresolved decisions. Outdated documents are unmade choices. Map the landscape before reading it.</div>
+      </div>
+    </div>
+    <div class="intake-row">
+      <div class="in-num">5</div>
+      <div class="in-body">
+        <div class="in-q">Who benefits from this succeeding — and who benefits from it failing?</div>
+        <div class="in-why">Politics is the environment architecture operates in. The obfuscating vendor, the resistant team, the absent EA — all have a reason. Find it early. Name it. It will shape every workshop that follows.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.2</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Pattern Recognition</div>
+      <div class="section-title">The Four Engagement Archetypes</div>
+      <div class="section-desc">Identify which one you are in. It changes everything that follows.</div>
+    </div>
+  </div>
+  <p class="p">Every engagement falls into one of four archetypes — or a combination of two. Get this wrong and you deploy the wrong posture. Wrong posture costs weeks.</p>
+
+  <div class="archetype">
+    <div class="arch-header">
+      <div class="arch-num">01</div>
+      <div class="arch-name">The Obfuscation Engagement</div>
+      <div class="arch-tag del">Deliberate</div>
+    </div>
+    <div class="arch-body">
+      <p class="p" style="margin-bottom:12px;">Information exists and is being deliberately withheld. The vendor, the client, or an internal party has a vested interest in preventing full disclosure.</p>
+      <div class="arch-grid">
+        <div>
+          <div class="arch-col-label">Signals</div>
+          <ul class="arch-list">
+            <li>Vendor confidence without documentation</li>
+            <li>Vague answers to direct data flow questions</li>
+            <li>Completed POC not being shared</li>
+            <li>Decisions made with no audit trail</li>
+            <li>Egress described as ingress</li>
+          </ul>
+        </div>
+        <div>
+          <div class="arch-col-label">VAF Concepts</div>
+          <ul class="arch-list">
+            <li>Information Asymmetry</li>
+            <li>Governance Drag — Deliberate</li>
+            <li>Decision Altitude Collapse</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-posture"><strong>Posture — Forensic.</strong> Every answer is a hypothesis until independently verified. The heat map is the interrogation instrument. Every blank cell is deliberate, not accidental. Go to unofficial channels. Hold the line until every cell is answered.</div>
+    </div>
+  </div>
+
+  <div class="archetype">
+    <div class="arch-header">
+      <div class="arch-num">02</div>
+      <div class="arch-name">The Negligent Void</div>
+      <div class="arch-tag neg">Negligent</div>
+    </div>
+    <div class="arch-body">
+      <p class="p" style="margin-bottom:12px;">Nothing has been done. No documentation. No data classification. No security assessment. No vendor alignment. The engagement exists on paper. It has no architectural foundation.</p>
+      <div class="arch-grid">
+        <div>
+          <div class="arch-col-label">Signals</div>
+          <ul class="arch-list">
+            <li>No architecture documents available</li>
+            <li>Vendor in transition — merger, rebrand, migration</li>
+            <li>Requirements described verbally, never written</li>
+            <li>Security concerns listed as "to be addressed later"</li>
+            <li>Digital strategy absent or outdated</li>
+          </ul>
+        </div>
+        <div>
+          <div class="arch-col-label">VAF Concepts</div>
+          <ul class="arch-list">
+            <li>Negligent Void</li>
+            <li>Cost of Inaction — Visible</li>
+            <li>Integrity Gap</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-posture"><strong>Posture — Constructive.</strong> You are not uncovering what exists. You are building the foundation from scratch under time pressure. The workshop creates the baseline. The heat map identifies every domain needing a decision before design can begin.</div>
+    </div>
+  </div>
+
+  <div class="archetype">
+    <div class="arch-header">
+      <div class="arch-num">03</div>
+      <div class="arch-name">The Institutional Paralysis</div>
+      <div class="arch-tag par">Systemic</div>
+    </div>
+    <div class="arch-body">
+      <p class="p" style="margin-bottom:12px;">The organisation has attempted this before. Multiple times. By multiple parties. No one will own it. History is being withheld or denied. Budget has been spent. Nothing has been delivered.</p>
+      <div class="arch-grid">
+        <div>
+          <div class="arch-col-label">Signals</div>
+          <ul class="arch-list">
+            <li>"We haven't really started yet" — 18+ months in</li>
+            <li>No handover between previous attempts</li>
+            <li>Documents exist but are not being shared</li>
+            <li>Pressure applied to you before delivery begins</li>
+            <li>$10k+/month spend with nothing to show</li>
+          </ul>
+        </div>
+        <div>
+          <div class="arch-col-label">VAF Concepts</div>
+          <ul class="arch-list">
+            <li>Institutional Paralysis</li>
+            <li>Governance Drag — Political</li>
+            <li>Non-Ownership Cost</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-posture"><strong>Posture — Immersive and Silent.</strong> Three months of ingestion if the environment requires it. Read everything. Say nothing under pressure. Discharge the work. Do not complain. Do not fight. Deliver.</div>
+    </div>
+  </div>
+
+  <div class="archetype">
+    <div class="arch-header">
+      <div class="arch-num">04</div>
+      <div class="arch-name">The Silo Engagement</div>
+      <div class="arch-tag sil">Human</div>
+    </div>
+    <div class="arch-body">
+      <p class="p" style="margin-bottom:12px;">Capability exists. The solution is achievable. The parties who need to collaborate have never been in the same room. The problem is human, not technical.</p>
+      <div class="arch-grid">
+        <div>
+          <div class="arch-col-label">Signals</div>
+          <ul class="arch-list">
+            <li>Business units with overlapping requirements who have never spoken</li>
+            <li>Technical teams with relevant capability never engaged</li>
+            <li>"We didn't know they were doing that"</li>
+            <li>No shared vocabulary between business and technical</li>
+          </ul>
+        </div>
+        <div>
+          <div class="arch-col-label">VAF Concepts</div>
+          <ul class="arch-list">
+            <li>Silo Architecture</li>
+            <li>Decision Altitude Collapse</li>
+            <li>De-siloing Instrument</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-posture"><strong>Posture — Facilitative.</strong> The workshop is the solution. Getting the right people together and establishing a shared language solves 70% of the problem before design begins. Architecture follows alignment.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.3</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Methodology</div>
+      <div class="section-title">Document Immersion Protocol</div>
+      <div class="section-desc">Read for decisions, not for detail. Map the landscape before you read the terrain.</div>
+    </div>
+  </div>
+  <p class="p">Existing documentation — however incomplete, contradictory, or deliberately obscured — runs through this protocol. Not cover to cover. Decision-first. What was decided, when, by whom, with what authority. The gaps in that picture are the real intelligence.</p>
+  <div class="callout signal">Read for decisions first. Read for detail only when the decision landscape is clear. The practitioner who reads for detail before mapping the landscape misses the structure of what is absent.</div>
+  <div class="phase-timeline">
+    <div class="phase-item">
+      <div class="phase-marker"><div class="phase-dot"></div><div class="phase-days">Day 1–2</div></div>
+      <div class="phase-card">
+        <div class="phase-name">Phase 1 — Inventory</div>
+        <ul class="phase-items">
+          <li>Request every document. Accept whatever is provided without comment.</li>
+          <li>Catalogue: title, date, author, scope, status.</li>
+          <li>Note what is absent. Gaps are as diagnostic as content.</li>
+          <li>Do not read in depth yet. Build the map first.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-marker"><div class="phase-dot"></div><div class="phase-days">Day 3–7</div></div>
+      <div class="phase-card">
+        <div class="phase-name">Phase 2 — Pattern Reading</div>
+        <ul class="phase-items">
+          <li>What was decided? When? By whom? With what authority?</li>
+          <li>What was attempted and stopped — and why?</li>
+          <li>Where are contradictions between documents?</li>
+          <li>What vendor commitments are documented vs. claimed verbally?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-marker"><div class="phase-dot"></div><div class="phase-days">Day 8–14</div></div>
+      <div class="phase-card">
+        <div class="phase-name">Phase 3 — Gap Analysis</div>
+        <ul class="phase-items">
+          <li>Map document coverage against the heat map domains.</li>
+          <li>Every domain with no documentation is an open risk.</li>
+          <li>Every domain with contradictory documentation is an unresolved decision.</li>
+          <li>The heat map skeleton is now populated. Module 3 assigns red/amber/green.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-marker"><div class="phase-dot"></div><div class="phase-days">Day 14+</div></div>
+      <div class="phase-card">
+        <div class="phase-name">Phase 4 — Synthesis Position</div>
+        <ul class="phase-items">
+          <li>You now know more about this engagement than anyone who handed it to you.</li>
+          <li>You do not say this yet. Complete the workshop. Verify independently.</li>
+          <li>Then state it — in writing, with evidence, in the artefact.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.4</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Analysis</div>
+      <div class="section-title">Stakeholder Mapping</div>
+      <div class="section-desc">Three categories. Every engagement. Not a RACI. A power and information map.</div>
+    </div>
+  </div>
+  <p class="p">The formal authority structure tells you who can sign. The informal authority structure tells you who actually decides. The interest structure tells you who wants this to succeed and who wants it to fail. All three required before the first workshop.</p>
+  <div class="sh-grid">
+    <div class="sh-card">
+      <div class="sh-cat">Category 01</div>
+      <div class="sh-title">Decision Holders</div>
+      <div class="sh-body">Who can say yes. Who can say no. Who can block with silence. Map the formal authority structure. Then map the informal one. They are rarely the same.</div>
+    </div>
+    <div class="sh-card">
+      <div class="sh-cat">Category 02</div>
+      <div class="sh-title">Information Holders</div>
+      <div class="sh-body">Who knows what you need. Who will share it. Who will not. DBAs, security teams, vendors — none of them will volunteer information without a structured request. Name them. Engage them directly in the workshop.</div>
+    </div>
+    <div class="sh-card">
+      <div class="sh-cat">Category 03</div>
+      <div class="sh-title">Interest Holders</div>
+      <div class="sh-body">Who benefits from this succeeding. Who benefits from it failing. Politics is the operating condition, not the problem to solve. Find the interest structure early. It explains everything that follows.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Diagnostic</div>
+      <div class="section-title">Environment Diagnostic</div>
+      <div class="section-desc">Four domains. Answer them or flag them before the first workshop begins.</div>
+    </div>
+  </div>
+  <div class="diag-grid">
+    <div class="diag-card">
+      <div class="diag-domain">Domain A</div>
+      <div class="diag-title">Architecture Environment</div>
+      <ul class="diag-questions">
+        <li>Does an EA practice exist? Is it functional?</li>
+        <li>Are there architecture standards or reference architectures in use?</li>
+        <li>What governance gates exist between design and delivery?</li>
+        <li>Is the EA involved in this engagement?</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <div class="diag-domain">Domain B</div>
+      <div class="diag-title">Delivery Environment</div>
+      <ul class="diag-questions">
+        <li>What methodology is in use — Agile, PRINCE2, waterfall, hybrid?</li>
+        <li>What is the delivery timeline and what are the hard constraints?</li>
+        <li>What has already been committed to contractually or politically?</li>
+        <li>What budget has been spent and what remains?</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <div class="diag-domain">Domain C</div>
+      <div class="diag-title">Vendor Environment</div>
+      <ul class="diag-questions">
+        <li>Who are the vendors? What is each relationship?</li>
+        <li>What has each vendor already proposed or committed to?</li>
+        <li>Are there existing contracts that constrain the solution?</li>
+        <li>What does the vendor roadmap show for 12–36 months?</li>
+      </ul>
+    </div>
+    <div class="diag-card">
+      <div class="diag-domain">Domain D</div>
+      <div class="diag-title">Organisational Environment</div>
+      <ul class="diag-questions">
+        <li>What is the organisation's risk appetite?</li>
+        <li>What compliance and regulatory obligations apply?</li>
+        <li>What has failed before — and why?</li>
+        <li>Who owns the problem today and who will own the solution tomorrow?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1.6</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Gate</div>
+      <div class="section-title">Module 1 Completion Checklist</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 2</div>
+    </div>
+  </div>
+  <div class="checklist">
+    <div class="checklist-header">Pre-Workshop Gate</div>
+    <div class="checklist-sub">MODULE 1 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED</div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Engagement archetype identified.</strong> Primary and secondary if mixed. Posture confirmed.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Five intake questions answered</strong> — or formally flagged as unknown and added to workshop agenda.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Document inventory complete.</strong> All available documents catalogued. Gaps documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Immersion protocol initiated.</strong> Phase 1 complete. Phases 2–4 in progress or complete.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Stakeholder map complete.</strong> Decision, information, and interest holders named.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Environment diagnostic complete.</strong> All four domains answered or formally open.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map skeleton populated.</strong> Domains mapped, open cells documented.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Module 2 workshop structured.</strong> Streams defined, attendees confirmed, objectives set.</div></div>
+    <div class="warning-block"><strong>Incomplete means proceed with incomplete information.</strong> The cost of that is always greater than the cost of finishing this module. Every week spent catching up to a baseline costs credibility that cannot be recovered.</div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 01 — ORIENTATION · MYINT ENTERPRISES PTY LTD</div>
+    <a class="next-module" href="module-02-intelligence.html">→ MODULE 02 — INTELLIGENCE</a>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+</div>
+</div>
+</body>
+</html>

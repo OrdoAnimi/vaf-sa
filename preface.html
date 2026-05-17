@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Preface — Influence Without Authority</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--gold:#c8a84b;--gold-dim:rgba(200,168,75,0.1);--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,168,75,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:56px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:40px;}
+.back:hover{color:var(--gold);}
+
+/* HEADER */
+.header{margin-bottom:64px;border-left:3px solid var(--gold);padding-left:24px;}
+.header-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.header-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,88px);letter-spacing:0.03em;line-height:0.88;margin-bottom:16px;}
+.header-title .line1{color:var(--white);}
+.header-title .line2{color:var(--gold);}
+.header-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;line-height:1.6;}
+
+.divider{height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:48px 0;opacity:0.3;}
+
+/* BODY */
+.p{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ghost);line-height:1.75;margin-bottom:16px;}
+.p strong{color:var(--white);font-weight:600;}
+.p em{color:var(--gold);font-style:normal;}
+
+.pull-quote{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,3.5vw,36px);letter-spacing:0.05em;line-height:1.2;color:var(--white);padding:28px 0;border-top:1px solid var(--wire);border-bottom:1px solid var(--wire);margin:36px 0;}
+.pull-quote span{color:var(--gold);}
+
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--gold);padding:18px 22px;margin:24px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+
+/* PILLARS */
+.pillar-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:32px 0;}
+@media(max-width:540px){.pillar-pair{grid-template-columns:1fr;}}
+.pillar{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--gold);padding:22px 24px;}
+.pillar-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.pillar-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.04em;color:var(--white);margin-bottom:12px;}
+.pillar-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.8;}
+
+/* MENTAL PROCESS */
+.process-stack{display:flex;flex-direction:column;gap:6px;margin:24px 0;}
+.process-row{display:grid;grid-template-columns:32px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.pr-num{background:var(--gold-dim);border-right:1px solid rgba(200,168,75,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);padding:14px 0;}
+.pr-body{padding:14px 18px;}
+.pr-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:4px;}
+.pr-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.6;}
+
+/* CODE SWITCH */
+.switch-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0;}
+@media(max-width:480px){.switch-grid{grid-template-columns:1fr;}}
+.switch-card{background:var(--forge);border:1px solid var(--wire);padding:18px 20px;}
+.sw-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.sw-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
+.sw-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+
+/* PRINCIPLES */
+.principles{display:flex;flex-direction:column;gap:6px;margin:24px 0;}
+.principle-row{display:grid;grid-template-columns:48px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.p-roman{background:var(--gold-dim);border-right:1px solid rgba(200,168,75,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);padding:18px 0;}
+.p-body{padding:16px 20px;}
+.p-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+.p-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+
+/* CLOSING */
+.closing{background:var(--steel);border:1px solid rgba(200,168,75,0.2);padding:32px 36px;margin-top:48px;text-align:center;}
+.closing-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2.5vw,26px);letter-spacing:0.06em;color:var(--white);line-height:1.5;}
+.closing-text span{color:var(--gold);}
+
+/* FOOTER */
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--gold);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.next-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--gold-dim);border:1px solid rgba(200,168,75,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+
+<div class="header">
+  <div class="header-eyebrow">VAF·SA — The Operating Philosophy</div>
+  <div class="header-title">
+    <div class="line1">Influence</div>
+    <div class="line2">Without Authority</div>
+  </div>
+  <div class="header-sub">Read this before Module 1. Everything else in the framework assumes this is already running.</div>
+</div>
+
+<p class="p">Walk into a room with no formal authority. Leave having changed the outcome. Nobody can fully explain how.</p>
+
+<p class="p">That is not a magic trick. It is a repeatable mental process. This preface names it.</p>
+
+<p class="p">Every certification in the field teaches you a domain. Cloud architecture. Security frameworks. Delivery methodology. Agile. TOGAF. None of them teach you how to operate in a room where the vendor is misleading you, the EA has not shown up, the project has been stalled for two years, and you have been handed the problem without the authority to solve it.</p>
+
+<p class="p">That condition is not the exception. It is the common condition. <em>VAF·SA was built for it.</em></p>
+
+<div class="pull-quote">
+  You do not need a title to change what happens in a room.<br>
+  You need <span>better preparation</span> than everyone else in it.
+</div>
+
+<p class="p">The preparation is not about knowing more technical facts. It is about arriving already knowing the shape of the problem — before anyone has briefed you, before the first workshop, before the first question is asked.</p>
+
+<p class="p">That preparation converts into a specific kind of calm. You do not need to win the argument. You need the outcome. Those are different things. Most people in most rooms never separate them. The architect who does holds a structural advantage that no title can replicate.</p>
+
+<div class="divider"></div>
+
+<div class="pillar-pair">
+  <div class="pillar">
+    <div class="pillar-label">Pillar One</div>
+    <div class="pillar-title">How to Think</div>
+    <div class="pillar-body">Read the environment before anyone briefs you on it. Know what archetype you are in before the first meeting ends. Understand what is absent as clearly as what is present. Prepare so thoroughly that calm becomes inevitable. The practitioner who thinks before they speak asks half as many questions and learns twice as much.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-label">Pillar Two</div>
+    <div class="pillar-title">How to Talk</div>
+    <div class="pillar-body">Speak plainly to every room. Ask the question you already know the shape of. Never use jargon to seem credible. Hold the position without making it personal. Let the evidence speak. You just place it. Silence after a statement is not awkward. It is working.</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<p class="p"><strong>The mental process.</strong> This is what actually happens in the room — not what the framework says should happen, but what operates underneath the framework when the architect is working correctly.</p>
+
+<div class="process-stack">
+  <div class="process-row">
+    <div class="pr-num">1</div>
+    <div class="pr-body">
+      <div class="pr-title">You arrive already knowing the shape of the answer.</div>
+      <div class="pr-text">Not the specific answer. The shape of it. Which archetype. What the real problem probably is. What the vendor is likely to be protecting. What the political dynamic looks like from the outside. Module 1 builds this picture before the first meeting. You walk in oriented. Everyone else walks in open.</div>
+    </div>
+  </div>
+  <div class="process-row">
+    <div class="pr-num">2</div>
+    <div class="pr-body">
+      <div class="pr-title">When you ask a question, you are confirming or exposing — not discovering.</div>
+      <div class="pr-text">The question is a hypothesis test. You already know what a complete, honest answer looks like. A deflection, a vague response, a silence — all of those are answers too. Module 2 builds this discipline. The ten questions are not an interview script. They are a structured confirmation of what you already suspect.</div>
+    </div>
+  </div>
+  <div class="process-row">
+    <div class="pr-num">3</div>
+    <div class="pr-body">
+      <div class="pr-title">You do not argue. You place evidence.</div>
+      <div class="pr-text">State the position once. Name the evidence. Place the artefact. Stop talking. The person who needs to defend themselves against a documented position is not you. It is the person who has to explain why the heat map cell is blank. Module 5 teaches this. The document does the work. You just hold the line.</div>
+    </div>
+  </div>
+  <div class="process-row">
+    <div class="pr-num">4</div>
+    <div class="pr-body">
+      <div class="pr-title">You stay above the noise.</div>
+      <div class="pr-text">The vendor pushes. The project manager wants to proceed. The EA has not engaged. The history of failed attempts is being used as pressure. None of that is the problem to solve. The problem to solve is named in the Customer Impact Statement. Stay on the problem. Every other dynamic is weather. Work in the weather.</div>
+    </div>
+  </div>
+  <div class="process-row">
+    <div class="pr-num">5</div>
+    <div class="pr-body">
+      <div class="pr-title">The artefact outlasts the politics.</div>
+      <div class="pr-text">The meeting ends. The political pressure dissipates. The vendor moves on. The artefact remains. The CIS, the AoaP, the heat map, the ADRs — they are the record of what was known, what was decided, what was raised, and what was left unresolved. That record is the real authority. Build it from day one.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<p class="p"><strong>The code-switch.</strong> Some architects operate in one register. Professional in the room. The same outside it. That register costs effort. It is a performance of professionalism rather than an expression of it.</p>
+
+<p class="p">The architect who can move between registers — technical and executive, formal and informal, forensic and plain — without effort is not performing. They are deploying the register the room requires. Both are authentic. Neither is a mask.</p>
+
+<div class="switch-grid">
+  <div class="switch-card">
+    <div class="sw-label">In the room</div>
+    <div class="sw-title">The operating professional</div>
+    <div class="sw-body">Precise. Plain-spoken. Every word deliberate. The artefact placed on the table. The question asked once. The position stated and not repeated. The silence held. This is not a performance. This is a skill operating at full capacity.</div>
+  </div>
+  <div class="switch-card">
+    <div class="sw-label">Outside the room</div>
+    <div class="sw-title">The same person</div>
+    <div class="sw-body">The lexicon drops. The formality goes. The professional register is not the person — it is the tool the person picks up when the work requires it and puts down when it does not. Both are real. The register switches. The thinking does not.</div>
+  </div>
+</div>
+
+<p class="p">The ability to switch cleanly — to pick up the professional register at the start of a meeting and put it down the moment it ends — is not social awkwardness. It is extreme situational intelligence. It means the register is a tool, not a costume. Tools are for the work. The work is in the room.</p>
+
+<div class="divider"></div>
+
+<p class="p"><strong>What this framework does not teach.</strong></p>
+
+<p class="p">It does not teach you to be liked. Carnegie teaches that. It does not teach you to inspire. Sinek teaches that. It does not teach you to build consensus. Every facilitation course teaches that.</p>
+
+<p class="p">VAF·SA teaches you to deliver outcomes in rooms where no one gave you permission to lead — using plain language, structured evidence, and a thinking system fast enough to operate before the environment has finished changing.</p>
+
+<p class="p">You do not need thirty years. You do not need sixty certifications. You need the system. This is the system. <em>Run it.</em></p>
+
+<div class="divider"></div>
+
+<div class="principles">
+  <div class="principle-row">
+    <div class="p-roman">I</div>
+    <div class="p-body">
+      <div class="p-title">No Process First. Outcome Leads.</div>
+      <div class="p-text">The framework is the vehicle. The outcome is the destination. When the methodology starts to feel like the goal — stop. Return to the outcome. Ask what the client needs to see by Friday. Work backwards from that. Every time.</div>
+    </div>
+  </div>
+  <div class="principle-row">
+    <div class="p-roman">II</div>
+    <div class="p-body">
+      <div class="p-title">Decision Altitude. Every Decision at the Right Level.</div>
+      <div class="p-text">Business decisions at business altitude. Technical decisions at technical altitude. When a technical decision is being made in a business room — stop the meeting. Name the altitude. Move the decision. This is not bureaucracy. This is the single discipline that prevents two years of wasted motion in a single afternoon.</div>
+    </div>
+  </div>
+  <div class="principle-row">
+    <div class="p-roman">III</div>
+    <div class="p-body">
+      <div class="p-title">One Artefact. One Page.</div>
+      <div class="p-text">The second page is where incomplete thinking hides. Force everything onto one page. If it does not fit — the thinking is not done yet. Go back. Remove everything that does not drive a decision. What remains is the artefact.</div>
+    </div>
+  </div>
+  <div class="principle-row">
+    <div class="p-roman">IV</div>
+    <div class="p-body">
+      <div class="p-title">Velocity Over Volume. Always.</div>
+      <div class="p-text">A complete requirements document produced six weeks after the decision was made changes nothing. An Architecture on a Page produced in week two changes everything. Produce the right thing fast. Not everything slowly.</div>
+    </div>
+  </div>
+</div>
+
+<div class="closing">
+  <div class="closing-text">
+    The room does not care about your title.<br>
+    It responds to <span>preparation</span>, <span>precision</span>, and <span>plain speech</span>.<br><br>
+    That is what this framework builds.<br>
+    Start with Module 1.
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">PREFACE — INFLUENCE WITHOUT AUTHORITY · MYINT ENTERPRISES PTY LTD</div>
+    <a class="next-link" href="modules/module-01-orientation.html">→ MODULE 01 — ORIENTATION</a>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+</div>
+
+</div>
+</body>
+</html>
