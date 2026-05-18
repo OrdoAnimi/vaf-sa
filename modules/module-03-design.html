@@ -334,6 +334,29 @@ body::before {
 .nav-prev:hover{color:var(--white);}
 .nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
 
+
+.register-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:540px){.register-grid{grid-template-columns:1fr;}}
+.register-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--amber);padding:16px 18px;}
+.register-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.register-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
+.register-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.risk-table{background:var(--forge);border:1px solid var(--wire);overflow:hidden;margin:20px 0;}
+.risk-header-row{display:grid;grid-template-columns:1.5fr 2fr 1.5fr 80px 1.5fr 100px;gap:0;background:var(--steel);border-bottom:1px solid var(--wire);}
+.risk-col-head{padding:10px 12px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-light);border-right:1px solid var(--wire);}
+.risk-col-head:last-child{border-right:none;}
+.risk-example-row{display:grid;grid-template-columns:1.5fr 2fr 1.5fr 80px 1.5fr 100px;gap:0;border-bottom:1px solid var(--wire);}
+.risk-example-row:last-child{border-bottom:none;}
+.risk-col{padding:10px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;border-right:1px solid var(--wire);display:flex;align-items:center;}
+.risk-col:last-child{border-right:none;}
+.risk-red{color:var(--signal);font-weight:600;}
+.risk-amber{color:var(--amber-hot);font-weight:600;}
+@media(max-width:700px){.risk-header-row,.risk-example-row{grid-template-columns:1fr;}.risk-col-head,.risk-col{border-right:none;border-bottom:1px solid var(--wire);}}
+.response-four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin:16px 0;}
+@media(max-width:600px){.response-four{grid-template-columns:1fr 1fr;}}
+.r4-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--green);padding:14px 16px;}
+.r4-label{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:6px;}
+.r4-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
 </style>
 </head>
 <body>
@@ -343,7 +366,7 @@ body::before {
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 03<br><span>DESIGN</span></div>
   <div class="doc-subtitle">Right tool. Right level. Right audience. How to build the solution that solves the actual problem.</div>
@@ -811,7 +834,7 @@ body::before {
         <div>
           <div class="alt-col-label">What Gets Decided Here</div>
           <div class="alt-col-value">Sequence and Phasing</div>
-          <div class="alt-col-desc">What gets built first. What dependencies exist between components. What the rollback position is. Sprint-compatible artefacts. UAT and go-live readiness.</div>
+          <div class="alt-col-desc">What gets built first. What dependencies exist between components. What the rollback position is. Delivery-compatible artefacts. UAT and go-live readiness.</div>
         </div>
         <div>
           <div class="alt-col-label">Primary Tool</div>
@@ -1029,12 +1052,168 @@ body::before {
   </div>
 </div>
 
+
 <div class="divider"></div>
 
-<!-- 3.8 GATE -->
+<!-- 3.8 ASSUMPTION REGISTER -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3.8</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Supporting Instrument</div>
+      <div class="section-title">Assumption Register</div>
+      <div class="section-desc">What is being treated as true. What changes if it is not.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Every design is built on some information that has not been fully confirmed. That is unavoidable. What is not acceptable is leaving those assumptions unnamed. An unnamed assumption is an invisible risk — it does not appear on the heat map because it has not been tested, and it does not appear in an ADR because no decision has been formally made against it. It quietly shapes the design until the moment it proves false.</p>
+
+  <p class="body-text">The assumption register names each assumption explicitly before the design is presented. It does not eliminate the assumption — in many engagements the information simply is not available yet. It makes the assumption visible, assigns it an owner, and defines what changes to the design if it turns out to be wrong.</p>
+
+  <div class="callout amber">An assumption register is not a risk register. A risk is something that might happen. An assumption is something being treated as already true. Both need to be tracked. Neither replaces the other.</div>
+
+  <div class="register-grid">
+    <div class="register-card">
+      <div class="register-label">Field 01</div>
+      <div class="register-title">The Assumption</div>
+      <div class="register-body">State what is being treated as true. Plain language. Specific. Not "vendor will deliver on time" — that is a risk. An assumption is structural: "The existing integration layer supports the required throughput." Either it does or it does not. That answer changes the design.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 02</div>
+      <div class="register-title">Basis</div>
+      <div class="register-body">What is this assumption grounded in? Vendor documentation. A prior engagement. An estimate from the technical lead. A reasonable inference from the current state. Name the source. The weaker the basis, the higher the priority for verification.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 03</div>
+      <div class="register-title">Design Impact if False</div>
+      <div class="register-body">If this assumption proves incorrect, what changes in the design? A different integration pattern. An additional security layer. A changed data flow direction. The phasing of the roadmap. State it precisely. This is the field that makes the assumption register a design instrument, not just a documentation exercise.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 04</div>
+      <div class="register-title">Verification Owner and Date</div>
+      <div class="register-body">Who is responsible for confirming or disproving this assumption. By when. An assumption without an owner and a deadline is not managed — it is deferred. Every assumption in this register requires a named owner before the design is presented to any audience.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.9 ARCHITECTURE RISK REGISTER -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.9</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Supporting Instrument</div>
+      <div class="section-title">Architecture Risk Register</div>
+      <div class="section-desc">Decision-specific risks. What each architectural choice could cost if it goes wrong.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The heat map identifies domain-level risks — gaps in security, data, compliance, vendor, and operations coverage. The architecture risk register tracks something different: the risks created by specific architectural decisions. Every significant design choice introduces uncertainty. Some of that uncertainty has consequences serious enough to document, track, and assign.</p>
+
+  <p class="body-text">The distinction matters. A domain risk is a gap to be closed. A decision risk is a trade-off accepted. Both require governance. Neither replaces the other.</p>
+
+  <div class="callout green">The architecture risk register is not the project risk register. Project risks are owned by the project manager. Architecture risks are owned by the solution architect — they arise from design choices and are resolved by design changes, acceptance, mitigation, or formal transference to the appropriate owner.</div>
+
+  <div class="risk-table">
+    <div class="risk-header-row">
+      <div class="risk-col-head">Decision</div>
+      <div class="risk-col-head">Risk</div>
+      <div class="risk-col-head">Business Impact</div>
+      <div class="risk-col-head">Severity</div>
+      <div class="risk-col-head">Response</div>
+      <div class="risk-col-head">Owner</div>
+    </div>
+    <div class="risk-example-row">
+      <div class="risk-col">API-led integration selected over direct database connection</div>
+      <div class="risk-col">API contract changes in vendor platform could break integration without notice</div>
+      <div class="risk-col">Service interruption for all consumers of the integration</div>
+      <div class="risk-col risk-amber">Medium</div>
+      <div class="risk-col">Mitigation — versioned API contract with vendor. Monitoring on contract drift.</div>
+      <div class="risk-col">Platform Lead</div>
+    </div>
+    <div class="risk-example-row">
+      <div class="risk-col">Cloud-hosted solution selected over on-premises</div>
+      <div class="risk-col">Data sovereignty confirmation not yet received from vendor</div>
+      <div class="risk-col">Regulatory breach if data leaves jurisdiction without appropriate controls</div>
+      <div class="risk-col risk-red">High</div>
+      <div class="risk-col">Avoidance — design provisional pending Domain 02 heat map resolution</div>
+      <div class="risk-col">Solution Architect</div>
+    </div>
+  </div>
+
+  <p class="body-text" style="margin-top:16px;"><strong>Four response strategies.</strong> Every risk in the register requires one of these four responses assigned before the register is presented:</p>
+
+  <div class="response-four">
+    <div class="r4-card">
+      <div class="r4-label">Avoidance</div>
+      <div class="r4-body">Change the design to remove the risk. The preferred response when the risk is high severity and the design has flexibility.</div>
+    </div>
+    <div class="r4-card">
+      <div class="r4-label">Mitigation</div>
+      <div class="r4-body">Add controls, monitoring, or process to reduce likelihood or severity. Named control. Named owner. Named review date.</div>
+    </div>
+    <div class="r4-card">
+      <div class="r4-label">Acceptance</div>
+      <div class="r4-body">The risk is acknowledged and the decision is made to proceed. Formal acceptance requires a named authority with the level to own the consequence.</div>
+    </div>
+    <div class="r4-card">
+      <div class="r4-label">Transference</div>
+      <div class="r4-body">Contractual or governance mechanism shifts responsibility to a vendor, insurer, or external party. The mechanism must be named and confirmed — not assumed.</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="divider"></div>
+
+<!-- 3.10 TECHNICAL DEBT REGISTER -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.10</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Supporting Instrument</div>
+      <div class="section-title">Technical Debt Register</div>
+      <div class="section-desc">What the current state inherits. What the design must account for.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The assumption register tracks what is being treated as true. The architecture risk register tracks what each design decision could cost. The technical debt register tracks something different: what the current state already owes. Every system that has been running in production carries deferred decisions, undocumented integrations, and compromised foundations that were accepted at some earlier point in exchange for speed or short-term convenience.</p>
+
+  <p class="body-text">Technical debt is not a failure of the current engagement. It is the environment the solution must be designed within. Naming it explicitly before design begins prevents the most common failure mode in solution architecture — designing a target state that cannot be reached from the actual current state because nobody documented what stands between them.</p>
+
+  <div class="callout amber">The technical debt register is not a criticism of what was built before. It is an accurate description of what the current design must account for. Without it, the gap analysis between current and target state is built on an incomplete picture of the current state.</div>
+
+  <div class="register-grid">
+    <div class="register-card">
+      <div class="register-label">Field 01</div>
+      <div class="register-title">The Debt Item</div>
+      <div class="register-body">Name the specific deferred decision, undocumented dependency, or compromised component. Plain language. Specific to a named system or integration point. Not a category — a concrete item that the design team will need to navigate.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 02</div>
+      <div class="register-title">Origin</div>
+      <div class="register-body">When was this debt incurred and why. A tactical shortcut. A deferred upgrade. A vendor lock-in decision made under time pressure. An undocumented integration created outside normal governance. The origin informs how hard it will be to resolve.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 03</div>
+      <div class="register-title">Design Constraint</div>
+      <div class="register-body">How does this debt item constrain the target state design. Does it force a phasing decision. Does it require a migration step that was not in the original scope. Does it affect the integration pattern or the data flow. Name the constraint precisely.</div>
+    </div>
+    <div class="register-card">
+      <div class="register-label">Field 04</div>
+      <div class="register-title">Resolution Approach</div>
+      <div class="register-body">Address within this engagement. Defer with governance approval and a named review date. Accept permanently with documented rationale. Each debt item requires one of these three responses before the design is considered complete. An unresolved debt item with no response is not managed debt — it is hidden risk.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3.11 GATE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3.11</div>
     <div class="section-title-block">
       <div class="section-eyebrow">Gate</div>
       <div class="section-title">Module 3 Completion Checklist</div>
@@ -1058,7 +1237,10 @@ body::before {
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>NFRs confirmed in heat map Domain 09</strong> — performance thresholds, scalability model, availability SLA, RTO and RPO defined and agreed with business.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Zero Trust applied to every context diagram connection</strong> — each named relationship verified: authentication method, minimum privilege, blast radius if compromised.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Observability specified</strong> — logs, metrics, and traces named. Sources, destinations, retention, and alerting thresholds defined before delivery begins.</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Design ready for artefact production</strong> — all three artefacts can now be produced: Customer Impact Statement, Architecture on a Page, Heat Map.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Assumption register complete</strong> — every design assumption named, basis stated, design impact if false documented, verification owner and deadline assigned.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Architecture risk register complete</strong> — every decision-specific risk named, severity assessed, response strategy assigned, owner confirmed.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Technical debt register complete</strong> — every debt item in the current state named, constrained against the target state design, and assigned a resolution approach.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Design ready for artefact production</strong> — Customer Impact Statement, Architecture on a Page, Heat Map, and ADRs can now be produced.</div></div>
   </div>
 </div>
 
@@ -1066,7 +1248,7 @@ body::before {
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-02-intelligence.html" class="nav-prev">← MODULE 02 — INTELLIGENCE</a>
       <a href="module-04-artefacts.html" class="nav-next">MODULE 04 — ARTEFACTS →</a>
@@ -1074,7 +1256,7 @@ body::before {
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 04 — ARTEFACTS · The Three Templates. One Page. Every Time.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav">VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
 </div>
 

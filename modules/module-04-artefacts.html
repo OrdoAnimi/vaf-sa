@@ -207,6 +207,21 @@ body::before {
 .nav-prev:hover{color:var(--white);}
 .nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
 
+
+.scr-template{background:var(--steel);border:1px solid var(--wire);overflow:hidden;margin:20px 0;}
+.scr-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--forge);border-bottom:1px solid var(--wire);}
+.scr-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);}
+.scr-meta{font-family:'DM Mono',monospace;font-size:8px;color:var(--fog);}
+.scr-row{display:grid;grid-template-columns:120px 2fr 1.5fr 80px 70px;gap:0;border-bottom:1px solid var(--wire);}
+.scr-row:last-child{border-bottom:none;}
+.scr-head-row{background:rgba(46,158,104,0.08);}
+.scr-cell{padding:10px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.5;border-right:1px solid var(--wire);}
+.scr-cell:last-child{border-right:none;}
+.scr-head{color:var(--green-light);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;}
+.scr-italic{font-style:italic;color:var(--mist);}
+.scr-open{color:var(--signal);font-weight:600;display:flex;align-items:center;}
+.scr-done{color:var(--green-light);font-weight:600;display:flex;align-items:center;}
+@media(max-width:640px){.scr-row{grid-template-columns:1fr;}.scr-cell{border-right:none;border-bottom:1px solid var(--wire);}}
 </style>
 </head>
 <body>
@@ -216,10 +231,10 @@ body::before {
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 04 OF 06<br>VAFSA-M04 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="doc-ref">MODULE 04 OF 06<br>VAFSA-M04 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 04<br><span>ARTEFACTS</span></div>
-  <div class="doc-subtitle">Four deliverables. One principle. Everything the engagement needs. Nothing it does not.</div>
+  <div class="doc-subtitle">Five deliverables. One principle. Everything the engagement needs. Nothing it does not.</div>
   <div class="doc-tags">
     <span class="tag purple">Four Artefacts</span>
     <span class="tag purple">One Page Each</span>
@@ -243,13 +258,15 @@ body::before {
 
   <p class="body-text">Documentation records what happened. An artefact drives what happens next. They are not the same thing. Every artefact in this framework produces a decision, unlocks an action, or protects an outcome. Anything that does none of those three things is overhead.</p>
 
-  <p class="body-text">VAF·SA produces four artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
+  <p class="body-text">VAF·SA produces five artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
 
   <div class="callout">
     The VAF Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. VAF·SA produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
   </div>
 
-  <p class="body-text">The relationship between VAF EA and VAF·SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, VAF·SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — VAF·SA artefacts stand alone as the authoritative record of the engagement.</p>
+  <p class="body-text">Where a Proof of Concept has been conducted — by the architect, the client, or the vendor — its outputs belong in this artefact set. A PoC without structured outputs is an experiment. A PoC with named success criteria, a heat map contribution, and a resulting Architecture Decision Record is a design instrument. The PoC output does not become a separate artefact — it populates the heat map cells it confirms and generates the ADR that records what the PoC determined.</p>
+
+<p class="body-text">The relationship between VAF EA and VAF·SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, VAF·SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — VAF·SA artefacts stand alone as the authoritative record of the engagement.</p>
 
   <div class="altitude-map">
     <div class="alt-row ea">
@@ -574,6 +591,10 @@ body::before {
           <div class="adr-val">What this decision creates, enables, or closes off. What would need to change if this decision were reversed. Any downstream decisions it triggers.</div>
         </div>
         <div class="adr-field">
+          <div class="adr-key">Trade-off Accepted</div>
+          <div class="adr-val">What was given up to make this decision. The alternative approach that was rejected and the specific reason it was rejected in favour of this path. This field makes the cost of the decision visible to every future architect who reads this record — preventing re-evaluation of options already ruled out with considered rationale.</div>
+        </div>
+        <div class="adr-field">
           <div class="adr-key">What Changes This</div>
           <div class="adr-val">Named conditions that would require this decision to be reviewed. E.g. "Vendor changes hosting model" or "Regulatory requirement changes data classification."</div>
         </div>
@@ -584,10 +605,98 @@ body::before {
 
 <div class="divider"></div>
 
-<!-- 4.5 LIVING DOC -->
+<!-- 4.5 STAKEHOLDER CONCERN REGISTER -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">4.5</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Artefact 05 — Transparency Instrument</div>
+      <div class="section-title">Stakeholder Concern Register</div>
+      <div class="section-desc">Named stakeholder. Named concern. Named resolution. In writing. Signed.</div>
+    </div>
+  </div>
+
+  <div class="artefact-card">
+    <div class="artefact-header">
+      <div class="art-num" style="background:rgba(46,158,104,0.08);color:#4aba84;">05</div>
+      <div class="art-title-block">
+        <div class="art-eyebrow">Transparency Instrument — All Altitudes</div>
+        <div class="art-name">Stakeholder Concern Register</div>
+        <div class="art-sub">SCR · One page · Produced in Module 2 · Updated through engagement · Signed by named stakeholders</div>
+      </div>
+      <div class="art-badge"><div class="badge-pill" style="color:#4aba84;border-color:rgba(46,158,104,0.4);">Accountability Lock</div></div>
+    </div>
+    <div class="artefact-body">
+      <p class="art-desc">The Stakeholder Concern Register is the artefact that makes political dynamics visible and accountability explicit. Every stakeholder in the engagement has their name on a page next to their actual concern — stated in their own words, not sanitised into a category. When that document is shared with all parties and each concern is committed to in writing, those concerns stop being private agendas and become formal work items.</p>
+      <p class="art-desc">This is not a stakeholder management matrix. It is not a responsibility matrix. It is a transparency contract — the document that prevents the backchannel conversation, the revisited commitment, and the mid-engagement claim that a concern was never raised. When every concern is named, politics has nowhere to hide.</p>
+      <div class="art-grid">
+        <div>
+          <div class="art-col-label">Four Columns</div>
+          <ul class="art-col-list">
+            <li><strong>Stakeholder</strong> — named individual, not a role</li>
+            <li><strong>Their concern</strong> — in their own words, not paraphrased</li>
+            <li><strong>What will be done</strong> — specific commitment, not a category</li>
+            <li><strong>By when</strong> — a date, not a phase</li>
+          </ul>
+        </div>
+        <div>
+          <div class="art-col-label">What It Prevents</div>
+          <ul class="art-col-list">
+            <li>Backchannel concern campaigns</li>
+            <li>Mid-engagement claims that concerns were ignored</li>
+            <li>Scope arguments based on undisclosed stakeholder positions</li>
+            <li>Political resistance disguised as technical objection</li>
+            <li>The vendor who claims their position was never heard</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scr-template">
+        <div class="scr-header">
+          <span class="scr-title">Stakeholder Concern Register</span>
+          <span class="scr-meta">Engagement: [Name] · Date: [Date] · Version: [N]</span>
+        </div>
+        <div class="scr-row scr-head-row">
+          <div class="scr-cell scr-head">Stakeholder</div>
+          <div class="scr-cell scr-head">Concern — in their words</div>
+          <div class="scr-cell scr-head">Commitment</div>
+          <div class="scr-cell scr-head">By When</div>
+          <div class="scr-cell scr-head">Status</div>
+        </div>
+        <div class="scr-row">
+          <div class="scr-cell">CISO</div>
+          <div class="scr-cell scr-italic">"I need written confirmation that no data leaves the jurisdiction before I can approve this design."</div>
+          <div class="scr-cell">Written data sovereignty statement obtained from vendor and reviewed</div>
+          <div class="scr-cell">15 June</div>
+          <div class="scr-cell scr-open">Open</div>
+        </div>
+        <div class="scr-row">
+          <div class="scr-cell">Regional Finance Lead</div>
+          <div class="scr-cell scr-italic">"The migration cost needs to be broken out from ongoing run cost before we can take this to the board."</div>
+          <div class="scr-cell">Separate CAPEX and OPEX view provided in the CIS cost section</div>
+          <div class="scr-cell">1 June</div>
+          <div class="scr-cell scr-done">Resolved</div>
+        </div>
+        <div class="scr-row">
+          <div class="scr-cell">Platform Lead</div>
+          <div class="scr-cell scr-italic">"The three teams who depend on this system haven't been consulted. If we design without them we'll have to redesign."</div>
+          <div class="scr-cell">Workshop 2 structured to include all three dependent teams</div>
+          <div class="scr-cell">Workshop 2</div>
+          <div class="scr-cell scr-done">Resolved</div>
+        </div>
+      </div>
+
+      <div class="art-rule" style="border-color:var(--green);margin-top:16px;"><strong>The test:</strong> Every person named in this register has seen it, confirmed their concern is accurately stated, and received a written commitment in response. If any named stakeholder can claim their concern was not recorded or not addressed — the register has not done its job.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4.6 LIVING DOC -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4.6</div>
     <div class="section-title-block">
       <div class="section-eyebrow">Principle — Not an Artefact</div>
       <div class="section-title">Living Documentation</div>
@@ -632,7 +741,7 @@ body::before {
 <!-- 4.6 GATE -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">4.6</div>
+    <div class="section-num">4.7</div>
     <div class="section-title-block">
       <div class="section-eyebrow">Gate</div>
       <div class="section-title">Module 4 Completion Checklist</div>
@@ -642,13 +751,14 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Artefact Gate</div>
-    <div class="checklist-sub">ALL FOUR ARTEFACTS MUST EXIST AND ALL ITEMS CONFIRMED BEFORE PROCEEDING TO MODULE 5</div>
+    <div class="checklist-sub">ALL FIVE ARTEFACTS MUST EXIST AND ALL ITEMS CONFIRMED BEFORE PROCEEDING TO MODULE 5</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Customer Impact Statement produced</strong> — one page, plain language, no technical content, named decision required from named person by named date.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS test passed</strong> — most senior non-technical stakeholder can read it, understand it, and state the decision required without explanation.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Architecture on a Page produced</strong> — three zones populated: business intent top, context-level diagram and current/target state middle, roadmap bottom, risks right margin.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>AoaP test passed</strong> — CIO reads zone 1, lead architect reads zone 2, project manager reads zone 3, none require clarification from the other's zone.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map finalised</strong> — all nine domains addressed, zero blank cells, all red cells have named owner and named deadline, all green cells independently verified.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Stakeholder Concern Register produced</strong> — every named stakeholder has their concern recorded in their own words, a written commitment confirmed, and a deadline assigned.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>ADRs written</strong> — one per significant decision made in the engagement. Status set. Decision makers named. Alternatives documented. Consequences stated.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>All artefacts versioned and dated</strong> — version number, date, author, status on every document.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Artefacts linked to delivery</strong> — AoaP roadmap phases traceable to workstreams, ADRs referenced from affected design decisions.</div></div>
@@ -661,7 +771,7 @@ body::before {
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-03-design.html" class="nav-prev">← MODULE 03 — DESIGN</a>
       <a href="module-05-communication.html" class="nav-next">MODULE 05 — COMMUNICATION →</a>
@@ -669,7 +779,7 @@ body::before {
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 05 — COMMUNICATION · Every Room. Every Audience. Plain Language. Every Time.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M04 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav">VAFSA-M04 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
 </div>
 

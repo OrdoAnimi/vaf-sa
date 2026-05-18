@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAF·SA Lexicon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{--ink:#0c0d10;--forge:#13151a;--steel:#1a1e28;--wire:#252b3a;--wire-light:#323a50;--amber:#c97d0a;--amber-hot:#e8920f;--amber-dim:rgba(201,125,10,0.12);--cold:#3d8fb5;--cold-light:#5aafd4;--signal:#c45228;--green:#2e9e68;--green-light:#4aba84;--gold:#c8a84b;--fog:#7a8299;--mist:#a8b0c4;--ghost:#d0d6e4;--white:#eef0f5;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(200,168,75,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:48px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--gold);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title span{color:var(--gold);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.intro{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--gold);padding:20px 24px;margin-bottom:40px;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin:40px 0 16px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--wire);}
+.term-stack{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.term-card{background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.term-header{display:grid;grid-template-columns:1fr auto;gap:0;border-bottom:1px solid var(--wire);padding:14px 20px;align-items:center;}
+.term-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);}
+.term-module{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--wire);color:var(--fog);}
+.term-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+@media(max-width:540px){.term-body{grid-template-columns:1fr;}}
+.term-definition{padding:14px 18px;border-right:1px solid var(--wire);}
+.term-why{padding:14px 18px;}
+.term-def-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.term-why-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.term-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.term-text strong{color:var(--white);}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand span{color:var(--gold);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(201,125,10,0.3);color:#e8920f;background:rgba(201,125,10,0.12);}
+</style>
+</head>
+<body>
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-ref">LEXICON v1.0<br>VAFSA-LEXICON<br>ZENCLOUD GLOBAL CONSULTANTS</div>
+  </div>
+  <div class="doc-title">THE VAF·SA<br><span>LEXICON</span></div>
+  <div class="doc-subtitle">Every term used in this framework. Defined precisely. Read before Module 1.</div>
+</div>
+
+<div class="intro">Every term in this framework carries a specific meaning. Where a plain English word has been chosen over a technical alternative, the choice was deliberate — the word captures the concept more accurately than the jargon it replaces. Where a new term has been introduced, it names something that existing vocabulary does not adequately describe. This lexicon defines each term precisely and explains why that specific word was chosen.</div>
+
+<div class="section-label">The Velocity Loop</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Velocity Loop</div><div class="term-module">Module 6</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The four-discipline operating cycle that connects all six modules into a continuous, repeatable practice. Read → Extract → Design → Deliver. Non-linear. Runs continuously throughout the engagement. New information triggers a return to the appropriate discipline, not a restart of the full cycle.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Velocity" because the purpose of the cycle is speed without loss of accuracy — not speed alone. "Loop" because the cycle does not end at Deliver. It returns to Read whenever the environment changes.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Read</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The first discipline in the Velocity Loop. Establishing situational awareness before first stakeholder contact. Engagement archetype identification. Document inventory. Stakeholder mapping. Environment diagnostic. Read is complete when the practitioner knows what kind of engagement they are in and what posture it requires.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Read" over "Observe" because the discipline is active, not passive. Reading an environment — its history, its gaps, its political dynamics — requires deliberate analysis, not open observation.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Extract</div><div class="term-module">Module 2</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The second discipline. Obtaining the information required for accurate design from stakeholders who may not volunteer it. The ten-question protocol. Vendor interrogation. Information gap mapping. Extract is complete when the intelligence base is sufficient to begin design — not when every question has been answered perfectly.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Extract" over "Orient" because the activity is directional — pulling information from an environment that does not always offer it freely. Orientation implies passive adjustment. Extraction implies deliberate effort against resistance.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Design</div><div class="term-module">Module 3</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The third discipline. Selecting the right instrument, at the right level, for the right audience. Current state mapping. Target state definition. Gap analysis. Heat map completion. Assumption register. Risk register. Technical debt register. Design is complete when the Architecture on a Page can be produced without further information gathering.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Design" over "Decide" because the output is structural, not binary. The practitioner is not making a single decision — they are assembling a design from multiple decisions, each documented in an ADR.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Deliver</div><div class="term-module">Modules 4 + 5</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The fourth discipline. Producing the five artefacts and presenting them to every audience who must act on them. Raising concerns in writing. Holding positions under pressure. Escalating through the three-layer protocol when required. Deliver is complete when the delivery team can operate without the solution architect in the room.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Deliver" over "Act" because act implies a single action. Delivery is a sustained discipline — artefact production, multi-audience communication, formal concern management, and engagement closure.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label">Decision Architecture</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Decision Altitude</div><div class="term-module">All Modules</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The level at which a decision belongs. Business decisions belong at business altitude — with the executive audience who funds and approves. Technical decisions belong at solution architecture altitude — with the architects and technical leads who design and build. Delivery decisions belong at delivery altitude — with the project and operations teams who execute. A decision made at the wrong altitude produces outcomes that the correct altitude must spend time and resource correcting.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Altitude" because it implies elevation — a structural position, not a preference. The correct altitude for a decision is determined by its nature and consequence, not by who happens to be in the room when it is raised.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Altitude Collapse</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The condition in which decisions are made at the wrong altitude — typically EA-level decisions made at SA level, or business decisions made in technical forums. Altitude collapse is the structural cause of most re-work in complex engagements. When the wrong audience makes the wrong decision, the consequences compound at every subsequent altitude.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Collapse" because the altitudes do not simply blur — the structure fails. The governance that should hold decisions at their correct level has been absent or overridden.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Governance Drag</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The measurable cost of governance processes that produce compliance output without producing governance outcomes. Documents are produced. Reviews are conducted. Decisions are not made. The engagement moves through process stages without advancing toward a result. Governance drag is not the result of too much governance — it is the result of governance that is structured around process completion rather than decision production.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Drag" because it has a physics analogy — a force that acts against forward motion in proportion to the engagement's size and complexity. The larger the governance apparatus, the greater the potential drag when it is not producing decisions.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Pattern Locking</div><div class="term-module">Module 6</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The discipline of declaring a design decision closed and defending that closure against re-litigation that is not driven by new information. A pattern is locked when the decision has been documented in an ADR, confirmed in a workshop, and accepted by named decision makers. It is unlocked only by new technical information, a changed regulatory obligation, or a confirmed change in business requirements — not by stakeholder preference or vendor commercial interest.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Locking" because it implies a state change — from open to closed — with a defined key for reopening. Not all patterns should be re-examined. Identifying which ones are genuinely closed, and protecting those closures, is a practitioner discipline.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label">Engagement Intelligence</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Information Asymmetry</div><div class="term-module">Module 2</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The condition in which one party to an engagement holds relevant information that another party does not. Information asymmetry is present in every engagement to some degree. In the Obfuscation Engagement it is deliberate. In the Negligent Void it is structural. In the Institutional Paralysis it is historical. Naming the asymmetry is the first step to resolving it.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Asymmetry" because the condition is structural, not incidental. One party is positioned differently from another with respect to the information that governs the engagement. Naming the structure makes it addressable.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Blank Cell</div><div class="term-module">Modules 2 + 3</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An unanswered cell in the heat map. In the context of VAF·SA, a blank cell is not an absence of information — it is evidence. A blank cell produced by a vendor or stakeholder in a structured engagement, where the question has been asked and no response provided, is treated as a deliberate withholding until evidence demonstrates otherwise. Blank cells drive escalation. They are never closed by promise — only by documented confirmation.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"The Blank Cell" as a named concept because most practitioners treat unanswered questions as gaps to fill. VAF·SA treats them as forensic evidence to be challenged. The reframe changes how the practitioner approaches every unanswered question in every engagement.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The E-Stop</div><div class="term-module">Workshop Playbook</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The decision to end workshop-level resolution and escalate to a formal governance mechanism. The E-Stop is triggered when a conflict has been reframed twice without resolution, when the required decision-maker is not in the room, when new issues are surfacing faster than existing ones are being closed, or when a vendor has deferred the same commitment twice. The E-Stop is not a failure — it is the workshop doing its job by identifying the limit of what workshop-level engagement can resolve.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"E-Stop" — emergency stop — because the trigger is a condition that requires the current process to cease immediately in favour of a different one. The analogy is deliberate: in a workshop context, continuing past the E-Stop condition produces noise, not decisions.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label">The Four Archetypes</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Obfuscation Engagement</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An engagement in which information critical to the solution is being deliberately withheld by a vendor, internal party, or stakeholder with a vested interest in preventing full disclosure. The defining characteristic is intent — the withholding is purposeful. Operating posture: forensic. Every response is a hypothesis until independently verified.</div></div>
+      <div class="term-why"><div class="term-why-label">Signal</div><div class="term-text">Vendor confidence without supporting documentation. Vague answers to direct data flow questions. Completed work not being shared. Data egress described as ingress.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Negligent Void</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An engagement in which no architectural foundation exists. No documentation. No data classification. No vendor alignment. The engagement exists as a requirement but has never been given the architectural attention it requires. The defining characteristic is absence — not deliberate, but structural. Operating posture: constructive.</div></div>
+      <div class="term-why"><div class="term-why-label">Signal</div><div class="term-text">No documents available. Vendor in transition. Requirements described verbally, never written. Security concerns deferred to a future phase that never arrives.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Institutional Paralysis</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An engagement that has been attempted multiple times by different parties, with no ownership, no delivery, and a history being withheld or denied. Significant budget has been consumed. Nothing has been produced. The defining characteristic is accumulated inertia — each failed attempt adds political weight against the next one. Operating posture: immersive.</div></div>
+      <div class="term-why"><div class="term-why-label">Signal</div><div class="term-text">"We haven't really started yet" — 18 months in. Multiple teams, no handover. Documents exist but are not being shared. Pressure applied to the incoming practitioner before delivery begins.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Silo Engagement</div><div class="term-module">Module 1</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An engagement in which the solution is achievable and the capability exists — but the parties who need to collaborate have never been in the same room. The problem is human and structural, not technical. The defining characteristic is proximity — the answer is present in the organisation, distributed across people who have not been connected. Operating posture: facilitative.</div></div>
+      <div class="term-why"><div class="term-why-label">Signal</div><div class="term-text">Business units with overlapping requirements who have never spoken. Technical teams with relevant capability never engaged. "We didn't know they were doing that."</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label">Artefact Instruments</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Boundary Statement</div><div class="term-module">Escalation Protocol</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">A formal written statement that defines precisely what the solution architect can confirm the design satisfies and what remains unconfirmed pending an outstanding decision or unresolved risk. Issued when escalation has been exhausted and a decision to proceed has been made over the architect's documented objection. The boundary statement is not a resignation from the engagement. It is a precise assignment of accountability.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Boundary" because it marks the precise line between what the architect owns and what they do not. Everything inside the boundary is confirmed. Everything outside it is the explicit responsibility of the party who made the decision to proceed.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">The Transparency Contract</div><div class="term-module">Module 4</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The Stakeholder Concern Register in its function as a mutual accountability instrument. When every stakeholder sees their concern recorded in their own words alongside a named commitment, the document becomes a contract — not legal, but social and professional. It removes the ability for any party to claim their concern was not raised or addressed, and it converts private political agendas into formal work items.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"Transparency" because visibility is the mechanism. "Contract" because the document creates mutual obligations — the architect commits to addressing the concern, the stakeholder commits to the record of it being accurately stated.</div></div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="section-label">Velocity Measurement</div>
+<div class="term-stack">
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Time to First Artefact (T2FA)</div><div class="term-module">Module 6</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">Working days from engagement start to the first signed Customer Impact Statement. The primary velocity measure. Measures how quickly the engagement produces its first decision-enabling output. Activity is not velocity. A signed artefact is. Target: 10–20 days standard, up to 30 for Institutional Paralysis engagements.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Measure</div><div class="term-text">The CIS is the first output that changes the engagement. Everything before it is preparation. T2FA measures the speed of that preparation — which is the only preparation that counts.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Heat Map Closure Rate (HCR)</div><div class="term-module">Module 6</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">The percentage of heat map cells moved from red or amber to confirmed green per week. Measures decision production, not document production. A cell moves to green only when the relevant information is confirmed and independently verified. Target: 15–25% of open cells per active week.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Measure</div><div class="term-text">Closure rate distinguishes between engagements that are producing decisions and engagements that are producing the appearance of decisions. The independence requirement on green cells prevents compliance performance masquerading as architectural progress.</div></div>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-header"><div class="term-name">Decision Velocity (DV)</div><div class="term-module">Module 6</div></div>
+    <div class="term-body">
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">Architecture Decision Records reaching Accepted status per engagement week. The direct measure of architectural progress. Each accepted ADR is a locked pattern, a confirmed decision, and a piece of design that will not be re-litigated. Target: 1–3 ADRs accepted per active week in Design and Deliver phases.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Measure</div><div class="term-text">Zero ADRs accepted for more than two weeks means either no significant decisions are being made, or decisions are being made without being recorded. Both indicate a loop that is not running correctly.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">LEXICON v1.0 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="nav-bar">
+      <a href="preface.html" class="nav-prev">← Preface</a>
+      <a href="modules/module-01-orientation.html" class="nav-next">MODULE 01 — ORIENTATION →</a>
+    </div>
+  </div>
+  <div style="text-align:right;"><div class="footer-nav">VAFSA-LEXICON<br>ZENCLOUD GLOBAL CONSULTANTS<br>velocityarchitectureframework.com</div></div>
+</div>
+</div>
+</body>
+</html>

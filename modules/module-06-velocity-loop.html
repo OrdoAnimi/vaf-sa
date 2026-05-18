@@ -383,6 +383,23 @@ body::before {
 .nav-prev:hover{color:var(--white);}
 .nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
 
+
+.jump-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:540px){.jump-grid{grid-template-columns:1fr;}}
+.jump-card{background:var(--forge);border:1px solid var(--wire);border-left:2px solid var(--gold);padding:16px 18px;}
+.jump-arch{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.jump-sequence{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.04em;color:var(--white);margin-bottom:8px;line-height:1.4;}
+.jump-reason{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.6;}
+
+.measure-stack{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+.measure-card{display:grid;grid-template-columns:56px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.measure-num{background:rgba(200,168,75,0.08);border-right:1px solid rgba(200,168,75,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);}
+.measure-content{padding:16px 20px;}
+.measure-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:2px;}
+.measure-abbr{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--gold);margin-bottom:8px;}
+.measure-def{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;margin-bottom:8px;}
+.measure-target{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.6;padding:8px 12px;background:var(--steel);border-left:2px solid var(--gold);}
+.measure-target span{color:var(--gold);font-weight:500;}
 </style>
 </head>
 <body>
@@ -392,7 +409,7 @@ body::before {
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 06 OF 06<br>VAFSA-M06 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="doc-ref">MODULE 06 OF 06<br>VAFSA-M06 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 06<br><span>THE VELOCITY LOOP</span></div>
   <div class="doc-subtitle">Think fast. Decide fast. Deliver fast. With or without anyone's help.</div>
@@ -448,12 +465,12 @@ body::before {
     <div class="section-num">6.1</div>
     <div class="section-title-block">
       <div class="section-eyebrow">The Cycle</div>
-      <div class="section-title">Observe. Orient. Decide. Act.</div>
-      <div class="section-desc">Four steps. Not four phases. Not four meetings. Four continuous actions running in parallel.</div>
+      <div class="section-title">Read. Extract. Design. Deliver.</div>
+      <div class="section-desc">Four disciplines. Not four phases. Not four meetings. Four continuous actions running in parallel.</div>
     </div>
   </div>
 
-  <p class="p">The practitioner who cycles through observation, orientation, decision, and action faster than the environment changes holds the advantage. Every other party in the engagement is responding to a situation that has already moved.</p>
+  <p class="p">The practitioner who reads the environment, extracts the intelligence, designs the solution, and delivers the artefact faster than the environment changes holds the advantage. Every other party in the engagement is responding to a situation that has already moved.</p>
 
   <p class="p">The same principle applies in every engagement you will ever walk into. The architect who observes, orients, decides, and acts faster than the environment changes — holds the ground. The architect who waits for certainty before acting is always reacting. Always behind.</p>
 
@@ -472,7 +489,7 @@ body::before {
     <div class="loop-cell orient">
       <div class="loop-letter">O</div>
       <div class="loop-label">Step 02</div>
-      <div class="loop-title">Orient</div>
+      <div class="loop-title">Extract</div>
       <div class="loop-module">Module 2 — Intelligence</div>
       <div class="loop-desc">Get what you need from people who may not want to give it. Ten questions. Plain speech. Vendor interrogation. Information gap map. You know the shape of the answer before you ask the question. Confirm or expose. Nothing else.</div>
     </div>
@@ -484,7 +501,7 @@ body::before {
     <div class="loop-cell decide">
       <div class="loop-letter">D</div>
       <div class="loop-label">Step 03</div>
-      <div class="loop-title">Decide</div>
+      <div class="loop-title">Design</div>
       <div class="loop-module">Module 3 — Design</div>
       <div class="loop-desc">Build the solution. Right tool. Right level. Right audience. context-level diagram. Heat map. Three altitudes. Current state. Target state. Gap. Security embedded. Observability specified. You decide what the solution is. Then you move.</div>
     </div>
@@ -492,11 +509,54 @@ body::before {
     <div class="loop-cell act">
       <div class="loop-letter">A</div>
       <div class="loop-label">Step 04</div>
-      <div class="loop-title">Act</div>
+      <div class="loop-title">Deliver</div>
       <div class="loop-module">Modules 4 and 5 — Artefacts and Communication</div>
-      <div class="loop-desc">Produce the artefacts. Present them to every room. Raise concerns in writing. Hold the line. The artefact is the action. It drives the next decision. The loop starts again from whatever the response reveals.</div>
+      <div class="loop-desc">Produce the artefacts. Present them to every room. Raise concerns in writing. Hold the line. The artefact is the delivery instrument. It drives the next decision. The loop starts again from whatever the response reveals.</div>
     </div>
 
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6.1b WHEN TO JUMP -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.1b</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Operating Discipline</div>
+      <div class="section-title">When to Jump Modules</div>
+      <div class="section-desc">The modules are not always sequential. The engagement determines the order.</div>
+    </div>
+  </div>
+
+  <p class="body-text">The four disciplines — Read, Extract, Design, Deliver — are presented in sequence because that sequence applies in most engagements. It does not apply in all of them. The Velocity Loop is continuous and non-linear. The module structure is a starting point, not a constraint.</p>
+
+  <p class="body-text">In an Obfuscation Engagement, intelligence extraction may need to begin before orientation is complete — because you do not know what you are orienting to until you have extracted something from the vendor. In a Silo Engagement, the workshop that belongs to Extract may need to precede the full document immersion of Read — because the room will tell you more in two hours than the documents will tell you in two weeks.</p>
+
+  <div class="callout">The module sequence is the default path. Archetype recognition determines when to depart from it. Orientation always produces the archetype diagnosis. The archetype diagnosis determines which module runs next.</div>
+
+  <div class="jump-grid">
+    <div class="jump-card">
+      <div class="jump-arch">Obfuscation Engagement</div>
+      <div class="jump-sequence">Read → Extract → Read (updated) → Design → Deliver</div>
+      <div class="jump-reason">Intelligence extraction surfaces information that changes the orientation picture. Re-run Read with the corrected information before finalising the current state. The loop runs twice before design begins.</div>
+    </div>
+    <div class="jump-card">
+      <div class="jump-arch">Negligent Void</div>
+      <div class="jump-sequence">Read (brief) → Extract → Design → Read (confirmed) → Deliver</div>
+      <div class="jump-reason">Where no documentation exists, document immersion is brief. The workshop creates the baseline. Design begins from the workshop output. A brief return to Read confirms the baseline before artefacts are finalised.</div>
+    </div>
+    <div class="jump-card">
+      <div class="jump-arch">Institutional Paralysis</div>
+      <div class="jump-sequence">Read (extended) → Extract → Design → Deliver</div>
+      <div class="jump-reason">The immersion period is extended — sometimes significantly — because the history is complex and deliberately obscured. Extract and Design follow in standard sequence once orientation is complete. Do not compress Read under external pressure.</div>
+    </div>
+    <div class="jump-card">
+      <div class="jump-arch">Silo Engagement</div>
+      <div class="jump-sequence">Read (brief) → Extract (workshop-first) → Design → Deliver</div>
+      <div class="jump-reason">The workshop is the primary intelligence instrument. Run it early. The room produces the current-state picture more accurately than any document inventory. Read is brief and supplementary to the workshop output.</div>
+    </div>
   </div>
 </div>
 
@@ -513,7 +573,7 @@ body::before {
     </div>
   </div>
 
-  <p class="p">New information arrives. Something changes. The vendor reveals the data is egress, not ingress. The CISO blocks the integration pattern you chose. The business changes the success criteria after the CIS was signed.</p>
+  <p class="p">New information arrives. The environment shifts. The vendor reveals the data is egress, not ingress. The CISO blocks the integration pattern you chose. The business changes the success criteria after the CIS was signed.</p>
 
   <p class="p">You do not restart the engagement. You do not rerun the full loop. You identify which step the new information belongs to and adjust from there.</p>
 
@@ -525,21 +585,21 @@ body::before {
       <div class="lb-trigger">Trigger</div>
       <div class="lb-title">Something you did not know about the environment</div>
       <div class="lb-body">A system that was not disclosed. A prior attempt that was hidden. A political dynamic that only became visible after the first workshop. A document that existed and was withheld.</div>
-      <div class="lb-step">Observe. Re-run Module 1 against the new information. Update the archetype diagnosis if it has changed.</div>
+      <div class="lb-step">Read. Re-run Module 1 against the new information. Update the archetype diagnosis if it has changed.</div>
     </div>
 
     <div class="lb-card">
       <div class="lb-trigger">Trigger</div>
       <div class="lb-title">The intelligence you gathered was wrong or incomplete</div>
       <div class="lb-body">The vendor confirmed something in a meeting that their written documentation contradicts. A stakeholder answered a question one way and a document answers it differently. The data flow is not what was described.</div>
-      <div class="lb-step">Orient. Re-run Module 2. Closed questions. Written confirmation. Independent verification. Adjust the heat map.</div>
+      <div class="lb-step">Extract. Re-run Module 2. Closed questions. Written confirmation. Independent verification. Adjust the heat map.</div>
     </div>
 
     <div class="lb-card">
       <div class="lb-trigger">Trigger</div>
       <div class="lb-title">The design decision needs to change</div>
       <div class="lb-body">A constraint emerged that the design does not satisfy. A security control was mandated that changes the integration pattern. An NFR was confirmed that the current architecture cannot meet.</div>
-      <div class="lb-step">Decide. Re-run Module 3 for the affected domain. Issue an ADR that supersedes the previous decision. Update the AoaP.</div>
+      <div class="lb-step">Design. Re-run Module 3 for the affected domain. Issue an ADR that supersedes the previous decision. Update the AoaP.</div>
     </div>
 
   </div>
@@ -649,6 +709,61 @@ body::before {
   </div>
 </div>
 
+
+<div class="divider"></div>
+
+<!-- 6.4b VELOCITY MEASUREMENT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6.4b</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Evidence Discipline</div>
+      <div class="section-title">Measuring Velocity</div>
+      <div class="section-desc">Speed without evidence is a claim. These three measures make it demonstrable.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Velocity over volume is a principle. Clients and governance bodies who commission engagements by the day or the deliverable will eventually ask for evidence that the principle was honoured — that speed did not substitute for rigour. Three measures answer that question. They are simple enough to track without additional tooling and precise enough to be defensible in any review.</p>
+
+  <div class="measure-stack">
+
+    <div class="measure-card">
+      <div class="measure-num">01</div>
+      <div class="measure-content">
+        <div class="measure-name">Time to First Artefact</div>
+        <div class="measure-abbr">T2FA</div>
+        <div class="measure-def">The number of working days from engagement start to the first signed Customer Impact Statement. This is the primary velocity measure. It tracks how quickly the engagement produces its first decision-enabling output — not how quickly activity begins. Activity beginning on day one is not velocity. A signed CIS on day ten is.</div>
+        <div class="measure-target"><span>Target range:</span> 10–20 working days for standard engagements. Up to 30 for Institutional Paralysis archetypes where extended immersion is required. Anything beyond 30 without a documented reason is a loop that has stalled.</div>
+      </div>
+    </div>
+
+    <div class="measure-card">
+      <div class="measure-num">02</div>
+      <div class="measure-content">
+        <div class="measure-name">Heat Map Closure Rate</div>
+        <div class="measure-abbr">HCR</div>
+        <div class="measure-def">The percentage of heat map cells moved from red or amber to green per week, averaged across the engagement. This measures decision production — not document production. A cell moves to green only when the relevant information has been confirmed and independently verified. A high closure rate with unverified green cells is not velocity. It is compliance performance.</div>
+        <div class="measure-target"><span>Target range:</span> 15–25% of open cells resolved per active engagement week. An engagement where the closure rate is below 10% for two consecutive weeks has identified a blocking condition. Name it and apply the escalation protocol.</div>
+      </div>
+    </div>
+
+    <div class="measure-card">
+      <div class="measure-num">03</div>
+      <div class="measure-content">
+        <div class="measure-name">Decision Velocity</div>
+        <div class="measure-abbr">DV</div>
+        <div class="measure-def">The number of Architecture Decision Records reaching Accepted status per engagement week. This is the direct measure of architectural progress — each accepted ADR is a decision that will not be re-litigated, a pattern that is locked, and a piece of the design that is confirmed. A high ADR acceptance rate indicates that the loop is producing decisions rather than discussions.</div>
+        <div class="measure-target"><span>Target range:</span> 1–3 ADRs accepted per active week in the Design and Deliver phases. Zero ADRs accepted for more than two weeks indicates either that no significant decisions are being made, or that decisions are being made without being recorded. Both are problems.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout green">These three measures exist to answer one question: was the speed of this engagement the result of structured analytical work, or of shortcuts that deferred risk to delivery? T2FA measures how fast the foundation was laid. HCR measures how systematically risks were closed. DV measures how rigorously decisions were made. Together they constitute an evidence trail, not a performance metric.</div>
+
+  <p class="body-text">All three measures are available from the artefacts the framework already requires. T2FA from the CIS sign-off date. HCR from the heat map version history. DV from the ADR register. No additional tracking system is required.</p>
+</div>
+
 <div class="divider"></div>
 
 <!-- 6.5 WHAT DONE MEANS -->
@@ -738,7 +853,7 @@ body::before {
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 06 — VELOCITY LOOP · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 06 — VELOCITY LOOP · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-05-communication.html" class="nav-prev">← MODULE 05 — COMMUNICATION</a>
       <a href="../index.html" class="nav-next">← FRAMEWORK HOME</a>
@@ -746,7 +861,7 @@ body::before {
     <div class="next-module" style="margin-top:12px;">→ NEXT: PREFACE — INFLUENCE WITHOUT AUTHORITY · The Operating Philosophy</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M06 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav">VAFSA-M06 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
 </div>
 

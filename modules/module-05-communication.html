@@ -204,6 +204,23 @@ body::before {
 .nav-prev:hover{color:var(--white);}
 .nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
 
+
+.redirect-stack{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.redirect-card{background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
+.redirect-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--signal);padding:10px 18px 0;margin-bottom:2px;}
+.redirect-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--white);padding:0 18px 10px;border-bottom:1px solid var(--wire);}
+.redirect-context{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);padding:12px 18px;line-height:1.6;border-bottom:1px solid var(--wire);}
+.redirect-script{padding:12px 18px;background:rgba(196,82,40,0.05);border-bottom:1px solid var(--wire);}
+.script-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--signal);margin-bottom:6px;}
+.script-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.7;font-style:italic;}
+.redirect-why{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);padding:10px 18px;line-height:1.6;border-left:2px solid var(--signal);}
+
+.align-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+@media(max-width:540px){.align-grid{grid-template-columns:1fr;}}
+.align-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--amber);padding:18px 20px;}
+.align-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.align-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.04em;color:var(--white);margin-bottom:10px;}
+.align-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
 </style>
 </head>
 <body>
@@ -213,7 +230,7 @@ body::before {
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 05 OF 06<br>VAFSA-M05 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="doc-ref">MODULE 05 OF 06<br>VAFSA-M05 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 05<br><span>COMMUNICATION</span></div>
   <div class="doc-subtitle">Every room. Every audience. Plain language. No jargon. The artefact speaks first. You follow it.</div>
@@ -357,7 +374,7 @@ body::before {
         <div class="aud-title-block">
           <div class="aud-label">Audience 04</div>
           <div class="aud-name">Project and Program Managers</div>
-          <div class="aud-desc">PM · Program manager · Delivery lead · Scrum master · Change manager</div>
+          <div class="aud-desc">PM · Program manager · Delivery lead · Agile delivery lead · Change manager</div>
         </div>
         <div class="aud-rule"><div class="aud-rule-text">Lead with dependency</div></div>
       </div>
@@ -534,6 +551,115 @@ body::before {
   </div>
 </div>
 
+
+<div class="divider"></div>
+
+<!-- 5.3b DECISION ALTITUDE REDIRECTION -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.3b</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Operating Discipline</div>
+      <div class="section-title">Redirecting to the Correct Altitude</div>
+      <div class="section-desc">What to say when the wrong decision is being made in the wrong room. Without confrontation. Without jargon.</div>
+    </div>
+  </div>
+
+  <p class="body-text">Decision Altitude collapse happens in meetings. An executive begins specifying technical implementation. A technical team negotiates business requirements. A vendor attempts to close a commercial commitment in an architecture review. The practitioner who allows these moments to pass without redirection owns the consequences — the business decision that got made without business authority, or the technical decision that locked out options the delivery team needed.</p>
+
+  <p class="body-text">Redirection is not confrontation. It is a structural observation delivered in plain language. The goal is to move the decision to the correct room — not to win the argument about where it belongs.</p>
+
+  <div class="callout">The redirection is always about the decision, not the person. "This decision belongs in a different room" is a structural observation. "You shouldn't be deciding this" is a personal one. The first is professional. The second creates resistance. Use the first. Always.</div>
+
+  <div class="redirect-stack">
+
+    <div class="redirect-card">
+      <div class="redirect-label">Scenario 01</div>
+      <div class="redirect-title">Executive making a technical decision</div>
+      <div class="redirect-context">The executive sponsor has begun specifying which cloud services to use, which integration pattern to adopt, or which vendor product to select. This is a technical decision. It belongs at solution architecture altitude, not business altitude.</div>
+      <div class="redirect-script">
+        <div class="script-label">Say This</div>
+        <div class="script-text">"That is exactly the right question — and I want to make sure it gets the right answer. The technical decision on [specific item] is one I need to take back to the architecture session with the technical team. What I need from this room is your confirmation on [the business outcome] — which gives us the authority to make that technical call with your intent clearly understood. Can we confirm that first?"</div>
+      </div>
+      <div class="redirect-why">The executive's input is acknowledged. The decision is moved without being dismissed. The business outcome — which is theirs to decide — is kept in the room.</div>
+    </div>
+
+    <div class="redirect-card">
+      <div class="redirect-label">Scenario 02</div>
+      <div class="redirect-title">Technical team negotiating business requirements</div>
+      <div class="redirect-context">The technical lead or platform team is making scope decisions, re-interpreting business requirements, or accepting constraints that affect business outcomes — without business authority to do so.</div>
+      <div class="redirect-script">
+        <div class="script-label">Say This</div>
+        <div class="script-text">"I want to make sure we are clear on what this room can decide. The technical approach to [item] is absolutely ours to resolve here. The question of whether [business requirement or constraint] still stands is a business decision — it belongs with [named business stakeholder]. I'll take that question back to them before we finalise this. Can we proceed with the technical design on the assumption it holds, and flag it for confirmation?"</div>
+      </div>
+      <div class="redirect-why">The technical work continues. The business decision is not made without authority. The gap is named and assigned — not left open and unaddressed.</div>
+    </div>
+
+    <div class="redirect-card">
+      <div class="redirect-label">Scenario 03</div>
+      <div class="redirect-title">Vendor attempting to close a commitment at the wrong level</div>
+      <div class="redirect-context">The vendor is seeking sign-off on a commercial position, a scope commitment, or a delivery timeline in an architecture session — where no one present has commercial authority.</div>
+      <div class="redirect-script">
+        <div class="script-label">Say This</div>
+        <div class="script-text">"I want to be direct with you. The people in this room can confirm the technical approach. The commercial commitment you are seeking belongs to a different conversation — with [named commercial authority]. I will make sure that conversation happens. In the meantime, I need you to confirm [the specific technical question] so we can continue the design work."</div>
+      </div>
+      <div class="redirect-why">The vendor's request is heard. The authority boundary is named clearly. The technical work continues. The commercial question does not get answered by someone without the authority to answer it.</div>
+    </div>
+
+    <div class="redirect-card">
+      <div class="redirect-label">Scenario 04</div>
+      <div class="redirect-title">Mixed-altitude room producing no decision</div>
+      <div class="redirect-context">A room containing executives, architects, technical leads, and vendors is attempting to reach agreement on a decision that requires clarity about which altitude it belongs to before anyone can decide anything.</div>
+      <div class="redirect-script">
+        <div class="script-label">Say This</div>
+        <div class="script-text">"Before we go further, I want to clarify what we are deciding in this session. There are two things on the table: [business outcome decision] and [technical approach decision]. The first belongs to [executive names]. The second belongs to [technical names]. I suggest we confirm the first in the next fifteen minutes, then the technical team takes the second from there. That way we do not have one conversation trying to make two decisions at once."</div>
+      </div>
+      <div class="redirect-why">The room is structured. Both decisions get the right audience. The meeting becomes two focused conversations instead of one unfocused one.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="divider"></div>
+
+<!-- 5.3c INTERNAL TEAM ALIGNMENT -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5.3c</div>
+    <div class="section-title-block">
+      <div class="section-eyebrow">Pre-Presentation Discipline</div>
+      <div class="section-title">Internal Team Alignment</div>
+      <div class="section-desc">Before the client room. Every specialist architect. One consistent position.</div>
+    </div>
+  </div>
+
+  <p class="body-text">In engagements involving a team of specialist architects — security, data, integration, infrastructure — the greatest communication risk is not what happens in the client room. It is what happens when two specialists from the same team offer contradictory positions in that room without realising they are doing so.</p>
+
+  <p class="body-text">A security architect who raises a concern already resolved in the heat map. A data architect who challenges an integration pattern the solution architect has already confirmed with the technical lead. An infrastructure specialist who volunteers a constraint that contradicts the roadmap. None of these represent incompetence. They represent the absence of a pre-presentation alignment session. Internal misalignment becomes public misalignment. That costs more credibility than any technical error.</p>
+
+  <div class="callout amber">The client room is not the place to discover that your team has different positions on the same question. The pre-presentation session is. Run it. Every time. Even when the team is experienced. Especially when the engagement is complex.</div>
+
+  <div class="align-grid">
+    <div class="align-card">
+      <div class="align-label">Session Structure</div>
+      <div class="align-title">The Pre-Presentation Session</div>
+      <div class="align-body">Thirty minutes. Same day as the client session where possible. Every specialist who will be in the room. Four agenda items only:<br><br>
+      1. Confirm the current state of each heat map domain — specialist by domain. Any change from the last agreed position is named before the client room.<br><br>
+      2. Agree the narrative for the audience. What leads. What follows. What stays technical and what gets translated.<br><br>
+      3. Name the designated voice per domain. When a question on security comes up — who answers it. When a question on data architecture comes up — who answers it. One voice per domain. No interruptions, no corrections, no additions from others unless invited.<br><br>
+      4. Protocol for unanticipated questions. If a question arrives that nobody prepared for — one response only: "Let me confirm that and come back to you before end of day." Not a guess. Not a debate. A commitment and a timeline.</div>
+    </div>
+    <div class="align-card">
+      <div class="align-label">What Alignment Produces</div>
+      <div class="align-title">One Position. One Room.</div>
+      <div class="align-body">The client room receives a single consistent position from a team that has already resolved its internal disagreements. Questions go to named specialists who are prepared for them. Contradictions are eliminated before they occur rather than managed after they surface.<br><br>
+      The session does not eliminate disagreement within the team. It ensures disagreement is resolved at the correct altitude — internally — rather than performed in front of the client.<br><br>
+      Where genuine disagreement cannot be resolved before the client session, it is not taken into the room unresolved. It is converted into an open item with a named internal owner and a resolution timeline — and presented as such if it surfaces.</div>
+    </div>
+  </div>
+</div>
+
 <div class="divider"></div>
 
 <!-- 5.4 PRESENTING THE ARTEFACTS -->
@@ -658,7 +784,7 @@ body::before {
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 05 — COMMUNICATION · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 05 — COMMUNICATION · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-04-artefacts.html" class="nav-prev">← MODULE 04 — ARTEFACTS</a>
       <a href="module-06-velocity-loop.html" class="nav-next">MODULE 06 — VELOCITY LOOP →</a>
@@ -666,7 +792,7 @@ body::before {
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 06 — VELOCITY LOOP · Think Fast. Decide Fast. Deliver Fast.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M05 · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav">VAFSA-M05 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
 </div>
 

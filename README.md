@@ -26,14 +26,18 @@ VAF·SA does.
 
 ---
 
+## v1.0
+
 ## Six Modules
 
 | Module | Name | What It Teaches |
 |---|---|---|
+| PRE | Preface | Influence Without Authority — read before Module 1 |
+| LEX | Lexicon | Every VAF·SA term defined precisely |
 | 01 | Orientation | How to read any environment before the first meeting |
 | 02 | Intelligence | How to get what you need from people who may not give it |
 | 03 | Design | Right tool. Right level. Right audience. |
-| 04 | Artefacts | Four deliverables. One page each. |
+| 04 | Artefacts | Five deliverables. CIS · AoaP · Heat Map · ADR · Stakeholder Concern Register |
 | 05 | Communication | Every room. Every audience. Plain language. |
 | 06 | Velocity Loop | Think fast. Decide fast. Deliver fast. |
 
