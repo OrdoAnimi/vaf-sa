@@ -302,7 +302,38 @@ body::before {
 
 .footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
 
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
 .next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--green-dim); border:1px solid rgba(46,158,104,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--green-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -343,7 +374,7 @@ body::before {
 
   <p class="body-text"><strong>Design is about producing the clearest possible picture of the solution — for the audience that needs to act on it — using the minimum tool necessary to achieve that clarity.</strong></p>
 
-  <p class="body-text">Draw a component diagram for an executive. You have not demonstrated expertise. You have demonstrated that you do not know your audience. Produce a one-page context diagram that a CEO and a DBA can both read. That is design operating correctly.</p>
+  <p class="body-text">Presenting a component-level diagram to an executive audience does not demonstrate architectural depth—it demonstrates a failure to calibrate communication to the audience that must act on it. A well-constructed context diagram that is simultaneously readable by an executive sponsor and a senior technical practitioner is a reliable indicator that the design is operating at the correct altitude.</p>
 
   <div class="callout">
     The most effective solution architecture diagram is not the most detailed one. It is the one that makes the right decision obvious to the right person at the right moment.
@@ -381,7 +412,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Every tool in the architect's stack has a purpose and a limit. Reach for the wrong tool. Waste time, produce confusion, signal that you do not understand the problem. Select the right one. Produce clarity in the time others spend setting up the wrong one.</p>
+  <p class="body-text">Every tool in the architect's stack has a purpose and a limit. Selecting an inappropriate design instrument wastes engagement time, introduces unnecessary complexity, and signals to stakeholders that the problem has not been accurately characterised. Selecting the appropriate tool produces clarity in the time that would otherwise be consumed by correction.</p>
 
   <div class="tool-grid">
 
@@ -1013,7 +1044,7 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Design Gate</div>
-    <div class="checklist-sub">MODULE 3 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED</div>
+    <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED BEFORE PROCEEDING TO MODULE 4</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>C4 Context diagram produced</strong> — all systems named, all users named, all connections named and directional.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map complete</strong> — all eight domains addressed. No blank cells. Red cells documented with owner and deadline. All green cells independently verified.</div></div>
@@ -1036,6 +1067,10 @@ body::before {
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="nav-bar">
+      <a href="module-02-intelligence.html" class="nav-prev">← MODULE 02 — INTELLIGENCE</a>
+      <a href="module-04-artefacts.html" class="nav-next">MODULE 04 — ARTEFACTS →</a>
+    </div>
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 04 — ARTEFACTS · The Three Templates. One Page. Every Time.</div>
   </div>
   <div style="text-align:right;">

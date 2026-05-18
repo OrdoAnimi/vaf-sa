@@ -96,6 +96,37 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .footer-brand span{color:var(--amber);}
 .footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
 .next-module{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--amber-dim);border:1px solid rgba(201,125,10,0.3);font-family:'DM Mono',monospace;font-size:10px;color:var(--amber-hot);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -107,7 +138,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="doc-ref">MODULE 01 OF 06<br>VAFSA-M01-ORIENTATION<br>MYINT ENTERPRISES PTY LTD</div>
   </div>
   <div class="doc-title">MODULE 01<br><span>ORIENTATION</span></div>
-  <div class="doc-subtitle">Read the environment before anyone briefs you on it.</div>
+  <div class="doc-subtitle">Establishing situational awareness before first engagement contact.</div>
   <div class="doc-tags">
     <span class="tag amber">Foundational</span>
     <span class="tag amber">Mandatory</span>
@@ -126,10 +157,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="section-desc">Why this module exists and what it costs to skip it</div>
     </div>
   </div>
-  <p class="p">Skip Module 1. Spend the first four weeks discovering what it would have told you in two days.</p>
-  <p class="p">That is the cost. Not a theoretical cost. The actual cost, measured in weeks, across every engagement where this step was bypassed.</p>
-  <p class="p">The environment you are entering has a history. Failed attempts. Political decisions. Withheld documents. Vendor commitments made without scrutiny. That history does not disappear because nobody volunteered it in the briefing. <strong>Read it before anyone chooses what to tell you.</strong></p>
-  <div class="callout">Module 1 is not discovery. Discovery assumes you are starting from nothing. Orientation assumes something has already happened — and you need to understand it before you act.</div>
+  <p class="p">Omitting Module 1 consistently produces the same result: several weeks spent acquiring intelligence that structured pre-engagement analysis would have established before the first meeting.</p>
+  <p class="p">The cost is not theoretical. It is measured in weeks, repeated across every engagement where this discipline was bypassed.</p>
+  <p class="p">Every engagement environment carries a history of prior attempts, contested decisions, and information that has not been volunteered. That history does not disappear because the briefing omits it. <strong>The structured approach established in Module 1 surfaces that history before it is filtered through the interests of those providing it.</strong></p>
+  <div class="callout">Module 1 is not a discovery process. Discovery proceeds from the assumption that no prior context exists. Orientation proceeds from the assumption that a history exists—decisions made, attempts undertaken, information withheld—and must be understood before any new activity begins.</div>
 </div>
 
 <div class="divider"></div>
@@ -140,7 +171,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Protocol</div>
       <div class="section-title">The Five Intake Questions</div>
-      <div class="section-desc">Before the first meeting. Before the first email. Before formal acceptance.</div>
+      <div class="section-desc">Applied before first stakeholder contact and before formal engagement acceptance.</div>
     </div>
   </div>
   <p class="p">These five questions are not discovery questions. They orient you to the environment before you enter it. If they cannot be answered before engagement begins, answering them becomes the first output of the first workshop.</p>
@@ -191,7 +222,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Pattern Recognition</div>
       <div class="section-title">The Four Engagement Archetypes</div>
-      <div class="section-desc">Identify which one you are in. It changes everything that follows.</div>
+      <div class="section-desc">Accurate archetype identification determines posture, approach, and time allocation across all subsequent modules.</div>
     </div>
   </div>
   <p class="p">Every engagement falls into one of four archetypes — or a combination of two. Get this wrong and you deploy the wrong posture. Wrong posture costs weeks.</p>
@@ -332,11 +363,11 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Methodology</div>
       <div class="section-title">Document Immersion Protocol</div>
-      <div class="section-desc">Read for decisions, not for detail. Map the landscape before you read the terrain.</div>
+      <div class="section-desc">The protocol prioritises decision mapping over content detail. Landscape before terrain.</div>
     </div>
   </div>
   <p class="p">Existing documentation — however incomplete, contradictory, or deliberately obscured — runs through this protocol. Not cover to cover. Decision-first. What was decided, when, by whom, with what authority. The gaps in that picture are the real intelligence.</p>
-  <div class="callout signal">Read for decisions first. Read for detail only when the decision landscape is clear. The practitioner who reads for detail before mapping the landscape misses the structure of what is absent.</div>
+  <div class="callout signal">Read for decisions first. Read for detail only when the decision landscape is clear. Detailed document review conducted before mapping the decision landscape systematically produces blind spots: the practitioner acquires detailed knowledge of what exists while missing the analytical significance of what does not.</div>
   <div class="phase-timeline">
     <div class="phase-item">
       <div class="phase-marker"><div class="phase-dot"></div><div class="phase-days">Day 1–2</div></div>
@@ -396,7 +427,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Analysis</div>
       <div class="section-title">Stakeholder Mapping</div>
-      <div class="section-desc">Three categories. Every engagement. Not a RACI. A power and information map.</div>
+      <div class="section-desc">A power and information map across three categories, applied to every engagement.</div>
     </div>
   </div>
   <p class="p">The formal authority structure tells you who can sign. The informal authority structure tells you who actually decides. The interest structure tells you who wants this to succeed and who wants it to fail. All three required before the first workshop.</p>
@@ -427,7 +458,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Diagnostic</div>
       <div class="section-title">Environment Diagnostic</div>
-      <div class="section-desc">Four domains. Answer them or flag them before the first workshop begins.</div>
+      <div class="section-desc">Four domains requiring confirmation before the first structured workshop session.</div>
     </div>
   </div>
   <div class="diag-grid">
@@ -482,12 +513,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="section-title-block">
       <div class="section-eyebrow">Gate</div>
       <div class="section-title">Module 1 Completion Checklist</div>
-      <div class="section-desc">Every item confirmed before proceeding to Module 2</div>
+      <div class="section-desc">Every item confirmed before proceeding to Module 2 — Intelligence.</div>
     </div>
   </div>
   <div class="checklist">
     <div class="checklist-header">Pre-Workshop Gate</div>
-    <div class="checklist-sub">MODULE 1 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED</div>
+    <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED BEFORE PROCEEDING TO MODULE 2</div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Engagement archetype identified.</strong> Primary and secondary if mixed. Posture confirmed.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Five intake questions answered</strong> — or formally flagged as unknown and added to workshop agenda.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Document inventory complete.</strong> All available documents catalogued. Gaps documented.</div></div>
@@ -496,7 +527,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Environment diagnostic complete.</strong> All four domains answered or formally open.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map skeleton populated.</strong> Domains mapped, open cells documented.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Module 2 workshop structured.</strong> Streams defined, attendees confirmed, objectives set.</div></div>
-    <div class="warning-block"><strong>Incomplete means proceed with incomplete information.</strong> The cost of that is always greater than the cost of finishing this module. Every week spent catching up to a baseline costs credibility that cannot be recovered.</div>
+    <div class="warning-block"><strong>Proceeding without completing this module means proceeding without the intelligence base required for accurate design.</strong> The cost of that deficiency compounds throughout the engagement and consistently exceeds the time investment required to complete this module.</div>
   </div>
 </div>
 
@@ -504,7 +535,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 01 — ORIENTATION · MYINT ENTERPRISES PTY LTD</div>
-    <a class="next-module" href="module-02-intelligence.html">→ MODULE 02 — INTELLIGENCE</a>
+    <div class="nav-bar">
+      <a href="../index.html" class="nav-prev">← Framework Home</a>
+      <a href="module-02-intelligence.html" class="nav-next">MODULE 02 — INTELLIGENCE →</a>
+    </div>
   </div>
   <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
 </div>

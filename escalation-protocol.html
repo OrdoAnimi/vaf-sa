@@ -102,7 +102,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="section-desc">Three layers. In sequence. The ADR is layer zero — it must exist before any of these apply.</div>
     </div>
   </div>
-  <p class="p">The ADR is written. The concern is documented. The deadline passed. Someone said proceed anyway. What happens next is not intuitive. Most architects stop at the documentation layer and call it done. That is not holding the line. That is abandoning it with better paperwork.</p>
+  <p class="p">When the Architecture Decision Record has been written, the concern formally documented, the deadline passed without resolution, and a direction to proceed has been issued, the appropriate response is not to accept the documentation layer as the final position. Treating a documented but unresolved concern as a closed matter protects the paper record while leaving the engagement exposed.</p>
   <p class="p">Escalation has three layers. Each one increases visibility. Each one makes ignoring the risk progressively harder. Use them in sequence. Do not skip to layer three — it signals panic. Move through them deliberately.</p>
 
   <div class="esc-layers">
@@ -153,7 +153,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="section-desc">Escalation reached its limit. The decision was made to proceed anyway. This is what you say.</div>
     </div>
   </div>
-  <p class="p">All three escalation layers are exhausted. The project is proceeding over your documented architectural objection. This situation requires a boundary statement — not a resignation, not a complaint, not a confrontation. A precise statement of what you can and cannot put your name to.</p>
+  <p class="p">When all three escalation layers have been activated without producing resolution, and a decision has been made to proceed despite a documented architectural concern, the appropriate response is a formal boundary statement. This is neither a resignation from the engagement nor a confrontational act. It is a precise, professional statement of what the solution architect can confirm the design satisfies and what remains unconfirmed pending the outstanding decision.</p>
 
   <div class="boundary-block">
     <div class="bb-title">The Boundary Statement</div>
@@ -177,7 +177,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="section-desc">How long each module should run. When it is taking too long. When to cut it and move.</div>
     </div>
   </div>
-  <p class="p">The framework teaches what to do in each module. It does not say how long. That gap creates a specific failure mode: the SA who runs Module 2 for six weeks because nothing says stop. These time ranges are not targets. They are boundaries. Inside the boundary, the work is running. Outside it, the loop has stalled and needs an E-stop.</p>
+  <p class="p">The framework defines the discipline required within each module. Without explicit time guidance, a predictable failure mode emerges: extended intelligence-gathering phases that accumulate information without converging on design. The time boundaries below are not aspirational targets. They are operational limits. These time ranges define operational limits, not aspirational targets. Work within these boundaries is progressing. Work that exceeds them has encountered a condition requiring formal identification and governance response.</p>
 
   <div class="time-grid">
     <div class="time-cell">
@@ -238,7 +238,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="section-desc">When to stop revisiting. When good enough is the correct standard.</div>
     </div>
   </div>
-  <p class="p">The most expensive time sink in solution architecture is not the complex problem. It is the re-litigated decision. The integration pattern that was agreed in week two and revisited in week six because a new stakeholder has questions. The data flow direction that was confirmed and then challenged by a vendor with a commercial interest in the challenge.</p>
+  <p class="p">The most significant source of time inefficiency in solution architecture engagements is not technical complexity. It is the re-examination of decisions that have already been made, documented, and agreed. The integration pattern that was agreed in week two and revisited in week six because a new stakeholder has questions. The data flow direction that was confirmed and then challenged by a vendor with a commercial interest in the challenge.</p>
   <p class="p">Pattern locking is the discipline of declaring a decision closed and defending that closure. Not rigidly — new information that materially changes the decision reopens it through an ADR. But social pressure, repeat questioning, and stakeholder second-guessing do not reopen a locked pattern. The ADR holds it.</p>
 
   <div class="lock-grid">

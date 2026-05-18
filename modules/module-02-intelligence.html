@@ -544,6 +544,31 @@ body::before {
   font-size:9px; color:var(--fog); letter-spacing:0.1em;
 }
 
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
 .next-module {
   display:inline-flex; align-items:center; gap:8px;
   padding:10px 18px;
@@ -554,6 +579,12 @@ body::before {
   letter-spacing:0.08em; text-transform:uppercase;
   margin-top:8px;
 }
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -590,12 +621,12 @@ body::before {
 
   <p class="body-text">Module 2 teaches you how to get the information you need from people who may not want to give it — without aggression, without authority, and without jargon. It is the most human module in the framework. It is also the most decisive. The architect who cannot gather real intelligence cannot design a real solution.</p>
 
-  <p class="body-text">Most architects ask the wrong questions. Not because they are not smart. Because they are trying to sound smart. Framework vocabulary. Methodology references. Performance of expertise. The person across the table closes down. The real information stays hidden.</p>
+  <p class="body-text">A common failure pattern in stakeholder engagement is the use of framework vocabulary and methodology references as a demonstration of expertise. This approach consistently produces the opposite of its intent: stakeholders disengage, and the information required for effective design remains inaccessible.</p>
 
-  <p class="body-text"><strong>Plain questions get real answers.</strong> A vendor who deflects a technical question cannot deflect a simple one. A stakeholder who avoids a requirements workshop will answer a direct conversation. The simpler the question, the harder it is to avoid.</p>
+  <p class="body-text"><strong>Direct, plain-language questions consistently produce more substantive responses than technically framed ones.</strong> A vendor who deflects a complex technical enquiry cannot as easily deflect a simple, closed question with a named assumption. A stakeholder who avoids formal requirements processes will engage with a structured direct conversation.</p>
 
   <div class="callout">
-    You are not in the room to demonstrate knowledge. You are in the room to extract it. Less said. More heard. Direct question. Less room to manoeuvre.
+    The intelligence-gathering phase is not an opportunity for the solution architect to demonstrate expertise. Its purpose is to extract the information required for accurate design. Precision of questioning, economy of speech, and disciplined listening produce significantly better outcomes than elaborated technical exposition.
   </div>
 
   <div class="pillars">
@@ -604,7 +635,7 @@ body::before {
       <div class="pillar-title">How to Think</div>
       <div class="pillar-body">
         Before you ask anything, know the shape of the answer you expect. You are confirming or exposing — not discovering. Every question is a hypothesis. Every response is evidence. Silence is evidence. Deflection is evidence. Confidence without documentation is evidence.<br><br>
-        Think before you speak. Half the questions. Twice the intelligence.
+        Structured preparation before each stakeholder interaction—including a clear hypothesis about what the response will reveal—consistently reduces the number of questions required and increases the quality of intelligence gathered.
       </div>
     </div>
     <div class="pillar talk">
@@ -631,7 +662,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Jargon is armour. Plain speech is the mark of someone who already knows the answer and does not need the vocabulary to prove it.</p>
+  <p class="body-text">Technical vocabulary deployed as a substitute for substantive clarity is a signal of uncertainty, not expertise. The solution architect who communicates with precision and economy demonstrates mastery more effectively than one who relies on terminology as a proxy for it.</p>
 
   <p class="body-text">In every room — executive, technical, vendor, operational — plain language wins. Faster. Cannot be deflected with counter-jargon. Signals confidence. Works on every audience simultaneously. No different register for the CFO and the DBA. Speak plainly to both.</p>
 
@@ -675,7 +706,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">These are not interview questions. Not a requirements template. A structured conversation — designed so that by question ten, you have everything you need to begin design. The intent behind each question matters as much as the question itself. Know both before you walk in.</p>
+  <p class="body-text">The ten questions constitute a structured intelligence protocol, not an interview script or requirements template. The sequence is designed so that by the final question, the solution architect has established the information base required to proceed to design. The intent behind each question is as important as its wording. Both should be understood before the engagement session begins.</p>
 
   <div class="questions-stack">
 
@@ -899,7 +930,7 @@ body::before {
   </div>
 
   <div class="callout amber">
-    Listen more than you speak. Arrive at design with better information than anyone who preceded you. Silence is not awkward. It is working.
+    Economy of speech during intelligence gathering consistently produces better outcomes than elaborated questioning. The interval between a question and a stakeholder's response is not conversational difficulty—it is pressure. The first party to fill that interval typically provides the most informative response.
   </div>
 </div>
 
@@ -916,9 +947,9 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Vendors are motivated. That motivation is not always aligned with the client's interest. Treat vendor engagement as a neutral information exchange and you will be misled. Treat it as an interrogation — respectfully, methodically, in plain language — and you will surface the real picture.</p>
+  <p class="body-text">Vendor engagement should not be treated as a neutral information exchange. Vendors operate from defined commercial interests that may not align with the client's architectural or operational requirements. A structured, methodical approach to vendor intelligence gathering—conducted respectfully but with a clear analytical framework—consistently surfaces a more accurate picture of proposed solutions than open-ended discussion.</p>
 
-  <p class="body-text">You hold certifications in their platform. You have read their documentation. You know their roadmap. You know where they mislead. They do not know that. That is the advantage. Ask closed questions with named assumptions they must confirm or deny. Open questions give them room. Closed questions remove it.</p>
+  <p class="body-text">Independent technical knowledge of a vendor's platform, documentation, and roadmap provides a significant intelligence advantage. Closed questions with named assumptions—which the vendor must confirm or correct—are structurally more effective than open-ended enquiries. Open questions create room for narrative management. Closed questions with stated assumptions require direct engagement with specific claims.</p>
 
   <div class="vendor-steps">
 
@@ -1043,7 +1074,7 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Intelligence Gate</div>
-    <div class="checklist-sub">MODULE 2 IS NOT COMPLETE UNTIL ALL ITEMS ARE CONFIRMED OR FORMALLY OPEN</div>
+    <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED OR FORMALLY DOCUMENTED AS OPEN BEFORE PROCEEDING TO MODULE 3</div>
 
     <div class="check-item">
       <div class="check-box"></div>

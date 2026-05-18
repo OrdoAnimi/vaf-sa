@@ -351,7 +351,38 @@ body::before {
 .footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
 .footer-brand span { color:var(--gold); }
 .footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
 .next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--gold-dim); border:1px solid rgba(200,168,75,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -394,18 +425,18 @@ body::before {
     </div>
   </div>
 
-  <p class="p">The Velocity Loop is not a new methodology. You have been running it since Module 1.</p>
+  <p class="p">The Velocity Loop is not a supplementary methodology. It is the integrating framework that connects the disciplines established across Modules 1 through 5 into a coherent, repeatable operational cycle.</p>
 
-  <p class="p">Module 1 was Observe. Module 2 was Orient. Module 3 was Decide. Modules 4 and 5 were Act. This module names what you were doing — and teaches you to run it faster next time.</p>
+  <p class="p">Module 1 constituted the Observe phase. Module 2 constituted the Orient phase. Module 3 constituted the Decide phase. Modules 4 and 5 constituted the Act phase. This module names that structure explicitly and develops the disciplines required to execute each phase with increasing speed and precision.</p>
 
-  <p class="p">The loop has one purpose: compress the time between entering an environment and delivering the solution. Not by skipping steps. By running each step with enough precision that you do not need to repeat it.</p>
+  <p class="p">The Velocity Loop has a single purpose: to reduce the elapsed time between engagement entry and solution delivery. This compression is achieved not by eliminating steps, but by executing each step with sufficient precision to eliminate the need for repetition.</p>
 
-  <p class="p">Two engagements take three months. Both started on the same day. One architect is still writing a requirements document. The other has an Architecture on a Page, a signed Customer Impact Statement, and a delivery team in Sprint 1. The difference is not intelligence. It is not resources. It is not seniority.</p>
+  <p class="p">Two engagements of equivalent complexity, commencing on the same date, can produce dramatically different outcomes at the three-month mark. The differentiating factor is not the technical knowledge of the practitioners involved, nor the resources available, nor the seniority of the engagement lead.</p>
 
-  <p class="p"><em>It is the speed of the loop.</em></p>
+  <p class="p">It is the operational speed of the analytical and delivery cycle.</p>
 
   <div class="callout">
-    Speed without precision produces rework. Precision without speed produces reports nobody reads. The Velocity Loop produces neither. It produces the right artefact for the right audience at the right moment — and moves on.
+    Speed without precision produces rework. Precision without operational velocity produces outputs that arrive after the decisions they were intended to inform have already been made. The Velocity Loop is designed to produce neither failure mode: it delivers accurate, decision-enabling artefacts to the appropriate audience at the moment those artefacts are needed.
   </div>
 </div>
 
@@ -422,11 +453,11 @@ body::before {
     </div>
   </div>
 
-  <p class="p">John Boyd built the OODA loop for fighter pilots. The pilot who completed the cycle faster than the enemy controlled the engagement. The enemy was always one step behind because they were always responding to the previous moment.</p>
+  <p class="p">John Boyd developed the OODA loop as an analytical framework for combat decision-making. The central insight is that the party who completes the observe-orient-decide-act cycle faster than their counterpart controls the engagement. The slower party is perpetually responding to a situation that has already changed.</p>
 
   <p class="p">The same principle applies in every engagement you will ever walk into. The architect who observes, orients, decides, and acts faster than the environment changes — holds the ground. The architect who waits for certainty before acting is always reacting. Always behind.</p>
 
-  <p class="p">You do not need certainty. You need enough information to move. The loop handles the rest.</p>
+  <p class="p">The framework does not require certainty before action. It requires sufficient information to make a well-grounded decision. Subsequent loops incorporate new information and adjust accordingly.</p>
 
   <div class="loop-diagram">
 
@@ -435,7 +466,7 @@ body::before {
       <div class="loop-label">Step 01</div>
       <div class="loop-title">Observe</div>
       <div class="loop-module">Module 1 — Orientation</div>
-      <div class="loop-desc">Read the environment before anyone briefs you on it. Five intake questions. Four archetypes. Document inventory. Stakeholder map. You are not discovering — you are pattern-matching against what you already know.</div>
+      <div class="loop-desc">Establishing situational awareness before first engagement contact. Five intake questions. Four archetypes. Document inventory. Stakeholder map. You are not discovering — you are pattern-matching against what you already know.</div>
     </div>
 
     <div class="loop-cell orient">
@@ -631,11 +662,11 @@ body::before {
     </div>
   </div>
 
-  <p class="p">Done is not when the project manager marks the deliverable complete. Done is not when the client stops asking questions. Done is not when the timeline runs out.</p>
+  <p class="p">Engagement completion is not defined by project management milestones, stakeholder satisfaction at a point in time, or the expiry of a contracted timeline.</p>
 
-  <p class="p">Done is when the artefact set is complete, the loop has run clean, and the delivery team has everything they need to build without you in the room.</p>
+  <p class="p">An engagement is complete when the artefact set is comprehensive and consistent, the Velocity Loop has run without unresolved gaps, and the delivery team is equipped to execute without ongoing architectural oversight.</p>
 
-  <p class="p">That is a specific, testable condition. Every item below is either true or it is not.</p>
+  <p class="p">This is a specific, objectively testable condition. Each criterion below is either satisfied or it is not.</p>
 
   <div class="done-block">
     <div class="done-title">VAF·SA Engagement Complete</div>
@@ -710,6 +741,10 @@ body::before {
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 06 — VELOCITY LOOP · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="nav-bar">
+      <a href="module-05-communication.html" class="nav-prev">← MODULE 05 — COMMUNICATION</a>
+      <a href="../index.html" class="nav-next">← FRAMEWORK HOME</a>
+    </div>
     <div class="next-module" style="margin-top:12px;">→ NEXT: PREFACE — INFLUENCE WITHOUT AUTHORITY · The Operating Philosophy</div>
   </div>
   <div style="text-align:right;">

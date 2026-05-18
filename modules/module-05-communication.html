@@ -172,7 +172,38 @@ body::before {
 .footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
 .footer-brand span { color:var(--signal); }
 .footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
 .next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:rgba(196,82,40,0.08); border:1px solid rgba(196,82,40,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--signal); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -207,14 +238,14 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Design the right solution. Fail to communicate it. The engagement is not complete. The design is still in your head. The room where decisions are made never saw it.</p>
+  <p class="body-text">A technically sound solution that cannot be communicated effectively to the relevant decision-making audience has not fulfilled the requirements of the engagement. The design remains theoretical until it is understood by the parties who must act on it.</p>
 
   <p class="body-text">Module 5 teaches how to present the artefacts produced in Module 4 to every audience who needs to act on them. It teaches how to raise concerns without losing the room. How to hold a position under pressure without making it personal. How to read a room in real time and adjust without abandoning the position.</p>
 
   <p class="body-text"><strong>The foundation has been established in Module 2.</strong> Plain questions get real answers. Plain speech outperforms framework language in every room. The less you say, the more they hear. Module 5 applies those principles to the specific communication contexts an SA will encounter — the executive presentation, the technical deep-dive, the vendor negotiation, the project manager update, and the governance escalation.</p>
 
   <div class="callout">
-    The artefact speaks first. You present the CIS and let it land before you add commentary. You present the Architecture on a Page and let the room read it before you explain it. If the artefact is doing its job, the first sixty seconds of silence after you place it on the table is not awkward. It is working.
+    The artefact should be presented before commentary is offered. Placing the Customer Impact Statement and allowing stakeholders to read it before elaboration consistently produces more substantive engagement than presenting it alongside explanation. You present the Architecture on a Page and let the room read it before you explain it. If the artefact is doing its job, the first sixty seconds of silence after you place it on the table is not awkward. It is working.
   </div>
 </div>
 
@@ -393,7 +424,7 @@ body::before {
 
   <p class="body-text">A concern raised verbally in a meeting is a concern that disappears when the meeting ends. A concern raised in writing, with a named owner and a named deadline, is a concern that stays visible until it is resolved or escalated. The architect who raises concerns verbally and accepts verbal reassurance is not protecting the engagement — they are protecting the relationship at the expense of the outcome.</p>
 
-  <p class="body-text">Raising concerns is not confrontational. It is professional. Identify what could go wrong. Force a decision before it does. Fail to raise concerns and you have failed the engagement — regardless of how comfortable the room felt.</p>
+  <p class="body-text">Raising formal concerns is a core professional function of the solution architect role, not a confrontational act. Identifying risks and requiring decisions before those risks materialise is the engagement discipline that separates effective practitioners from those who defer to social comfort.</p>
 
   <div class="concern-steps">
 
@@ -464,7 +495,7 @@ body::before {
 
   <p class="body-text">Holding the line is not stubbornness. It is the discipline of maintaining a position that is supported by evidence under pressure from parties who have a vested interest in that position not being maintained. The vendor who needs the contract signed. The project manager who needs the phase to start. The executive who does not want to hear the timeline has moved. Holding the line protects the engagement from the interests of the room.</p>
 
-  <p class="body-text">Abandon a correct position under social pressure. You have not been collaborative. You have failed the engagement. Agreement that contradicts evidence is not consensus. It is capitulation.</p>
+  <p class="body-text">Abandoning a technically correct position under social or political pressure does not constitute collaboration. It constitutes a failure of the engagement's architectural integrity. Agreement that contradicts evidence is not consensus. It is capitulation.</p>
 
   <div class="hold-grid">
     <div class="hold-card wrong">
@@ -609,7 +640,7 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Communication Gate</div>
-    <div class="checklist-sub">MODULE 5 IS NOT COMPLETE UNTIL ALL ARTEFACTS HAVE BEEN PRESENTED AND ALL CONCERNS ARE FORMALLY DOCUMENTED</div>
+    <div class="checklist-sub">ALL ARTEFACTS MUST HAVE BEEN FORMALLY PRESENTED AND ALL CONCERNS DOCUMENTED BEFORE MODULE 5 IS CLOSED</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS presented to executive audience</strong> — placed, read silently, decision question confirmed. Response documented.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>AoaP presented zone by zone</strong> — business zone confirmed by executive, architecture zone confirmed by technical lead, roadmap confirmed by PM. Disagreements documented.</div></div>
@@ -628,6 +659,10 @@ body::before {
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 05 — COMMUNICATION · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="nav-bar">
+      <a href="module-04-artefacts.html" class="nav-prev">← MODULE 04 — ARTEFACTS</a>
+      <a href="module-06-velocity-loop.html" class="nav-next">MODULE 06 — VELOCITY LOOP →</a>
+    </div>
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 06 — VELOCITY LOOP · Think Fast. Decide Fast. Deliver Fast.</div>
   </div>
   <div style="text-align:right;">

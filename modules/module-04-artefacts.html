@@ -175,7 +175,38 @@ body::before {
 .footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
 .footer-brand span { color:var(--purple-light); }
 .footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+}
+.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev:hover { color: var(--white); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+
 .next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--purple-dim); border:1px solid rgba(124,92,191,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--purple-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev:hover{color:var(--white);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+
 </style>
 </head>
 <body>
@@ -210,7 +241,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">An artefact is not documentation. Documentation records what happened. An artefact drives what happens next. Every artefact exists to produce a decision, unlock an action, or protect an outcome. None of those three things? Not an artefact. Overhead.</p>
+  <p class="body-text">An architecture artefact is distinct from documentation. Documentation records what has occurred. A properly constructed artefact drives the decisions and actions that follow. Every artefact in this framework is designed to produce a decision, unlock a required action, or protect a defined outcome. Any document that serves none of these functions is administrative overhead, not architecture.</p>
 
   <p class="body-text">VAF·SA produces four artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
 
@@ -611,7 +642,7 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Artefact Gate</div>
-    <div class="checklist-sub">MODULE 4 IS NOT COMPLETE UNTIL ALL FOUR ARTEFACTS EXIST AND ALL ITEMS ARE CONFIRMED</div>
+    <div class="checklist-sub">ALL FOUR ARTEFACTS MUST EXIST AND ALL ITEMS CONFIRMED BEFORE PROCEEDING TO MODULE 5</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Customer Impact Statement produced</strong> — one page, plain language, no technical content, named decision required from named person by named date.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS test passed</strong> — most senior non-technical stakeholder can read it, understand it, and state the decision required without explanation.</div></div>
@@ -631,6 +662,10 @@ body::before {
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="nav-bar">
+      <a href="module-03-design.html" class="nav-prev">← MODULE 03 — DESIGN</a>
+      <a href="module-05-communication.html" class="nav-next">MODULE 05 — COMMUNICATION →</a>
+    </div>
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 05 — COMMUNICATION · Every Room. Every Audience. Plain Language. Every Time.</div>
   </div>
   <div style="text-align:right;">
