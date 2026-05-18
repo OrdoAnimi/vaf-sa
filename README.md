@@ -1,6 +1,6 @@
 # VAF·SA — Velocity Architecture Framework · Solution Architecture
 
-**Myint Enterprises Pty Ltd · ZenCloud Global Consultants · Brisbane**
+**ZenCloud Global Consultants · Brisbane**
 
 ---
 
@@ -8,7 +8,7 @@
 
 A practitioner framework for solution architects.
 
-Not theory. Not a certification study guide. Not another methodology to collect alongside TOGAF and your Azure badge.
+Not theory. Not a certification study guide. Not another methodology to collect alongside enterprise architecture methodology and your Azure badge.
 
 This teaches two things. How to think. How to talk.
 
@@ -63,8 +63,8 @@ Each archetype has a named response. Module 1 teaches you to identify which one 
 
 ## Built On
 
-- 30 years of field delivery across government, mining, financial services, retail, transport infrastructure, and global managed services
-- 62+ certifications across every major cloud platform, security framework, architecture methodology, and delivery discipline
+- field delivery across government, financial services, infrastructure, retail, and managed services
+- deep technical and delivery experience across cloud, security, data, and enterprise architecture
 - Four engagement archetypes drawn from real engagements
 - Field-verified on four continents
 
@@ -101,9 +101,11 @@ vaf-sa/
 
 ## Licence
 
+© ZenCloud Global Consultants. All rights reserved.
+
 Velocity Architecture Framework™ is a registered trademark.
 
-No part of this framework may be reproduced, distributed, or transmitted without written permission from Myint Enterprises Pty Ltd.
+No part of this framework may be reproduced, distributed, or transmitted without written permission from ZenCloud Global Consultants.
 
 ---
 

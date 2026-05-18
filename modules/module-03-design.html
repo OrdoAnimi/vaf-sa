@@ -129,7 +129,7 @@ body::before {
 
 .tool-not-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
 
-/* C4 LEVELS */
+/* context diagram LEVELS */
 .c4-stack { display:flex; flex-direction:column; gap:8px; margin:20px 0; }
 
 .c4-level { display:grid; grid-template-columns:56px 1fr auto; gap:0; overflow:hidden; border:1px solid; }
@@ -343,19 +343,19 @@ body::before {
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03-DESIGN<br>MYINT ENTERPRISES PTY LTD</div>
+    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS</div>
   </div>
   <div class="doc-title">MODULE 03<br><span>DESIGN</span></div>
   <div class="doc-subtitle">Right tool. Right level. Right audience. How to build the solution that solves the actual problem.</div>
   <div class="doc-tags">
-    <span class="tag green">C4 Model</span>
+    <span class="tag green">structural diagram approach</span>
     <span class="tag green">Heat Map</span>
     <span class="tag green">Three-Altitude Stack</span>
-    <span class="tag amber">SABSA Security Layer</span>
-    <span class="tag amber">ISO 27001</span>
-    <span class="tag">Azure · AWS · GCP</span>
-    <span class="tag">API-led Architecture</span>
-    <span class="tag">Mermaid · Lucidchart</span>
+    <span class="tag amber">security architecture practice Security Layer</span>
+    <span class="tag amber">information security management</span>
+    <span class="tag">Cloud Platforms</span>
+    <span class="tag">Integration Patterns</span>
+    <span class="tag">Diagramming Tools</span>
   </div>
 </div>
 
@@ -374,7 +374,7 @@ body::before {
 
   <p class="body-text"><strong>Design is about producing the clearest possible picture of the solution — for the audience that needs to act on it — using the minimum tool necessary to achieve that clarity.</strong></p>
 
-  <p class="body-text">Presenting a component-level diagram to an executive audience does not demonstrate architectural depth—it demonstrates a failure to calibrate communication to the audience that must act on it. A well-constructed context diagram that is simultaneously readable by an executive sponsor and a senior technical practitioner is a reliable indicator that the design is operating at the correct altitude.</p>
+  <p class="body-text">A component-level diagram in an executive room does not demonstrate depth. It demonstrates that the audience has not been considered. A context diagram that an executive sponsor and a senior technical practitioner can both read without explanation is the standard. That is design at the right level.</p>
 
   <div class="callout">
     The most effective solution architecture diagram is not the most detailed one. It is the one that makes the right decision obvious to the right person at the right moment.
@@ -384,7 +384,7 @@ body::before {
     <div class="phil-card">
       <div class="phil-label">Principle 01</div>
       <div class="phil-title">Right Tool</div>
-      <div class="phil-body">62 certifications means 62 tools available. The skill is selecting the one that fits the engagement — not deploying all of them. More tools do not produce a better solution. The right tool produces a faster one.</div>
+      <div class="phil-body">A broad technical toolkit is an advantage only when paired with the discipline to select the right instrument for the engagement. More tools do not produce a better solution. The right tool produces a faster one.</div>
     </div>
     <div class="phil-card">
       <div class="phil-label">Principle 02</div>
@@ -412,13 +412,13 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Every tool in the architect's stack has a purpose and a limit. Selecting an inappropriate design instrument wastes engagement time, introduces unnecessary complexity, and signals to stakeholders that the problem has not been accurately characterised. Selecting the appropriate tool produces clarity in the time that would otherwise be consumed by correction.</p>
+  <p class="body-text">Every tool in the architect's stack has a purpose and a limit. The wrong instrument wastes time, introduces complexity, and signals to the room that the problem has not been properly characterised. The right instrument produces clarity.</p>
 
   <div class="tool-grid">
 
     <div class="tool-row">
       <div class="tool-name-block">
-        <div class="tool-name">C4 Model</div>
+        <div class="tool-name">structural diagram approach</div>
         <div class="tool-type">Structural · Communication</div>
       </div>
       <div class="tool-when">
@@ -427,7 +427,7 @@ body::before {
       </div>
       <div class="tool-not">
         <div class="tool-not-label">Do Not Use When</div>
-        <div class="tool-not-text">You need to show process flow or time sequence. C4 shows structure, not behaviour. For behaviour use Mermaid sequence or flowchart.</div>
+        <div class="tool-not-text">You need to show process flow or time sequence. context diagram shows structure, not behaviour. For behaviour use Mermaid sequence or flowchart.</div>
       </div>
     </div>
 
@@ -487,7 +487,7 @@ body::before {
       </div>
       <div class="tool-not">
         <div class="tool-not-label">Do Not Use When</div>
-        <div class="tool-not-text">The audience includes anyone outside the delivery team. Azure icons in a board presentation signal that the presenter does not know their audience. Translate to C4 Context before the room changes.</div>
+        <div class="tool-not-text">The audience includes anyone outside the delivery team. Azure icons in a board presentation signal that the presenter does not know their audience. Translate to context-level diagram before the room changes.</div>
       </div>
     </div>
 
@@ -496,20 +496,20 @@ body::before {
 
 <div class="divider"></div>
 
-<!-- 3.2 C4 -->
+<!-- 3.2 context diagram -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">3.2</div>
     <div class="section-title-block">
       <div class="section-eyebrow">Primary Tool</div>
-      <div class="section-title">The C4 Model — Applied</div>
+      <div class="section-title">The structural diagram approach — Applied</div>
       <div class="section-desc">Four levels. Know when to use each. Know when to stop.</div>
     </div>
   </div>
 
-  <p class="body-text">The C4 Model is the primary structural tool in VAF·SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
+  <p class="body-text">The context-to-component structural approach is the primary design instrument in VAF·SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
 
-  <p class="body-text">Most architectural presentations fail because they start at the wrong level. Too detailed for the executive. Too abstract for the developer. C4 solves this by making the level explicit and the zoom deliberate.</p>
+  <p class="body-text">Most architectural presentations fail because they start at the wrong level. Too detailed for the executive. Too abstract for the developer. context diagram solves this by making the level explicit and the zoom deliberate.</p>
 
   <div class="c4-stack">
 
@@ -541,7 +541,7 @@ body::before {
     </div>
 
     <div class="c4-level never">
-      <div class="c4-num">C4</div>
+      <div class="c4-num">context diagram</div>
       <div class="c4-body">
         <div class="c4-title">Code Diagram — Not In This Framework</div>
         <div class="c4-desc">Class diagrams. Database schemas. Internal implementation detail. This is developer territory. The solution architect does not produce Code diagrams — the development team does. If a solution requires Code-level documentation to be understood by the architecture audience, the design has not been explained at the right altitude.</div>
@@ -552,7 +552,7 @@ body::before {
   </div>
 
   <div class="callout">
-    The C4 Context diagram is the one diagram that never needs an explanation. If you have drawn it correctly, every person in every room — business, technical, vendor, executive — reads it the same way. That is the standard to design to.
+    The context diagram is the one diagram that never needs an explanation. If you have drawn it correctly, every person in every room — business, technical, vendor, executive — reads it the same way. That is the standard to design to.
   </div>
 </div>
 
@@ -588,7 +588,7 @@ body::before {
       <ul class="hm-questions">
         <li>What is the threat model for this solution?</li>
         <li>What security controls are mandated by policy?</li>
-        <li>Essential Eight compliance status?</li>
+        <li>security control baseline status?</li>
         <li>Who is the security authority for this engagement?</li>
       </ul>
       <div class="hm-status-row">
@@ -620,7 +620,7 @@ body::before {
       <ul class="hm-questions">
         <li>What regulatory obligations apply?</li>
         <li>Privacy impact assessment completed?</li>
-        <li>ISO 27001 / SOC2 / ISM controls in scope?</li>
+        <li>information security management / SOC2 / ISM controls in scope?</li>
         <li>Audit trail requirements documented?</li>
       </ul>
       <div class="hm-status-row">
@@ -790,8 +790,8 @@ body::before {
         </div>
         <div>
           <div class="alt-col-label">Primary Tool</div>
-          <div class="alt-col-value">C4 Context + Heat Map</div>
-          <div class="alt-col-desc">C4 Context shows the structure. Heat map confirms every concern domain is addressed. Container level added when delivery teams need deployment detail.</div>
+          <div class="alt-col-value">context-level diagram + Heat Map</div>
+          <div class="alt-col-desc">context-level diagram shows the structure. Heat map confirms every concern domain is addressed. Container level added when delivery teams need deployment detail.</div>
         </div>
         <div>
           <div class="alt-col-label">Design Output</div>
@@ -863,7 +863,7 @@ body::before {
       <div class="ctg-label">Target State</div>
       <div class="ctg-title">What Is Needed</div>
       <ul class="ctg-list">
-        <li>Solution at C4 Context level</li>
+        <li>Solution at context level</li>
         <li>Named target systems</li>
         <li>Designed data flows</li>
         <li>Integration architecture</li>
@@ -906,29 +906,29 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">Security architecture in VAF·SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first C4 context box. SABSA provides the threat and risk lens. ISO 27001 and Essential Eight provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
+  <p class="body-text">Security architecture in VAF·SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first context diagram context box. security architecture practice provides the threat and risk lens. information security management and security control baseline provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
 
   <div class="security-grid">
     <div class="sec-card">
-      <div class="sec-label">SABSA Lens</div>
+      <div class="sec-label">security architecture practice Lens</div>
       <div class="sec-title">Threat and Risk Context</div>
       <div class="sec-body">Applied at business architecture altitude. What are the threats to the business — not just to the system. What risk appetite applies. What security attributes the solution must demonstrate.</div>
       <div class="sec-principle">Ask: what does the attacker want, and what does this solution do to prevent them getting it?</div>
     </div>
     <div class="sec-card">
-      <div class="sec-label">Essential Eight</div>
+      <div class="sec-label">security control baseline</div>
       <div class="sec-title">Control Baseline</div>
       <div class="sec-body">Applied at solution architecture altitude. Eight controls. Maturity level matched to the organisation's risk profile. Every design confirms which controls are addressed and which require additional work.</div>
       <div class="sec-principle">Ask: which of the eight controls does this solution affect — positively or negatively?</div>
     </div>
     <div class="sec-card">
-      <div class="sec-label">ISO 27001</div>
+      <div class="sec-label">information security management</div>
       <div class="sec-title">Governance Framework</div>
       <div class="sec-body">Applied when a formal compliance obligation exists. Information security management system alignment. Audit trail requirements. Risk treatment documentation. Not always in scope — but always checked against the heat map.</div>
       <div class="sec-principle">Ask: what evidence does this design produce that satisfies the control requirement?</div>
     </div>
     <div class="sec-card">
-      <div class="sec-label">API Security Architect</div>
+      <div class="sec-label">API security discipline</div>
       <div class="sec-title">Integration Security</div>
       <div class="sec-body">Applied at every integration point. Authentication model confirmed. Token lifecycle managed. API contracts documented with security attributes. No unnamed API dependency leaves the design without a named security control.</div>
       <div class="sec-principle">Ask: who can call this API, what can they do, and how do we know it is them?</div>
@@ -936,14 +936,14 @@ body::before {
   </div>
 
   <div class="callout signal">
-    Zero Trust is not a product. It is a design posture: assume breach, verify explicitly, enforce least privilege. Every connection in the design — internal or external — is treated as untrusted until verified. Apply this to every named relationship in the C4 Context diagram before design is considered complete.
+    Zero Trust is not a product. It is a design posture: assume breach, verify explicitly, enforce least privilege. Every connection in the design — internal or external — is treated as untrusted until verified. Apply this to every named relationship in the context diagram before design is considered complete.
   </div>
 
   <div class="security-grid" style="grid-template-columns:1fr;">
     <div class="sec-card">
       <div class="sec-label">Zero Trust — Added 2025</div>
       <div class="sec-title">Trust No Connection by Default</div>
-      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in VAF·SA at every named connection in the C4 Context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
+      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in VAF·SA at every named connection in the context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
       <div class="sec-principle">Ask: if this connection were compromised, what could an attacker reach from here — and is that acceptable?</div>
     </div>
   </div>
@@ -1046,17 +1046,17 @@ body::before {
     <div class="checklist-header">Design Gate</div>
     <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED BEFORE PROCEEDING TO MODULE 4</div>
 
-    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>C4 Context diagram produced</strong> — all systems named, all users named, all connections named and directional.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>context diagram produced</strong> — all systems named, all users named, all connections named and directional.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map complete</strong> — all eight domains addressed. No blank cells. Red cells documented with owner and deadline. All green cells independently verified.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Current state documented</strong> — confirmed through Module 1 immersion and Module 2 intelligence. Not taken from a document at face value.</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Target state designed</strong> — at C4 Context level minimum. Container level added where required by delivery audience.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Target state designed</strong> — at context level minimum. Container level added where required by delivery audience.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Gap analysis complete</strong> — named items, named owners, named dependencies, named risks per item.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Three-altitude stack aligned</strong> — business intent at BA altitude, solution structure at SA altitude, delivery sequence at delivery altitude. No altitude crossover.</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Security embedded</strong> — SABSA threat model, Essential Eight alignment, API security, and ISO 27001 controls confirmed against heat map.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Security embedded</strong> — threat and risk assessment, security control alignment, API security, and information security management controls confirmed against heat map.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Integration pattern selected</strong> — pattern named and justified for each integration point. No unnamed or assumed connections.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Data flow direction confirmed</strong> — ingress or egress, internal or external, classification applied, retention obligation documented.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>NFRs confirmed in heat map Domain 09</strong> — performance thresholds, scalability model, availability SLA, RTO and RPO defined and agreed with business.</div></div>
-    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Zero Trust applied to every C4 connection</strong> — each named relationship verified: authentication method, minimum privilege, blast radius if compromised.</div></div>
+    <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Zero Trust applied to every context diagram connection</strong> — each named relationship verified: authentication method, minimum privilege, blast radius if compromised.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Observability specified</strong> — logs, metrics, and traces named. Sources, destinations, retention, and alerting thresholds defined before delivery begins.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Design ready for artefact production</strong> — all three artefacts can now be produced: Customer Impact Statement, Architecture on a Page, Heat Map.</div></div>
   </div>
@@ -1066,7 +1066,7 @@ body::before {
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · ZENCLOUD GLOBAL CONSULTANTS</div>
     <div class="nav-bar">
       <a href="module-02-intelligence.html" class="nav-prev">← MODULE 02 — INTELLIGENCE</a>
       <a href="module-04-artefacts.html" class="nav-next">MODULE 04 — ARTEFACTS →</a>
@@ -1074,7 +1074,7 @@ body::before {
     <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 04 — ARTEFACTS · The Three Templates. One Page. Every Time.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M03-DESIGN<br>30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div>
+    <div class="footer-nav">VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS</div>
   </div>
 </div>
 

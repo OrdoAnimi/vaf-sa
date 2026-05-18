@@ -95,7 +95,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="doc-header">
   <div class="doc-meta">
     <div class="doc-brand">VAF·SA — The Worked Example</div>
-    <div class="doc-ref">VAFSA-WORKED-EXAMPLE<br>MYINT ENTERPRISES PTY LTD</div>
+    <div class="doc-ref">VAFSA-WORKED-EXAMPLE<br>ZENCLOUD GLOBAL CONSULTANTS</div>
   </div>
   <div class="doc-title">THE<br><span>AUTHORITY</span><br>ENGAGEMENT</div>
   <div class="doc-subtitle">All six modules. One real engagement. Principles preserved. All identifying information removed.</div>
@@ -116,9 +116,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 </div>
 
-<p class="p">The engagement brief presented at the outset described a straightforward decommissioning requirement: a legacy relational database, no longer serving its original purpose, requiring structured retirement. After two years and substantial accumulated operational cost across multiple failed attempts, the system remained operational. Ownership of the problem was effectively absent.</p>
+<p class="p">The initial brief described a straightforward decommissioning requirement — a legacy database no longer serving its original purpose. After two years and several failed attempts across different teams, the system was still running. Nobody owned the problem.</p>
 
-<p class="p">No information regarding prior attempts was volunteered during the initial briefing. The engagement history existed across the documentation landscape. It required systematic retrieval.</p>
+<p class="p">No prior attempt was mentioned in the briefing. The history existed. It had to be found.</p>
 
 <div class="divider"></div>
 
@@ -188,7 +188,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="mod-title-block">
       <div class="mod-eyebrow">Module 03 Applied</div>
       <div class="mod-name">Design</div>
-      <div class="mod-outcome">Duration: 18 working days · C4 Context confirmed · Heat map: 9 domains, 3 red, 4 amber, 2 green</div>
+      <div class="mod-outcome">Duration: 18 working days · context-level diagram confirmed · Heat map: 9 domains, 3 red, 4 amber, 2 green</div>
     </div>
   </div>
 
@@ -201,12 +201,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
   <div class="framework-applied">
     <div class="fa-label">Framework Applied</div>
-    <div class="fa-text"><strong>C4 Context:</strong> Drew the current state at context level first. Fourteen named systems. Named connections. Named data flows — with direction. Every connection the prior attempts had missed was visible because the direction arrows were named. "Direction unknown" was not permitted. Every unknown became a red heat map cell.<br><br>
-    <strong>Security embedded:</strong> Every connection in the C4 diagram was assessed against Zero Trust posture — how is this connection verified, what is the minimum privilege, what is the blast radius if compromised. Three connections failed the assessment. They went red on the heat map before the design was presented to the room.<br><br>
+    <div class="fa-text"><strong>context-level diagram:</strong> Drew the current state at context level first. Fourteen named systems. Named connections. Named data flows — with direction. Every connection the prior attempts had missed was visible because the direction arrows were named. "Direction unknown" was not permitted. Every unknown became a red heat map cell.<br><br>
+    <strong>Security embedded:</strong> Every connection in the context diagram diagram was assessed against Zero Trust posture — how is this connection verified, what is the minimum privilege, what is the blast radius if compromised. Three connections failed the assessment. They went red on the heat map before the design was presented to the room.<br><br>
     <strong>Heat map as forensic instrument:</strong> Placed on screen. Named every red cell aloud. "Domain 02 — data sovereignty — red. The question is: has written confirmation been received from the vendor that data remains within jurisdiction. The answer is no. Who owns this cell and by when?" The vendor representative could not deflect a named cell the way they had deflected an open question.</div>
   </div>
 
-  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> C4 Context confirmed — 14 systems, all connections named and directional. Heat map: 9 domains assessed, 3 red with named owners and deadlines, 4 amber with owners, 2 green with independent verification. ADR-001 through ADR-004 written. Pattern locked: decommission sequence confirmed, no re-litigation without new technical information.</div></div>
+  <div class="outcome-block"><div class="ob-check">→</div><div class="ob-text"><strong>Gate passed:</strong> context-level diagram confirmed — 14 systems, all connections named and directional. Heat map: 9 domains assessed, 3 red with named owners and deadlines, 4 amber with owners, 2 green with independent verification. ADR-001 through ADR-004 written. Pattern locked: decommission sequence confirmed, no re-litigation without new technical information.</div></div>
 </div>
 
 <!-- MODULE 4 -->
@@ -279,14 +279,14 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
   <div class="what-happened">
     <div class="wh-label">What Happened</div>
-    <div class="wh-text">At week seven, new information arrived. One of the fourteen dependent application systems — listed in the C4 Context diagram as a read-only consumer of the database — was discovered to be writing to it. Not reading. Writing. The discovery came from a junior team member who had never been in a workshop. They mentioned it in passing during a delivery stand-up.<br><br>
-    The information changed the decommission sequence. It did not change the target state. It changed the order of operations and added two dependencies to the gap analysis. The loop was re-run from Orient — not from the beginning. The C4 diagram was updated. ADR-003 was superseded by ADR-008. The AoaP roadmap was updated. The delivery team was briefed within 24 hours.<br><br>
+    <div class="wh-text">At week seven, new information arrived. One of the fourteen dependent application systems — listed in the context diagram as a read-only consumer of the database — was discovered to be writing to it. Not reading. Writing. The discovery came from a junior team member who had never been in a workshop. They mentioned it in passing during a delivery stand-up.<br><br>
+    The information changed the decommission sequence. It did not change the target state. It changed the order of operations and added two dependencies to the gap analysis. The loop was re-run from Orient — not from the beginning. The context diagram diagram was updated. ADR-003 was superseded by ADR-008. The AoaP roadmap was updated. The delivery team was briefed within 24 hours.<br><br>
     The decommission programme completed its first phase on time. The database was offline within the committed window. The ongoing monthly operational cost stopped.</div>
   </div>
 
   <div class="framework-applied">
     <div class="fa-label">Framework Applied</div>
-    <div class="fa-text"><strong>Loop re-run from Orient:</strong> New information changed the orientation, not the design. The C4 diagram was updated. The affected heat map cells were reassessed. The ADR was superseded. The pattern was re-locked with the corrected information. Total re-run time: three working days. No workshop was required because the new information was specific and the design change was contained.<br><br>
+    <div class="fa-text"><strong>Loop re-run from Orient:</strong> New information changed the orientation, not the design. The context diagram diagram was updated. The affected heat map cells were reassessed. The ADR was superseded. The pattern was re-locked with the corrected information. Total re-run time: three working days. No workshop was required because the new information was specific and the design change was contained.<br><br>
     <strong>What done meant:</strong> The engagement was not done when the database went offline. It was done when the delivery team had all artefacts, all ADRs, and the updated Architecture on a Page — and could answer every question without the solution architect in the room. That condition was reached on day ninety-one. The architect was no longer required for operational queries by day ninety-five.</div>
   </div>
 
@@ -331,7 +331,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div class="lesson-card">
     <div class="lc-num">04</div>
     <div class="lc-title">The loop re-run took three days because the artefacts were complete</div>
-    <div class="lc-body">The discovery in week seven could have restarted the engagement. It did not because the C4 diagram, the heat map, and the ADRs were complete enough that the new information had a specific, named place to land. Incomplete artefacts would have required a full restart.</div>
+    <div class="lc-body">The discovery in week seven could have restarted the engagement. It did not because the context diagram diagram, the heat map, and the ADRs were complete enough that the new information had a specific, named place to land. Incomplete artefacts would have required a full restart.</div>
   </div>
   <div class="lesson-card">
     <div class="lc-num">05</div>
@@ -348,10 +348,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 <div class="doc-footer">
   <div>
     <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">THE WORKED EXAMPLE · MYINT ENTERPRISES PTY LTD · ZENCLOUD GLOBAL CONSULTANTS</div>
+    <div class="footer-nav" style="margin-top:4px;">THE WORKED EXAMPLE · ZENCLOUD GLOBAL CONSULTANTS</div>
     <a class="back-link" href="index.html">← RETURN TO FRAMEWORK</a>
   </div>
-  <div style="text-align:right;"><div class="footer-nav">30 YEARS · 62 CERTIFICATIONS<br>FIELD-VERIFIED · FOUR CONTINENTS</div></div>
+  <div style="text-align:right;"><div class="footer-nav">ZENCLOUD GLOBAL CONSULTANTS</div></div>
 </div>
 </div>
 </body>
