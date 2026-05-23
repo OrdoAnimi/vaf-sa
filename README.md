@@ -1,116 +1,123 @@
-# VAF·SA — Velocity Architecture Framework · Solution Architecture
+# VAF-SA
 
-**ZenCloud Global Consultants · Brisbane**
+Velocity Architecture Framework - Solution Architecture is a practitioner framework for solution architects focused on practical delivery, architecture decisions, governance, and execution.
 
----
+## Purpose
 
-## What This Is
+VAF-SA exists to help solution architects operate in difficult delivery conditions: stalled engagements, unclear ownership, incomplete documentation, vendor pressure, weak governance, and political ambiguity.
 
-A practitioner framework for solution architects.
+It is practical rather than theoretical. The framework gives practitioners a structured way to read the environment, extract the information that matters, design at the right altitude, produce usable artefacts, communicate across stakeholder groups, and keep delivery moving.
 
-Not theory. Not a certification study guide. Not another methodology to collect alongside enterprise architecture methodology and your Azure badge.
+## Who It Is For
 
-This teaches two things. How to think. How to talk.
+- Solution architects working in complex or poorly documented delivery environments.
+- Enterprise architects who need a delivery-level companion to architecture governance.
+- Delivery leads who need architecture decisions converted into executable work.
+- Architecture reviewers assessing whether a design is grounded, traceable, and fit for governance.
+- Consultants using Velocity Architecture Framework or StudioSix methods in client engagements.
 
-Everything else follows from those two.
+## What It Does
 
----
+The current repository provides a static framework site with:
 
-## The Problem It Solves
+- A framework homepage in `index.html`.
+- A preface for practitioner context and operating mindset.
+- A lexicon defining the framework terms.
+- Six solution architecture modules:
+  - Module 01 - Orientation
+  - Module 02 - Intelligence
+  - Module 03 - Design
+  - Module 04 - Artefacts
+  - Module 05 - Communication
+  - Module 06 - Velocity Loop
+- Supplementary resources:
+  - Workshop playbook
+  - Escalation protocol
+  - Worked example
+- Four engagement archetypes:
+  - The Obfuscation Engagement
+  - The Negligent Void
+  - The Institutional Paralysis
+  - The Silo Engagement
+- Practical artefact guidance including CIS, Architecture on a Page, heat map, ADR, and stakeholder concern register.
 
-Enterprise architecture writes the position papers and disappears. The solution architect inherits the engagement — stalled, undocumented, politically compromised, sometimes deliberately obfuscated — and is expected to deliver anyway.
+## Live Demo
 
-No framework teaches you how to operate in that condition.
+[VAF-SA](https://zencloudau.github.io/vaf-sa/)
 
-VAF·SA does.
+## Screenshots
 
----
+![VAF-SA home](docs/screenshots/vaf-sa-home.png)
 
-## v1.0
+![VAF-SA module view](docs/screenshots/vaf-sa-modules.png)
 
-## Six Modules
+![VAF-SA practitioner view](docs/screenshots/vaf-sa-practitioner-view.png)
 
-| Module | Name | What It Teaches |
-|---|---|---|
-| PRE | Preface | Influence Without Authority — read before Module 1 |
-| LEX | Lexicon | Every VAF·SA term defined precisely |
-| 01 | Orientation | How to read any environment before the first meeting |
-| 02 | Intelligence | How to get what you need from people who may not give it |
-| 03 | Design | Right tool. Right level. Right audience. |
-| 04 | Artefacts | Five deliverables. CIS · AoaP · Heat Map · ADR · Stakeholder Concern Register |
-| 05 | Communication | Every room. Every audience. Plain language. |
-| 06 | Velocity Loop | Think fast. Decide fast. Deliver fast. |
+## How It Fits the Ecosystem
 
----
+VAF-SA is the solution architecture delivery module of the broader Velocity Architecture Framework ecosystem.
 
-## The Four Engagement Archetypes
+- **Velocity Architecture Framework** provides the enterprise architecture, decision-governance, and architecture operating model context.
+- **VAF-SA** translates that context into field practice for solution architects.
+- **EA Artefact Generator** can support the creation of structured artefacts and export-ready architecture content aligned to the framework.
+- **StudioSix** is the commercial delivery wrapper that can package VAF-SA methods into client-facing consulting and AI-assisted delivery work.
+- **ZenCloudAU** is the public GitHub organisation and consulting context for the framework.
 
-Every engagement falls into one of four patterns.
+VAF-SA should stay focused on practitioner guidance and solution architecture execution. It should link to the broader framework and tools rather than duplicate them.
 
-1. **The Obfuscation Engagement** — vendor deliberately hides the real situation
-2. **The Negligent Void** — nothing has been done, no foundation exists
-3. **The Institutional Paralysis** — multiple failed attempts, no ownership, history withheld
-4. **The Silo Engagement** — capability exists, parties have never spoken
+## Tech Stack
 
-Each archetype has a named response. Module 1 teaches you to identify which one you are in before the first meeting ends.
+Confirmed from the current files:
 
----
+- Static HTML
+- Inline CSS
+- Google Fonts loaded from `index.html`
+- No package manager or build system currently present
 
-## The Four Principles
+Primary files:
 
-1. No process first. Outcome leads.
-2. Decision altitude. Every decision at the right level.
-3. One artefact. If it does not fit on one page, the thinking is not done.
-4. Velocity over volume. Insight delivered fast beats documentation delivered late.
+- `index.html`
+- `preface.html`
+- `lexicon.html`
+- `workshop-playbook.html`
+- `escalation-protocol.html`
+- `worked-example.html`
+- `modules/module-01-orientation.html`
+- `modules/module-02-intelligence.html`
+- `modules/module-03-design.html`
+- `modules/module-04-artefacts.html`
+- `modules/module-05-communication.html`
+- `modules/module-06-velocity-loop.html`
 
----
+## How to Run Locally
 
-## Built On
+This is a static HTML site. It can be opened directly in a browser from `index.html` or served with any local static file server.
 
-- field delivery across government, financial services, infrastructure, retail, and managed services
-- deep technical and delivery experience across cloud, security, data, and enterprise architecture
-- Four engagement archetypes drawn from real engagements
-- Field-verified on four continents
+No `package.json` or npm scripts are currently present.
 
----
+## Project Status
 
-## The VAF Ecosystem
+Portfolio-ready.
 
-VAF·SA is the delivery-altitude module of the **Velocity Architecture Framework™**.
+The framework content and static site are substantial and navigable. The repo is not yet product-ready because public packaging still needs a clearer license file and a stronger link map into the wider Velocity Architecture and StudioSix ecosystem.
 
-The EA layer — Decision Altitude, Governance Drag, The Compliant Path, The Integrity Gap — is documented in the VAF Series (LinkedIn) and the VAF book.
+## Roadmap
 
-VAF·SA operates beneath that layer. It is the instrument for environments where EA governance is absent, incomplete, or has abandoned the field.
+Near-term improvements:
 
-**Trademark:** Velocity Architecture Framework™ — Application 2614111, Class 42.
+- Add a repository-level license file or clarify the licensing model.
+- Add a simple ecosystem diagram linking VAF-SA, Velocity Architecture Framework, EA Artefact Generator, and StudioSix.
+- Add a short "Start Here" path for first-time readers.
+- Add examples of how the artefacts map to governance review and delivery execution.
 
----
+## Security and Data Notes
 
-## Repository Structure
+The repo appears to be a static content site. It does not require environment configuration, API keys, or runtime secrets based on the current files inspected.
 
-```
-vaf-sa/
-├── README.md
-├── index.html              — Framework homepage
-└── modules/
-    ├── module-01-orientation.html
-    ├── module-02-intelligence.html
-    ├── module-03-design.html
-    ├── module-04-artefacts.html
-    ├── module-05-communication.html
-    └── module-06-velocity-loop.html
-```
+The worked example is described in the site as NDA-clean. Do not add client-identifying material or confidential engagement content to this repository.
 
----
+## License
 
-## Licence
+License not yet specified.
 
-© ZenCloud Global Consultants. All rights reserved.
-
-Velocity Architecture Framework™ is a registered trademark.
-
-No part of this framework may be reproduced, distributed, or transmitted without written permission from ZenCloud Global Consultants.
-
----
-
-*ZenCloud Global Consultants · velocityarchitectureframework.com*
+The previous README stated: "© ZenCloud Global Consultants. All rights reserved." No standalone `LICENSE` file is currently present in the repository.
