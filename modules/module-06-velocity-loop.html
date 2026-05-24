@@ -8,47 +8,21 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-:root {
-  --ink: #0c0d10;
-  --forge: #13151a;
-  --steel: #1a1e28;
-  --wire: #252b3a;
-  --wire-light: #323a50;
-  --gold: #c8a84b;
-  --gold-hot: #e0be5a;
-  --gold-dim: rgba(200,168,75,0.1);
-  --amber: #c97d0a;
-  --cold: #3d8fb5;
-  --cold-light: #5aafd4;
-  --signal: #c45228;
-  --green: #2e9e68;
-  --green-light: #4aba84;
-  --fog: #7a8299;
-  --mist: #a8b0c4;
-  --ghost: #d0d6e4;
-  --white: #eef0f5;
+:root{
+  --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
+  --wire:#E2E8F0;--wire-light:#CBD5E1;
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);
+  --cold:#2563EB;--cold-light:#3B82F6;
+  --signal:#DC2626;--green:#16A34A;--green-light:#22C55E;
+  --gold:#E8630A;--gold-hot:#C24F06;--gold-dim:rgba(232,99,10,0.07);
+  --fog:#64748B;--mist:#475569;--ghost:#334155;--white:#0F172A;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
-body {
-  background: var(--ink);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-}
+body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
 
-body::before {
-  content:''; position:fixed; inset:0;
-  background-image:
-    linear-gradient(rgba(200,168,75,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,168,75,0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events:none; z-index:0;
-}
-
-.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:48px 32px 96px; }
+.page { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:32px 32px 96px; }
 
 /* HEADER */
 .doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
@@ -60,12 +34,12 @@ body::before {
 .doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
 .doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
 .tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
-.tag.gold { border-color:rgba(200,168,75,0.4); color:var(--gold); }
+.tag.gold { border-color:rgba(232,99,10,0.3); color:var(--gold); }
 
 /* SECTION */
 .section { margin-bottom:52px; }
 .section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
-.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(200,168,75,0.2); min-width:44px; padding-top:2px; }
+.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(232,99,10,0.15); min-width:44px; padding-top:2px; }
 .section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
 .section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
 .section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
@@ -75,7 +49,7 @@ body::before {
 .p strong { color:var(--white); font-weight:600; }
 .p em { color:var(--gold); font-style:normal; }
 
-.divider { height:1px; background:linear-gradient(to right, var(--gold), transparent); margin:40px 0; opacity:0.3; }
+.divider { height:1px; background:linear-gradient(to right, var(--gold), transparent); margin:40px 0; opacity:0.4; }
 
 /* CALLOUT */
 .callout { background:var(--forge); border:1px solid var(--wire); border-left:3px solid var(--gold); padding:16px 20px; margin:20px 0; font-family:'DM Mono', monospace; font-size:11px; color:var(--mist); line-height:1.7; }
@@ -193,7 +167,7 @@ body::before {
 .pr-num {
   display:flex; align-items:center; justify-content:center;
   background:var(--gold-dim);
-  border-right:1px solid rgba(200,168,75,0.2);
+  border-right:1px solid rgba(232,99,10,0.15);
   font-family:'Bebas Neue', sans-serif;
   font-size:20px; color:var(--gold);
   padding:16px 0;
@@ -241,7 +215,7 @@ body::before {
 .lb-step {
   margin-top:8px; padding:8px 12px;
   background:var(--steel);
-  border-left:2px solid rgba(200,168,75,0.3);
+  border-left:2px solid rgba(232,99,10,0.2);
   font-family:'DM Mono', monospace;
   font-size:9px; color:var(--gold);
 }
@@ -295,7 +269,7 @@ body::before {
 .done-item {
   display:flex; align-items:flex-start; gap:12px;
   padding:10px 14px;
-  background:var(--ink);
+  background:var(--steel);
   border:1px solid var(--wire);
 }
 
@@ -315,7 +289,7 @@ body::before {
 /* FINAL STATEMENT */
 .final-statement {
   background:var(--forge);
-  border:1px solid rgba(200,168,75,0.3);
+  border:1px solid rgba(232,99,10,0.2);
   padding:32px 36px;
   margin:40px 0;
   text-align:center;
@@ -373,16 +347,25 @@ body::before {
   text-decoration: none;
   border: 1px solid;
 }
-.nav-link.prev { background: rgba(50,58,80,0.4); border-color: var(--wire-light); color: var(--fog); }
+.nav-link.prev { background: rgba(203,213,225,0.5); border-color: var(--wire-light); color: var(--fog); }
 .nav-link.prev:hover { color: var(--white); }
-.nav-link.next { background: var(--amber-dim); border-color: rgba(201,125,10,0.3); color: var(--amber-hot); }
+.nav-link.next { background: var(--amber-dim); border-color: rgba(232,99,10,0.2); color: var(--amber-hot); }
 
-.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--gold-dim); border:1px solid rgba(200,168,75,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--gold-dim); border:1px solid rgba(232,99,10,0.2); font-family:'DM Mono', monospace; font-size:10px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
 
 .nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
-.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(50,58,80,0.3);}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
 .nav-prev:hover{color:var(--white);}
-.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid;color:#e8920f;background:rgba(201,125,10,0.12);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#e8920f;background:rgba(232,99,10,0.07);}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
+.nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
 
 
 .jump-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
@@ -394,7 +377,7 @@ body::before {
 
 .measure-stack{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
 .measure-card{display:grid;grid-template-columns:56px 1fr;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;}
-.measure-num{background:rgba(200,168,75,0.08);border-right:1px solid rgba(200,168,75,0.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);}
+.measure-num{background:rgba(200,168,75,0.08);border-right:1px solid rgba(232,99,10,0.15);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);}
 .measure-content{padding:16px 20px;}
 .measure-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:2px;}
 .measure-abbr{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--gold);margin-bottom:8px;}
@@ -404,7 +387,20 @@ body::before {
 </style>
 </head>
 <body>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#7a8299;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../workshop-playbook.html">Workshop</a></li>
+      <li><a href="../escalation-protocol.html">Escalation</a></li>
+    </ul>
+    <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
+  </div>
+</nav>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
