@@ -4,272 +4,1019 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="VAF·SA is a practical solution architecture framework for stalled, unclear, politically difficult, vendor-heavy, or under-documented engagements. Six modules. Two pillars. One loop.">
-<title>VAF·SA — Velocity Architecture Framework · Solution Architecture</title>
+<title>VAF·SA — Solution Architecture Practitioner Framework</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
 :root {
-  --ink:#0c0d10; --forge:#13151a; --steel:#1a1e28; --wire:#252b3a; --wire-light:#323a50;
-  --amber:#c97d0a; --amber-hot:#e8920f; --cold:#3d8fb5; --cold-light:#5aafd4;
-  --signal:#c45228; --green:#2e9e68; --green-light:#4aba84;
-  --m1:#c97d0a; --m2:#3d8fb5; --m3:#2e9e68; --m4:#7c5cbf; --m5:#c45228; --m6:#c8a84b;
-  --fog:#7a8299; --mist:#a8b0c4; --ghost:#d0d6e4; --white:#eef0f5;
+  --page:    #F8FAFC;
+  --panel:   #FFFFFF;
+  --alt:     #F1F5F9;
+  --ink:     #0F172A;
+  --body:    #334155;
+  --muted:   #64748B;
+  --border:  #E2E8F0;
+  --strong:  #CBD5E1;
+  --accent:  #E8630A;
+  --accentd: #C24F06;
+  --abg:     rgba(232,99,10,0.08);
+  --aborder: rgba(232,99,10,0.22);
+  --navy:    #1E3A5F;
+  --blue:    #2563EB;
+  --bbg:     rgba(37,99,235,0.08);
+  --bborder: rgba(37,99,235,0.22);
+
+  --m1:#D97706; --m1b:rgba(217,119,6,0.08); --m1e:rgba(217,119,6,0.22);
+  --m2:#2563EB; --m2b:rgba(37,99,235,0.08); --m2e:rgba(37,99,235,0.22);
+  --m3:#16A34A; --m3b:rgba(22,163,74,0.08); --m3e:rgba(22,163,74,0.22);
+  --m4:#7C3AED; --m4b:rgba(124,58,237,0.08); --m4e:rgba(124,58,237,0.22);
+  --m5:#EA580C; --m5b:rgba(234,88,12,0.08); --m5e:rgba(234,88,12,0.22);
+  --m6:#B45309; --m6b:rgba(180,83,9,0.08); --m6e:rgba(180,83,9,0.22);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--ink);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(61,143,181,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(61,143,181,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
-.page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:56px 32px 96px;}
 
-/* HERO */
-.hero{margin-bottom:48px;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;color:var(--amber);text-transform:uppercase;margin-bottom:16px;}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,112px);letter-spacing:0.03em;line-height:0.88;margin-bottom:20px;}
-.hero-title .vaf{color:var(--amber);}
-.hero-title .sa{color:var(--white);}
-.hero-title .sub{display:block;font-size:clamp(18px,3vw,32px);color:var(--fog);letter-spacing:0.08em;margin-top:8px;}
-.hero-strip{display:flex;gap:4px;height:3px;max-width:400px;margin-bottom:24px;}
-.hero-strip div{flex:1;}
-.hero-positioning{font-size:15px;color:var(--ghost);line-height:1.7;max-width:680px;margin-bottom:10px;}
-.hero-positioning strong{color:var(--white);}
-.hero-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);line-height:1.85;max-width:620px;margin-bottom:32px;}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
-/* CTAS */
-.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:52px;}
-.cta-btn{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;padding:12px 22px;border:1px solid var(--amber);color:var(--amber);background:rgba(201,125,10,0.08);transition:background 0.15s,color 0.15s;}
-.cta-btn:hover{background:rgba(201,125,10,0.18);color:var(--amber-hot);}
-.cta-btn-sec{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;padding:12px 22px;border:1px solid var(--wire-light);color:var(--mist);background:transparent;transition:border-color 0.15s,color 0.15s;}
-.cta-btn-sec:hover{border-color:var(--fog);color:var(--white);}
+body {
+  background: var(--page);
+  color: var(--body);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
 
-/* SECTION LABELS */
-.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--wire);}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* PILLARS */
-.pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:52px;}
-@media(max-width:480px){.pillars{grid-template-columns:1fr;}}
-.pillar{background:var(--forge);border:1px solid var(--wire);padding:20px 22px;}
-.pillar-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;}
-.pillar:nth-child(1) .pillar-label{color:var(--amber);}
-.pillar:nth-child(2) .pillar-label{color:var(--cold-light);}
-.pillar-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);margin-bottom:8px;}
-.pillar-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.75;}
+/* ── NAV ─────────────────────────────────── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(15,23,42,0.07);
+}
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-brand:hover { text-decoration: none; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
 
-/* WHO THIS IS FOR */
-.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:52px;}
-@media(max-width:520px){.who-grid{grid-template-columns:1fr;}}
-.who-card{background:var(--forge);border:1px solid var(--wire);border-left:2px solid var(--cold);padding:16px 18px;}
-.who-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:5px;}
-.who-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.75;}
+/* ── PAGE ────────────────────────────────── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+}
 
-/* WHEN TO USE */
-.when-list{display:flex;flex-direction:column;gap:5px;margin-bottom:52px;}
-.when-item{display:grid;grid-template-columns:20px 1fr;gap:14px;padding:12px 16px;background:var(--forge);border:1px solid var(--wire);align-items:start;}
-.when-check{font-family:'DM Mono',monospace;font-size:11px;color:var(--green-light);padding-top:1px;}
-.when-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);line-height:1.65;}
-.when-text strong{color:var(--white);}
+/* ── HERO ────────────────────────────────── */
+.hero { margin-bottom: 72px; }
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(54px, 9.5vw, 100px);
+  letter-spacing: 0.03em;
+  line-height: 0.9;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.hero-title .accent { color: var(--accent); }
+.hero-subtitle {
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 400;
+  color: var(--body);
+  max-width: 720px;
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+.hero-strip {
+  display: flex;
+  gap: 4px;
+  height: 3px;
+  max-width: 360px;
+  margin-bottom: 22px;
+}
+.hero-strip div { flex: 1; }
+.hero-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  background: var(--alt);
+  border: 1px solid var(--border);
+  color: var(--body);
+  border-radius: 2px;
+}
+.badge-accent {
+  background: var(--abg);
+  border-color: var(--aborder);
+  color: var(--accentd);
+}
 
-/* START HERE PATHWAY */
-.pathway{background:var(--steel);border:1px solid var(--wire);padding:24px 28px;margin-bottom:52px;}
-.pathway-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
-.pathway-steps{display:flex;flex-direction:column;gap:0;}
-.pathway-step{display:grid;grid-template-columns:40px 1fr;gap:0;border-bottom:1px solid var(--wire);}
-.pathway-step:last-child{border-bottom:none;}
-.ps-num{display:flex;align-items:center;justify-content:center;border-right:1px solid var(--wire);padding:16px 0;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--amber);}
-.ps-body{padding:14px 18px;}
-.ps-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:3px;}
-.ps-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.65;}
-.ps-link{font-family:'DM Mono',monospace;font-size:9px;color:var(--amber);text-decoration:none;display:inline-block;margin-top:5px;}
-.ps-link:hover{color:var(--amber-hot);}
+/* ── CTAS ────────────────────────────────── */
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.cta-primary {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+.cta-primary:hover { background: var(--accentd); color: #fff; text-decoration: none; }
+.cta-secondary {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--strong);
+  border-radius: 2px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.cta-secondary:hover { border-color: var(--muted); color: var(--ink); text-decoration: none; }
 
-/* MODULES */
-.modules-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:52px;}
-.module-link{display:grid;grid-template-columns:64px 1fr auto;gap:0;background:var(--forge);border:1px solid var(--wire);overflow:hidden;text-decoration:none;transition:border-color 0.15s;}
-.module-link:hover{border-color:var(--wire-light);}
-.ml-num{display:flex;align-items:center;justify-content:center;border-right:1px solid var(--wire);padding:20px 0;font-family:'Bebas Neue',sans-serif;font-size:24px;}
-.module-link:nth-child(1) .ml-num{background:rgba(201,125,10,0.08);color:var(--m1);}
-.module-link:nth-child(2) .ml-num{background:rgba(61,143,181,0.08);color:var(--m2);}
-.module-link:nth-child(3) .ml-num{background:rgba(46,158,104,0.08);color:var(--m3);}
-.module-link:nth-child(4) .ml-num{background:rgba(124,92,191,0.08);color:var(--m4);}
-.module-link:nth-child(5) .ml-num{background:rgba(196,82,40,0.08);color:var(--m5);}
-.module-link:nth-child(6) .ml-num{background:rgba(200,168,75,0.08);color:var(--m6);}
-.ml-body{padding:16px 20px;}
-.ml-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--white);margin-bottom:3px;}
-.ml-desc{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);}
-.ml-arrow{display:flex;align-items:center;padding:0 20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--wire-light);}
+/* ── SECTION STRUCTURE ───────────────────── */
+.section { margin-bottom: 68px; }
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.section-intro {
+  font-size: 14px;
+  color: var(--body);
+  max-width: 720px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
 
-/* WORKED EXAMPLE FEATURE */
-.feature-block{background:var(--steel);border:1px solid var(--wire);border-left:3px solid var(--m6);padding:24px 28px;margin-bottom:52px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;}
-@media(max-width:560px){.feature-block{grid-template-columns:1fr;gap:16px;}}
-.fb-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.25em;color:var(--m6);text-transform:uppercase;margin-bottom:8px;}
-.fb-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);margin-bottom:8px;}
-.fb-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.8;margin-bottom:12px;}
-.fb-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.fb-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;padding:4px 10px;border:1px solid var(--wire-light);color:var(--fog);}
-.fb-link{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;padding:12px 20px;border:1px solid var(--m6);color:var(--m6);background:rgba(200,168,75,0.08);white-space:nowrap;transition:background 0.15s;}
-.fb-link:hover{background:rgba(200,168,75,0.18);}
+/* ── FRAMEWORK CARD ──────────────────────── */
+.framework-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 26px 30px;
+}
+.framework-card p { color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+.framework-card p:last-child { margin-bottom: 0; }
+.fwk-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+.fwk-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.5;
+}
+.fwk-list li::before {
+  content: '→';
+  color: var(--accent);
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 
-/* ARTEFACTS */
-.artefacts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:52px;}
-@media(max-width:620px){.artefacts-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:360px){.artefacts-grid{grid-template-columns:1fr;}}
-.artefact-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--m4);padding:14px 16px;}
-.art-abbr{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--m4);text-transform:uppercase;margin-bottom:6px;}
-.art-name{font-weight:600;font-size:11px;color:var(--white);margin-bottom:5px;}
-.art-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.65;}
-.art-ref{border-top-color:var(--cold);}
-.art-ref .art-abbr{color:var(--cold-light);}
-.art-ref a{color:var(--cold-light);text-decoration:none;}
-.art-ref a:hover{color:var(--white);}
+/* ── PILLARS ─────────────────────────────── */
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:540px) { .pillars { grid-template-columns: 1fr; } }
+.pillar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 24px 26px;
+}
+.pillar-1 { border-top: 3px solid var(--accent); }
+.pillar-2 { border-top: 3px solid var(--blue); }
+.pillar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pillar-1 .pillar-label { color: var(--accent); }
+.pillar-2 .pillar-label { color: var(--blue); }
+.pillar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.pillar-body { font-size: 13px; color: var(--body); line-height: 1.7; }
 
-/* ARCHETYPES */
-.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:52px;}
-@media(max-width:480px){.arch-grid{grid-template-columns:1fr;}}
-.arch-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
-.arch-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--wire-light);line-height:1;margin-bottom:4px;}
-.arch-name{font-weight:600;font-size:12px;color:var(--white);margin-bottom:6px;}
-.arch-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.75;}
+/* ── PRACTITIONER LOOP ───────────────────── */
+.loop-track {
+  display: flex;
+  align-items: stretch;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.loop-step {
+  flex: 1;
+  min-width: 100px;
+  padding: 18px 12px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.loop-step:last-child { border-right: none; }
+.loop-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+.loop-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.loop-arrow {
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 2px;
+}
+.loop-note {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 640px;
+}
 
-/* PRINCIPLES */
-.prin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:52px;}
-@media(max-width:600px){.prin-grid{grid-template-columns:1fr 1fr;}}
-.prin-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--amber);padding:14px 16px;}
-.prin-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(201,125,10,0.2);line-height:1;margin-bottom:4px;}
-.prin-title{font-weight:600;font-size:11px;color:var(--amber-hot);margin-bottom:4px;}
-.prin-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.65;}
+/* ── MODULES ─────────────────────────────── */
+.note-box {
+  background: var(--abg);
+  border: 1px solid var(--aborder);
+  padding: 13px 20px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--body);
+  line-height: 1.6;
+}
+.note-box strong { color: var(--ink); }
 
-/* CREDIBILITY */
-.credibility{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px;}
-@media(max-width:540px){.credibility{grid-template-columns:1fr;}}
-.cred-card{background:var(--forge);border:1px solid var(--wire);padding:18px;}
-.cred-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(201,125,10,0.25);line-height:1;margin-bottom:8px;}
-.cred-title{font-weight:600;font-size:11px;color:var(--white);margin-bottom:5px;}
-.cred-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.65;}
+.modules-grid { display: flex; flex-direction: column; gap: 6px; }
+.module-link {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.module-link:hover { border-color: var(--strong); box-shadow: 0 2px 8px rgba(15,23,42,0.07); text-decoration: none; }
+.ml-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+}
+.module-link:nth-child(1) .ml-num { background:var(--m1b); color:var(--m1); border-right-color:var(--m1e); }
+.module-link:nth-child(2) .ml-num { background:var(--m2b); color:var(--m2); border-right-color:var(--m2e); }
+.module-link:nth-child(3) .ml-num { background:var(--m3b); color:var(--m3); border-right-color:var(--m3e); }
+.module-link:nth-child(4) .ml-num { background:var(--m4b); color:var(--m4); border-right-color:var(--m4e); }
+.module-link:nth-child(5) .ml-num { background:var(--m5b); color:var(--m5); border-right-color:var(--m5e); }
+.module-link:nth-child(6) .ml-num { background:var(--m6b); color:var(--m6); border-right-color:var(--m6e); }
+.ml-body { padding: 14px 20px; }
+.ml-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.ml-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.ml-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  font-size: 14px;
+  color: var(--border);
+  transition: color 0.15s;
+}
+.module-link:hover .ml-arrow { color: var(--accent); }
 
-/* DISCLAIMER */
-.disclaimer{background:var(--forge);border:1px solid var(--wire);border-left:2px solid var(--wire-light);padding:16px 20px;margin-bottom:52px;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.8;}
-.disclaimer strong{color:var(--mist);}
+/* ── TOOLKIT ─────────────────────────────── */
+.toolkit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:540px) { .toolkit-grid { grid-template-columns: 1fr; } }
+.toolkit-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.toolkit-card:hover { border-color: var(--strong); box-shadow: 0 2px 8px rgba(15,23,42,0.07); text-decoration: none; }
+.toolkit-abbr {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.toolkit-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+.toolkit-purpose { font-size: 12px; color: var(--muted); line-height: 1.6; flex: 1; }
+.toolkit-when {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 4px;
+  line-height: 1.5;
+}
 
-/* FOOTER */
-.footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
-.footer-brand span{color:var(--amber);}
-.footer-org{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);margin-top:4px;}
-.footer-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
-.footer-link{font-family:'DM Mono',monospace;font-size:9px;color:var(--wire-light);text-decoration:none;letter-spacing:0.08em;transition:color 0.15s;}
-.footer-link:hover{color:var(--fog);}
-.footer-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--wire-light);letter-spacing:0.08em;text-align:right;line-height:1.8;}
+/* ── PATHWAY ─────────────────────────────── */
+.pathway {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.pathway-header {
+  padding: 16px 24px;
+  background: var(--alt);
+  border-bottom: 1px solid var(--border);
+}
+.pathway-title { font-size: 16px; font-weight: 700; color: var(--ink); }
+.pathway-step {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.pathway-step:last-child { border-bottom: none; }
+.ps-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--accent);
+  background: var(--abg);
+}
+.ps-body { padding: 14px 20px; }
+.ps-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.ps-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 6px; }
+.ps-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.ps-link:hover { text-decoration: underline; }
+
+/* ── ARCHETYPES ──────────────────────────── */
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:540px) { .arch-grid { grid-template-columns: 1fr; } }
+.arch-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px 22px;
+}
+.arch-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.arch-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.arch-rows { display: flex; flex-direction: column; gap: 10px; }
+.arch-row { display: grid; grid-template-columns: 80px 1fr; gap: 8px; font-size: 12px; }
+.arch-key {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 2px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.arch-val { color: var(--body); line-height: 1.55; }
+.arch-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.arch-link:hover { text-decoration: underline; }
+
+/* ── WHO / WHEN ──────────────────────────── */
+.who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:520px) { .who-grid { grid-template-columns: 1fr; } }
+.who-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  padding: 16px 18px;
+}
+.who-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.who-body { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+.when-list { display: flex; flex-direction: column; gap: 5px; }
+.when-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 14px;
+  padding: 11px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  align-items: start;
+}
+.when-check { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); padding-top: 2px; }
+.when-text { font-size: 13px; color: var(--body); line-height: 1.6; }
+.when-text strong { color: var(--ink); font-weight: 600; }
+
+/* ── ARTEFACTS ───────────────────────────── */
+.artefacts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+@media(max-width:620px) { .artefacts-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:360px) { .artefacts-grid { grid-template-columns: 1fr; } }
+.artefact-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--m4);
+  padding: 14px 16px;
+}
+.art-abbr {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--m4);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.art-name { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.art-body { font-size: 11px; color: var(--muted); line-height: 1.65; }
+.art-ref { border-top-color: var(--blue); }
+.art-ref .art-abbr { color: var(--blue); }
+.art-ref a { color: var(--blue); }
+.art-ref a:hover { color: var(--ink); }
+
+/* ── FEATURE BLOCK ───────────────────────── */
+.feature-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--m6);
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+@media(max-width:560px) { .feature-block { grid-template-columns: 1fr; gap: 16px; } }
+.fb-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--m6);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.fb-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.fb-body { font-size: 13px; color: var(--body); line-height: 1.75; margin-bottom: 12px; }
+.fb-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.fb-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.fb-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #fff;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.fb-link:hover { background: var(--accentd); color: #fff; text-decoration: none; }
+
+/* ── PRINCIPLES ──────────────────────────── */
+.prin-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+@media(max-width:600px) { .prin-grid { grid-template-columns: 1fr 1fr; } }
+.prin-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  padding: 16px;
+}
+.prin-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: rgba(232,99,10,0.18);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.prin-title { font-size: 12px; font-weight: 700; color: var(--accentd); margin-bottom: 5px; }
+.prin-body { font-size: 11px; color: var(--muted); line-height: 1.65; }
+
+/* ── ECOSYSTEM ───────────────────────────── */
+.ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media(max-width:560px) { .ecosystem-grid { grid-template-columns: 1fr; } }
+.eco-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.eco-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eco-label.current { color: var(--accent); }
+.eco-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+.eco-desc { font-size: 12px; color: var(--muted); line-height: 1.6; flex: 1; }
+.eco-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.eco-link:hover { text-decoration: underline; }
+
+/* ── ABOUT ───────────────────────────────── */
+.about-band {
+  background: var(--navy);
+  padding: 36px 40px;
+  margin-bottom: 68px;
+}
+.about-band .section-label { color: rgba(255,255,255,0.45); }
+.about-band .section-label::after { background: rgba(255,255,255,0.12); }
+.about-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+  max-width: 700px;
+}
+.about-text strong { color: #fff; }
+.about-text p + p { margin-top: 14px; }
+
+/* ── CREDIBILITY ─────────────────────────── */
+.credibility { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+@media(max-width:540px) { .credibility { grid-template-columns: 1fr; } }
+.cred-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+.cred-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: rgba(232,99,10,0.18);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.cred-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.cred-body { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+/* ── DISCLAIMER ──────────────────────────── */
+.disclaimer {
+  background: var(--alt);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  margin-bottom: 56px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.disclaimer strong { color: var(--body); }
+
+/* ── FOOTER ──────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.footer-brand span { color: var(--accent); }
+.footer-org {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+.footer-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+.footer-link:hover { color: var(--accent); text-decoration: none; }
+.footer-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media(max-width:680px) {
+  .page { padding: 40px 20px 72px; }
+  .site-nav .nav-links { display: none; }
+  .about-band { padding: 28px 24px; }
+}
+@media(max-width:420px) {
+  .hero-badges { gap: 6px; }
+  .loop-track { flex-direction: column; }
+  .loop-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .loop-step:last-child { border-bottom: none; }
+}
 </style>
 </head>
 <body>
+
+<!-- ── NAV ───────────────────────────────── -->
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#hero">VAF·SA</a>
+    <ul class="nav-links">
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#pillars">Pillars</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#archetypes">Archetypes</a></li>
+      <li><a href="#ecosystem">Ecosystem</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="page">
 
-<!-- HERO -->
-<div class="hero">
+<!-- ── HERO ──────────────────────────────── -->
+<section class="hero" id="hero">
   <div class="hero-eyebrow">Velocity Architecture Framework™ · Solution Architecture</div>
-  <div class="hero-title">
-    <span class="vaf">VAF·SA</span>
-    <span class="sub">The Practitioner Framework</span>
-  </div>
+  <div class="hero-title"><span class="accent">VAF·SA</span></div>
+  <p class="hero-subtitle">
+    Solution Architecture Practitioner Framework — a practical field method for architects who need to read the environment, extract the truth, design the right artefacts, and communicate under pressure.
+  </p>
   <div class="hero-strip">
-    <div style="background:#c97d0a"></div>
-    <div style="background:#3d8fb5"></div>
-    <div style="background:#2e9e68"></div>
-    <div style="background:#7c5cbf"></div>
-    <div style="background:#c45228"></div>
-    <div style="background:#c8a84b"></div>
+    <div style="background:#D97706"></div>
+    <div style="background:#2563EB"></div>
+    <div style="background:#16A34A"></div>
+    <div style="background:#7C3AED"></div>
+    <div style="background:#EA580C"></div>
+    <div style="background:#B45309"></div>
   </div>
-  <p class="hero-positioning">
-    A practical solution architecture framework for <strong>stalled, unclear, politically difficult,
-    vendor-heavy, or under-documented engagements.</strong>
+  <p class="hero-tagline">Six modules. Two pillars. One loop.</p>
+  <div class="hero-badges">
+    <span class="badge badge-accent">Practitioner field method</span>
+    <span class="badge">Engagement diagnostics</span>
+    <span class="badge">Architecture artefact strategy</span>
+    <span class="badge">Communication under pressure</span>
+    <span class="badge">Built from delivery reality</span>
+  </div>
+  <div class="cta-row">
+    <a class="cta-primary" href="modules/module-01-orientation.html">Explore the six modules</a>
+    <a class="cta-secondary" href="preface.html">Start with the Preface</a>
+    <a class="cta-secondary" href="https://zencloudau.github.io/velocity-architecture/" target="_blank" rel="noopener">Velocity Architecture Framework ↗</a>
+  </div>
+</section>
+
+<!-- ── WHAT VAF·SA IS ─────────────────────── -->
+<section class="section" id="framework">
+  <div class="section-label">Framework</div>
+  <h2 class="section-title">What VAF·SA Is</h2>
+  <p class="section-intro">
+    VAF·SA is a practitioner framework for solution architects operating in complex, unclear, or politically difficult delivery environments. It provides the method — not just the models.
   </p>
-  <p class="hero-sub">
-    Helps architects orient quickly, extract real information, design under pressure,<br>
-    and produce decision-ready artefacts before momentum is lost.
+  <div class="framework-card">
+    <p>
+      Most architecture frameworks assume the engagement is clean: documentation exists, stakeholders are cooperative, and the problem is well-defined. VAF·SA assumes the opposite. It was built for the environments architects actually encounter — stalled programs, vendor-controlled information flows, inherited engagements, and situations where producing the wrong artefact wastes everyone's time.
+    </p>
+    <p>VAF·SA helps architects:</p>
+    <ul class="fwk-list">
+      <li>Understand the engagement context before producing anything</li>
+      <li>Identify missing information and diagnose why it is missing</li>
+      <li>Diagnose stakeholder conditions, delivery constraints, and risk</li>
+      <li>Select and shape the minimum useful architecture artefact for the situation</li>
+      <li>Communicate decisions clearly to every audience, at the right altitude</li>
+      <li>Avoid producing documents that do not change outcomes</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── PILLARS ─────────────────────────────── -->
+<section class="section" id="pillars">
+  <div class="section-label">Two Pillars</div>
+  <h2 class="section-title">How Practitioners Operate</h2>
+  <p class="section-intro">VAF·SA is organised around two foundational operating disciplines. Both must be active simultaneously.</p>
+  <div class="pillars">
+    <div class="pillar pillar-1">
+      <div class="pillar-label">Pillar One</div>
+      <div class="pillar-title">Read the Environment</div>
+      <p class="pillar-body">
+        Diagnose the engagement before producing artefacts. Establish situational awareness before first engagement contact. Know which archetype you are in before the first meeting. Understand what is absent as clearly as what is present. The quality of your output is determined by the quality of your preparation.
+      </p>
+    </div>
+    <div class="pillar pillar-2">
+      <div class="pillar-title" style="padding-top:20px;">Produce the Right Artefact</div>
+      <div class="pillar-label" style="order:-1;">Pillar Two</div>
+      <p class="pillar-body">
+        Select and shape the minimum useful architecture artefact for the situation, audience, and decision. Speak plainly to every room. Never use jargon to seem credible. Hold the position without making it personal. Let the evidence speak. You just place it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRACTITIONER LOOP ──────────────────── -->
+<section class="section">
+  <div class="section-label">The Practitioner Loop</div>
+  <h2 class="section-title">Iterative, Not Sequential</h2>
+  <p class="section-intro">
+    VAF·SA is not a one-time document process. Each engagement cycle runs through six disciplines and loops back as conditions change.
   </p>
-</div>
+  <div class="loop-track">
+    <div class="loop-step">
+      <div class="loop-num">01</div>
+      <div class="loop-name">Observe</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-num">02</div>
+      <div class="loop-name">Diagnose</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-num">03</div>
+      <div class="loop-name">Structure</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-num">04</div>
+      <div class="loop-name">Produce</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-num">05</div>
+      <div class="loop-name">Communicate</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-num">06</div>
+      <div class="loop-name">Adjust</div>
+      <div class="loop-arrow">↺</div>
+    </div>
+  </div>
+  <p class="loop-note">
+    Each step maps to a VAF·SA module. The loop continues until the engagement is complete or the practitioner discharges the work. VAF·SA defines what "complete" means.
+  </p>
+</section>
 
-<!-- CTAS -->
-<div class="cta-row">
-  <a class="cta-btn" href="preface.html">Start with the Preface</a>
-  <a class="cta-btn" href="modules/module-01-orientation.html">Use the Framework</a>
-  <a class="cta-btn-sec" href="worked-example.html">View the Worked Example</a>
-</div>
+<!-- ── SIX MODULES ────────────────────────── -->
+<section class="section" id="modules">
+  <div class="section-label">Six Modules</div>
+  <h2 class="section-title">The Module Structure</h2>
+  <p class="section-intro">
+    Each module is a discrete practitioner discipline. Work them sequentially on first use. Return to specific modules as engagement conditions change.
+  </p>
+  <div class="note-box">
+    <strong>Before you begin:</strong> Read the Preface and Lexicon first. Both are in the Practitioner Toolkit below. The modules assume both have been read.
+  </div>
+  <div class="modules-grid">
+    <a class="module-link" href="modules/module-01-orientation.html">
+      <div class="ml-num">01</div>
+      <div class="ml-body">
+        <div class="ml-name">Orientation</div>
+        <div class="ml-desc">Read the environment before anyone briefs you · Four engagement archetypes · Five intake questions · Document immersion protocol</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+    <a class="module-link" href="modules/module-02-intelligence.html">
+      <div class="ml-num">02</div>
+      <div class="ml-body">
+        <div class="ml-name">Intelligence</div>
+        <div class="ml-desc">Extract what you need from people who may not give it · Ten practitioner questions · Vendor interrogation · Gap mapping</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+    <a class="module-link" href="modules/module-03-design.html">
+      <div class="ml-num">03</div>
+      <div class="ml-body">
+        <div class="ml-name">Design</div>
+        <div class="ml-desc">Design instrument selection · Context diagram framework · Heat map forensic analysis · Three-altitude design stack · Security and observability</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+    <a class="module-link" href="modules/module-04-artefacts.html">
+      <div class="ml-num">04</div>
+      <div class="ml-body">
+        <div class="ml-name">Artefacts</div>
+        <div class="ml-desc">Five practitioner artefacts · CIS · Architecture on a Page · Heat Map · ADR · Stakeholder Concern Register</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+    <a class="module-link" href="modules/module-05-communication.html">
+      <div class="ml-num">05</div>
+      <div class="ml-body">
+        <div class="ml-name">Communication</div>
+        <div class="ml-desc">Five audience categories · Formal concern escalation · Position maintenance under pressure · Professional conduct standards</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+    <a class="module-link" href="modules/module-06-velocity-loop.html">
+      <div class="ml-num">06</div>
+      <div class="ml-body">
+        <div class="ml-name">The Velocity Loop</div>
+        <div class="ml-desc">Read · Extract · Design · Deliver · Operating without support · Engagement completion criteria</div>
+      </div>
+      <div class="ml-arrow">→</div>
+    </a>
+  </div>
+</section>
 
-<!-- PILLARS -->
-<div class="section-label">Two Pillars</div>
-<div class="pillars">
-  <div class="pillar">
-    <div class="pillar-label">Pillar One</div>
-    <div class="pillar-title">How to Think</div>
-    <div class="pillar-body">Establishing situational awareness before first engagement contact. Know what archetype you are in before the first meeting. Understand what is absent as clearly as what is present. Prepare so thoroughly that calm becomes inevitable.</div>
+<!-- ── PRACTITIONER TOOLKIT ───────────────── -->
+<section class="section" id="toolkit">
+  <div class="section-label">Practitioner Toolkit</div>
+  <h2 class="section-title">Supplementary Resources</h2>
+  <p class="section-intro">Five reference documents that support and extend the six modules. Read the Preface and Lexicon before starting Module 01.</p>
+  <div class="toolkit-grid">
+    <a class="toolkit-card" href="preface.html">
+      <div class="toolkit-abbr">Preface</div>
+      <div class="toolkit-name">Influence Without Authority</div>
+      <div class="toolkit-purpose">Establishes the operating philosophy for VAF·SA. Both pillars. The mental process. The practitioner's relationship to outcomes, authority, and institutional obstruction.</div>
+      <div class="toolkit-when">When to use: Read before Module 01. Required foundation for all modules.</div>
+    </a>
+    <a class="toolkit-card" href="lexicon.html">
+      <div class="toolkit-abbr">Lexicon</div>
+      <div class="toolkit-name">The VAF·SA Lexicon</div>
+      <div class="toolkit-purpose">Every VAF·SA term defined precisely. Decision Altitude. Governance Drag. The Blank Cell. The Four Archetypes. The Velocity Loop. No ambiguity.</div>
+      <div class="toolkit-when">When to use: Read before Module 01. Reference throughout engagement.</div>
+    </a>
+    <a class="toolkit-card" href="workshop-playbook.html">
+      <div class="toolkit-abbr">Workshop Playbook</div>
+      <div class="toolkit-name">Workshop Playbook</div>
+      <div class="toolkit-purpose">How to design the room. The opening statement. Conflict management in technical workshops. The E-stop protocol. What leaves the room and what does not.</div>
+      <div class="toolkit-when">When to use: Silo Engagement archetype. Facilitating cross-team alignment workshops.</div>
+    </a>
+    <a class="toolkit-card" href="escalation-protocol.html">
+      <div class="toolkit-abbr">Escalation Protocol</div>
+      <div class="toolkit-name">Escalation Protocol + Time Guidance</div>
+      <div class="toolkit-purpose">Three escalation layers. The boundary statement. Time allocation per module. Pattern locking — when to stop and escalate rather than continue.</div>
+      <div class="toolkit-when">When to use: Engagement is stalled, obstructed, or generating no movement after two cycles.</div>
+    </a>
+    <a class="toolkit-card" href="worked-example.html">
+      <div class="toolkit-abbr">Worked Example</div>
+      <div class="toolkit-name">The Authority Engagement</div>
+      <div class="toolkit-purpose">All six VAF·SA modules applied to one complete real engagement. NDA-clean. Real constraints, real obstruction, real outcome. Delivered in 90 days.</div>
+      <div class="toolkit-when">When to use: After reading the Preface and Lexicon, before starting a live engagement.</div>
+    </a>
   </div>
-  <div class="pillar">
-    <div class="pillar-label">Pillar Two</div>
-    <div class="pillar-title">How to Talk</div>
-    <div class="pillar-body">Speak plainly to every room. Ask the question you already know the shape of. Never use jargon to seem credible. Hold the position without making it personal. Let the evidence speak. You just place it.</div>
-  </div>
-</div>
+</section>
 
-<!-- WHO THIS IS FOR -->
-<div class="section-label">Who This Is For</div>
-<div class="who-grid">
-  <div class="who-card">
-    <div class="who-title">Solution Architects</div>
-    <div class="who-body">Engaged mid-program with no documentation, competing narratives, and a delivery deadline that doesn't move.</div>
-  </div>
-  <div class="who-card">
-    <div class="who-title">Enterprise Architects</div>
-    <div class="who-body">Parachuted into troubled programs where previous attempts have failed and no one will say why.</div>
-  </div>
-  <div class="who-card">
-    <div class="who-title">Consulting Professionals</div>
-    <div class="who-body">Navigating vendor-controlled environments where disclosure is managed and decisions are being made without you.</div>
-  </div>
-  <div class="who-card">
-    <div class="who-title">Technical Leads</div>
-    <div class="who-body">Managing politically difficult stakeholder landscapes where technical clarity is the only lever available.</div>
-  </div>
-</div>
-
-<!-- WHEN TO USE -->
-<div class="section-label">When to Use VAF·SA</div>
-<div class="when-list">
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>Engagement is stalled</strong> and no one can clearly articulate why progress has stopped.</div>
-  </div>
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>Vendor controls the information flow</strong> and full disclosure has not occurred.</div>
-  </div>
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>Documentation is absent or incomplete</strong> — you are designing from verbal briefings and assumptions.</div>
-  </div>
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>Political dynamics are preventing honest technical assessment</strong> from reaching decision-makers.</div>
-  </div>
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>You have inherited an under-specified engagement</strong> with time pressure and no structured handover.</div>
-  </div>
-  <div class="when-item">
-    <div class="when-check">+</div>
-    <div class="when-text"><strong>Clarity is required in weeks, not months</strong> — decision-makers need artefacts, not analysis.</div>
-  </div>
-</div>
-
-<!-- START HERE PATHWAY -->
-<div class="section-label">Start Here</div>
-<div class="pathway">
-  <div class="pathway-title">Recommended Entry Pathway</div>
-  <div class="pathway-steps">
+<!-- ── START HERE PATHWAY ─────────────────── -->
+<section class="section">
+  <div class="section-label">Entry Pathway</div>
+  <h2 class="section-title">Start Here</h2>
+  <p class="section-intro">If this is your first engagement with VAF·SA, follow this sequence.</p>
+  <div class="pathway">
+    <div class="pathway-header">
+      <div class="pathway-title">Recommended Entry Pathway</div>
+    </div>
     <div class="pathway-step">
       <div class="ps-num">1</div>
       <div class="ps-body">
         <div class="ps-title">Read the Preface — Influence Without Authority</div>
-        <div class="ps-desc">Establishes the operating philosophy. Both pillars. The mental process. Required before Module 1.</div>
-        <a class="ps-link" href="preface.html">Open Preface &rarr;</a>
+        <div class="ps-desc">Establishes the operating philosophy. Both pillars. The mental process. Required before Module 01.</div>
+        <a class="ps-link" href="preface.html">Open Preface →</a>
       </div>
     </div>
     <div class="pathway-step">
@@ -277,7 +1024,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="ps-body">
         <div class="ps-title">Read the Lexicon</div>
         <div class="ps-desc">Every term defined precisely. The four archetypes. Decision Altitude. Governance Drag. The Blank Cell.</div>
-        <a class="ps-link" href="lexicon.html">Open Lexicon &rarr;</a>
+        <a class="ps-link" href="lexicon.html">Open Lexicon →</a>
       </div>
     </div>
     <div class="pathway-step">
@@ -285,15 +1032,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="ps-body">
         <div class="ps-title">Identify Your Archetype — Module 01: Orientation</div>
         <div class="ps-desc">Four engagement patterns. Read the environment before your first meeting. Know what you are walking into.</div>
-        <a class="ps-link" href="modules/module-01-orientation.html">Module 01 &rarr;</a>
+        <a class="ps-link" href="modules/module-01-orientation.html">Open Module 01 →</a>
       </div>
     </div>
     <div class="pathway-step">
       <div class="ps-num">4</div>
       <div class="ps-body">
         <div class="ps-title">Work Modules 02–06 Sequentially</div>
-        <div class="ps-desc">Intelligence &rarr; Design &rarr; Artefacts &rarr; Communication &rarr; Velocity Loop. Produce artefacts as you go.</div>
-        <a class="ps-link" href="modules/module-02-intelligence.html">Continue from Module 02 &rarr;</a>
+        <div class="ps-desc">Intelligence → Design → Artefacts → Communication → Velocity Loop. Produce artefacts as you go.</div>
+        <a class="ps-link" href="modules/module-02-intelligence.html">Continue from Module 02 →</a>
       </div>
     </div>
     <div class="pathway-step">
@@ -301,246 +1048,330 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div class="ps-body">
         <div class="ps-title">Study the Worked Example</div>
         <div class="ps-desc">All six modules applied to one real engagement. NDA-clean. 90 days. Delivered.</div>
-        <a class="ps-link" href="worked-example.html">View Worked Example &rarr;</a>
+        <a class="ps-link" href="worked-example.html">View Worked Example →</a>
       </div>
     </div>
   </div>
+</section>
+
+<!-- ── ARCHETYPES ─────────────────────────── -->
+<section class="section" id="archetypes">
+  <div class="section-label">Engagement Diagnostics</div>
+  <h2 class="section-title">Four Engagement Archetypes</h2>
+  <p class="section-intro">
+    Before producing any artefact, identify which archetype you are operating in. The archetype determines the correct practitioner response. Module 01 covers archetype identification in detail.
+  </p>
+  <div class="arch-grid">
+    <div class="arch-card">
+      <div class="arch-num">Archetype 01</div>
+      <div class="arch-name">The Obfuscation Engagement</div>
+      <div class="arch-rows">
+        <div class="arch-row">
+          <div class="arch-key">Signal</div>
+          <div class="arch-val">Information exists but is being withheld. Vendor controls the disclosure timeline.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Meaning</div>
+          <div class="arch-val">Deliberate management of information flow to protect a position or vendor interest.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Response</div>
+          <div class="arch-val">Deploy the Heat Map. Every blank cell is a finding. Pattern analysis reveals what is being protected.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">See</div>
+          <div class="arch-val"><a class="arch-link" href="modules/module-02-intelligence.html">Module 02 — Intelligence →</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-num">Archetype 02</div>
+      <div class="arch-name">The Negligent Void</div>
+      <div class="arch-rows">
+        <div class="arch-row">
+          <div class="arch-key">Signal</div>
+          <div class="arch-val">No documentation. No data classification. No vendor alignment. The engagement exists on paper only.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Meaning</div>
+          <div class="arch-val">The architectural foundation was never built. Nothing has been done, not merely withheld.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Response</div>
+          <div class="arch-val">Begin from zero. Structure the environment before attempting to design within it.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">See</div>
+          <div class="arch-val"><a class="arch-link" href="modules/module-03-design.html">Module 03 — Design →</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-num">Archetype 03</div>
+      <div class="arch-name">The Institutional Paralysis</div>
+      <div class="arch-rows">
+        <div class="arch-row">
+          <div class="arch-key">Signal</div>
+          <div class="arch-val">Multiple prior attempts, different parties, no ownership. Budget spent. History withheld. Nothing delivered.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Meaning</div>
+          <div class="arch-val">Organisational friction has prevented completion. The problem is structural, not technical.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Response</div>
+          <div class="arch-val">Three months of immersion. Silence under pressure. Discharge the work. Escalate when the boundary is reached.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">See</div>
+          <div class="arch-val"><a class="arch-link" href="escalation-protocol.html">Escalation Protocol →</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-num">Archetype 04</div>
+      <div class="arch-name">The Silo Engagement</div>
+      <div class="arch-rows">
+        <div class="arch-row">
+          <div class="arch-key">Signal</div>
+          <div class="arch-val">Capability exists. The solution is achievable. The parties who need to collaborate have never shared a room.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Meaning</div>
+          <div class="arch-val">The block is structural and relational, not technical. The knowledge exists, but not in the same place.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">Response</div>
+          <div class="arch-val">The workshop is the solution. Design the room. Manage the opening. Do not let the right answer leave without a commitment.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-key">See</div>
+          <div class="arch-val"><a class="arch-link" href="workshop-playbook.html">Workshop Playbook →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO / WHEN ─────────────────────────── -->
+<section class="section">
+  <div class="section-label">Practitioners</div>
+  <h2 class="section-title">Who This Is For</h2>
+  <div class="who-grid" style="margin-bottom:32px;">
+    <div class="who-card">
+      <div class="who-title">Solution Architects</div>
+      <div class="who-body">Engaged mid-program with no documentation, competing narratives, and a delivery deadline that does not move.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-title">Enterprise Architects</div>
+      <div class="who-body">Parachuted into troubled programs where previous attempts have failed and no one will say why.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-title">Consulting Professionals</div>
+      <div class="who-body">Navigating vendor-controlled environments where disclosure is managed and decisions are being made without you.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-title">Technical Leads</div>
+      <div class="who-body">Managing politically difficult stakeholder landscapes where technical clarity is the only lever available.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Use Cases</div>
+  <h2 class="section-title" style="margin-bottom:20px;">When to Use VAF·SA</h2>
+  <div class="when-list">
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Joining a messy delivery engagement</strong> — mid-program, no handover, no documentation baseline.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Asked to produce artefacts without a clear problem</strong> — the brief is vague and the stakeholders disagree.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Unclear stakeholders or ownership</strong> — no one will confirm what they are responsible for.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Vendor controls the information flow</strong> and full disclosure has not occurred.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Political dynamics are blocking honest technical assessment</strong> from reaching decision-makers.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Preparing for architecture review</strong> — translating delivery pressure into governance-ready artefacts.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Rescuing a stalled solution design</strong> — multiple prior attempts, no completed output.</div>
+    </div>
+    <div class="when-item">
+      <div class="when-check">+</div>
+      <div class="when-text"><strong>Clarity is required in weeks, not months</strong> — decision-makers need artefacts, not analysis.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEMPLATES AND ARTEFACTS ────────────── -->
+<section class="section">
+  <div class="section-label">Templates and Artefacts</div>
+  <h2 class="section-title">The Five Practitioner Artefacts</h2>
+  <p class="section-intro">VAF·SA defines five minimum-useful artefacts. Each is designed to produce a decision, not a document.</p>
+  <div class="artefacts-grid">
+    <div class="artefact-card">
+      <div class="art-abbr">CIS</div>
+      <div class="art-name">Customer Impact Statement</div>
+      <div class="art-body">One-page business case for technical decisions. Translates architecture risk into business language decision-makers can act on.</div>
+    </div>
+    <div class="artefact-card">
+      <div class="art-abbr">AoaP</div>
+      <div class="art-name">Architecture on a Page</div>
+      <div class="art-body">The canonical context diagram. One page. No second page. Forces thinking to completion before committing.</div>
+    </div>
+    <div class="artefact-card">
+      <div class="art-abbr">HM</div>
+      <div class="art-name">Heat Map</div>
+      <div class="art-body">Forensic instrument for obfuscation engagements. Every blank cell is a finding. Pattern analysis across capability domains.</div>
+    </div>
+    <div class="artefact-card">
+      <div class="art-abbr">ADR</div>
+      <div class="art-name">Architecture Decision Record</div>
+      <div class="art-body">Decision-ready documentation. Context, options considered, rationale, consequences. Audit-grade record of intent.</div>
+    </div>
+    <div class="artefact-card">
+      <div class="art-abbr">SCR</div>
+      <div class="art-name">Stakeholder Concern Register</div>
+      <div class="art-body">Formal capture of concerns, owners, and resolution status. Creates accountability without requiring formal authority.</div>
+    </div>
+    <div class="artefact-card art-ref">
+      <div class="art-abbr">↑ M04</div>
+      <div class="art-name">Full Artefact Guidance</div>
+      <div class="art-body"><a href="modules/module-04-artefacts.html">Module 04</a> contains complete templates, worked examples, and production guidance for each artefact.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORKED EXAMPLE ─────────────────────── -->
+<section class="section">
+  <div class="section-label">The Worked Example</div>
+  <div class="feature-block">
+    <div>
+      <div class="fb-label">Case Study &nbsp;·&nbsp; NDA-Clean &nbsp;·&nbsp; Real Engagement</div>
+      <div class="fb-title">The Authority Engagement</div>
+      <div class="fb-body">All six VAF·SA modules applied to one complete engagement. No invented scenarios. A real program, real constraints, real obstruction, and a real outcome. Delivered in 90 days from initial engagement.</div>
+      <div class="fb-tags">
+        <span class="fb-tag">All 6 Modules</span>
+        <span class="fb-tag">90 Days</span>
+        <span class="fb-tag">NDA-Clean</span>
+        <span class="fb-tag">Delivered</span>
+      </div>
+    </div>
+    <a class="fb-link" href="worked-example.html">View Example →</a>
+  </div>
+</section>
+
+<!-- ── OPERATING PRINCIPLES ───────────────── -->
+<section class="section">
+  <div class="section-label">Operating Principles</div>
+  <h2 class="section-title">Four Operating Principles</h2>
+  <div class="prin-grid">
+    <div class="prin-card">
+      <div class="prin-num">I</div>
+      <div class="prin-title">No Process First</div>
+      <div class="prin-body">The framework is the vehicle. The outcome is the destination. Process never leads.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-num">II</div>
+      <div class="prin-title">Decision Altitude</div>
+      <div class="prin-body">Every decision at the right level. Business altitude for business decisions. Technical altitude for technical decisions.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-num">III</div>
+      <div class="prin-title">One Artefact</div>
+      <div class="prin-body">If it does not fit on one page, the thinking is not done. The second page is where incomplete thinking hides.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-num">IV</div>
+      <div class="prin-title">Velocity Over Volume</div>
+      <div class="prin-body">Insight delivered fast beats documentation delivered late. Always.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ECOSYSTEM ──────────────────────────── -->
+<section class="section" id="ecosystem">
+  <div class="section-label">The VAF Ecosystem</div>
+  <h2 class="section-title">Framework, Method, and Tooling</h2>
+  <p class="section-intro">VAF·SA is one component of a connected practitioner ecosystem. Each layer addresses a different level of the architecture discipline.</p>
+  <div class="ecosystem-grid">
+    <div class="eco-card">
+      <div class="eco-label current">You are here</div>
+      <div class="eco-name">VAF·SA</div>
+      <div class="eco-desc">Practitioner field method. Teaches the approach: read the environment, diagnose the engagement, produce the right artefact, communicate under pressure.</div>
+      <a class="eco-link" href="#">zencloudau.github.io/vaf-sa</a>
+    </div>
+    <div class="eco-card">
+      <div class="eco-label">Architecture Framework</div>
+      <div class="eco-name">Velocity Architecture Framework</div>
+      <div class="eco-desc">Broader architecture framework. Explains the structural models, governance patterns, and delivery architecture that VAF·SA practitioners operate within.</div>
+      <a class="eco-link" href="https://zencloudau.github.io/velocity-architecture/" target="_blank" rel="noopener">Open VAF ↗</a>
+    </div>
+    <div class="eco-card">
+      <div class="eco-label">AI-Assisted Tooling</div>
+      <div class="eco-name">VAF Agentic Architect</div>
+      <div class="eco-desc">Generates governance-ready architecture artefacts using the VAF methodology. Accelerates practitioner output without replacing practitioner judgement.</div>
+      <a class="eco-link" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Open Agentic Architect ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────── -->
+<div class="about-band" id="about">
+  <div class="section-label">About</div>
+  <div class="about-text">
+    <p>
+      <strong>VAF·SA is authored by Phil Myint</strong>, Global Enterprise Architect and founder of ZenCloud. The framework reflects practical experience across solution architecture, enterprise architecture, governance, integration, cloud transformation, and delivery environments where architecture must influence outcomes without formal authority.
+    </p>
+    <p>
+      VAF·SA was not developed as an academic exercise. It was built incrementally across engagements where conventional methods were insufficient — environments defined by unclear ownership, managed disclosure, institutional obstruction, and the absence of the conditions that most frameworks assume. The content is NDA-clean and reflects patterns, not specifics.
+    </p>
+  </div>
 </div>
 
-<!-- SIX MODULES -->
-<div class="section-label">Six Modules</div>
-<div style="background:rgba(200,168,75,0.08);border:1px solid rgba(200,168,75,0.22);padding:14px 20px;margin-bottom:14px;font-family:'DM Mono',monospace;font-size:11px;color:#c8a84b;line-height:1.65;">
-  <strong style="color:#eef0f5;display:block;margin-bottom:3px;">Before you begin</strong>
-  Read the Preface and Lexicon first. Both are in Supplementary Resources below. The modules assume both have been read.
-</div>
-<div class="modules-grid">
-  <a class="module-link" href="modules/module-01-orientation.html">
-    <div class="ml-num">01</div>
-    <div class="ml-body">
-      <div class="ml-name">Orientation</div>
-      <div class="ml-desc">Read the environment before anyone briefs you on it · Four archetypes · Five intake questions · Document immersion</div>
+<!-- ── WHY THIS FRAMEWORK ─────────────────── -->
+<section class="section">
+  <div class="section-label">Why This Framework</div>
+  <div class="credibility">
+    <div class="cred-card">
+      <div class="cred-num">01</div>
+      <div class="cred-title">Practitioner-Built</div>
+      <div class="cred-body">Derived from real enterprise engagements. Not academic. Not theoretical. Tested under the conditions it describes.</div>
     </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="modules/module-02-intelligence.html">
-    <div class="ml-num">02</div>
-    <div class="ml-body">
-      <div class="ml-name">Intelligence</div>
-      <div class="ml-desc">Get what you need from people who may not give it · Ten questions · Vendor interrogation · Gap mapping</div>
+    <div class="cred-card">
+      <div class="cred-num">02</div>
+      <div class="cred-title">No Authority Required</div>
+      <div class="cred-body">Designed to operate without formal authority, executive sponsorship, or vendor cooperation. Works in the conditions most frameworks assume away.</div>
     </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="modules/module-03-design.html">
-    <div class="ml-num">03</div>
-    <div class="ml-body">
-      <div class="ml-name">Design</div>
-      <div class="ml-desc">Design instrument selection · Context diagram structural framework · Heat map forensic analysis · Three-altitude design stack · Embedded security · Observability specification</div>
+    <div class="cred-card">
+      <div class="cred-num">03</div>
+      <div class="cred-title">NDA-Clean Evidence</div>
+      <div class="cred-body">Complete worked example included. One real engagement. All six modules applied. No invented scenarios.</div>
     </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="modules/module-04-artefacts.html">
-    <div class="ml-num">04</div>
-    <div class="ml-body">
-      <div class="ml-name">Artefacts</div>
-      <div class="ml-desc">Five practitioner artefacts · CIS · Architecture on a Page · Heat Map · ADR · Stakeholder Concern Register</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="modules/module-05-communication.html">
-    <div class="ml-num">05</div>
-    <div class="ml-body">
-      <div class="ml-name">Communication</div>
-      <div class="ml-desc">Stakeholder communication across five audience categories · Formal concern escalation · Position maintenance under pressure · Professional conduct standards</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="modules/module-06-velocity-loop.html">
-    <div class="ml-num">06</div>
-    <div class="ml-body">
-      <div class="ml-name">The Velocity Loop</div>
-      <div class="ml-desc">Read · Extract · Design · Deliver · Operating without support · Engagement completion criteria</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-</div>
+  </div>
+</section>
 
-<!-- WORKED EXAMPLE FEATURE -->
-<div class="section-label">The Worked Example</div>
-<div class="feature-block">
-  <div>
-    <div class="fb-label">Case Study &nbsp;·&nbsp; NDA-Clean &nbsp;·&nbsp; Real Engagement</div>
-    <div class="fb-title">The Authority Engagement</div>
-    <div class="fb-body">All six VAF·SA modules applied to one complete engagement. No invented scenarios. A real program, real constraints, real obstruction, and a real outcome. Delivered in 90 days from initial engagement.</div>
-    <div class="fb-tags">
-      <span class="fb-tag">All 6 Modules</span>
-      <span class="fb-tag">90 Days</span>
-      <span class="fb-tag">NDA-Clean</span>
-      <span class="fb-tag">Delivered</span>
-    </div>
-  </div>
-  <a class="fb-link" href="worked-example.html">View Example &rarr;</a>
-</div>
-
-<!-- TEMPLATES AND ARTEFACTS -->
-<div class="section-label">Templates and Artefacts</div>
-<div class="artefacts-grid">
-  <div class="artefact-card">
-    <div class="art-abbr">CIS</div>
-    <div class="art-name">Customer Impact Statement</div>
-    <div class="art-body">One-page business case for technical decisions. Translates architecture risk into business language decision-makers can act on.</div>
-  </div>
-  <div class="artefact-card">
-    <div class="art-abbr">AoaP</div>
-    <div class="art-name">Architecture on a Page</div>
-    <div class="art-body">The canonical context diagram. One page. No second page. Forces thinking to completion before committing.</div>
-  </div>
-  <div class="artefact-card">
-    <div class="art-abbr">HM</div>
-    <div class="art-name">Heat Map</div>
-    <div class="art-body">Forensic instrument for obfuscation engagements. Every blank cell is a finding. Pattern analysis across capability domains.</div>
-  </div>
-  <div class="artefact-card">
-    <div class="art-abbr">ADR</div>
-    <div class="art-name">Architecture Decision Record</div>
-    <div class="art-body">Decision-ready documentation. Context, options considered, rationale, consequences. Audit-grade record of intent.</div>
-  </div>
-  <div class="artefact-card">
-    <div class="art-abbr">SCR</div>
-    <div class="art-name">Stakeholder Concern Register</div>
-    <div class="art-body">Formal capture of concerns, owners, and resolution status. Creates accountability without requiring formal authority.</div>
-  </div>
-  <div class="artefact-card art-ref">
-    <div class="art-abbr">&uarr; M04</div>
-    <div class="art-name">Full Artefact Guidance</div>
-    <div class="art-body"><a href="modules/module-04-artefacts.html">Module 04</a> contains complete templates, worked examples, and production guidance for each artefact.</div>
-  </div>
-</div>
-
-<!-- SUPPLEMENTARY RESOURCES -->
-<div class="section-label">Supplementary Resources</div>
-<div class="modules-grid">
-  <a class="module-link" href="preface.html">
-    <div class="ml-num" style="background:rgba(200,168,75,0.08);color:#c8a84b;font-size:14px;letter-spacing:0.05em;">PRE</div>
-    <div class="ml-body">
-      <div class="ml-name">Preface — Influence Without Authority</div>
-      <div class="ml-desc">The operating philosophy · Read before Module 1 · Two pillars · The mental process</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="lexicon.html">
-    <div class="ml-num" style="background:rgba(200,168,75,0.08);color:#c8a84b;font-size:14px;letter-spacing:0.05em;">LEX</div>
-    <div class="ml-body">
-      <div class="ml-name">The VAF·SA Lexicon</div>
-      <div class="ml-desc">Every term defined precisely · Decision Altitude · Governance Drag · The Blank Cell · The Four Archetypes · The Velocity Loop</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="workshop-playbook.html">
-    <div class="ml-num" style="background:rgba(61,143,181,0.08);color:#5aafd4;font-size:14px;letter-spacing:0.05em;">WS</div>
-    <div class="ml-body">
-      <div class="ml-name">Workshop Playbook</div>
-      <div class="ml-desc">How to design the room · The opening · Conflict management · The E-stop · What leaves the room</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="escalation-protocol.html">
-    <div class="ml-num" style="background:rgba(196,82,40,0.08);color:#c45228;font-size:14px;letter-spacing:0.05em;">ESC</div>
-    <div class="ml-body">
-      <div class="ml-name">Escalation Protocol + Time Guidance</div>
-      <div class="ml-desc">Three escalation layers · The boundary statement · Time per module · Pattern locking</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-  <a class="module-link" href="worked-example.html">
-    <div class="ml-num" style="background:rgba(200,168,75,0.08);color:#c8a84b;font-size:14px;letter-spacing:0.05em;">EX</div>
-    <div class="ml-body">
-      <div class="ml-name">The Worked Example — The Authority Engagement</div>
-      <div class="ml-desc">All six modules · One real engagement · NDA-clean · 90 days · Delivered</div>
-    </div>
-    <div class="ml-arrow">&rarr;</div>
-  </a>
-</div>
-
-<!-- FOUR ENGAGEMENT ARCHETYPES -->
-<div class="section-label">Four Engagement Archetypes</div>
-<div class="arch-grid">
-  <div class="arch-card">
-    <div class="arch-num">01</div>
-    <div class="arch-name">The Obfuscation Engagement</div>
-    <div class="arch-body">Information exists and is being deliberately withheld. The vendor has a vested interest in preventing full disclosure. The heat map is the forensic instrument. Every blank cell is evidence.</div>
-  </div>
-  <div class="arch-card">
-    <div class="arch-num">02</div>
-    <div class="arch-name">The Negligent Void</div>
-    <div class="arch-body">Nothing has been done. No documentation. No data classification. No vendor alignment. The engagement exists on paper. It has no architectural foundation.</div>
-  </div>
-  <div class="arch-card">
-    <div class="arch-num">03</div>
-    <div class="arch-name">The Institutional Paralysis</div>
-    <div class="arch-body">Multiple attempts. Different parties. No ownership. History withheld. Budget spent. Nothing delivered. Three months of immersion. Silence under pressure. Discharge the work.</div>
-  </div>
-  <div class="arch-card">
-    <div class="arch-num">04</div>
-    <div class="arch-name">The Silo Engagement</div>
-    <div class="arch-body">Capability exists. The solution is achievable. The parties who need to collaborate have never been in the same room. The workshop is the solution.</div>
-  </div>
-</div>
-
-<!-- FOUR OPERATING PRINCIPLES -->
-<div class="section-label">Four Operating Principles</div>
-<div class="prin-grid">
-  <div class="prin-card">
-    <div class="prin-num">I</div>
-    <div class="prin-title">No Process First</div>
-    <div class="prin-body">The framework is the vehicle. The outcome is the destination. Process never leads.</div>
-  </div>
-  <div class="prin-card">
-    <div class="prin-num">II</div>
-    <div class="prin-title">Decision Altitude</div>
-    <div class="prin-body">Every decision at the right level. Business altitude for business decisions. Technical altitude for technical decisions.</div>
-  </div>
-  <div class="prin-card">
-    <div class="prin-num">III</div>
-    <div class="prin-title">One Artefact</div>
-    <div class="prin-body">If it does not fit on one page, the thinking is not done. The second page is where incomplete thinking hides.</div>
-  </div>
-  <div class="prin-card">
-    <div class="prin-num">IV</div>
-    <div class="prin-title">Velocity Over Volume</div>
-    <div class="prin-body">Insight delivered fast beats documentation delivered late. Always.</div>
-  </div>
-</div>
-
-<!-- CREDIBILITY -->
-<div class="section-label">Why This Framework</div>
-<div class="credibility">
-  <div class="cred-card">
-    <div class="cred-num">01</div>
-    <div class="cred-title">Practitioner-Built</div>
-    <div class="cred-body">Derived from real enterprise engagements. Not academic. Not theoretical. Tested under the conditions it describes.</div>
-  </div>
-  <div class="cred-card">
-    <div class="cred-num">02</div>
-    <div class="cred-title">No Authority Required</div>
-    <div class="cred-body">Designed to operate without formal authority, executive sponsorship, or vendor cooperation. Works in the conditions most frameworks assume away.</div>
-  </div>
-  <div class="cred-card">
-    <div class="cred-num">03</div>
-    <div class="cred-title">NDA-Clean Evidence</div>
-    <div class="cred-body">Complete worked example included. One real engagement. All six modules applied. No invented scenarios.</div>
-  </div>
-</div>
-
-<!-- DISCLAIMER -->
+<!-- ── DISCLAIMER ─────────────────────────── -->
 <div class="disclaimer">
   <strong>Professional note:</strong> VAF·SA is a practitioner methodology for solution architecture engagements. It does not constitute legal, financial, regulatory, or sector-specific compliance advice. Practitioner judgement is required in all applications. Framework outputs should be reviewed against organisational governance requirements before use in regulated or critical-infrastructure contexts.
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
+<!-- ── FOOTER ─────────────────────────────── -->
+<footer>
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> &mdash; Velocity Architecture Framework&trade; &middot; v1.0</div>
-    <div class="footer-org">ZenCloud Global Consultants &middot; Brisbane, Australia</div>
+    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework™ · v1.0</div>
+    <div class="footer-org">ZenCloud Global Consultants · Brisbane, Australia</div>
     <div class="footer-links">
       <a class="footer-link" href="preface.html">Preface</a>
       <a class="footer-link" href="lexicon.html">Lexicon</a>
@@ -548,11 +1379,18 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <a class="footer-link" href="worked-example.html">Worked Example</a>
       <a class="footer-link" href="workshop-playbook.html">Workshop</a>
       <a class="footer-link" href="escalation-protocol.html">Escalation</a>
+      <a class="footer-link" href="https://zencloudau.github.io/velocity-architecture/" target="_blank" rel="noopener">VAF Framework ↗</a>
+      <a class="footer-link" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Agentic Architect ↗</a>
+      <a class="footer-link" href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
-  <div class="footer-meta">velocityarchitectureframework.com<br>&copy; 2025 ZenCloud Global Consultants</div>
-</div>
+  <div class="footer-meta">
+    zencloudau.github.io/vaf-sa<br>
+    velocityarchitectureframework.com<br>
+    © 2025 ZenCloud Global Consultants
+  </div>
+</footer>
 
-</div>
+</div><!-- .page -->
 </body>
 </html>
