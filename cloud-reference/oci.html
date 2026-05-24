@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAF·SA Cloud Reference — Oracle Cloud Infrastructure. Architecture principles, landing-zone patterns, tenancy and compartments, IAM, Cloud Guard, Security Zones, and VAF·SA usage notes.">
+<title>VAF·SA — OCI Cloud Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
+  --oci:#C74634;--oci-dim:rgba(199,70,52,0.07);--oci-border:rgba(199,70,52,0.28);
+  --green:#16A34A;--signal:#DC2626;
+  --ink:#0F172A;--body:#334155;--muted:#64748B;
+  --border:#E2E8F0;--alt:#F1F5F9;--panel:#FFFFFF;--page:#F8FAFC;--strong:#CBD5E1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--page);color:var(--body);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-links-bar a.active{color:var(--amber);}
+.nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
+.nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title span{color:var(--oci);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag.oci{border-color:var(--oci-border);color:var(--oci);}
+.tag.amber{border-color:var(--amber-border);color:var(--amber);}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(199,70,52,0.16);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--oci);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
+.p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--ink);font-weight:600;}
+.callout{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.callout.oci{border-left-color:var(--oci);}
+.divider{height:1px;background:linear-gradient(to right,var(--oci),transparent);margin:40px 0;opacity:0.35;}
+/* DOMAIN LIST */
+.domain-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);overflow:hidden;margin:20px 0;}
+.domain-item{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--border);}
+.domain-item:last-child{border-bottom:none;}
+.di-key{padding:14px 16px;background:var(--alt);border-right:1px solid var(--border);font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--ink);letter-spacing:0.04em;}
+.di-val{padding:14px 18px;font-size:12.5px;color:var(--body);line-height:1.55;}
+@media(max-width:600px){.domain-item{grid-template-columns:1fr;}.di-key{border-right:none;border-bottom:1px solid var(--border);}}
+/* REF LINKS */
+.ref-links{display:flex;flex-direction:column;gap:6px;margin:20px 0;}
+.ref-link{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px 16px;text-decoration:none;color:inherit;transition:border-color 0.15s;}
+.ref-link:hover{border-color:var(--strong);text-decoration:none;}
+.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--oci);white-space:nowrap;padding-top:2px;min-width:60px;}
+.rl-body{flex:1;}
+.rl-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.rl-url{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
+/* VAF NOTES */
+.vaf-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
+.vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
+.pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
+.doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand span{color:var(--amber);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
+.footer-nav a{color:var(--muted);text-decoration:none;}
+.footer-nav a:hover{color:var(--amber);}
+@media(max-width:680px){.page{padding:16px 20px 64px;}.nav-inner{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../workshop-playbook.html">Workshop</a></li>
+      <li><a href="../escalation-protocol.html">Escalation</a></li>
+      <li><a href="index.html" class="active">Cloud Ref</a></li>
+    </ul>
+    <a class="nav-cta-btn" href="../modules/module-01-orientation.html">Start Module 01 →</a>
+  </div>
+</nav>
+
+<div class="page">
+<a class="back" href="index.html">← Cloud Reference Layer</a>
+
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Cloud Reference · Oracle Cloud Infrastructure</div>
+    <div class="doc-ref">VENDOR REFERENCE<br>VAFSA-CRL-OCI · v1.0</div>
+  </div>
+  <div class="doc-title">ORACLE CLOUD<br><span>INFRASTRUCTURE</span></div>
+  <div class="doc-subtitle">Architecture Principles · Landing-Zone Patterns · Tenancy and Compartments · Cloud Guard · Security Zones</div>
+  <div class="doc-tags">
+    <span class="tag oci">OCI</span>
+    <span class="tag">Architecture Principles</span>
+    <span class="tag">Landing Zone</span>
+    <span class="tag">Cloud Guard</span>
+    <span class="tag">Security Zones</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-eyebrow">Overview</div>
+      <div class="section-title">OCI Architecture Guidance</div>
+      <div class="section-desc">How Oracle structures its architecture and adoption guidance for enterprise customers.</div>
+    </div>
+  </div>
+  <p class="p">Oracle Cloud Infrastructure (OCI) provides architecture guidance through its <strong>Architecture Center</strong> — a collection of reference architectures, best-practice documentation, and landing-zone patterns. OCI does not publish a branded Well-Architected Framework under that name, but its architecture principles address equivalent workload quality concerns: availability, performance, security, cost, and operational effectiveness.</p>
+  <p class="p">OCI's governance model is built on <strong>tenancy → compartments</strong>. Unlike other clouds that use separate accounts or subscriptions for isolation, OCI achieves logical isolation through compartments within a single tenancy. This structure — and the IAM and policy model that governs it — is the foundation on which all workload placement and governance decisions are built.</p>
+  <p class="p">Many OCI enterprise engagements involve Oracle workloads — EBS, E-Business Suite, Database, Fusion — migrated from on-premises or other clouds. The architecture decisions for these workloads often intersect with Oracle licensing, support terms, and dedicated infrastructure options (Dedicated Region, Exadata Cloud@Customer) that have no direct equivalent on other platforms.</p>
+  <div class="callout oci">OCI engagements frequently surface confusion between what the tenancy policy model theoretically allows and what the IAM configuration actually enforces. Module 02 (Intelligence) is the instrument for establishing the real governance posture — not the intended one.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ARCHITECTURE PRINCIPLES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-eyebrow">OCI Architecture Principles</div>
+      <div class="section-title">Core Design Principles</div>
+      <div class="section-desc">The architecture considerations that apply across all OCI workloads.</div>
+    </div>
+  </div>
+  <div class="domain-list">
+    <div class="domain-item"><div class="di-key">High availability</div><div class="di-val">OCI regions contain multiple Availability Domains (ADs) and Fault Domains (FDs). Workload resilience is designed through placement across ADs and FDs, combined with load balancing, health checks, and automated failover patterns.</div></div>
+    <div class="domain-item"><div class="di-key">Security by design</div><div class="di-val">Security is integrated into every layer — network, compute, storage, identity. OCI's security model is built on compartments, IAM policies, Security Zones, and Cloud Guard. Security is not an add-on to the architecture — it is structural.</div></div>
+    <div class="domain-item"><div class="di-key">Cost efficiency</div><div class="di-val">OCI pricing model differs from other clouds — costs are predictable and typically volume-based rather than egress-heavy. Cost architecture decisions include Universal Credits, Reserved Capacity, and Dedicated VM Hosts for licensing efficiency.</div></div>
+    <div class="domain-item"><div class="di-key">Operational effectiveness</div><div class="di-val">Automation through OCI Resource Manager (Terraform-based), Events, and Notifications. Monitoring through OCI Monitoring and Logging. Operations design is a first-class architecture concern.</div></div>
+    <div class="domain-item"><div class="di-key">Performance</div><div class="di-val">Flexible Shapes for compute allow precise resource allocation. High-throughput storage (Block Volume, File Storage). Low-latency networking through FastConnect and OCI's physical network architecture. Oracle workloads often have specific performance requirements that drive placement and shape selection.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LANDING ZONE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-eyebrow">OCI Landing-Zone Patterns</div>
+      <div class="section-title">Enterprise Foundation</div>
+      <div class="section-desc">Tenancy design, compartments, IAM, network baseline, and security controls.</div>
+    </div>
+  </div>
+  <div class="domain-list">
+    <div class="domain-item"><div class="di-key">Tenancy and compartments</div><div class="di-val">The tenancy is the root of the OCI resource hierarchy. Compartments provide logical isolation within the tenancy — analogous to accounts (AWS), subscriptions (Azure), or projects (Google Cloud). A standard compartment hierarchy separates Security, Network, Shared Services, Workload, and Sandbox compartments. Compartment design is a foundational decision — it determines policy inheritance and audit scope.</div></div>
+    <div class="domain-item"><div class="di-key">IAM and identity domains</div><div class="di-val">OCI Identity Domains manage users, groups, and credentials. IAM Policies grant permissions to groups or dynamic groups on specific resources in specific compartments. Policy design is based on verb-resource-compartment structure. Identity federation with external identity providers (SAML 2.0, SCIM) for enterprise SSO. Dynamic Groups for instance-principal-based access.</div></div>
+    <div class="domain-item"><div class="di-key">Network baseline</div><div class="di-val">Virtual Cloud Networks (VCNs) provide the network boundary. Hub-and-spoke model using a hub VCN for centralised connectivity and inspection, with spoke VCNs attached via Local Peering Gateways (LPG) or DRG. FastConnect for dedicated on-premises connectivity. OCI Network Firewall or equivalent for centralised traffic inspection.</div></div>
+    <div class="domain-item"><div class="di-key">Security baseline</div><div class="di-val">Security controls applied across the landing zone: Security Lists and Network Security Groups for traffic control, OCI Vault for secrets management, Key Management Service for encryption key governance, OS Management Hub for instance patching, and Bastion Service for privileged access to compute instances.</div></div>
+    <div class="domain-item"><div class="di-key">Cloud Guard and Security Zones</div><div class="di-val">Cloud Guard continuously monitors the OCI tenancy for security risks — misconfigurations, anomalous activity, and policy violations — and can automatically remediate issues through Responders. Security Zones enforce a set of security policies on designated compartments, preventing non-compliant resource configurations from being deployed.</div></div>
+    <div class="domain-item"><div class="di-key">Logging and monitoring</div><div class="di-val">OCI Audit Service captures all API calls across the tenancy. OCI Logging aggregates service logs, audit logs, and custom application logs. OCI Monitoring provides metrics and alerting. Service Connector Hub routes logs to archival storage, analytics, or external SIEM systems. Log retention and access controls are governance decisions.</div></div>
+    <div class="domain-item"><div class="di-key">Workload placement notes</div><div class="di-val">Oracle workload placement decisions must account for: Oracle licensing terms and the impact of CPU architecture on licence compliance; Dedicated Region or Cloud@Customer options for data sovereignty; Exadata Cloud Service for Oracle Database performance requirements; and the separation of Oracle-managed PaaS services from customer-managed IaaS workloads in the compartment hierarchy.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VAF·SA USAGE NOTES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-eyebrow">VAF·SA Usage Notes</div>
+      <div class="section-title">Applying VAF·SA in OCI Engagements</div>
+      <div class="section-desc">Where the practitioner method adds value in an OCI environment.</div>
+    </div>
+  </div>
+  <div class="vaf-notes">
+    <div class="vn-label">VAF·SA Practitioner Notes — OCI</div>
+    <ul class="vn-list">
+      <li><strong>Compartment design decisions are rarely documented.</strong> The compartment hierarchy is often built iteratively without a recorded rationale. Module 04 (Artefacts) produces a compartment design ADR — capturing what hierarchy was chosen, what alternatives were considered, and what constraints drove the decision. This record is essential when the hierarchy needs to evolve as workloads scale.</li>
+      <li><strong>IAM policy complexity is a recurring governance problem.</strong> OCI IAM policies accumulate over time. Module 02 (Intelligence) surfaces who can do what in which compartment — identifying policy statements that are broader than intended, inherited policies that are no longer appropriate, and dynamic group memberships that have not been reviewed.</li>
+      <li><strong>Oracle licensing is an architecture constraint.</strong> In Oracle workload migrations, licensing terms — particularly around processor core counts and virtualisation entitlements — constrain compute shape selection. Module 01 (Orientation) establishes what licensing constraints apply before any workload placement design begins.</li>
+      <li><strong>Cloud Guard findings as evidence.</strong> Where Cloud Guard is deployed, its detector findings provide an objective baseline of the current security posture — useful in Module 02 (Intelligence) and the Heat Map artefact in Module 04 (Artefacts).</li>
+      <li><strong>Security Zones as governance instruments.</strong> Security Zone policies are architectural decisions — they determine what resource configurations are permanently prohibited in designated compartments. Module 04 (Artefacts) records Security Zone policy decisions as ADRs, with clear rationale for each enforced control and the process for requesting exceptions.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OFFICIAL REFERENCES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-eyebrow">Official References</div>
+      <div class="section-title">Oracle Documentation</div>
+      <div class="section-desc">Official vendor sources — not affiliated with Oracle Corporation.</div>
+    </div>
+  </div>
+  <div class="ref-links">
+    <a class="ref-link" href="https://docs.oracle.com/en-us/iaas/Content/architecture/Concepts/architecture_center.htm" target="_blank" rel="noopener">
+      <div class="rl-label">Architecture</div>
+      <div class="rl-body"><div class="rl-name">OCI Architecture Center — reference architectures and best practices</div><div class="rl-url">docs.oracle.com/iaas/Content/architecture/</div></div>
+    </a>
+    <a class="ref-link" href="https://docs.oracle.com/en/solutions/cis-oci-benchmark/index.html" target="_blank" rel="noopener">
+      <div class="rl-label">Landing Zone</div>
+      <div class="rl-body"><div class="rl-name">OCI Landing Zone — CIS OCI Foundations Benchmark implementation</div><div class="rl-url">docs.oracle.com/en/solutions/cis-oci-benchmark/</div></div>
+    </a>
+    <a class="ref-link" href="https://docs.oracle.com/en-us/iaas/cloud-guard/using/part-start.htm" target="_blank" rel="noopener">
+      <div class="rl-label">Cloud Guard</div>
+      <div class="rl-body"><div class="rl-name">OCI Cloud Guard — security monitoring and remediation</div><div class="rl-url">docs.oracle.com/iaas/cloud-guard/</div></div>
+    </a>
+    <a class="ref-link" href="https://docs.oracle.com/en-us/iaas/security-zone/using/security-zones.htm" target="_blank" rel="noopener">
+      <div class="rl-label">Security Zones</div>
+      <div class="rl-body"><div class="rl-name">OCI Security Zones — compartment policy enforcement</div><div class="rl-url">docs.oracle.com/iaas/security-zone/</div></div>
+    </a>
+    <a class="ref-link" href="https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/overview.htm" target="_blank" rel="noopener">
+      <div class="rl-label">IAM</div>
+      <div class="rl-body"><div class="rl-name">OCI Identity and Access Management overview</div><div class="rl-url">docs.oracle.com/iaas/Content/Identity/Concepts/overview.htm</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a class="pn-prev" href="google-cloud.html">← Google Cloud Reference</a>
+  <a class="pn-next" href="landing-zone.html">Landing Zone Blueprint →</a>
+</div>
+
+<div class="doc-footer">
+  <div class="footer-brand"><span>VAF·SA</span> — OCI Cloud Reference</div>
+  <div class="footer-nav"><a href="index.html">Cloud Ref</a> · <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="landing-zone.html">Landing Zone</a></div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAF·SA Cloud Reference — Google Cloud Platform. Architecture Framework, Cloud Adoption Framework, landing-zone design, org hierarchy, Security Command Center, and VAF·SA usage notes.">
+<title>VAF·SA — Google Cloud Reference</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
+  --gcp:#1A73E8;--gcp-dim:rgba(26,115,232,0.07);--gcp-border:rgba(26,115,232,0.28);
+  --green:#16A34A;--signal:#DC2626;
+  --ink:#0F172A;--body:#334155;--muted:#64748B;
+  --border:#E2E8F0;--alt:#F1F5F9;--panel:#FFFFFF;--page:#F8FAFC;--strong:#CBD5E1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--page);color:var(--body);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-links-bar a.active{color:var(--amber);}
+.nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
+.nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title span{color:var(--gcp);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag.gcp{border-color:var(--gcp-border);color:var(--gcp);}
+.tag.amber{border-color:var(--amber-border);color:var(--amber);}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(26,115,232,0.18);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gcp);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
+.p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--ink);font-weight:600;}
+.callout{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.callout.gcp{border-left-color:var(--gcp);}
+.divider{height:1px;background:linear-gradient(to right,var(--gcp),transparent);margin:40px 0;opacity:0.35;}
+/* PILLAR GRID */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0;}
+@media(max-width:620px){.pillar-grid{grid-template-columns:1fr 1fr;}}
+.pillar-card{background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--gcp);padding:14px 16px;}
+.pc-num{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;color:var(--muted);margin-bottom:4px;}
+.pc-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.pc-body{font-size:11px;color:var(--muted);line-height:1.5;}
+/* DOMAIN LIST */
+.domain-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);overflow:hidden;margin:20px 0;}
+.domain-item{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);}
+.domain-item:last-child{border-bottom:none;}
+.di-key{padding:14px 16px;background:var(--alt);border-right:1px solid var(--border);font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--ink);letter-spacing:0.04em;}
+.di-val{padding:14px 18px;font-size:12.5px;color:var(--body);line-height:1.55;}
+@media(max-width:600px){.domain-item{grid-template-columns:1fr;}.di-key{border-right:none;border-bottom:1px solid var(--border);}}
+/* REF LINKS */
+.ref-links{display:flex;flex-direction:column;gap:6px;margin:20px 0;}
+.ref-link{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px 16px;text-decoration:none;color:inherit;transition:border-color 0.15s;}
+.ref-link:hover{border-color:var(--strong);text-decoration:none;}
+.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gcp);white-space:nowrap;padding-top:2px;min-width:60px;}
+.rl-body{flex:1;}
+.rl-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.rl-url{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
+/* VAF NOTES */
+.vaf-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
+.vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
+.pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
+.doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand span{color:var(--amber);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
+.footer-nav a{color:var(--muted);text-decoration:none;}
+.footer-nav a:hover{color:var(--amber);}
+@media(max-width:680px){.page{padding:16px 20px 64px;}.nav-inner{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../workshop-playbook.html">Workshop</a></li>
+      <li><a href="../escalation-protocol.html">Escalation</a></li>
+      <li><a href="index.html" class="active">Cloud Ref</a></li>
+    </ul>
+    <a class="nav-cta-btn" href="../modules/module-01-orientation.html">Start Module 01 →</a>
+  </div>
+</nav>
+
+<div class="page">
+<a class="back" href="index.html">← Cloud Reference Layer</a>
+
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Cloud Reference · Google Cloud Platform</div>
+    <div class="doc-ref">VENDOR REFERENCE<br>VAFSA-CRL-GCP · v1.0</div>
+  </div>
+  <div class="doc-title">GOOGLE<br><span>CLOUD</span></div>
+  <div class="doc-subtitle">Architecture Framework · Cloud Adoption Framework · Landing Zone · Org Hierarchy · Security Command Center</div>
+  <div class="doc-tags">
+    <span class="tag gcp">Google Cloud</span>
+    <span class="tag">Architecture Framework</span>
+    <span class="tag">Cloud Adoption</span>
+    <span class="tag">Landing Zone</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-eyebrow">Overview</div>
+      <div class="section-title">Google Cloud Architecture Guidance</div>
+      <div class="section-desc">How Google structures its architecture and adoption guidance for enterprise customers.</div>
+    </div>
+  </div>
+  <p class="p">Google Cloud's architecture and adoption guidance centres on two frameworks. The <strong>Google Cloud Architecture Framework</strong> addresses workload design quality across six pillars. The <strong>Google Cloud Adoption Framework</strong> addresses the readiness and maturity of an organisation's cloud adoption journey across four themes. The <strong>Landing Zone</strong> design (also referred to as Cloud Foundation) establishes the resource hierarchy, governance baseline, and network architecture for a governed Google Cloud environment.</p>
+  <p class="p">Google Cloud's resource hierarchy — <strong>Organisation → Folders → Projects</strong> — is the foundation of its governance model. Identity and access management (IAM) policies, Org Policies, and billing accounts are applied at different points in this hierarchy. Understanding the intended hierarchy before designing workload placement is a prerequisite for sound architecture.</p>
+  <div class="callout gcp">Google Cloud engagements frequently surface unclear ownership of the Organisation node and the Billing account. Module 01 (Orientation) establishes who controls these resources and what governance decisions have already been made — before any workload placement or landing-zone design begins.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ARCHITECTURE FRAMEWORK -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-eyebrow">Google Cloud Architecture Framework</div>
+      <div class="section-title">Six Pillars</div>
+      <div class="section-desc">Workload design quality assessment across six dimensions.</div>
+    </div>
+  </div>
+  <div class="pillar-grid">
+    <div class="pillar-card"><div class="pc-num">PILLAR 01</div><div class="pc-name">System Design</div><div class="pc-body">Architecture decisions that underpin workload quality — application design, data management, compute and storage selection, reliability patterns.</div></div>
+    <div class="pillar-card"><div class="pc-num">PILLAR 02</div><div class="pc-name">Operational Excellence</div><div class="pc-body">Monitoring, alerting, incident management, SRE practices, deployment automation, and change management.</div></div>
+    <div class="pillar-card"><div class="pc-num">PILLAR 03</div><div class="pc-name">Security, Privacy, Compliance</div><div class="pc-body">Identity and access, data protection, network security, threat detection, compliance controls, and supply chain security.</div></div>
+    <div class="pillar-card"><div class="pc-num">PILLAR 04</div><div class="pc-name">Reliability</div><div class="pc-body">Designing for availability and resilience — failure planning, testing, recovery, and SLA management.</div></div>
+    <div class="pillar-card"><div class="pc-num">PILLAR 05</div><div class="pc-name">Cost Optimisation</div><div class="pc-body">Understanding and reducing expenditure — rightsizing, committed use discounts, billing visibility, and financial accountability.</div></div>
+    <div class="pillar-card"><div class="pc-num">PILLAR 06</div><div class="pc-name">Performance Optimisation</div><div class="pc-body">Matching resources to workload needs — latency, throughput, caching, load balancing, and capacity planning.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CLOUD ADOPTION FRAMEWORK -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-eyebrow">Google Cloud Adoption Framework</div>
+      <div class="section-title">Four Themes · Three Phases</div>
+      <div class="section-desc">Assessing and developing cloud adoption capability across an organisation.</div>
+    </div>
+  </div>
+  <p class="p">The Google Cloud Adoption Framework assesses cloud maturity across four themes — Learn, Lead, Scale, and Secure — at three phases of adoption: Tactical, Strategic, and Transformational. Each theme–phase combination identifies a set of capabilities the organisation should develop or demonstrate.</p>
+  <div class="domain-list">
+    <div class="domain-item"><div class="di-key">Learn</div><div class="di-val">Developing cloud skills and knowledge across the organisation — from technical practitioners to executive decision makers. Training programmes, certification, and learning paths.</div></div>
+    <div class="domain-item"><div class="di-key">Lead</div><div class="di-val">Executive sponsorship, cloud strategy definition, operating model change, and governance structure for cloud adoption. Includes establishing a Cloud Centre of Excellence (CCoE) or equivalent.</div></div>
+    <div class="domain-item"><div class="di-key">Scale</div><div class="di-val">Expanding cloud usage across workloads and business units — automation, self-service provisioning, workload onboarding processes, and cost management at scale.</div></div>
+    <div class="domain-item"><div class="di-key">Secure</div><div class="di-val">Security posture across the cloud environment — identity governance, data protection, threat detection, compliance monitoring, and incident response capability.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LANDING ZONE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-eyebrow">Landing Zone / Cloud Foundation</div>
+      <div class="section-title">Enterprise Foundation</div>
+      <div class="section-desc">Resource hierarchy, governance baselines, and network design for a governed Google Cloud environment.</div>
+    </div>
+  </div>
+  <div class="domain-list">
+    <div class="domain-item"><div class="di-key">Organisation, folders, projects</div><div class="di-val">The resource hierarchy determines policy inheritance and billing scope. Folders group projects by business unit, environment, or workload type. Projects are the boundary for resource isolation, IAM, and cost allocation. Hierarchy design is a foundational architecture decision.</div></div>
+    <div class="domain-item"><div class="di-key">IAM baseline</div><div class="di-val">Google Cloud IAM controls access at Organisation, Folder, and Project level. Principle of least privilege. Service account governance — avoiding over-privileged service accounts is a common security gap. Workload Identity Federation for external identity integration.</div></div>
+    <div class="domain-item"><div class="di-key">Network baseline</div><div class="di-val">Shared VPC model for enterprise environments — a host project provides the network, service projects consume it. Cloud Interconnect or VPN for on-premises connectivity. Private Google Access for API access without public internet exposure. DNS design across the hierarchy.</div></div>
+    <div class="domain-item"><div class="di-key">Security baseline</div><div class="di-val">VPC Service Controls to define security perimeters around sensitive data. Organisation Policy Service for preventive controls at Organisation or Folder level. Access Transparency for audit of Google staff access. Binary Authorization for container workload integrity.</div></div>
+    <div class="domain-item"><div class="di-key">Logging and monitoring</div><div class="di-val">Cloud Audit Logs aggregated to a central logging project. Log sinks for long-term retention and SIEM integration. Cloud Monitoring for workload observability. Security Command Center (Premium or Enterprise) for threat detection and posture management across the organisation.</div></div>
+    <div class="domain-item"><div class="di-key">Workload assessment notes</div><div class="di-val">Workload placement decisions in Google Cloud must account for data residency requirements, regulatory constraints on data location, and the impact of the Shared VPC model on connectivity. These are architecture decisions, not defaults — each requires an ADR.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VAF·SA USAGE NOTES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-eyebrow">VAF·SA Usage Notes</div>
+      <div class="section-title">Applying VAF·SA in Google Cloud Engagements</div>
+      <div class="section-desc">Where the practitioner method adds value in a Google Cloud environment.</div>
+    </div>
+  </div>
+  <div class="vaf-notes">
+    <div class="vn-label">VAF·SA Practitioner Notes — Google Cloud</div>
+    <ul class="vn-list">
+      <li><strong>The Organisation node is frequently contested.</strong> In multi-account organisations, the question of who controls the Organisation node — and therefore who can assign Org Policies and modify the resource hierarchy — is often unresolved. Module 01 (Orientation) establishes this before any design work begins.</li>
+      <li><strong>Shared VPC ownership disputes.</strong> The division of responsibility between the host project network team and the service project application team is a recurring source of delivery friction. Module 02 (Intelligence) maps real ownership — not the RACI on the project plan.</li>
+      <li><strong>Org Policy as a governance instrument.</strong> Module 04 (Artefacts) records Org Policy decisions as ADRs — which policies are enforced, at which level, with what exceptions, and what the process is for requesting an exception. The absence of this record is a common governance gap.</li>
+      <li><strong>Adoption framework as a diagnostic.</strong> The Google Cloud Adoption Framework four-theme assessment is a useful intelligence tool in Module 02 — applying it to the client's environment surfaces whether the adoption is Tactical, Strategic, or Transformational, and where the capability gaps are.</li>
+      <li><strong>Security Command Center findings as evidence.</strong> Where Security Command Center is deployed, its findings provide objective evidence of the current security posture for Module 02 (Intelligence) and the Heat Map artefact in Module 04 (Artefacts).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- OFFICIAL REFERENCES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div>
+      <div class="section-eyebrow">Official References</div>
+      <div class="section-title">Google Cloud Documentation</div>
+      <div class="section-desc">Official vendor sources — not affiliated with Google or Alphabet.</div>
+    </div>
+  </div>
+  <div class="ref-links">
+    <a class="ref-link" href="https://cloud.google.com/architecture/framework" target="_blank" rel="noopener">
+      <div class="rl-label">Architecture</div>
+      <div class="rl-body"><div class="rl-name">Google Cloud Architecture Framework</div><div class="rl-url">cloud.google.com/architecture/framework</div></div>
+    </a>
+    <a class="ref-link" href="https://cloud.google.com/adoption-framework" target="_blank" rel="noopener">
+      <div class="rl-label">Adoption</div>
+      <div class="rl-body"><div class="rl-name">Google Cloud Adoption Framework</div><div class="rl-url">cloud.google.com/adoption-framework</div></div>
+    </a>
+    <a class="ref-link" href="https://cloud.google.com/docs/enterprise/best-practices-for-enterprise-organizations" target="_blank" rel="noopener">
+      <div class="rl-label">Landing Zone</div>
+      <div class="rl-body"><div class="rl-name">Google Cloud Landing Zone design — enterprise organisations</div><div class="rl-url">cloud.google.com/docs/enterprise/best-practices-for-enterprise-organizations</div></div>
+    </a>
+    <a class="ref-link" href="https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview" target="_blank" rel="noopener">
+      <div class="rl-label">Security</div>
+      <div class="rl-body"><div class="rl-name">Security Command Center overview</div><div class="rl-url">cloud.google.com/security-command-center/docs/</div></div>
+    </a>
+    <a class="ref-link" href="https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy" target="_blank" rel="noopener">
+      <div class="rl-label">Hierarchy</div>
+      <div class="rl-body"><div class="rl-name">Google Cloud resource hierarchy</div><div class="rl-url">cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy</div></div>
+    </a>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a class="pn-prev" href="azure.html">← Azure Reference</a>
+  <a class="pn-next" href="oci.html">OCI Reference →</a>
+</div>
+
+<div class="doc-footer">
+  <div class="footer-brand"><span>VAF·SA</span> — Google Cloud Reference</div>
+  <div class="footer-nav"><a href="index.html">Cloud Ref</a> · <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone</a></div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

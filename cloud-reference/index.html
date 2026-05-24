@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAF·SA Cloud Architecture Reference Layer — how VAF·SA maps to vendor frameworks, cloud adoption frameworks, and enterprise landing-zone patterns.">
+<title>VAF·SA — Cloud Architecture Reference Layer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
+  --cold:#2563EB;--cold-dim:rgba(37,99,235,0.06);--cold-border:rgba(37,99,235,0.2);
+  --green:#16A34A;--green-dim:rgba(22,163,74,0.06);
+  --ink:#0F172A;--body:#334155;--muted:#64748B;
+  --border:#E2E8F0;--alt:#F1F5F9;--panel:#FFFFFF;--page:#F8FAFC;--strong:#CBD5E1;
+  --m1:#D97706;--m2:#2563EB;--m3:#16A34A;--m4:#7C3AED;--m5:#EA580C;--m6:#B45309;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--page);color:var(--body);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-links-bar a.active{color:var(--amber);}
+.nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
+.nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title span{color:var(--amber);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag.amber{border-color:var(--amber-border);color:var(--amber);}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(232,99,10,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
+.p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--ink);font-weight:600;}
+.callout{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.callout.blue{border-left-color:var(--cold);}
+.divider{height:1px;background:linear-gradient(to right,var(--amber),transparent);margin:40px 0;opacity:0.4;}
+/* VENDOR NAV GRID */
+.vendor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:24px 0;}
+@media(max-width:600px){.vendor-grid{grid-template-columns:1fr 1fr;}}
+.vendor-card{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--border);border-top:3px solid var(--amber);padding:16px 18px;text-decoration:none;color:inherit;transition:border-color 0.15s,box-shadow 0.15s;}
+.vendor-card:hover{border-color:var(--strong);box-shadow:0 2px 10px rgba(15,23,42,0.08);text-decoration:none;}
+.vc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.vc-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--ink);}
+.vc-desc{font-size:11px;color:var(--muted);line-height:1.45;}
+.vc-arr{font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);margin-top:6px;}
+/* MODULE MAPPING */
+.module-map{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);overflow:hidden;}
+.mm-row{display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--border);}
+.mm-row:last-child{border-bottom:none;}
+.mm-key{padding:16px 18px;background:var(--alt);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px;}
+.mm-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;}
+.mm-name{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.mm-val{padding:16px 20px;}
+.mm-val-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;margin-top:10px;}
+.mm-val-label:first-child{margin-top:0;}
+.mm-val-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.mm-val-list li{font-size:12px;color:var(--body);line-height:1.45;padding-left:14px;position:relative;}
+.mm-val-list li::before{content:'→';color:var(--amber);font-size:10px;position:absolute;left:0;top:2px;}
+@media(max-width:600px){.mm-row{grid-template-columns:1fr;}.mm-key{border-right:none;border-bottom:1px solid var(--border);}}
+/* THREE-WAY TABLE */
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:640px){.three-col{grid-template-columns:1fr;}}
+.tc-card{background:var(--panel);border:1px solid var(--border);padding:16px 18px;}
+.tc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.tc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.tc-body{font-size:11.5px;color:var(--body);line-height:1.55;}
+/* FOOTER */
+.doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand span{color:var(--amber);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
+.footer-nav a{color:var(--muted);text-decoration:none;}
+.footer-nav a:hover{color:var(--amber);}
+@media(max-width:680px){.page{padding:16px 20px 64px;}.nav-inner{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../workshop-playbook.html">Workshop</a></li>
+      <li><a href="../escalation-protocol.html">Escalation</a></li>
+      <li><a href="index.html" class="active">Cloud Ref</a></li>
+    </ul>
+    <a class="nav-cta-btn" href="../modules/module-01-orientation.html">Start Module 01 →</a>
+  </div>
+</nav>
+
+<div class="page">
+<a class="back" href="../index.html">← VAF·SA Framework</a>
+
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Cloud Architecture Reference Layer</div>
+    <div class="doc-ref">REFERENCE LIBRARY<br>VAFSA-CRL · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
+  </div>
+  <div class="doc-title">CLOUD<br><span>REFERENCE LAYER</span></div>
+  <div class="doc-subtitle">Mapping VAF·SA to vendor frameworks, cloud adoption patterns, and enterprise landing zones.</div>
+  <div class="doc-tags">
+    <span class="tag amber">Reference Library</span>
+    <span class="tag">Multi-Cloud</span>
+    <span class="tag">AWS · Azure · GCP · OCI</span>
+    <span class="tag">Landing Zones</span>
+  </div>
+</div>
+
+<!-- SECTION 1: POSITIONING -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-eyebrow">Positioning</div>
+      <div class="section-title">VAF·SA and Vendor Frameworks</div>
+      <div class="section-desc">What this reference layer is — and what it is not.</div>
+    </div>
+  </div>
+
+  <p class="p">Vendor cloud frameworks — Well-Architected Frameworks, Cloud Adoption Frameworks, landing-zone blueprints, and governance baselines — describe platform-specific good practice. They define what a well-governed cloud environment looks like on a given platform, and they provide structured guidance for workload assessment, landing-zone design, and operational controls.</p>
+
+  <p class="p"><strong>VAF·SA is not a replacement for any of these frameworks.</strong> It does not attempt to re-describe AWS security design, Azure identity topology, or Google Cloud organisation structure. Those topics are the vendor's domain.</p>
+
+  <p class="p">VAF·SA describes how the architect operates in the space <em>before and around</em> vendor framework application: how to read a stalled engagement, extract missing intelligence from a vendor-heavy environment, resolve unclear ownership, navigate decision paralysis, and turn uncertainty into a recommendation the client can act on. That is a practitioner method problem — not a platform problem.</p>
+
+  <div class="callout">
+    Vendor frameworks describe the destination. VAF·SA describes how to navigate the terrain between where the client is now and where the framework says they should be.
+  </div>
+
+  <div class="three-col">
+    <div class="tc-card">
+      <div class="tc-label">Vendor Framework</div>
+      <div class="tc-title">What good looks like</div>
+      <div class="tc-body">Platform-specific architecture principles, pillar definitions, landing-zone patterns, control baselines, and workload assessment tools.</div>
+    </div>
+    <div class="tc-card">
+      <div class="tc-label">VAF·SA</div>
+      <div class="tc-title">How the practitioner operates</div>
+      <div class="tc-body">The field method for reading environments, extracting intelligence, resolving ambiguity, selecting the right architecture instrument, and producing the minimum useful artefact under pressure.</div>
+    </div>
+    <div class="tc-card">
+      <div class="tc-label">This Reference Layer</div>
+      <div class="tc-title">How they map</div>
+      <div class="tc-body">Where VAF·SA modules align to cloud adoption, workload assessment, landing-zone design, and governance evidence collection — per vendor and vendor-neutral.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 2: VENDOR PAGES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-eyebrow">Vendor Reference Pages</div>
+      <div class="section-title">Platform References</div>
+      <div class="section-desc">AWS · Azure · Google Cloud · Oracle Cloud Infrastructure</div>
+    </div>
+  </div>
+
+  <p class="p">Each vendor reference page summarises the key frameworks, cloud adoption models, landing-zone patterns, and governance baselines for that platform — with notes on how VAF·SA applies in those contexts and links to official vendor documentation.</p>
+
+  <div class="vendor-grid">
+    <a class="vendor-card" href="aws.html">
+      <div class="vc-label">Amazon Web Services</div>
+      <div class="vc-name">AWS</div>
+      <div class="vc-desc">Well-Architected Framework, Cloud Adoption Framework, Control Tower, Landing Zones, multi-account strategy.</div>
+      <div class="vc-arr">View reference →</div>
+    </a>
+    <a class="vendor-card" href="azure.html">
+      <div class="vc-label">Microsoft Azure</div>
+      <div class="vc-name">Azure</div>
+      <div class="vc-desc">Cloud Adoption Framework, Well-Architected Framework, Azure Landing Zones, management groups, Azure Policy.</div>
+      <div class="vc-arr">View reference →</div>
+    </a>
+    <a class="vendor-card" href="google-cloud.html">
+      <div class="vc-label">Google Cloud Platform</div>
+      <div class="vc-name">Google Cloud</div>
+      <div class="vc-desc">Architecture Framework, Cloud Adoption Framework, landing-zone design, org hierarchy, Security Command Center.</div>
+      <div class="vc-arr">View reference →</div>
+    </a>
+    <a class="vendor-card" href="oci.html">
+      <div class="vc-label">Oracle Cloud Infrastructure</div>
+      <div class="vc-name">OCI</div>
+      <div class="vc-desc">Architecture principles, landing-zone patterns, tenancy and compartment design, Cloud Guard, Security Zones.</div>
+      <div class="vc-arr">View reference →</div>
+    </a>
+    <a class="vendor-card" href="landing-zone.html" style="border-top-color:var(--cold);">
+      <div class="vc-label">Vendor-Neutral</div>
+      <div class="vc-name">Landing Zone Blueprint</div>
+      <div class="vc-desc">14 enterprise landing-zone domains mapped across AWS, Azure, Google Cloud, and OCI.</div>
+      <div class="vc-arr">View blueprint →</div>
+    </a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 3: MODULE MAPPING -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-eyebrow">Framework Alignment</div>
+      <div class="section-title">VAF·SA Module Mapping</div>
+      <div class="section-desc">How each VAF·SA module aligns to cloud adoption, WAF pillars, and landing-zone design areas.</div>
+    </div>
+  </div>
+
+  <p class="p">This mapping is not a prescription. It identifies where each module's practitioner activities and outputs connect to vendor framework concepts. A practitioner working a cloud engagement will move through VAF·SA modules in sequence while drawing on vendor framework reference material at each stage.</p>
+
+  <div class="module-map">
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m1);">
+        <div class="mm-num" style="color:var(--m1);">01</div>
+        <div class="mm-name" style="color:var(--m1);">Orientation</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud adoption context</div>
+        <ul class="mm-val-list">
+          <li>Cloud strategy — why the organisation is moving to cloud and what is driving the timeline</li>
+          <li>Current-state maturity — what is already in cloud, what is on-premises, what is contested</li>
+          <li>Ownership model — who controls cloud accounts, security tooling, and landing-zone standards</li>
+          <li>Decision structure — who has the authority to approve platform and workload placement decisions</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS CAF: Business and People perspectives — strategy, readiness, stakeholder alignment</li>
+          <li>Azure CAF: Strategy and Plan phases — motivations, outcomes, business case</li>
+          <li>Google Cloud Adoption: Assess and align — current capabilities, organisational readiness</li>
+          <li>OCI: Architecture principles review — tenancy strategy, ownership, compartment governance model</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m2);">
+        <div class="mm-num" style="color:var(--m2);">02</div>
+        <div class="mm-name" style="color:var(--m2);">Intelligence</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud discovery context</div>
+        <ul class="mm-val-list">
+          <li>Workload discovery — what workloads are candidates for migration, modernisation, or re-architecture</li>
+          <li>Platform readiness — are accounts, landing zones, and baselines in place or still being built</li>
+          <li>Risk identification — what compliance, data residency, and security constraints apply</li>
+          <li>Governance gaps — where policy, tagging, cost management, or access controls are absent</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS Well-Architected Review: workload assessment, risk identification across six pillars</li>
+          <li>Azure CAF: Ready phase — landing zone assessment, environment validation</li>
+          <li>Google Cloud: Workload assessment — portfolio analysis, migration path identification</li>
+          <li>OCI: Landing-zone readiness review — compartment design, IAM, network baseline validation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m3);">
+        <div class="mm-num" style="color:var(--m3);">03</div>
+        <div class="mm-name" style="color:var(--m3);">Design</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud design context</div>
+        <ul class="mm-val-list">
+          <li>Well-Architected pillar evaluation — which pillars are most relevant to the target workload</li>
+          <li>Landing-zone design areas — account structure, identity, networking, security, monitoring</li>
+          <li>Target-state options — lift-and-shift vs re-platform vs re-architect — and the trade-offs</li>
+          <li>Platform blueprint decisions — which controls are mandatory, which are configurable</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS WAF: six pillars — Operational Excellence, Security, Reliability, Performance, Cost, Sustainability</li>
+          <li>Azure WAF: five pillars — Reliability, Security, Cost, Operational Excellence, Performance</li>
+          <li>Google Cloud Architecture Framework: six pillars — System Design, Operational Excellence, Security, Reliability, Cost, Performance</li>
+          <li>OCI: architecture best practices — high availability, security, cost efficiency, operational model</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m4);">
+        <div class="mm-num" style="color:var(--m4);">04</div>
+        <div class="mm-name" style="color:var(--m4);">Artefacts</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud artefact context</div>
+        <ul class="mm-val-list">
+          <li>Architecture Decision Records — capturing platform, workload placement, and control decisions</li>
+          <li>Architecture on a Page — landing-zone topology, workload placement, data flows</li>
+          <li>Heat Map — risk, readiness, and governance status across the workload or platform portfolio</li>
+          <li>Workload assessment — structured evidence of WAF pillar evaluation and risk disposition</li>
+          <li>Landing-zone decision pack — account structure, identity, network, security baseline decisions</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS: Well-Architected Review report, Landing Zone decision log, Control Tower configuration record</li>
+          <li>Azure: Landing Zone design documentation, Azure Policy assignment record, governance baseline</li>
+          <li>Google Cloud: Landing zone blueprint documentation, Org Policy record, Security Command Center configuration</li>
+          <li>OCI: Landing zone configuration record, Cloud Guard policy set, Security Zones definition</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m5);">
+        <div class="mm-num" style="color:var(--m5);">05</div>
+        <div class="mm-name" style="color:var(--m5);">Communication</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud communication context</div>
+        <ul class="mm-val-list">
+          <li>Executive narrative — cloud investment rationale, expected outcomes, risk posture</li>
+          <li>Risk framing — what risks are accepted, mitigated, or deferred in the current cloud posture</li>
+          <li>Governance recommendations — what policies, guardrails, and review cycles are proposed</li>
+          <li>Stakeholder alignment — aligning security, finance, operations, and delivery on the platform design</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS CAF: Governance and Security perspectives — policy, risk, compliance framing for stakeholders</li>
+          <li>Azure CAF: Govern phase — cost management, security baseline, identity, resource consistency communication</li>
+          <li>Google Cloud: Governance and compliance framing — Org Policy, audit logging, security posture reporting</li>
+          <li>OCI: Security posture reporting — Cloud Guard findings, Security Zones status, compartment policy review</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mm-row">
+      <div class="mm-key" style="border-left:3px solid var(--m6);">
+        <div class="mm-num" style="color:var(--m6);">06</div>
+        <div class="mm-name" style="color:var(--m6);">Velocity Loop</div>
+      </div>
+      <div class="mm-val">
+        <div class="mm-val-label">Cloud operating model context</div>
+        <ul class="mm-val-list">
+          <li>Continuous improvement — platform baseline iteration, control refinement, coverage expansion</li>
+          <li>Operational feedback — cost anomalies, security findings, performance drift, availability events</li>
+          <li>Platform governance iteration — policy reviews, exception management, account onboarding cadence</li>
+          <li>Cloud operating model refinement — who runs what, how issues are escalated, how changes are governed</li>
+        </ul>
+        <div class="mm-val-label">Vendor framework alignment</div>
+        <ul class="mm-val-list">
+          <li>AWS: Well-Architected continual improvement, Operational Excellence pillar practices, Control Tower drift detection</li>
+          <li>Azure: Manage and Govern phases — Azure Monitor, Cost Management, Defender posture iteration</li>
+          <li>Google Cloud: Operational excellence pillar — SRE practices, Cloud Operations Suite, continuous compliance</li>
+          <li>OCI: Cloud Guard continuous monitoring, Security Zones enforcement iteration, operational review cadence</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>
+    <div class="footer-brand"><span>VAF·SA</span> — Cloud Architecture Reference Layer</div>
+    <div class="footer-nav" style="margin-top:8px;">
+      <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone Blueprint</a>
+    </div>
+  </div>
+  <div class="footer-nav">ZenCloud Global Consultants<br>zencloudau.github.io/vaf-sa</div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>

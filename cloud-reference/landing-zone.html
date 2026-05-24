@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAF·SA Cloud Reference — Enterprise Landing Zone Blueprint. Vendor-neutral 14-domain blueprint covering identity, account structure, network, security, policy, logging, backup, cost, shared services, deployment, workload onboarding, operations, exceptions, and compliance evidence.">
+<title>VAF·SA — Enterprise Landing Zone Blueprint</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
+  --lz:#1E6FD9;--lz-dim:rgba(30,111,217,0.07);--lz-border:rgba(30,111,217,0.26);
+  --aws:#FF9900;--azure:#0078D4;--gcp:#1A73E8;--oci:#C74634;
+  --green:#16A34A;--signal:#DC2626;
+  --ink:#0F172A;--body:#334155;--muted:#64748B;
+  --border:#E2E8F0;--alt:#F1F5F9;--panel:#FFFFFF;--page:#F8FAFC;--strong:#CBD5E1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--page);color:var(--body);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-links-bar a.active{color:var(--amber);}
+.nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
+.nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:32px;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title span{color:var(--lz);}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag.lz{border-color:var(--lz-border);color:var(--lz);}
+.tag.amber{border-color:var(--amber-border);color:var(--amber);}
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(30,111,217,0.14);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--lz);margin-bottom:4px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
+.p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--ink);font-weight:600;}
+.callout{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;}
+.callout.lz{border-left-color:var(--lz);}
+.divider{height:1px;background:linear-gradient(to right,var(--lz),transparent);margin:40px 0;opacity:0.3;}
+/* DOMAIN LIST */
+.domain-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);overflow:hidden;margin:20px 0;}
+.domain-item{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--border);}
+.domain-item:last-child{border-bottom:none;}
+.di-key{padding:14px 16px;background:var(--alt);border-right:1px solid var(--border);font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--ink);letter-spacing:0.04em;display:flex;flex-direction:column;gap:4px;}
+.di-num{font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;color:rgba(30,111,217,0.3);}
+.di-val{padding:14px 18px;font-size:12.5px;color:var(--body);line-height:1.55;}
+@media(max-width:600px){.domain-item{grid-template-columns:1fr;}.di-key{border-right:none;border-bottom:1px solid var(--border);}}
+/* VENDOR MAPPING TABLE */
+.vendor-table{width:100%;border-collapse:collapse;border:1px solid var(--border);margin:20px 0;font-size:12.5px;}
+.vendor-table th{padding:10px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;background:var(--alt);border-bottom:1px solid var(--border);border-right:1px solid var(--border);color:var(--muted);}
+.vendor-table th:last-child{border-right:none;}
+.vendor-table td{padding:12px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--body);}
+.vendor-table td:last-child{border-right:none;}
+.vendor-table tr:last-child td{border-bottom:none;}
+.vendor-table .vt-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;white-space:nowrap;}
+.vt-aws{color:var(--aws);}
+.vt-azure{color:var(--azure);}
+.vt-gcp{color:var(--gcp);}
+.vt-oci{color:var(--oci);}
+.vt-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;padding:2px 7px;border:1px solid;border-radius:1px;margin:2px 2px 2px 0;white-space:nowrap;}
+.vt-tag.aws{color:var(--aws);border-color:rgba(255,153,0,0.3);}
+.vt-tag.azure{color:var(--azure);border-color:rgba(0,120,212,0.3);}
+.vt-tag.gcp{color:var(--gcp);border-color:rgba(26,115,232,0.3);}
+.vt-tag.oci{color:var(--oci);border-color:rgba(199,70,52,0.3);}
+/* VAF NOTES */
+.vaf-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
+.vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
+.pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
+.doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand span{color:var(--amber);}
+.footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
+.footer-nav a{color:var(--muted);text-decoration:none;}
+.footer-nav a:hover{color:var(--amber);}
+@media(max-width:680px){.page{padding:16px 20px 64px;}.nav-inner{padding:0 20px;}.vendor-table{font-size:11px;}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../workshop-playbook.html">Workshop</a></li>
+      <li><a href="../escalation-protocol.html">Escalation</a></li>
+      <li><a href="index.html" class="active">Cloud Ref</a></li>
+    </ul>
+    <a class="nav-cta-btn" href="../modules/module-01-orientation.html">Start Module 01 →</a>
+  </div>
+</nav>
+
+<div class="page">
+<a class="back" href="index.html">← Cloud Reference Layer</a>
+
+<div class="doc-header">
+  <div class="doc-meta">
+    <div class="doc-brand">VAF·SA — Cloud Reference · Enterprise Landing Zone Blueprint</div>
+    <div class="doc-ref">VENDOR-NEUTRAL<br>VAFSA-CRL-LZ · v1.0</div>
+  </div>
+  <div class="doc-title">ENTERPRISE<br><span>LANDING ZONE</span></div>
+  <div class="doc-subtitle">Vendor-Neutral Blueprint · 14 Domains · AWS · Azure · Google Cloud · OCI Mapping</div>
+  <div class="doc-tags">
+    <span class="tag lz">Vendor-Neutral</span>
+    <span class="tag">14 Domains</span>
+    <span class="tag">Identity</span>
+    <span class="tag">Network</span>
+    <span class="tag">Security</span>
+    <span class="tag">Governance</span>
+    <span class="tag amber">VAF·SA</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-eyebrow">Overview</div>
+      <div class="section-title">What is an Enterprise Landing Zone?</div>
+      <div class="section-desc">A pre-configured, governed foundation that every workload deploys into.</div>
+    </div>
+  </div>
+  <p class="p">An enterprise landing zone is the pre-built, governed cloud foundation into which workloads are deployed. It is not a workload — it is the environment a workload expects to find. A well-designed landing zone means teams deploying workloads do not need to solve identity, network, security, or compliance problems from scratch. Those decisions have been made, documented, and enforced at the foundation level.</p>
+  <p class="p">Every major cloud vendor publishes its own landing zone guidance — AWS Landing Zone (via Control Tower), Azure Landing Zones (via CAF), Google Cloud Landing Zones, and OCI Landing Zone patterns. These differ in terminology, tooling, and structure. The 14 domains below describe what a landing zone must address regardless of vendor. The vendor mapping in Section 03 shows how each platform implements those domains.</p>
+  <p class="p">A landing zone is an architecture decision, not a deployment script. The script is an output of that decision. Decisions made here — about account structure, network topology, identity federation, and security policy — are extremely difficult to change once workloads are running. They warrant ADRs, not just configurations.</p>
+  <div class="callout lz">VAF·SA treats the landing zone as an artefact-producing engagement, not a deployment task. Module 04 (Artefacts) is the primary instrument. Each domain below should be traceable to a recorded decision — not assumed to be inherited from a vendor template.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 14 DOMAINS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-eyebrow">Blueprint Domains</div>
+      <div class="section-title">14-Domain Enterprise Blueprint</div>
+      <div class="section-desc">The decisions that every enterprise landing zone must address, regardless of vendor.</div>
+    </div>
+  </div>
+  <div class="domain-list">
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">01</div>Identity and access</div>
+      <div class="di-val">How users, service accounts, and workloads authenticate and receive permissions. Covers the identity provider (federated or native), group structure, role definitions, and the principle of least privilege as an enforced baseline — not an aspiration. This domain governs both human access (operators, developers, administrators) and machine access (workloads calling cloud APIs).</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">02</div>Account / subscription / project / tenancy structure</div>
+      <div class="di-val">The logical boundary model for cloud resources. This is the primary isolation mechanism: AWS uses accounts, Azure uses subscriptions, Google Cloud uses projects, OCI uses compartments within a tenancy. The hierarchy — and the rationale for it — determines policy inheritance, billing boundaries, blast radius of an incident, and the scope of governance controls. Changing this structure after workloads are running is expensive and disruptive.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">03</div>Network topology</div>
+      <div class="di-val">The network architecture that connects workloads, shared services, on-premises environments, and the internet. Typically a hub-and-spoke model with centralised inspection and routing. Decisions include: CIDR allocation strategy (non-overlapping ranges across all environments), transit model (Transit Gateway, Virtual WAN, Cloud Interconnect, DRG), internet ingress and egress points, and DNS resolution strategy. Network topology decisions are effectively permanent — re-IPing a live environment is a major project.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">04</div>Security baseline</div>
+      <div class="di-val">The minimum security controls applied to every workload in the landing zone by default. Includes: encryption at rest and in transit (enforced, not optional), secrets management (no plaintext credentials), vulnerability scanning, endpoint detection, and network traffic inspection. The security baseline is not a checklist to be completed at deployment — it is an enforced architectural constraint that workloads must satisfy to be accepted into the landing zone.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">05</div>Policy and governance</div>
+      <div class="di-val">The mechanism by which the enterprise enforces architectural and security standards across all accounts, subscriptions, or projects. This includes preventive controls (deny non-compliant resource configurations at the API level), detective controls (identify drift from baseline), and corrective controls (automated remediation or alert-and-track). Policy scope, exceptions process, and the governance body responsible for policy changes must be defined and documented.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">06</div>Logging and monitoring</div>
+      <div class="di-val">Centralised collection, retention, and analysis of logs — API activity, platform events, network traffic, and application logs. Logging is a governance requirement, not a technical preference. Decisions: what is logged, where logs are stored, retention period, who can access logs, and how logs are used for security investigation and compliance evidence. The logging architecture must be independent of the workloads it observes — workloads must not be able to disable or modify their own audit trail.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">07</div>Backup and resilience</div>
+      <div class="di-val">The policy for protecting data and workloads from loss or failure. Covers backup schedules, retention periods, restore testing, cross-region or cross-zone replication, and Recovery Time Objective (RTO) and Recovery Point Objective (RPO) requirements by workload criticality tier. Backup and resilience decisions are made at the landing zone level — workloads onboarded to the zone inherit the applicable tier unless an explicit exception is recorded.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">08</div>Cost management</div>
+      <div class="di-val">How cloud spend is attributed, monitored, and controlled across accounts or projects. Includes: tagging policy (mandatory cost allocation tags, enforced at the account boundary), budget alerts, cost anomaly detection, chargeback or showback model, and the governance process for commitment purchases (Reserved Instances, Savings Plans, Committed Use Discounts). Cost management is a landing zone function — it cannot be delegated to individual workload teams without a shared foundation.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">09</div>Shared services</div>
+      <div class="di-val">Centralised capabilities that workloads consume rather than build. Typically includes: DNS resolution, centralised logging pipeline, secrets management, certificate authority, patch management, and container image registry. Shared services are deployed into the landing zone foundation — workloads reference them rather than replicating them. Decisions about what becomes a shared service and what remains workload-local are architectural decisions with cost, operational, and governance implications.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">10</div>Deployment pipelines</div>
+      <div class="di-val">How infrastructure and application code moves from source control to cloud environments. Includes: the CI/CD tooling approved for use in the landing zone, the deployment patterns (infrastructure-as-code standard, code review gates, approval workflows), environment promotion sequence (development → test → staging → production), and the access model for deployment automation (role assumptions, federated identity for pipelines, no static credentials). Deployment pipeline design is a security and governance control, not just a developer convenience.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">11</div>Workload onboarding</div>
+      <div class="di-val">The process by which a new workload or team is admitted to the landing zone. Covers: the request and approval workflow, the standard account or project structure provisioned for new workloads (account vending machine or project factory), mandatory baseline controls that must be in place before go-live, and the handover checklist. Onboarding is a governance gate — it enforces the landing zone standards at the point where workloads enter the environment, not retrospectively.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">12</div>Operations model</div>
+      <div class="di-val">How the landing zone itself is operated, maintained, and evolved over time. Includes: ownership of the landing zone components (who is responsible for the network hub, the logging pipeline, the policy engine), the change process for landing zone components, incident response responsibilities for shared services, and the cadence and process for landing zone upgrades. The operations model is an organisational decision as much as a technical one — unclear ownership of the landing zone is a recurring governance failure pattern.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">13</div>Exception handling</div>
+      <div class="di-val">The formal process for requesting, approving, documenting, and reviewing deviations from landing zone standards. Exceptions are inevitable — the absence of a formal process does not prevent exceptions, it prevents them from being tracked. The exception register is an architecture artefact: it records what the deviation is, why it was approved, who approved it, what compensating controls are in place, and when it will be reviewed. Exceptions without a review date become permanent technical debt.</div>
+    </div>
+    <div class="domain-item">
+      <div class="di-key"><div class="di-num">14</div>Compliance evidence</div>
+      <div class="di-val">The structured collection of evidence that demonstrates the landing zone meets applicable regulatory, contractual, or organisational requirements. Not a one-time audit artefact — continuous compliance means the evidence is generated automatically from the environment (policy compliance reports, configuration snapshots, log archives) and is available on demand. The compliance evidence model must be designed into the landing zone — retrofitting auditability into a running environment is difficult and incomplete.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VENDOR MAPPING -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-eyebrow">Vendor Mapping</div>
+      <div class="section-title">How Each Platform Implements the Foundation</div>
+      <div class="section-desc">Key services and concepts per vendor — not an exhaustive feature comparison.</div>
+    </div>
+  </div>
+  <p class="p">The table below maps the primary services and constructs each vendor uses for the landing zone foundation. This is a practitioner reference — it names what to look for, not how to configure it. Official vendor documentation (linked from each vendor page in this reference) covers configuration detail.</p>
+  <table class="vendor-table">
+    <thead>
+      <tr>
+        <th>Domain</th>
+        <th style="color:var(--aws)">AWS</th>
+        <th style="color:var(--azure)">Azure</th>
+        <th style="color:var(--gcp)">Google Cloud</th>
+        <th style="color:var(--oci)">OCI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Account structure</strong></td>
+        <td><span class="vt-tag aws">Organizations</span><span class="vt-tag aws">Accounts</span><span class="vt-tag aws">OUs</span><span class="vt-tag aws">Control Tower</span></td>
+        <td><span class="vt-tag azure">Management groups</span><span class="vt-tag azure">Subscriptions</span><span class="vt-tag azure">Resource groups</span></td>
+        <td><span class="vt-tag gcp">Organisation</span><span class="vt-tag gcp">Folders</span><span class="vt-tag gcp">Projects</span></td>
+        <td><span class="vt-tag oci">Tenancy</span><span class="vt-tag oci">Compartments</span></td>
+      </tr>
+      <tr>
+        <td><strong>Identity and access</strong></td>
+        <td><span class="vt-tag aws">IAM</span><span class="vt-tag aws">IAM Identity Center</span></td>
+        <td><span class="vt-tag azure">Entra ID</span><span class="vt-tag azure">PIM</span></td>
+        <td><span class="vt-tag gcp">Cloud IAM</span><span class="vt-tag gcp">Cloud Identity</span></td>
+        <td><span class="vt-tag oci">Identity Domains</span><span class="vt-tag oci">IAM Policies</span></td>
+      </tr>
+      <tr>
+        <td><strong>Policy and governance</strong></td>
+        <td><span class="vt-tag aws">Service Control Policies</span><span class="vt-tag aws">AWS Config</span></td>
+        <td><span class="vt-tag azure">Azure Policy</span><span class="vt-tag azure">Policy Initiatives</span></td>
+        <td><span class="vt-tag gcp">Org Policy</span><span class="vt-tag gcp">Org Policy constraints</span></td>
+        <td><span class="vt-tag oci">IAM Policies</span><span class="vt-tag oci">Security Zones</span></td>
+      </tr>
+      <tr>
+        <td><strong>Logging and monitoring</strong></td>
+        <td><span class="vt-tag aws">CloudTrail</span><span class="vt-tag aws">CloudWatch</span><span class="vt-tag aws">Config</span></td>
+        <td><span class="vt-tag azure">Azure Monitor</span><span class="vt-tag azure">Activity Log</span><span class="vt-tag azure">Log Analytics</span></td>
+        <td><span class="vt-tag gcp">Cloud Logging</span><span class="vt-tag gcp">Cloud Audit Logs</span></td>
+        <td><span class="vt-tag oci">OCI Audit</span><span class="vt-tag oci">OCI Logging</span><span class="vt-tag oci">Service Connector Hub</span></td>
+      </tr>
+      <tr>
+        <td><strong>Security baseline</strong></td>
+        <td><span class="vt-tag aws">GuardDuty</span><span class="vt-tag aws">Security Hub</span></td>
+        <td><span class="vt-tag azure">Defender for Cloud</span><span class="vt-tag azure">Sentinel</span></td>
+        <td><span class="vt-tag gcp">Security Command Center</span></td>
+        <td><span class="vt-tag oci">Cloud Guard</span><span class="vt-tag oci">Security Zones</span></td>
+      </tr>
+      <tr>
+        <td><strong>Network topology</strong></td>
+        <td><span class="vt-tag aws">VPC</span><span class="vt-tag aws">Transit Gateway</span><span class="vt-tag aws">Network Firewall</span></td>
+        <td><span class="vt-tag azure">VNet</span><span class="vt-tag azure">Virtual WAN</span><span class="vt-tag azure">Azure Firewall</span></td>
+        <td><span class="vt-tag gcp">VPC</span><span class="vt-tag gcp">Shared VPC</span><span class="vt-tag gcp">Cloud Interconnect</span></td>
+        <td><span class="vt-tag oci">VCN</span><span class="vt-tag oci">DRG</span><span class="vt-tag oci">FastConnect</span></td>
+      </tr>
+      <tr>
+        <td><strong>Workload onboarding</strong></td>
+        <td><span class="vt-tag aws">Account Factory</span><span class="vt-tag aws">Control Tower</span></td>
+        <td><span class="vt-tag azure">Subscription vending</span><span class="vt-tag azure">Azure Blueprints</span></td>
+        <td><span class="vt-tag gcp">Project factory</span><span class="vt-tag gcp">Org Policy</span></td>
+        <td><span class="vt-tag oci">Compartment patterns</span><span class="vt-tag oci">Resource Manager</span></td>
+      </tr>
+      <tr>
+        <td><strong>Deployment pipelines</strong></td>
+        <td><span class="vt-tag aws">CodePipeline</span><span class="vt-tag aws">CloudFormation</span><span class="vt-tag aws">CDK</span></td>
+        <td><span class="vt-tag azure">Azure DevOps</span><span class="vt-tag azure">Bicep</span><span class="vt-tag azure">GitHub Actions</span></td>
+        <td><span class="vt-tag gcp">Cloud Build</span><span class="vt-tag gcp">Cloud Deploy</span><span class="vt-tag gcp">Terraform</span></td>
+        <td><span class="vt-tag oci">Resource Manager</span><span class="vt-tag oci">OCI DevOps</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout">Vendor mapping is a starting point, not a prescription. The correct set of services for any engagement depends on what is already deployed, what the client's teams know how to operate, and what governance constraints apply. VAF·SA does not recommend vendor tooling — it helps practitioners work with what is in front of them.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VAF·SA USAGE NOTES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-eyebrow">VAF·SA Usage Notes</div>
+      <div class="section-title">Applying VAF·SA in Landing Zone Engagements</div>
+      <div class="section-desc">Where the practitioner method adds value when landing zones are the subject of the engagement.</div>
+    </div>
+  </div>
+  <div class="vaf-notes">
+    <div class="vn-label">VAF·SA Practitioner Notes — Landing Zone</div>
+    <ul class="vn-list">
+      <li><strong>Landing zones are rarely built from zero.</strong> Most engagements involve a landing zone that already exists — built by a previous team, modified over time, and partially documented. Module 02 (Intelligence) is the instrument for establishing what is actually deployed versus what the vendor template assumed. Do not document the template; document the deviation from it.</li>
+      <li><strong>The 14 domains are decision prompts, not a deployment checklist.</strong> Each domain surfaces a decision that should be recorded as an Architecture Decision Record (ADR) under Module 04 (Artefacts). If a landing zone engagement cannot produce an ADR for each domain, the decisions have been made implicitly — which is the condition VAF·SA exists to address.</li>
+      <li><strong>Account structure and network topology decisions are foundational constraints.</strong> Changes to these domains after workloads are running are high-risk and expensive. Module 01 (Orientation) establishes whether the landing zone is in a greenfield, brownfield, or contested state before any recommendations are made. The engagement type determines what VAF·SA can actually change versus what it can only document.</li>
+      <li><strong>Exception handling is an indicator of governance health.</strong> A landing zone with no formal exception register does not have no exceptions — it has undocumented ones. Module 05 (Communication) includes communicating exception risk to the appropriate stakeholders. The exception register produced in Module 04 (Artefacts) is often the most actionable governance output of a landing zone engagement.</li>
+      <li><strong>The Velocity Loop applies to landing zone drift.</strong> A landing zone that was correct at build time will drift unless there is a mechanism to detect and correct it. Module 06 (The Velocity Loop) is the practitioner framework for maintaining posture across engagement cycles — applicable to ongoing landing zone health reviews as much as to workload delivery engagements.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a class="pn-prev" href="oci.html">← OCI Reference</a>
+  <a class="pn-next" href="index.html">Cloud Ref Overview →</a>
+</div>
+
+<div class="doc-footer">
+  <div class="footer-brand"><span>VAF·SA</span> — Enterprise Landing Zone Blueprint</div>
+  <div class="footer-nav"><a href="index.html">Cloud Ref</a> · <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a></div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>
