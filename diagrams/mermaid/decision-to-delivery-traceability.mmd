@@ -1,0 +1,54 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EFF6FF', 'primaryBorderColor': '#2563EB', 'lineColor': '#64748B'}}}%%
+flowchart LR
+    subgraph Discovery ["Discovery Layer"]
+        CIS[Current Intent Statement\nCIS — constraints · drivers · context]
+    end
+
+    subgraph Artefacts ["Architecture Artefact Chain"]
+        direction TB
+        AOAP[Architecture on a Page\nAoAP — one-page view]
+        CSA[Conceptual Solution Architecture\nCSA — logical design]
+        SAS[Solution Architecture Summary\nSAS — stakeholder brief]
+        SAD[Solution Architecture Document\nSAD — full technical record]
+        ADR[Architecture Decision Records\nADR — per key decision]
+    end
+
+    subgraph Governance ["Governance & Assurance"]
+        ARB[Architecture Review Board\nARB]
+        TRA[TRA Submission Package]
+    end
+
+    subgraph Delivery ["Delivery"]
+        BACKLOG[Product / Delivery Backlog]
+        SPRINT[Sprint / Increment]
+        REG[Architecture Register]
+    end
+
+    CIS --> AOAP
+    AOAP --> CSA
+    CSA --> SAS
+    SAS --> SAD
+    ADR -.->|decision referenced in| CSA
+    ADR -.->|decision referenced in| SAS
+    ADR -.->|decision referenced in| SAD
+
+    AOAP -->|briefed to| ARB
+    SAS -->|reviewed by| ARB
+    SAD -->|submitted to| TRA
+    ARB -->|approval gate| SAD
+
+    SAD -->|informs| BACKLOG
+    ADR -->|constraints inform| BACKLOG
+    BACKLOG --> SPRINT
+    SPRINT -.->|architecture change triggers| ADR
+    SAD -->|registered in| REG
+    ADR -->|registered in| REG
+
+    classDef disco fill:#FFF7ED,stroke:#EA580C,color:#7C2D12
+    classDef artefact fill:#EFF6FF,stroke:#2563EB,color:#1E3A5F
+    classDef gov fill:#F0FDF4,stroke:#16A34A,color:#14532D
+    classDef delivery fill:#F8FAFC,stroke:#64748B,color:#0F172A
+    class CIS disco
+    class AOAP,CSA,SAS,SAD,ADR artefact
+    class ARB,TRA gov
+    class BACKLOG,SPRINT,REG delivery

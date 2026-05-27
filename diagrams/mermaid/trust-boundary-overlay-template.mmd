@@ -1,0 +1,64 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#F8FAFC', 'primaryBorderColor': '#64748B', 'lineColor': '#64748B'}}}%%
+flowchart TB
+    subgraph ext ["&#x1F534; External / Untrusted Zone"]
+        direction TB
+        U([End User\nbrowser · mobile])
+        P([Partner / Third-Party\nB2B integration])
+        ATTK([Threat Actor\nadversarial])
+    end
+
+    subgraph dmz ["&#x1F7E1; DMZ / Perimeter Zone"]
+        direction LR
+        WAF[WAF / DDoS Mitigation\nL3–L7 filtering]
+        GW[API Gateway\nauth · throttle · TLS termination]
+        CDN[CDN\nstatic asset delivery]
+    end
+
+    subgraph app ["&#x1F7E2; Application Zone — Trusted Internal"]
+        direction LR
+        SVC[Application Services\nbusiness logic]
+        IAM[Identity & Access Mgmt\nAuthN · AuthZ · RBAC]
+        BUS[Event Bus\nasync decoupling]
+    end
+
+    subgraph data ["&#x1F535; Data Zone — Restricted"]
+        direction LR
+        DB[(Primary Database\nencrypted at rest + transit)]
+        VAULT[Secret Store\ncredentials · keys · certs]
+        BACKUP[(Backup & Archive\nimmutable · geo-redundant)]
+    end
+
+    subgraph admin ["&#x26AB; Admin / Privileged Zone"]
+        direction LR
+        MGMT[Management Plane\nconfig · deploy · patch]
+        AUDIT[Audit & SIEM\ncentralised log analysis]
+    end
+
+    U -->|HTTPS 443| WAF
+    P -->|mTLS 443| WAF
+    ATTK -. blocked .-> WAF
+    WAF --> CDN
+    WAF --> GW
+    GW <-->|token validation| IAM
+    GW -->|authenticated request| SVC
+    SVC <-->|AuthZ check| IAM
+    SVC --> BUS
+    SVC -->|read · write| DB
+    SVC -->|secret fetch| VAULT
+    BUS --> SVC
+    DB --> BACKUP
+    MGMT -->|privileged access — MFA + PAM| SVC
+    MGMT --> VAULT
+    SVC -->|events · logs| AUDIT
+    GW -->|access logs| AUDIT
+
+    classDef red fill:#FEF2F2,stroke:#DC2626,color:#991B1B
+    classDef yellow fill:#FFFBEB,stroke:#D97706,color:#92400E
+    classDef green fill:#F0FDF4,stroke:#16A34A,color:#14532D
+    classDef blue fill:#EFF6FF,stroke:#2563EB,color:#1E3A5F
+    classDef grey fill:#1E293B,stroke:#475569,color:#F8FAFC
+    class U,P,ATTK red
+    class WAF,GW,CDN yellow
+    class SVC,IAM,BUS green
+    class DB,VAULT,BACKUP blue
+    class MGMT,AUDIT grey

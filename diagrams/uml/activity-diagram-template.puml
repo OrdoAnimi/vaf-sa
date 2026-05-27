@@ -1,0 +1,72 @@
+@startuml activity-diagram-template
+title Activity Diagram — [Process Name]
+' Replace bracketed placeholders before use.
+
+skinparam backgroundColor #F8FAFC
+skinparam activityBorderColor #CBD5E1
+skinparam activityBackgroundColor #FFFFFF
+skinparam activityArrowColor #2563EB
+skinparam noteBorderColor #D97706
+skinparam noteBackgroundColor #FFFBEB
+skinparam fontName "DM Sans"
+
+|Caller / Client|
+start
+
+:Submit [request / event];
+
+|API Gateway|
+
+if (Valid request format?) then (yes)
+    :Authenticate caller;
+    if (Token valid and not expired?) then (yes)
+        :Authorise request scope;
+        if (Caller has required permission?) then (yes)
+        else (no)
+            :Return 403 Forbidden;
+            stop
+        endif
+    else (no)
+        :Return 401 Unauthorized;
+        stop
+    endif
+else (no)
+    :Return 400 Bad Request;
+    stop
+endif
+
+|Application Service|
+
+:Retrieve current state\nfrom database;
+
+if (Pre-condition check passes?) then (yes)
+    :Apply business logic;
+
+    fork
+        :Update primary record;
+    fork again
+        :Publish domain event\nto event bus;
+    end fork
+
+    :Persist audit entry;
+
+    |API Gateway|
+    :Return 200 OK\n{response payload};
+
+else (no)
+    :Return 409 Conflict\n{reason detail};
+    stop
+endif
+
+|Caller / Client|
+:Handle response;
+
+if (Success?) then (yes)
+    :Update UI / downstream state;
+else (no)
+    :Display error\nand retry options;
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,53 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EFF6FF', 'primaryBorderColor': '#2563EB', 'lineColor': '#64748B'}}}%%
+flowchart LR
+    subgraph External ["External / Consumer"]
+        U([User / API Consumer])
+        P([Partner System])
+    end
+
+    subgraph Ingress ["Ingress Layer"]
+        GW[API Gateway\nauth · rate-limit · routing]
+    end
+
+    subgraph Application ["Application Layer"]
+        SVC[Application Service\nbusiness logic · orchestration]
+        CACHE[(Cache\nRedis)]
+    end
+
+    subgraph Persistence ["Persistence Layer"]
+        DB[(Primary Database\nPostgreSQL)]
+        DW[(Analytics / Warehouse\nread-optimised)]
+    end
+
+    subgraph Async ["Async / Event Layer"]
+        BUS[Event Bus / Queue\nSQS · SNS · Kafka]
+        WORKER[Worker Service\nasync processing]
+    end
+
+    subgraph Observability ["Observability"]
+        LOG[Log Aggregator]
+        METRICS[Metrics / APM]
+    end
+
+    U -->|HTTPS — request| GW
+    P -->|mTLS — API call| GW
+    GW -->|validated request| SVC
+    SVC <-->|read · write hot data| CACHE
+    CACHE -.->|cache miss — fallback| DB
+    SVC -->|read · write| DB
+    SVC -->|publish domain event| BUS
+    BUS -->|deliver event| WORKER
+    WORKER -->|write processed record| DB
+    WORKER -->|write analytical record| DW
+    SVC -->|log · trace| LOG
+    SVC -->|metric| METRICS
+    WORKER -->|log · trace| LOG
+
+    classDef layer fill:#F8FAFC,stroke:#CBD5E1,color:#0F172A
+    classDef store fill:#EFF6FF,stroke:#2563EB,color:#1E3A5F
+    classDef bus fill:#F0FDF4,stroke:#16A34A,color:#14532D
+    classDef obs fill:#FFF7ED,stroke:#EA580C,color:#7C2D12
+    class GW,SVC,WORKER layer
+    class CACHE,DB,DW store
+    class BUS bus
+    class LOG,METRICS obs

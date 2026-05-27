@@ -1,0 +1,28 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1E3A5F', 'primaryTextColor': '#F8FAFC', 'primaryBorderColor': '#2563EB', 'lineColor': '#64748B', 'secondaryColor': '#F1F5F9', 'tertiaryColor': '#FFFFFF'}}}%%
+flowchart TD
+    A([Engagement Initiated]) --> B[Intake & Scoping\narchitecture-intake-checklist]
+    B --> C[Discovery\nCurrent Intent Statement — CIS]
+    C --> D{Complexity\nAssessment}
+    D -->|Low| E1[Architecture on a Page\nAoAP — fast track]
+    D -->|Medium| E2[AoAP + Conceptual SA\nCSA]
+    D -->|High| E3[AoAP + CSA + SAS + SAD\nfull artefact set]
+    E1 --> F[Architecture Review\nlight — ARB or peer]
+    E2 --> G[Architecture Review\nstandard — ARB]
+    E3 --> H[Architecture Review\nfull — ARB + TRA readiness]
+    F --> I{Gate: Approved?}
+    G --> I
+    H --> I
+    I -->|Yes| J[Delivery Handoff\nADRs + SAD to team]
+    I -->|Revise| C
+    I -->|Escalate| K[Escalation Protocol]
+    J --> L[Architecture Register Entry]
+    L --> M([Velocity Loop — next cycle])
+    K --> B
+
+    classDef default fill:#F8FAFC,stroke:#CBD5E1,color:#0F172A,font-size:12px
+    classDef gate fill:#FEF3C7,stroke:#D97706,color:#92400E
+    classDef terminal fill:#1E3A5F,stroke:#1E3A5F,color:#F8FAFC
+    classDef escalate fill:#FEE2E2,stroke:#DC2626,color:#991B1B
+    class I gate
+    class A,M terminal
+    class K escalate

@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base'}}%%
+C4Container
+    title Container Diagram — [System Name]
+
+    Person(endUser, "End User", "Interacts via browser or mobile.")
+
+    System_Ext(idp, "Identity Provider", "OAuth 2.0 / OIDC")
+    System_Ext(extAPI, "External API / Data Source", "Third-party integration")
+
+    System_Boundary(sys, "[System Name]") {
+        Container(webApp, "Web Application", "React / TypeScript", "Delivers the user interface.\nServed via CDN.")
+        Container(apiGateway, "API Gateway", "Managed Gateway", "Request routing, rate limiting,\nauth token validation.")
+        Container(appService, "Application Service", "[Language / Framework]", "Core business logic,\ndomain orchestration.")
+        Container(workerService, "Worker / Job Service", "[Language / Framework]", "Async processing, background jobs,\nevent-driven tasks.")
+        ContainerDb(primaryDb, "Primary Database", "PostgreSQL / Aurora", "Persistent relational data store.\nManaged, HA, automated backups.")
+        ContainerDb(cacheLayer, "Cache", "Redis / ElastiCache", "Session data, hot-path reads,\nrate limit counters.")
+        Container(eventBus, "Event Bus / Queue", "SQS / SNS / Kafka", "Decouples producers from consumers.\nGuarantees at-least-once delivery.")
+    }
+
+    Rel(endUser, webApp, "Uses", "HTTPS 443")
+    Rel(webApp, apiGateway, "Calls", "HTTPS / REST")
+    Rel(apiGateway, idp, "Validates token via", "OIDC / HTTPS")
+    Rel(apiGateway, appService, "Routes request to", "HTTP / internal")
+    Rel(appService, primaryDb, "Reads / writes", "TLS / SQL")
+    Rel(appService, cacheLayer, "Reads / writes", "TLS")
+    Rel(appService, eventBus, "Publishes events to", "AMQP / HTTPS")
+    Rel(eventBus, workerService, "Delivers events to", "AMQP / HTTPS")
+    Rel(workerService, primaryDb, "Reads / writes", "TLS / SQL")
+    Rel(appService, extAPI, "Calls", "HTTPS / REST")
+
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")

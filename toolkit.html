@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VAF·SA Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
+<title>VAF·SA — SA Toolkit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --page:    #F8FAFC;
+  --panel:   #FFFFFF;
+  --alt:     #F1F5F9;
+  --ink:     #0F172A;
+  --body:    #334155;
+  --muted:   #64748B;
+  --border:  #E2E8F0;
+  --strong:  #CBD5E1;
+  --accent:  #E8630A;
+  --accentd: #C24F06;
+  --abg:     rgba(232,99,10,0.07);
+  --aborder: rgba(232,99,10,0.22);
+  --navy:    #1E3A5F;
+  --blue:    #2563EB;
+  --green:   #16A34A;
+  --purple:  #7C3AED;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--page); color:var(--body); font-family:'DM Sans',sans-serif; font-size:15px; line-height:1.65; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* ── NAV ───────────────────────── */
+.site-nav {
+  position:sticky; top:0; z-index:100;
+  background:#fff; border-bottom:1px solid var(--border);
+  box-shadow:0 1px 4px rgba(15,23,42,0.07);
+}
+.nav-inner {
+  max-width:1140px; margin:0 auto; padding:0 32px;
+  height:52px; display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.nav-brand { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.06em; color:var(--accent); text-decoration:none; white-space:nowrap; flex-shrink:0; }
+.nav-brand:hover { text-decoration:none; }
+.nav-links { display:flex; align-items:center; gap:20px; list-style:none; flex-wrap:wrap; }
+.nav-links a { font-size:12px; font-weight:600; color:var(--muted); text-decoration:none; white-space:nowrap; }
+.nav-links a:hover { color:var(--accent); text-decoration:none; }
+.nav-links a.active { color:var(--accent); }
+.nav-cta { font-size:12px; font-weight:700; text-decoration:none; padding:7px 16px; background:var(--accent); color:#fff; border-radius:2px; }
+.nav-cta:hover { background:var(--accentd); color:#fff; text-decoration:none; }
+
+/* ── PAGE ──────────────────────── */
+.page { max-width:1140px; margin:0 auto; padding:0 32px 96px; }
+.back { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:var(--muted); text-decoration:none; display:inline-block; margin:32px 0 40px; }
+.back:hover { color:var(--accent); }
+
+/* ── HERO ──────────────────────── */
+.hero { padding:48px 0 44px; border-bottom:1px solid var(--border); margin-bottom:48px; }
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,8vw,96px); letter-spacing:0.03em; line-height:0.88; color:var(--ink); margin-bottom:14px; }
+.hero-title .accent { color:var(--accent); }
+.hero-strip { display:flex; gap:4px; height:3px; max-width:220px; margin-bottom:14px; }
+.hero-strip div { flex:1; }
+.hero-tagline { font-family:'DM Mono',monospace; font-size:12px; font-weight:500; letter-spacing:0.1em; color:var(--muted); margin-bottom:18px; }
+.hero-desc { font-size:14px; color:var(--body); max-width:680px; line-height:1.75; }
+
+/* ── DISCLAIMER CALLOUT ────────── */
+.disclaimer {
+  background:var(--alt); border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  padding:20px 24px; margin-bottom:48px;
+  font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); line-height:1.8;
+}
+.disclaimer strong { color:var(--ink); font-weight:600; font-family:'DM Sans',sans-serif; font-size:12px; }
+.disclaimer .tool-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.disclaimer .tool-tag {
+  font-family:'DM Mono',monospace; font-size:10px; padding:3px 8px;
+  background:var(--panel); border:1px solid var(--border); color:var(--muted); border-radius:2px;
+}
+
+/* ── SECTION LABEL ─────────────── */
+.section-label {
+  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.25em;
+  color:var(--muted); text-transform:uppercase; margin-bottom:16px;
+  padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.section-block { margin-bottom:52px; }
+
+/* ── TOOLKIT GRID ──────────────── */
+.tk-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+}
+@media(max-width:900px){ .tk-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:540px){ .tk-grid { grid-template-columns:1fr; } }
+
+.tk-card {
+  background:var(--panel); border:1px solid var(--border);
+  border-top:2px solid var(--border);
+  padding:20px 22px; display:flex; flex-direction:column; gap:10px;
+  transition:border-color 0.15s, box-shadow 0.15s;
+}
+.tk-card:hover { border-color:var(--strong); box-shadow:0 2px 8px rgba(15,23,42,0.06); }
+.tk-card.accent  { border-top-color:var(--accent); }
+.tk-card.navy    { border-top-color:var(--navy); }
+.tk-card.blue    { border-top-color:var(--blue); }
+.tk-card.green   { border-top-color:var(--green); }
+.tk-card.purple  { border-top-color:var(--purple); }
+.tk-card.muted   { border-top-color:var(--muted); }
+
+.tk-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); }
+.tk-name { font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink); line-height:1.3; }
+.tk-desc { font-size:13px; color:var(--muted); line-height:1.6; flex:1; }
+.tk-file { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); }
+.tk-file:hover { text-decoration:underline; }
+.tk-foot { display:flex; justify-content:space-between; align-items:center; margin-top:4px; }
+.tk-type { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); background:var(--alt); padding:2px 7px; border-radius:2px; }
+
+/* ── FILE LIST ─────────────────── */
+.file-list { display:flex; flex-direction:column; gap:6px; }
+.file-item {
+  display:grid; grid-template-columns:120px 1fr auto;
+  align-items:start; gap:12px;
+  background:var(--panel); border:1px solid var(--border);
+  padding:12px 16px; text-decoration:none; color:inherit;
+  transition:border-color 0.12s;
+}
+.file-item:hover { border-color:var(--strong); text-decoration:none; }
+@media(max-width:640px){ .file-item { grid-template-columns:1fr; } }
+.fi-name { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); word-break:break-all; }
+.fi-desc { font-size:13px; color:var(--muted); line-height:1.5; }
+.fi-badge { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); background:var(--alt); padding:2px 7px; border-radius:2px; white-space:nowrap; align-self:start; }
+
+/* ── PATHWAY TABLE ─────────────── */
+.pathway-table { width:100%; border-collapse:collapse; font-size:13px; }
+.pathway-table th { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); padding:8px 12px; border-bottom:2px solid var(--border); text-align:left; background:var(--alt); }
+.pathway-table td { padding:10px 12px; border-bottom:1px solid var(--border); color:var(--body); vertical-align:top; }
+.pathway-table tr:last-child td { border-bottom:none; }
+.pathway-table td:first-child { font-weight:600; color:var(--ink); white-space:nowrap; }
+.pathway-table td code { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); }
+
+/* ── FOOTER ────────────────────── */
+.site-footer { border-top:1px solid var(--border); padding:32px 0 0; margin-top:48px; }
+.footer-inner { max-width:1140px; margin:0 auto; padding:0 32px 32px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px; }
+.footer-brand { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--strong); }
+.footer-brand span { color:var(--accent); }
+.footer-links { display:flex; flex-wrap:wrap; gap:12px 20px; margin-top:8px; }
+.footer-link { font-size:12px; color:var(--muted); text-decoration:none; }
+.footer-link:hover { color:var(--accent); }
+.footer-meta { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); line-height:1.7; text-align:right; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">VAF·SA</a>
+    <ul class="nav-links">
+      <li><a href="preface.html">Preface</a></li>
+      <li><a href="lexicon.html">Lexicon</a></li>
+      <li><a href="worked-example.html">Worked Example</a></li>
+      <li><a href="toolkit.html" class="active">SA Toolkit</a></li>
+      <li><a href="cloud-reference/">Cloud Ref</a></li>
+      <li><a href="https://zencloudau.github.io/velocity-architecture/" target="_blank" rel="noopener">VAF Framework ↗</a></li>
+    </ul>
+    <a class="nav-cta" href="modules/module-01-orientation.html">Start Module 01</a>
+  </div>
+</nav>
+
+<div class="page">
+<a class="back" href="index.html">← VAF·SA Framework</a>
+
+<!-- ── HERO ──────────────────────── -->
+<div class="hero">
+  <div class="hero-eyebrow">VAF·SA — Practitioner Toolkit</div>
+  <div class="hero-title">SA <span class="accent">Toolkit</span></div>
+  <div class="hero-strip">
+    <div style="background:var(--accent)"></div>
+    <div style="background:var(--navy)"></div>
+    <div style="background:var(--blue)"></div>
+    <div style="background:var(--green)"></div>
+    <div style="background:var(--muted)"></div>
+  </div>
+  <div class="hero-tagline">Templates · Diagrams · Governance · Patterns</div>
+  <div class="hero-desc">
+    Reusable solution architecture artefacts — Mermaid, C4, UML, data flow, trust boundary diagrams,
+    and structured templates for AoAP, CSA, SAS, SAD, ADR, and TRA submission.
+    Everything in this toolkit is tooling-agnostic and delivery-ready.
+  </div>
+</div>
+
+<!-- ── DISCLAIMER ────────────────── -->
+<div class="disclaimer">
+  <strong>VAF·SA does not replace your diagramming tools.</strong>
+  <br><br>
+  This toolkit provides reusable solution architecture patterns, decision structures, and artefact templates.
+  The diagrams are written in open formats — Mermaid and PlantUML — that render in any compatible tool.
+  VAF·SA connects these artefacts to delivery governance, decision traceability, and TRA readiness.
+  <div class="tool-list">
+    <span class="tool-tag">Mermaid</span>
+    <span class="tool-tag">PlantUML</span>
+    <span class="tool-tag">C4 Model</span>
+    <span class="tool-tag">UML</span>
+    <span class="tool-tag">Lucidchart</span>
+    <span class="tool-tag">Visio</span>
+    <span class="tool-tag">Draw.io</span>
+    <span class="tool-tag">ArchiMate</span>
+    <span class="tool-tag">Orbus iServer</span>
+    <span class="tool-tag">GitHub Copilot</span>
+  </div>
+</div>
+
+<!-- ── ENGAGEMENT PATHWAY ─────────── -->
+<div class="section-block">
+  <div class="section-label">Engagement pathway — which artefacts, in which order</div>
+  <table class="pathway-table">
+    <thead>
+      <tr>
+        <th>Pathway</th>
+        <th>When to use</th>
+        <th>Artefacts</th>
+        <th>Governance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fast-Track</td>
+        <td>Low complexity, known domain, low risk</td>
+        <td><code>AoAP</code></td>
+        <td>Peer review or lead architect sign-off</td>
+      </tr>
+      <tr>
+        <td>Standard</td>
+        <td>Medium complexity or moderate risk</td>
+        <td><code>AoAP</code> + <code>CSA</code></td>
+        <td>Architecture Review Board — standard session</td>
+      </tr>
+      <tr>
+        <td>Full</td>
+        <td>High complexity, unfamiliar domain, or regulatory scope</td>
+        <td><code>AoAP</code> + <code>CSA</code> + <code>SAS</code> + <code>SAD</code></td>
+        <td>Architecture Review Board — full session</td>
+      </tr>
+      <tr>
+        <td>TRA-Ready</td>
+        <td>Full pathway + TRA submission required</td>
+        <td>All above + TRA package</td>
+        <td>ARB + TRA body submission</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── TOOLKIT SECTIONS ───────────── -->
+<div class="section-block">
+  <div class="section-label">Toolkit — four capability areas</div>
+  <div class="tk-grid">
+
+    <div class="tk-card accent">
+      <div class="tk-label">Engagement</div>
+      <div class="tk-name">Engagement Toolkit</div>
+      <div class="tk-desc">Intake checklist and discovery framework. Use before producing any artefact. Surfaces the Current Intent Statement.</div>
+      <div class="tk-foot">
+        <span class="tk-type">2 templates</span>
+        <span class="tk-type">toolkit/engagement-toolkit/</span>
+      </div>
+    </div>
+
+    <div class="tk-card navy">
+      <div class="tk-label">Visual Modelling</div>
+      <div class="tk-name">Visual Modelling Toolkit</div>
+      <div class="tk-desc">Mermaid and PlantUML diagram templates — C4, data flow, trust boundary, UML sequence, activity, deployment. Open format, tool-agnostic.</div>
+      <div class="tk-foot">
+        <span class="tk-type">10 diagrams</span>
+        <span class="tk-type">diagrams/</span>
+      </div>
+    </div>
+
+    <div class="tk-card blue">
+      <div class="tk-label">Architecture Artefacts</div>
+      <div class="tk-name">Artefact Templates</div>
+      <div class="tk-desc">AoAP, CSA, SAS, SAD (TRA-ready), and ADR templates. Structured for ARB review and delivery governance.</div>
+      <div class="tk-foot">
+        <span class="tk-type">5 templates</span>
+        <span class="tk-type">templates/</span>
+      </div>
+    </div>
+
+    <div class="tk-card green">
+      <div class="tk-label">Governance</div>
+      <div class="tk-name">Governance &amp; TRA Toolkit</div>
+      <div class="tk-desc">TRA readiness checklist mapped to ISM, PSPF, Privacy Act, and sector-specific obligations. Every unchecked item is a rejection risk.</div>
+      <div class="tk-foot">
+        <span class="tk-type">1 checklist</span>
+        <span class="tk-type">toolkit/governance-tra-toolkit/</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MERMAID DIAGRAMS ───────────── -->
+<div class="section-block">
+  <div class="section-label">Mermaid diagrams — open in any Mermaid-compatible tool</div>
+  <div class="file-list">
+
+    <a class="file-item" href="diagrams/mermaid/architecture-engagement-flow.mmd">
+      <div class="fi-name">architecture-engagement-flow.mmd</div>
+      <div class="fi-desc">Full engagement lifecycle — intake through to delivery handoff and architecture register. Shows all three complexity pathways and governance gates.</div>
+      <div class="fi-badge">.mmd · Mermaid</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/c4-context-template.mmd">
+      <div class="fi-name">c4-context-template.mmd</div>
+      <div class="fi-desc">C4 Level 1 — System Context. Users, administrators, the core system, and all external dependencies. Replace bracketed placeholders.</div>
+      <div class="fi-badge">.mmd · C4 Context</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/c4-container-template.mmd">
+      <div class="fi-name">c4-container-template.mmd</div>
+      <div class="fi-desc">C4 Level 2 — Container. Web app, API gateway, application service, worker, database, cache, event bus. Full interaction set included.</div>
+      <div class="fi-badge">.mmd · C4 Container</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/data-flow-template.mmd">
+      <div class="fi-name">data-flow-template.mmd</div>
+      <div class="fi-desc">End-to-end data flow — external consumer through ingress, application, persistence, async/event, and observability layers.</div>
+      <div class="fi-badge">.mmd · Data Flow</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/trust-boundary-overlay-template.mmd">
+      <div class="fi-name">trust-boundary-overlay-template.mmd</div>
+      <div class="fi-desc">Four-zone trust boundary overlay — External / DMZ / Application / Data / Admin. Security controls mapped to each zone boundary.</div>
+      <div class="fi-badge">.mmd · Security</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/architecture-governance-flow.mmd">
+      <div class="fi-name">architecture-governance-flow.mmd</div>
+      <div class="fi-desc">Architecture governance process — intake, triage, three ARB pathways, TRA decision branch, revise/resubmit loop, and delivery handoff.</div>
+      <div class="fi-badge">.mmd · Governance</div>
+    </a>
+
+    <a class="file-item" href="diagrams/mermaid/decision-to-delivery-traceability.mmd">
+      <div class="fi-name">decision-to-delivery-traceability.mmd</div>
+      <div class="fi-desc">Full traceability chain from CIS through AoAP → CSA → SAS → SAD → TRA, with ADR cross-references, ARB gate, and delivery backlog linkage.</div>
+      <div class="fi-badge">.mmd · Traceability</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ── PLANTUML DIAGRAMS ──────────── -->
+<div class="section-block">
+  <div class="section-label">PlantUML diagrams — open in PlantUML, IntelliJ, VS Code, or any compatible tool</div>
+  <div class="file-list">
+
+    <a class="file-item" href="diagrams/uml/sequence-diagram-template.puml">
+      <div class="fi-name">sequence-diagram-template.puml</div>
+      <div class="fi-desc">Full request/response sequence — user, frontend, API gateway, application service, database, external service, event bus. Happy path and two error paths included.</div>
+      <div class="fi-badge">.puml · Sequence</div>
+    </a>
+
+    <a class="file-item" href="diagrams/uml/activity-diagram-template.puml">
+      <div class="fi-name">activity-diagram-template.puml</div>
+      <div class="fi-desc">Request processing activity flow — input validation, authentication, authorisation, business logic, parallel fork for event and persistence, error exits.</div>
+      <div class="fi-badge">.puml · Activity</div>
+    </a>
+
+    <a class="file-item" href="diagrams/uml/deployment-diagram-template.puml">
+      <div class="fi-name">deployment-diagram-template.puml</div>
+      <div class="fi-desc">Cloud deployment diagram — edge/perimeter, public subnet, application tier (auto-scaling), data tier (primary + replica + cache), platform services, admin/management plane.</div>
+      <div class="fi-badge">.puml · Deployment</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ── ARTEFACT TEMPLATES ─────────── -->
+<div class="section-block">
+  <div class="section-label">Architecture artefact templates — Markdown, structured for ARB and TRA submission</div>
+  <div class="file-list">
+
+    <a class="file-item" href="toolkit/engagement-toolkit/architecture-intake-checklist.md">
+      <div class="fi-name">architecture-intake-checklist.md</div>
+      <div class="fi-desc">Engagement intake checklist — scope, stakeholders, constraints, information state, risk, and artefact pathway decision. Use before any artefact is produced.</div>
+      <div class="fi-badge">.md · Intake</div>
+    </a>
+
+    <a class="file-item" href="toolkit/engagement-toolkit/architecture-discovery-framework.md">
+      <div class="fi-name">architecture-discovery-framework.md</div>
+      <div class="fi-desc">Structured discovery questions for CIS development — organisational context, current state, decision inventory, risk, future state intent, and the blank cell test.</div>
+      <div class="fi-badge">.md · Discovery</div>
+    </a>
+
+    <a class="file-item" href="templates/architecture-on-a-page-template.md">
+      <div class="fi-name">architecture-on-a-page-template.md</div>
+      <div class="fi-desc">AoAP template — one-line statement, context, scope, stakeholders, current and target state, component summary, integrations, decisions, risks. Fast-track and standard pathway.</div>
+      <div class="fi-badge">.md · AoAP</div>
+    </a>
+
+    <a class="file-item" href="templates/conceptual-solution-architecture-template.md">
+      <div class="fi-name">conceptual-solution-architecture-template.md</div>
+      <div class="fi-desc">CSA template — logical architecture, component interactions, integration surface, security architecture, resilience, observability, decisions, open issues.</div>
+      <div class="fi-badge">.md · CSA</div>
+    </a>
+
+    <a class="file-item" href="templates/solution-architecture-summary-template.md">
+      <div class="fi-name">solution-architecture-summary-template.md</div>
+      <div class="fi-desc">SAS template — executive summary, what is being built, decisions made, open questions, key risks, dependencies, compliance posture, delivery pathway, and the ask.</div>
+      <div class="fi-badge">.md · SAS</div>
+    </a>
+
+    <a class="file-item" href="templates/sad-tra-ready-template.md">
+      <div class="fi-name">sad-tra-ready-template.md</div>
+      <div class="fi-desc">Full SAD structured for ARB review and TRA submission — business context, architecture overview, integration, security, resilience, decisions, risk register, compliance posture, TRA readiness summary.</div>
+      <div class="fi-badge">.md · SAD / TRA</div>
+    </a>
+
+    <a class="file-item" href="templates/architecture-decision-record-template.md">
+      <div class="fi-name">architecture-decision-record-template.md</div>
+      <div class="fi-desc">ADR template — context, decision, rationale, three options with pros/cons, consequences (positive and trade-off), compliance notes, review conditions, artefact update checklist.</div>
+      <div class="fi-badge">.md · ADR</div>
+    </a>
+
+    <a class="file-item" href="toolkit/governance-tra-toolkit/tra-readiness-checklist.md">
+      <div class="fi-name">tra-readiness-checklist.md</div>
+      <div class="fi-desc">TRA submission readiness checklist — 10 sections covering system description, security architecture, IAM, data management, vulnerability management, resilience, observability, supply chain, compliance, and documentation completeness.</div>
+      <div class="fi-badge">.md · TRA</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ── MODULE CROSS-REFERENCE ────── -->
+<div class="section-block">
+  <div class="section-label">Toolkit to module mapping</div>
+  <div class="file-list">
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 01 — Orientation</div>
+      <div class="fi-desc">Use: architecture-intake-checklist. Identify engagement archetype before selecting artefact pathway.</div>
+      <div class="fi-badge"><a href="modules/module-01-orientation.html" style="color:var(--accent);">→ Module 01</a></div>
+    </div>
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 02 — Intelligence</div>
+      <div class="fi-desc">Use: architecture-discovery-framework. Build the Current Intent Statement. Run the blank cell test.</div>
+      <div class="fi-badge"><a href="modules/module-02-intelligence.html" style="color:var(--accent);">→ Module 02</a></div>
+    </div>
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 03 — Design</div>
+      <div class="fi-desc">Use: AoAP, CSA templates + Mermaid C4 and data flow diagrams. Produce the logical design.</div>
+      <div class="fi-badge"><a href="modules/module-03-design.html" style="color:var(--accent);">→ Module 03</a></div>
+    </div>
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 04 — Artefacts</div>
+      <div class="fi-desc">Use: SAS, SAD, ADR templates + all diagram templates. Produce the full artefact set for governance.</div>
+      <div class="fi-badge"><a href="modules/module-04-artefacts.html" style="color:var(--accent);">→ Module 04</a></div>
+    </div>
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 05 — Communication</div>
+      <div class="fi-desc">Use: SAS as the stakeholder communication artefact. Use governance flow diagram for ARB briefings.</div>
+      <div class="fi-badge"><a href="modules/module-05-communication.html" style="color:var(--accent);">→ Module 05</a></div>
+    </div>
+    <div class="file-item" style="cursor:default;">
+      <div class="fi-name" style="color:var(--muted);">Module 06 — Velocity Loop</div>
+      <div class="fi-desc">Use: decision-to-delivery-traceability diagram. Update ADRs and architecture register each cycle.</div>
+      <div class="fi-badge"><a href="modules/module-06-velocity-loop.html" style="color:var(--accent);">→ Module 06</a></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<!-- ── FOOTER ────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework™ · v1.0</div>
+      <div class="footer-links">
+        <a class="footer-link" href="index.html">Home</a>
+        <a class="footer-link" href="preface.html">Preface</a>
+        <a class="footer-link" href="lexicon.html">Lexicon</a>
+        <a class="footer-link" href="modules/module-01-orientation.html">Modules</a>
+        <a class="footer-link" href="worked-example.html">Worked Example</a>
+        <a class="footer-link" href="workshop-playbook.html">Workshop</a>
+        <a class="footer-link" href="escalation-protocol.html">Escalation</a>
+        <a class="footer-link" href="cloud-reference/">Cloud Ref</a>
+        <a class="footer-link" href="https://zencloudau.github.io/velocity-architecture/" target="_blank" rel="noopener">VAF Framework ↗</a>
+        <a class="footer-link" href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="footer-meta">zencloudau.github.io/vaf-sa<br>© 2025 ZenCloud Global Consultants</div>
+  </div>
+</footer>
+
+</body>
+</html>

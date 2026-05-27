@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base'}}%%
+C4Context
+    title System Context Diagram — [System Name]
+
+    Person(endUser, "End User", "Primary consumer of the system.\nInteracts via web or mobile interface.")
+    Person(adminUser, "Administrator", "Configures system behaviour,\nmanages access and settings.")
+
+    System(coreSystem, "[System Name]", "Delivers [core value proposition].\nHandles [primary capability].")
+
+    System_Ext(identityProvider, "Identity Provider", "Authenticates users.\nOAuth 2.0 / OIDC.")
+    System_Ext(upstreamSystem, "Upstream Data Source", "Provides [data type] consumed\nby [System Name].")
+    System_Ext(downstreamSystem, "Downstream Consumer", "Receives [output type]\nfrom [System Name].")
+    System_Ext(notificationService, "Notification Service", "Delivers email / SMS / push\nalerts to end users.")
+
+    Rel(endUser, coreSystem, "Uses", "HTTPS")
+    Rel(adminUser, coreSystem, "Configures", "HTTPS / Admin Console")
+    Rel(coreSystem, identityProvider, "Authenticates via", "OIDC / HTTPS")
+    Rel(upstreamSystem, coreSystem, "Pushes data to", "REST API / Event")
+    Rel(coreSystem, downstreamSystem, "Sends results to", "REST API / Webhook")
+    Rel(coreSystem, notificationService, "Triggers alerts via", "HTTPS API")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

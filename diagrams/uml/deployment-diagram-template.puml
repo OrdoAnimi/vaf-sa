@@ -1,0 +1,81 @@
+@startuml deployment-diagram-template
+title Deployment Diagram — [System Name] — [Environment: Production]
+' Replace bracketed placeholders before use.
+
+skinparam backgroundColor #F8FAFC
+skinparam nodeBorderColor #CBD5E1
+skinparam nodeBackgroundColor #F1F5F9
+skinparam componentBorderColor #2563EB
+skinparam componentBackgroundColor #FFFFFF
+skinparam databaseBorderColor #16A34A
+skinparam databaseBackgroundColor #F0FDF4
+skinparam fontName "DM Sans"
+skinparam arrowColor #64748B
+
+node "End User Device" as CLIENT {
+    component "Browser / Mobile App" as UA
+}
+
+node "Cloud Provider — [Region]" as CLOUD {
+
+    node "Edge Layer" as EDGE {
+        component "CDN\n(static assets · caching)" as CDN
+        component "WAF + DDoS Protection" as WAF
+    }
+
+    node "Network — Public Subnet" as PUBLIC {
+        component "Load Balancer\n(L7 · TLS termination)" as LB
+    }
+
+    node "Network — Application Subnet (Private)" as APPNET {
+        node "Compute — Auto-Scaling Group" as ASG {
+            component "Application Node 1\n[Runtime / Container]" as APP1
+            component "Application Node 2\n[Runtime / Container]" as APP2
+            component "Application Node n\n[Runtime / Container]" as APPn
+        }
+        component "Worker Service\n[Runtime / Container]" as WORKER
+    }
+
+    node "Network — Data Subnet (Isolated)" as DATANET {
+        database "Primary Database\n[Engine] — Multi-AZ HA" as DBPRIMARY
+        database "Read Replica\n[Engine] — read-optimised" as DBREPLICA
+        database "Cache Cluster\n[Redis / ElastiCache]" as CACHE
+    }
+
+    node "Platform Services (Managed)" as PLATFORM {
+        component "Identity Provider\nOIDC / OAuth 2.0" as IDP
+        component "Secret Store\n[Vault / KMS]" as VAULT
+        component "Message Queue / Event Bus\n[SQS / SNS / Kafka]" as QUEUE
+        component "Observability Stack\nmetrics · traces · logs" as OBS
+        component "Object Storage\nblobs · artefacts · backups" as S3
+    }
+
+    node "Admin / Management Plane" as ADMINPLANE {
+        component "CI/CD Pipeline" as CICD
+        component "Infrastructure as Code\n[Terraform / CDK]" as IAC
+        component "Bastion / Jump Host\n(MFA required)" as BASTION
+    }
+}
+
+UA --> CDN : HTTPS 443
+UA --> WAF : HTTPS 443
+WAF --> LB : HTTPS (internal)
+CDN --> LB : origin pull
+LB --> APP1 : HTTP (internal)
+LB --> APP2 : HTTP (internal)
+LB --> APPn : HTTP (internal)
+APP1 --> IDP : OIDC token validation
+APP1 --> VAULT : Secret fetch (TLS)
+APP1 --> DBPRIMARY : SQL / TLS
+APP1 --> CACHE : Redis / TLS
+APP1 --> QUEUE : publish event
+QUEUE --> WORKER : deliver event
+WORKER --> DBREPLICA : SQL read / TLS
+WORKER --> S3 : read · write objects
+APP1 --> OBS : metrics · traces · logs
+WORKER --> OBS : metrics · traces · logs
+BASTION --> APP1 : SSH (privileged · audited)
+CICD --> ASG : deploy artefact
+IAC --> CLOUD : provision infrastructure
+
+@enduml

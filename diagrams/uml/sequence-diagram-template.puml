@@ -1,0 +1,83 @@
+@startuml sequence-diagram-template
+title Sequence Diagram — [Interaction Name]
+' Replace bracketed placeholders before use.
+
+skinparam backgroundColor #F8FAFC
+skinparam sequenceParticipantBorderColor #CBD5E1
+skinparam sequenceParticipantBackgroundColor #FFFFFF
+skinparam sequenceArrowColor #2563EB
+skinparam noteBorderColor #D97706
+skinparam noteBackgroundColor #FFFBEB
+skinparam fontName "DM Sans"
+
+autonumber
+
+actor "User" as U
+participant "Frontend\n(SPA / Mobile)" as FE
+participant "API Gateway" as GW
+participant "Application Service" as APP
+database "Database" as DB
+participant "External Service" as EXT
+participant "Event Bus" as BUS
+
+== Happy Path ==
+
+U -> FE : User action (e.g. submit form)
+activate FE
+
+FE -> GW : POST /api/v1/[resource]\n[Authorization: Bearer {token}]
+activate GW
+
+GW -> GW : Validate JWT / API key
+note right GW : Check expiry, signature,\nscope claims
+
+GW -> APP : Forward authenticated request
+activate APP
+
+APP -> DB : Query current state
+activate DB
+DB --> APP : Result set
+deactivate DB
+
+APP -> APP : Apply business logic / validation
+
+APP -> EXT : Call external API (if required)
+activate EXT
+EXT --> APP : 200 OK {response}
+deactivate EXT
+
+APP -> BUS : Publish domain event\n(async — fire and forget)
+
+APP -> DB : Persist updated state
+activate DB
+DB --> APP : Write confirmed
+deactivate DB
+
+APP --> GW : 200 OK {response payload}
+deactivate APP
+
+GW --> FE : 200 OK {response payload}
+deactivate GW
+
+FE --> U : Render success state
+deactivate FE
+
+== Error Path — Authentication Failure ==
+
+U -> FE : User action
+FE -> GW : Request with expired token
+GW -> GW : Token validation fails
+GW --> FE : 401 Unauthorized
+FE --> U : Prompt re-authentication
+
+== Error Path — Downstream Failure ==
+
+APP -> EXT : Call external API
+activate EXT
+EXT --> APP : 503 Service Unavailable
+deactivate EXT
+APP --> GW : 502 Bad Gateway\n{error detail}
+GW --> FE : 502 Bad Gateway
+FE --> U : Display error message + retry option
+
+@enduml

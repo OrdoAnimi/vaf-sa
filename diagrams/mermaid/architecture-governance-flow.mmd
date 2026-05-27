@@ -1,0 +1,48 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EFF6FF', 'primaryBorderColor': '#2563EB', 'lineColor': '#64748B'}}}%%
+flowchart TD
+    A([Architecture Request Received]) --> B[Intake & Triage\narchitecture-intake-checklist]
+    B --> C{Complexity &\nRisk Assessment}
+
+    C -->|Low complexity\nlow risk| D1[Fast-Track Pathway\nAoAP only]
+    C -->|Medium complexity\nor risk| D2[Standard Pathway\nAoAP + CSA]
+    C -->|High complexity\nor regulatory scope| D3[Full Pathway\nAoAP + CSA + SAS + SAD]
+
+    D1 --> E1[Peer Review\nor Lead Architect sign-off]
+    D2 --> E2[Architecture Review Board\nstandard session]
+    D3 --> E3[Architecture Review Board\nfull + TRA readiness check]
+
+    E3 --> TRA{TRA Submission\nRequired?}
+    TRA -->|Yes| TRA_PREP[Prepare TRA Package\ntra-readiness-checklist]
+    TRA_PREP --> E3_GATE{TRA Body\nDecision}
+    E3_GATE -->|Approved| APPROVED
+    E3_GATE -->|Conditional| COND[Conditions Register\ntrack + resolve]
+    E3_GATE -->|Deferred| DEFER[Revised Submission\nschedule follow-up]
+    COND --> APPROVED
+    DEFER --> TRA_PREP
+
+    TRA -->|No| E3_DIRECT{ARB Decision}
+    E3_DIRECT -->|Approved| APPROVED
+    E3_DIRECT -->|Revise| REVISE
+
+    E1 --> GATE1{Approved?}
+    E2 --> GATE2{ARB Decision}
+    GATE1 -->|Yes| APPROVED
+    GATE1 -->|No| REVISE
+    GATE2 -->|Approved| APPROVED
+    GATE2 -->|Revise| REVISE
+    GATE2 -->|Rejected| ESC[Escalation Protocol]
+    ESC --> B
+
+    REVISE[Revise & Resubmit] --> C
+    APPROVED([Approved — Proceed]) --> REG[Architecture Register Entry\nADRs · decisions · version]
+    REG --> HANDOFF([Delivery Handoff\nSAD + ADRs to team])
+
+    classDef default fill:#F8FAFC,stroke:#CBD5E1,color:#0F172A,font-size:11px
+    classDef gate fill:#FEF3C7,stroke:#D97706,color:#92400E
+    classDef approved fill:#F0FDF4,stroke:#16A34A,color:#14532D
+    classDef escalate fill:#FEE2E2,stroke:#DC2626,color:#991B1B
+    classDef terminal fill:#1E3A5F,stroke:#1E3A5F,color:#F8FAFC
+    class C,TRA,TRA,E3_GATE,E3_DIRECT,GATE1,GATE2 gate
+    class APPROVED,HANDOFF approved
+    class ESC escalate
+    class A terminal
