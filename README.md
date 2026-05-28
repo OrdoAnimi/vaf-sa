@@ -2,6 +2,23 @@
 
 Velocity Architecture Framework - Solution Architecture is a practitioner framework for solution architects focused on practical delivery, architecture decisions, governance, and execution.
 
+## Start Here
+
+If you landed in this repository from ZenCloud, StudioSix, Velocity Architecture, LinkedIn, or search, use the reader-facing site first.
+
+| Need | Use this |
+|---|---|
+| Understand VAF-SA | [VAF-SA home](https://zencloudau.github.io/vaf-sa/) |
+| Navigate the full public site | [VAF-SA site map](https://zencloudau.github.io/vaf-sa/site-map.html) |
+| Start the practitioner method | [Module 01 - Orientation](https://zencloudau.github.io/vaf-sa/modules/module-01-orientation.html) |
+| Use the toolkit | [Solution Architecture Toolkit](https://zencloudau.github.io/vaf-sa/toolkit.html) |
+| Use cloud reference material | [Cloud Architecture Reference](https://zencloudau.github.io/vaf-sa/cloud-reference/) |
+| Read the worked example | [Worked Example](https://zencloudau.github.io/vaf-sa/worked-example.html) |
+| Understand ecosystem placement | [Ecosystem Map](docs/ecosystem-map.md) |
+| Review usage terms | [Usage Terms](USAGE-TERMS.md) |
+
+GitHub is the source of truth. GitHub Pages is the reader-facing publication layer.
+
 ## Purpose
 
 VAF-SA exists to help solution architects operate in difficult delivery conditions: stalled engagements, unclear ownership, incomplete documentation, vendor pressure, weak governance, and political ambiguity.
@@ -21,6 +38,7 @@ It is practical rather than theoretical. The framework gives practitioners a str
 The current repository provides a static framework site with:
 
 - A framework homepage in `index.html`.
+- A public site map in `site-map.html`.
 - A preface for practitioner context and operating mindset.
 - A lexicon defining the framework terms.
 - Six solution architecture modules:
@@ -39,7 +57,9 @@ The current repository provides a static framework site with:
   - The Negligent Void
   - The Institutional Paralysis
   - The Silo Engagement
-- Practical artefact guidance including CIS, Architecture on a Page, heat map, ADR, and stakeholder concern register.
+- Solution Architecture Toolkit in `toolkit.html`.
+- Cloud Architecture Reference in `cloud-reference/`.
+- Practical artefact guidance including CIS, Architecture on a Page, heat map, ADR, stakeholder concern register, SA toolkit artefacts, and TRA-readiness material.
 
 ## Live Demo
 
@@ -60,10 +80,14 @@ VAF-SA is the solution architecture delivery module of the broader Velocity Arch
 - **Velocity Architecture Framework** provides the enterprise architecture, decision-governance, and architecture operating model context.
 - **VAF-SA** translates that context into field practice for solution architects.
 - **EA Artefact Generator** can support the creation of structured artefacts and export-ready architecture content aligned to the framework.
-- **StudioSix** is the commercial delivery wrapper that can package VAF-SA methods into client-facing consulting and AI-assisted delivery work.
-- **ZenCloudAU** is the public GitHub organisation and consulting context for the framework.
+- **PMO Portal** connects architecture decisions to delivery governance and execution visibility.
+- **Velocity Academy** provides learning, courses, certification, books, and practitioner pathways.
+- **StudioSix** is the commercial delivery and productisation wrapper for architecture-led AI delivery.
+- **ZenCloud Advisory** is the commercial advisory front door.
 
 VAF-SA should stay focused on practitioner guidance and solution architecture execution. It should link to the broader framework and tools rather than duplicate them.
+
+See [docs/ecosystem-map.md](docs/ecosystem-map.md) for the full ecosystem map.
 
 ## Tech Stack
 
@@ -71,17 +95,20 @@ Confirmed from the current files:
 
 - Static HTML
 - Inline CSS
-- Google Fonts loaded from `index.html`
+- Google Fonts loaded from HTML pages
 - No package manager or build system currently present
 
 Primary files:
 
 - `index.html`
+- `site-map.html`
 - `preface.html`
 - `lexicon.html`
 - `workshop-playbook.html`
 - `escalation-protocol.html`
 - `worked-example.html`
+- `toolkit.html`
+- `cloud-reference/index.html`
 - `modules/module-01-orientation.html`
 - `modules/module-02-intelligence.html`
 - `modules/module-03-design.html`
@@ -95,20 +122,30 @@ This is a static HTML site. It can be opened directly in a browser from `index.h
 
 No `package.json` or npm scripts are currently present.
 
+## Deployment
+
+Deployment is documented in [DEPLOYMENT.md](DEPLOYMENT.md).
+
+Production URL:
+
+```text
+https://zencloudau.github.io/vaf-sa/
+```
+
 ## Project Status
 
-Portfolio-ready.
+Portfolio-ready and practitioner-usable.
 
-The framework content and static site are substantial and navigable. The repo is not yet product-ready because public packaging still needs a clearer license file and a stronger link map into the wider Velocity Architecture and StudioSix ecosystem.
+Productisation still requires release/versioning discipline, formal contribution boundaries, and a final decision on commercial licensing posture. Public visitor onboarding, deployment documentation, usage terms, and ecosystem routing are now present.
 
 ## Roadmap
 
 Near-term improvements:
 
-- Add a repository-level license file or clarify the licensing model.
-- Add a simple ecosystem diagram linking VAF-SA, Velocity Architecture Framework, EA Artefact Generator, and StudioSix.
-- Add a short "Start Here" path for first-time readers.
-- Add examples of how the artefacts map to governance review and delivery execution.
+- Add governance-review examples showing how artefacts map to architecture review and delivery execution.
+- Add a small release history or changelog.
+- Add consistent footer/site-map links to every subpage if further packaging is required.
+- Review whether selected toolkit artefacts should have standalone rendered pages.
 
 ## Security and Data Notes
 
@@ -116,8 +153,8 @@ The repo appears to be a static content site. It does not require environment co
 
 The worked example is described in the site as NDA-clean. Do not add client-identifying material or confidential engagement content to this repository.
 
-## License
+## Usage Terms
 
-License not yet specified.
+Usage terms are documented in [USAGE-TERMS.md](USAGE-TERMS.md).
 
-The previous README stated: "© ZenCloud Global Consultants. All rights reserved." No standalone `LICENSE` file is currently present in the repository.
+The VAF-SA method, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the ZenCloud / Velocity Architecture ecosystem.
