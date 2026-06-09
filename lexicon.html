@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The VAF·SA Lexicon — every term defined precisely. Decision Altitude, Governance Drag, The Blank Cell, the four engagement archetypes, the Velocity Loop, and more.">
-<title>VAF·SA — Lexicon: Every Term Defined</title>
-<meta property="og:url" content="https://zencloudau.github.io/vaf-sa/lexicon.html">
-<meta property="og:title" content="VAF·SA — Lexicon: Every Term Defined">
-<meta property="og:description" content="The VAF·SA Lexicon — every term defined precisely. Decision Altitude, Governance Drag, The Blank Cell, the four engagement archetypes, the Velocity Loop, and more.">
+<meta name="description" content="The Velocity™ SA Lexicon — every term defined precisely. Decision Altitude, Governance Drag, The Blank Cell, the four engagement archetypes, the Velocity Loop, and more.">
+<title>Velocity™ SA — Lexicon: Every Term Defined</title>
+<meta property="og:url" content="https://zencloudau.github.io/Velocity™-sa/lexicon.html">
+<meta property="og:title" content="Velocity™ SA — Lexicon: Every Term Defined">
+<meta property="og:description" content="The Velocity™ SA Lexicon — every term defined precisely. Decision Altitude, Governance Drag, The Blank Cell, the four engagement archetypes, the Velocity Loop, and more.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
@@ -63,32 +63,38 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
 .nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
 .nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">VAF·SA</a>
+    <a class="nav-brand" href="index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="preface.html">Preface</a></li>
       <li><a href="lexicon.html">Lexicon</a></li>
       <li><a href="worked-example.html">Worked Example</a></li>
       <li><a href="workshop-playbook.html">Workshop</a></li>
       <li><a href="escalation-protocol.html">Escalation</a></li>
-      <li><a href="cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta-btn" href="modules/module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
 <div class="page">
-<a class="back" href="index.html">← VAF·SA Framework</a>
+<a class="back" href="index.html">← Velocity™ SA Framework</a>
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-brand">Velocity™ SA — Velocity Architecture Framework · Solution Architecture</div>
     <div class="doc-ref">LEXICON v1.0<br>VAFSA-LEXICON<br>ZENCLOUD GLOBAL CONSULTANTS</div>
   </div>
-  <div class="doc-title">THE VAF·SA<br><span>LEXICON</span></div>
+  <div class="doc-title">THE Velocity™ SA<br><span>LEXICON</span></div>
   <div class="doc-subtitle">Every term used in this framework. Defined precisely. Read before Module 1.</div>
 </div>
 
@@ -190,8 +196,8 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   <div class="term-card">
     <div class="term-header"><div class="term-name">The Blank Cell</div><div class="term-module">Modules 2 + 3</div></div>
     <div class="term-body">
-      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An unanswered cell in the heat map. In the context of VAF·SA, a blank cell is not an absence of information — it is evidence. A blank cell produced by a vendor or stakeholder in a structured engagement, where the question has been asked and no response provided, is treated as a deliberate withholding until evidence demonstrates otherwise. Blank cells drive escalation. They are never closed by promise — only by documented confirmation.</div></div>
-      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"The Blank Cell" as a named concept because most practitioners treat unanswered questions as gaps to fill. VAF·SA treats them as forensic evidence to be challenged. The reframe changes how the practitioner approaches every unanswered question in every engagement.</div></div>
+      <div class="term-definition"><div class="term-def-label">Definition</div><div class="term-text">An unanswered cell in the heat map. In the context of Velocity™ SA, a blank cell is not an absence of information — it is evidence. A blank cell produced by a vendor or stakeholder in a structured engagement, where the question has been asked and no response provided, is treated as a deliberate withholding until evidence demonstrates otherwise. Blank cells drive escalation. They are never closed by promise — only by documented confirmation.</div></div>
+      <div class="term-why"><div class="term-why-label">Why This Term</div><div class="term-text">"The Blank Cell" as a named concept because most practitioners treat unanswered questions as gaps to fill. Velocity™ SA treats them as forensic evidence to be challenged. The reframe changes how the practitioner approaches every unanswered question in every engagement.</div></div>
     </div>
   </div>
 
@@ -295,7 +301,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">LEXICON v1.0 · ZENCLOUD GLOBAL CONSULTANTS</div>
     <div class="nav-bar">
       <a href="preface.html" class="nav-prev">← Preface</a>
@@ -305,5 +311,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   <div style="text-align:right;"><div class="footer-nav">VAFSA-LEXICON<br>ZENCLOUD GLOBAL CONSULTANTS<br>velocityarchitectureframework.com</div></div>
 </div>
 </div>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

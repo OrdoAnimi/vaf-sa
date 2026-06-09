@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA Cloud Reference — Microsoft Azure. Cloud Adoption Framework, Well-Architected Framework, Azure Landing Zones, management groups, Azure Policy, and VAF·SA usage notes.">
-<title>VAF·SA — Azure Cloud Reference</title>
+<meta name="description" content="Velocity™ SA Cloud Reference — Microsoft Azure. Cloud Adoption Framework, Well-Architected Framework, Azure Landing Zones, management groups, Azure Policy, and Velocity™ SA usage notes.">
+<title>Velocity™ SA — Azure Cloud Reference</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
@@ -77,8 +77,8 @@ a:hover{text-decoration:underline;}
 .rl-body{flex:1;}
 .rl-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .rl-url{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
-/* VAF NOTES */
-.vaf-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
+/* Velocity™ NOTES */
+.Velocity™-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
 .vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
 .vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
@@ -96,20 +96,26 @@ a:hover{text-decoration:underline;}
 .footer-nav a{color:var(--muted);text-decoration:none;}
 .footer-nav a:hover{color:var(--amber);}
 @media(max-width:680px){.page{padding:16px 20px 64px;}.nav-inner{padding:0 20px;}}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
       <li><a href="../lexicon.html">Lexicon</a></li>
       <li><a href="../worked-example.html">Worked Example</a></li>
       <li><a href="../workshop-playbook.html">Workshop</a></li>
       <li><a href="../escalation-protocol.html">Escalation</a></li>
-      <li><a href="index.html" class="active">Cloud Ref</a></li>
+      <li><a href="index.html" class="active">Cloud Reference</a></li>
     </ul>
     <a class="nav-cta-btn" href="../modules/module-01-orientation.html">Start Module 01 →</a>
   </div>
@@ -120,7 +126,7 @@ a:hover{text-decoration:underline;}
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — Cloud Reference · Microsoft Azure</div>
+    <div class="doc-brand">Velocity™ SA — Cloud Reference · Microsoft Azure</div>
     <div class="doc-ref">VENDOR REFERENCE<br>VAFSA-CRL-AZ · v1.0</div>
   </div>
   <div class="doc-title">MICROSOFT<br><span>AZURE</span></div>
@@ -146,7 +152,7 @@ a:hover{text-decoration:underline;}
   </div>
   <p class="p">Microsoft's cloud architecture guidance is organised around two primary frameworks. The <strong>Microsoft Cloud Adoption Framework for Azure (CAF)</strong> addresses the end-to-end journey — strategy, planning, readiness, migration, governance, and management. The <strong>Azure Well-Architected Framework (WAF)</strong> focuses on workload quality across five pillars. <strong>Azure Landing Zones</strong> provide the reference architecture and implementation patterns for a governed Azure environment.</p>
   <p class="p">Azure Landing Zones distinguish between <em>platform landing zones</em> — the shared services and governance foundation — and <em>application landing zones</em> — the subscription and resource group structure for individual workloads. This two-layer model is important for enterprise architects to understand early, because it determines accountability boundaries and the pace of workload onboarding.</p>
-  <div class="callout azure">Azure engagements often surface ambiguity between what the CAF recommends and what the organisation has actually built. VAF·SA Module 02 (Intelligence) is the instrument for establishing the real gap — not the gap the vendor documentation implies.</div>
+  <div class="callout azure">Azure engagements often surface ambiguity between what the CAF recommends and what the organisation has actually built. Velocity™ SA Module 02 (Intelligence) is the instrument for establishing the real gap — not the gap the vendor documentation implies.</div>
 </div>
 
 <div class="divider"></div>
@@ -219,18 +225,18 @@ a:hover{text-decoration:underline;}
 
 <div class="divider"></div>
 
-<!-- VAF·SA USAGE NOTES -->
+<!-- Velocity™ SA USAGE NOTES -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">05</div>
     <div>
-      <div class="section-eyebrow">VAF·SA Usage Notes</div>
-      <div class="section-title">Applying VAF·SA in Azure Engagements</div>
+      <div class="section-eyebrow">Velocity™ SA Usage Notes</div>
+      <div class="section-title">Applying Velocity™ SA in Azure Engagements</div>
       <div class="section-desc">Where the practitioner method adds value in an Azure-heavy environment.</div>
     </div>
   </div>
-  <div class="vaf-notes">
-    <div class="vn-label">VAF·SA Practitioner Notes — Azure</div>
+  <div class="Velocity™-notes">
+    <div class="vn-label">Velocity™ SA Practitioner Notes — Azure</div>
     <ul class="vn-list">
       <li><strong>CAF phase mismatch is a common presenting problem.</strong> Organisations frequently begin migration before the landing zone is ready, or begin governance before strategy is clear. Module 01 (Orientation) establishes which CAF phases have actually been completed — not which the project plan says are complete.</li>
       <li><strong>Management group design decisions are often undocumented.</strong> Module 04 (Artefacts) produces a landing-zone decision pack capturing why the management group hierarchy is structured as it is — what options were evaluated, what constraints drove the decision, and what the exception process is for workloads that do not fit the standard model.</li>
@@ -283,10 +289,16 @@ a:hover{text-decoration:underline;}
 </div>
 
 <div class="doc-footer">
-  <div class="footer-brand"><span>VAF·SA</span> — Azure Cloud Reference</div>
-  <div class="footer-nav"><a href="index.html">Cloud Ref</a> · <a href="aws.html">AWS</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone</a></div>
+  <div class="footer-brand"><span>Velocity™ SA</span> — Azure Cloud Reference</div>
+  <div class="footer-nav"><a href="index.html">Cloud Reference</a> · <a href="aws.html">AWS</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone</a></div>
 </div>
 
 </div><!-- .page -->
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

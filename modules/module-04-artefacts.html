@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA Module 04 — Artefacts. Five practitioner artefacts: Customer Impact Statement, Architecture on a Page, Heat Map, Architecture Decision Record, Stakeholder Concern Register.">
-<title>VAF·SA — Module 04: Artefacts</title>
+<meta name="description" content="Velocity™ SA Module 04 — Artefacts. Five practitioner artefacts: Customer Impact Statement, Architecture on a Page, Heat Map, Architecture Decision Record, Stakeholder Concern Register.">
+<title>Velocity™ SA — Module 04: Artefacts</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -214,30 +214,36 @@ body::before {
 .scr-open{color:var(--signal);font-weight:600;display:flex;align-items:center;}
 .scr-done{color:var(--green-light);font-weight:600;display:flex;align-items:center;}
 @media(max-width:640px){.scr-row{grid-template-columns:1fr;}.scr-cell{border-right:none;border-bottom:1px solid var(--wire);}}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
       <li><a href="../lexicon.html">Lexicon</a></li>
       <li><a href="../worked-example.html">Worked Example</a></li>
       <li><a href="../workshop-playbook.html">Workshop</a></li>
       <li><a href="../escalation-protocol.html">Escalation</a></li>
-      <li><a href="../cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="../cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← Velocity™ SA Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-brand">Velocity™ SA — Velocity Architecture Framework · Solution Architecture</div>
     <div class="doc-ref">MODULE 04 OF 06<br>VAFSA-M04 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 04<br><span>ARTEFACTS</span></div>
@@ -259,43 +265,43 @@ body::before {
     <div class="section-title-block">
       <div class="section-eyebrow">Foundation</div>
       <div class="section-title">Purpose</div>
-      <div class="section-desc">What artefacts do, what they do not do, and where VAF·SA sits in the broader VAF ecosystem</div>
+      <div class="section-desc">What artefacts do, what they do not do, and where Velocity™ SA sits in the broader Velocity™ ecosystem</div>
     </div>
   </div>
 
   <p class="body-text">Documentation records what happened. An artefact drives what happens next. They are not the same thing. Every artefact in this framework produces a decision, unlocks an action, or protects an outcome. Anything that does none of those three things is overhead.</p>
 
-  <p class="body-text">VAF·SA produces five artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
+  <p class="body-text">Velocity™ SA produces five artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
 
   <div class="callout">
-    The VAF Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. VAF·SA produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
+    The Velocity™ Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. Velocity™ SA produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
   </div>
 
   <p class="body-text">Where a Proof of Concept has been conducted — by the architect, the client, or the vendor — its outputs belong in this artefact set. A PoC without structured outputs is an experiment. A PoC with named success criteria, a heat map contribution, and a resulting Architecture Decision Record is a design instrument. The PoC output does not become a separate artefact — it populates the heat map cells it confirms and generates the ADR that records what the PoC determined.</p>
 
-<p class="body-text">The relationship between VAF EA and VAF·SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, VAF·SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — VAF·SA artefacts stand alone as the authoritative record of the engagement.</p>
+<p class="body-text">The relationship between Velocity™ EA and Velocity™ SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, Velocity™ SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — Velocity™ SA artefacts stand alone as the authoritative record of the engagement.</p>
 
   <div class="altitude-map">
     <div class="alt-row ea">
-      <div class="alt-label"><div class="alt-label-text">VAF EA</div></div>
+      <div class="alt-label"><div class="alt-label-text">Velocity™ EA</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">Guardrail Canvas</div><div class="alt-cell-desc">Strategic intent and governance boundaries</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">Trade-off Matrix</div><div class="alt-cell-desc">EA-level decision trade-offs</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">ADR + Fitness Functions</div><div class="alt-cell-desc">Governed architectural decisions</div></div>
     </div>
     <div class="alt-row ba">
-      <div class="alt-label"><div class="alt-label-text">VAF·SA BA</div></div>
+      <div class="alt-label"><div class="alt-label-text">Velocity™ SA BA</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 01</div><div class="alt-cell-value">Customer Impact Statement</div><div class="alt-cell-desc">Business intent locked in plain language</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">Executive · Business Leads</div><div class="alt-cell-desc">Anyone who funds or approves</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page</div><div class="alt-cell-desc">No exceptions</div></div>
     </div>
     <div class="alt-row sa">
-      <div class="alt-label"><div class="alt-label-text">VAF·SA SA</div></div>
+      <div class="alt-label"><div class="alt-label-text">Velocity™ SA SA</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 02</div><div class="alt-cell-value">Architecture on a Page</div><div class="alt-cell-desc">Solution visible to all audiences</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 03</div><div class="alt-cell-value">Heat Map</div><div class="alt-cell-desc">Nine domains. Forensic instrument.</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Each</div><div class="alt-cell-desc">No exceptions</div></div>
     </div>
     <div class="alt-row del">
-      <div class="alt-label"><div class="alt-label-text">VAF·SA Delivery</div></div>
+      <div class="alt-label"><div class="alt-label-text">Velocity™ SA Delivery</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 04</div><div class="alt-cell-value">Architecture Decision Record</div><div class="alt-cell-desc">SA-level. Why this was decided.</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">All · Future Architects</div><div class="alt-cell-desc">Decision rationale preserved</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Per Decision</div><div class="alt-cell-desc">No exceptions</div></div>
@@ -549,7 +555,7 @@ body::before {
     <div class="artefact-body">
       <p class="art-desc">The ADR solves the most pervasive problem in solution architecture: decision rationale gets lost. Systems are built to reflect decisions nobody on the current team remembers making. New architects repeat analysis already completed. Governance reviews lack evidence of past reasoning. Vendors exploit the gap between what was decided and what was documented.</p>
       <p class="art-desc">In every one of the four engagement archetypes, the absence of ADRs contributed to the failure. The vendor who obfuscated did so partly because no prior decision about data egress had been formally recorded. The organisation with institutional paralysis had no record of why prior attempts failed. The ADR exists so that the next architect, the next audit, and the next vendor engagement has the evidence in writing.</p>
-      <p class="art-desc"><strong>VAF·SA ADRs are SA-level.</strong> They are lighter than the EA-level ADR with fitness functions. One page. Written at the time of the decision. Numbered. Versioned. Status tracked. Never modified — only superseded by a new ADR that references the original.</p>
+      <p class="art-desc"><strong>Velocity™ SA ADRs are SA-level.</strong> They are lighter than the EA-level ADR with fitness functions. One page. Written at the time of the decision. Numbered. Versioned. Status tracked. Never modified — only superseded by a new ADR that references the original.</p>
       <div class="art-rule"><strong>When to write an ADR:</strong> Any decision that, if reversed, would require significant rework. Any decision that could be challenged in governance. Any decision involving a vendor commitment. Any decision about data flow, security controls, or integration patterns. When in doubt — write one. The cost of writing one is minutes. The cost of not having one can be months.</div>
     </div>
   </div>
@@ -711,7 +717,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">A document that is accurate on the day it is produced and outdated within a month is not a living artefact. It is a historical record with a future expiry date. Every artefact produced in VAF·SA is treated as a living document — versioned, dated, and updated when the engagement conditions change.</p>
+  <p class="body-text">A document that is accurate on the day it is produced and outdated within a month is not a living artefact. It is a historical record with a future expiry date. Every artefact produced in Velocity™ SA is treated as a living document — versioned, dated, and updated when the engagement conditions change.</p>
 
   <p class="body-text">This is not about maintaining a documentation system. It is about maintaining the integrity of the artefact as the authoritative record of what was decided and why. A CIS that reflects the original intent and not the evolved one has failed its purpose. An ADR marked Accepted for a decision that has since been superseded — without a new ADR referencing it — has broken the decision chain.</p>
 
@@ -739,7 +745,7 @@ body::before {
   </div>
 
   <div class="callout green">
-    The VAF Agentic Architect already generates and commits VP1, VP2, and VP3 artefacts to GitHub automatically. VAF·SA artefacts — CIS, AoaP, Heat Map, ADR — are the next generation of targets for agentic generation. The framework teaches the human method first. The agent automates it second.
+    The Velocity™ Agentic Architect already generates and commits VP1, VP2, and VP3 artefacts to GitHub automatically. Velocity™ SA artefacts — CIS, AoaP, Heat Map, ADR — are the next generation of targets for agentic generation. The framework teaches the human method first. The agent automates it second.
   </div>
 </div>
 
@@ -777,7 +783,7 @@ body::before {
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-03-design.html" class="nav-prev">← MODULE 03 — DESIGN</a>
@@ -791,5 +797,11 @@ body::before {
 </div>
 
 </div>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

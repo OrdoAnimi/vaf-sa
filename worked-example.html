@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The VAF·SA Worked Example — The Authority Engagement. All six modules applied to one real enterprise engagement. NDA-clean. 90 days. Delivered.">
-<title>VAF·SA — Worked Example: The Authority Engagement</title>
+<meta name="description" content="The Velocity™ SA Worked Example — The Authority Engagement. All six modules applied to one real enterprise engagement. NDA-clean. 90 days. Delivered.">
+<title>Velocity™ SA — Worked Example: The Authority Engagement</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
@@ -103,30 +103,36 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
 .nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
 .nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">VAF·SA</a>
+    <a class="nav-brand" href="index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="preface.html">Preface</a></li>
       <li><a href="lexicon.html">Lexicon</a></li>
       <li><a href="worked-example.html">Worked Example</a></li>
       <li><a href="workshop-playbook.html">Workshop</a></li>
       <li><a href="escalation-protocol.html">Escalation</a></li>
-      <li><a href="cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta-btn" href="modules/module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
 <div class="page">
-<a class="back" href="index.html">← VAF·SA Framework</a>
+<a class="back" href="index.html">← Velocity™ SA Framework</a>
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — The Worked Example</div>
+    <div class="doc-brand">Velocity™ SA — The Worked Example</div>
     <div class="doc-ref">VAFSA-WORKED-EXAMPLE<br>ZENCLOUD GLOBAL CONSULTANTS</div>
   </div>
   <div class="doc-title">THE<br><span>AUTHORITY</span><br>ENGAGEMENT</div>
@@ -379,12 +385,18 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">THE WORKED EXAMPLE · ZENCLOUD GLOBAL CONSULTANTS</div>
     <a class="back-link" href="index.html">← RETURN TO FRAMEWORK</a>
   </div>
   <div style="text-align:right;"><div class="footer-nav">ZENCLOUD GLOBAL CONSULTANTS</div></div>
 </div>
 </div>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

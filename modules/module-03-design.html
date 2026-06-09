@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA Module 03 — Design. Design instrument selection, context diagram framework, heat map forensic analysis, three-altitude design stack, embedded security and observability.">
-<title>VAF·SA — Module 03: Design</title>
+<meta name="description" content="Velocity™ SA Module 03 — Design. Design instrument selection, context diagram framework, heat map forensic analysis, three-altitude design stack, embedded security and observability.">
+<title>Velocity™ SA — Module 03: Design</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -343,30 +343,36 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .r4-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--green);padding:14px 16px;}
 .r4-label{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:6px;}
 .r4-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
       <li><a href="../lexicon.html">Lexicon</a></li>
       <li><a href="../worked-example.html">Worked Example</a></li>
       <li><a href="../workshop-playbook.html">Workshop</a></li>
       <li><a href="../escalation-protocol.html">Escalation</a></li>
-      <li><a href="../cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="../cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← Velocity™ SA Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-brand">Velocity™ SA — Velocity Architecture Framework · Solution Architecture</div>
     <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 03<br><span>DESIGN</span></div>
@@ -390,11 +396,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <div class="section-title-block">
       <div class="section-eyebrow">Foundation</div>
       <div class="section-title">Purpose</div>
-      <div class="section-desc">What design means in VAF·SA — and what it does not mean</div>
+      <div class="section-desc">What design means in Velocity™ SA — and what it does not mean</div>
     </div>
   </div>
 
-  <p class="body-text">Design in VAF·SA is not about producing the most detailed diagram. It is not about demonstrating the full depth of your technical knowledge. It is not about filling every box in a framework template.</p>
+  <p class="body-text">Design in Velocity™ SA is not about producing the most detailed diagram. It is not about demonstrating the full depth of your technical knowledge. It is not about filling every box in a framework template.</p>
 
   <p class="body-text"><strong>Design is about producing the clearest possible picture of the solution — for the audience that needs to act on it — using the minimum tool necessary to achieve that clarity.</strong></p>
 
@@ -531,7 +537,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">The context-to-component structural approach is the primary design instrument in VAF·SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
+  <p class="body-text">The context-to-component structural approach is the primary design instrument in Velocity™ SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
 
   <p class="body-text">Most architectural presentations fail because they start at the wrong level. Too detailed for the executive. Too abstract for the developer. context diagram solves this by making the level explicit and the zoom deliberate.</p>
 
@@ -754,7 +760,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   </div>
 
   <div class="callout amber">
-    A heat map with no red cells is not evidence of a complete design. It is evidence that the cells were answered without being challenged. The architect's job is to verify every green cell independently before it leaves the map. Trust but verify is not VAF·SA. Verify, then trust.
+    A heat map with no red cells is not evidence of a complete design. It is evidence that the cells were answered without being challenged. The architect's job is to verify every green cell independently before it leaves the map. Trust but verify is not Velocity™ SA. Verify, then trust.
   </div>
 </div>
 
@@ -771,7 +777,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">Every design decision in VAF·SA belongs to an altitude. Making the wrong decision at the wrong altitude — or letting the wrong audience make a decision that belongs at a different level — produces the failure modes the four archetypes describe. The three-altitude stack is the structural discipline that prevents that.</p>
+  <p class="body-text">Every design decision in Velocity™ SA belongs to an altitude. Making the wrong decision at the wrong altitude — or letting the wrong audience make a decision that belongs at a different level — produces the failure modes the four archetypes describe. The three-altitude stack is the structural discipline that prevents that.</p>
 
   <div class="altitude-stack">
 
@@ -930,7 +936,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">Security architecture in VAF·SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first context diagram context box. security architecture practice provides the threat and risk lens. information security management and security control baseline provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
+  <p class="body-text">Security architecture in Velocity™ SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first context diagram context box. security architecture practice provides the threat and risk lens. information security management and security control baseline provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
 
   <div class="security-grid">
     <div class="sec-card">
@@ -967,7 +973,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <div class="sec-card">
       <div class="sec-label">Zero Trust — Added 2025</div>
       <div class="sec-title">Trust No Connection by Default</div>
-      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in VAF·SA at every named connection in the context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
+      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in Velocity™ SA at every named connection in the context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
       <div class="sec-principle">Ask: if this connection were compromised, what could an attacker reach from here — and is that acceptable?</div>
     </div>
   </div>
@@ -1044,7 +1050,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
       <div class="pattern-label">Pillar 03</div>
       <div class="pattern-title">Traces</div>
       <div class="pattern-use">End-to-end request tracing across distributed systems and integration points. Required when the solution includes multiple services or APIs. Enables rapid incident diagnosis without manual log correlation across systems.</div>
-      <div class="pattern-when">the solution crosses more than one system boundary — which in VAF·SA is almost every engagement.</div>
+      <div class="pattern-when">the solution crosses more than one system boundary — which in Velocity™ SA is almost every engagement.</div>
     </div>
   </div>
 
@@ -1248,7 +1254,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-02-intelligence.html" class="nav-prev">← MODULE 02 — INTELLIGENCE</a>
@@ -1262,5 +1268,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 </div>
 
 </div>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

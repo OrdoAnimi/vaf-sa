@@ -1,21 +1,27 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Public navigation map for VAF-SA, the Velocity Architecture Framework solution architecture practitioner method.">
-<title>VAF·SA — Public Site Map</title>
+<meta name="description" content="Public navigation map for Velocity™-SA, the Velocity Architecture Framework solution architecture practitioner method.">
+<title>Velocity™ SA — Public Site Map</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 :root{--page:#F8FAFC;--panel:#FFFFFF;--alt:#F1F5F9;--ink:#0F172A;--body:#334155;--muted:#64748B;--border:#E2E8F0;--accent:#E8630A;--accentd:#C24F06;--navy:#1E3A5F}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--page);color:var(--body);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.site-nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,.07)}.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px}.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:var(--accent);white-space:nowrap}.nav-links{display:flex;gap:18px;list-style:none;flex-wrap:wrap}.nav-links a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--accent)}.page{max-width:1140px;margin:0 auto;padding:48px 32px 80px}.eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}.title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,9vw,104px);letter-spacing:.03em;line-height:.9;color:var(--ink);margin-bottom:14px}.lead{max-width:720px;color:var(--body);margin-bottom:32px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:36px}.card{display:block;background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--accent);padding:22px 24px;color:inherit;text-decoration:none;min-height:138px}.card:hover{border-color:var(--accent);text-decoration:none}.label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}.name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px}.desc{font-size:13px;color:var(--muted)}.section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--border);margin:44px 0 16px}.footer{border-top:1px solid var(--border);padding-top:24px;margin-top:44px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;line-height:1.8}@media(max-width:680px){.nav-inner{height:auto;align-items:flex-start;padding:14px 20px;flex-direction:column}.page{padding:36px 20px 64px}.title{font-size:64px}}
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
-<nav class="site-nav"><div class="nav-inner"><a class="nav-brand" href="index.html">VAF·SA</a><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="toolkit.html">Toolkit</a></li><li><a href="cloud-reference/">Cloud Ref</a></li><li><a href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">VAF Framework ↗</a></li><li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li><li><a href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div></nav>
+<nav class="site-nav"><div class="nav-inner"><a class="nav-brand" href="index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="toolkit.html">Toolkit</a></li><li><a href="cloud-reference/">Cloud Reference</a></li><li><a href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Velocity™ Framework ↗</a></li><li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li><li><a href="https://github.com/ZenCloudAU/Velocity™-sa" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div></nav>
 <main class="page">
-<p class="eyebrow">Public navigation</p><h1 class="title">VAF·SA Site Map</h1><p class="lead">Use this page as the reader-facing navigation layer for the VAF-SA solution architecture practitioner method.</p>
+<p class="eyebrow">Public navigation</p><h1 class="title">Velocity™ SA Site Map</h1><p class="lead">Use this page as the reader-facing navigation layer for the Velocity™-SA solution architecture practitioner method.</p>
 <div class="grid">
-<a class="card" href="index.html"><p class="label">Start here</p><p class="name">Framework home</p><p class="desc">Public landing page for VAF-SA, the six modules, practitioner context, toolkit, and ecosystem routing.</p></a>
+<a class="card" href="index.html"><p class="label">Start here</p><p class="name">Framework home</p><p class="desc">Public landing page for Velocity™-SA, the six modules, practitioner context, toolkit, and ecosystem routing.</p></a>
 <a class="card" href="modules/module-01-orientation.html"><p class="label">Module 01</p><p class="name">Orientation</p><p class="desc">Read the delivery environment before committing to design or artefacts.</p></a>
 <a class="card" href="modules/module-02-intelligence.html"><p class="label">Module 02</p><p class="name">Intelligence</p><p class="desc">Extract the missing information required to make defensible solution decisions.</p></a>
 <a class="card" href="modules/module-03-design.html"><p class="label">Module 03</p><p class="name">Design</p><p class="desc">Select the right solution instrument and level of design detail.</p></a>
@@ -28,9 +34,9 @@
 <a class="card" href="toolkit.html"><p class="label">Toolkit</p><p class="name">Solution Architecture Toolkit</p><p class="desc">Mermaid, C4, UML, data-flow, governance, TRA, ADR, SAD, SAS, CSA, and AoAP artefact guidance.</p></a>
 <a class="card" href="cloud-reference/"><p class="label">Cloud</p><p class="name">Cloud Architecture Reference</p><p class="desc">AWS, Azure, Google Cloud, OCI, module mapping, and enterprise landing-zone reference material.</p></a>
 <a class="card" href="worked-example.html"><p class="label">Example</p><p class="name">Worked Example</p><p class="desc">NDA-clean worked example showing how the method applies in practice.</p></a>
-<a class="card" href="workshop-playbook.html"><p class="label">Workshop</p><p class="name">Workshop Playbook</p><p class="desc">Facilitation and engagement structure for using VAF-SA in workshops.</p></a>
+<a class="card" href="workshop-playbook.html"><p class="label">Workshop</p><p class="name">Workshop Playbook</p><p class="desc">Facilitation and engagement structure for using Velocity™-SA in workshops.</p></a>
 <a class="card" href="escalation-protocol.html"><p class="label">Governance</p><p class="name">Escalation Protocol</p><p class="desc">Practical route for escalating design risk, ambiguity, and delivery blockers.</p></a>
-<a class="card" href="lexicon.html"><p class="label">Language</p><p class="name">Lexicon</p><p class="desc">Shared terms used across the VAF-SA practitioner method.</p></a>
+<a class="card" href="lexicon.html"><p class="label">Language</p><p class="name">Lexicon</p><p class="desc">Shared terms used across the Velocity™-SA practitioner method.</p></a>
 <a class="card" href="preface.html"><p class="label">Context</p><p class="name">Preface</p><p class="desc">Practitioner operating mindset and context for using the method.</p></a>
 </div>
 <p class="section-title">Ecosystem routes</p>
@@ -42,5 +48,11 @@
 </div>
 <div class="footer">ZenCloud advises. StudioSix produces. Velocity decides.</div>
 </main>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

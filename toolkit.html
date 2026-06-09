@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
-<title>VAF·SA — SA Toolkit</title>
-<meta property="og:url" content="https://zencloudau.github.io/vaf-sa/toolkit.html">
-<meta property="og:title" content="VAF·SA — SA Toolkit">
-<meta property="og:description" content="VAF·SA Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
+<meta name="description" content="Velocity™ SA Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
+<title>Velocity™ SA — SA Toolkit</title>
+<meta property="og:url" content="https://zencloudau.github.io/Velocity™-sa/toolkit.html">
+<meta property="og:title" content="Velocity™ SA — SA Toolkit">
+<meta property="og:description" content="Velocity™ SA Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -153,32 +153,38 @@ a:hover { text-decoration:underline; }
 .footer-link { font-size:12px; color:var(--muted); text-decoration:none; }
 .footer-link:hover { color:var(--accent); }
 .footer-meta { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); line-height:1.7; text-align:right; }
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">VAF·SA</a>
+    <a class="nav-brand" href="index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
       <li><a href="preface.html">Preface</a></li>
       <li><a href="lexicon.html">Lexicon</a></li>
       <li><a href="worked-example.html">Worked Example</a></li>
       <li><a href="toolkit.html" class="active">SA Toolkit</a></li>
-      <li><a href="cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">VAF Framework ↗</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Velocity™ Framework ↗</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta" href="modules/module-01-orientation.html">Start Module 01</a>
   </div>
 </nav>
 
 <div class="page">
-<a class="back" href="index.html">← VAF·SA Framework</a>
+<a class="back" href="index.html">← Velocity™ SA Framework</a>
 
 <!-- ── HERO ──────────────────────── -->
 <div class="hero">
-  <div class="hero-eyebrow">VAF·SA — Practitioner Toolkit</div>
+  <div class="hero-eyebrow">Velocity™ SA — Practitioner Toolkit</div>
   <div class="hero-title">SA <span class="accent">Toolkit</span></div>
   <div class="hero-strip">
     <div style="background:var(--accent)"></div>
@@ -197,11 +203,11 @@ a:hover { text-decoration:underline; }
 
 <!-- ── DISCLAIMER ────────────────── -->
 <div class="disclaimer">
-  <strong>VAF·SA does not replace your diagramming tools.</strong>
+  <strong>Velocity™ SA does not replace your diagramming tools.</strong>
   <br><br>
   This toolkit provides reusable solution architecture patterns, decision structures, and artefact templates.
   The diagrams are written in open formats — Mermaid and PlantUML — that render in any compatible tool.
-  VAF·SA connects these artefacts to delivery governance, decision traceability, and TRA readiness.
+  Velocity™ SA connects these artefacts to delivery governance, decision traceability, and TRA readiness.
   <div class="tool-list">
     <span class="tool-tag">Mermaid</span>
     <span class="tool-tag">PlantUML</span>
@@ -480,7 +486,7 @@ a:hover { text-decoration:underline; }
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework™ · v1.0</div>
+      <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework™ · v1.0</div>
       <div class="footer-links">
         <a class="footer-link" href="index.html">Home</a>
         <a class="footer-link" href="preface.html">Preface</a>
@@ -489,14 +495,20 @@ a:hover { text-decoration:underline; }
         <a class="footer-link" href="worked-example.html">Worked Example</a>
         <a class="footer-link" href="workshop-playbook.html">Workshop</a>
         <a class="footer-link" href="escalation-protocol.html">Escalation</a>
-        <a class="footer-link" href="cloud-reference/">Cloud Ref</a>
-        <a class="footer-link" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">VAF Framework ↗</a>
-        <a class="footer-link" href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="footer-link" href="cloud-reference/">Cloud Reference</a>
+        <a class="footer-link" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Velocity™ Framework ↗</a>
+        <a class="footer-link" href="https://github.com/ZenCloudAU/Velocity™-sa" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
     </div>
-    <div class="footer-meta">zencloudau.github.io/vaf-sa<br>© 2026 ZenCloud Global Consultants</div>
+    <div class="footer-meta">zencloudau.github.io/Velocity™-sa<br>© 2026 ZenCloud Global Consultants</div>
   </div>
 </footer>
 
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

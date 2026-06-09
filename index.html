@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA — Solution Architecture Practitioner Framework. Six modules. Two pillars. One loop.">
+<meta name="description" content="Velocity™ SA — Solution Architecture Practitioner Framework. Six modules. Two pillars. One loop.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>VAF·SA — Solution Architecture Practitioner Framework</title>
-<meta property="og:url" content="https://zencloudau.github.io/vaf-sa/">
-<meta property="og:title" content="VAF·SA — Solution Architecture Practitioner Framework">
-<meta property="og:description" content="VAF·SA — Solution Architecture Practitioner Framework. Six modules. Two pillars. One loop.">
+<title>Velocity™ SA — Solution Architecture Practitioner Framework</title>
+<meta property="og:url" content="https://zencloudau.github.io/Velocity™-sa/">
+<meta property="og:title" content="Velocity™ SA — Solution Architecture Practitioner Framework">
+<meta property="og:description" content="Velocity™ SA — Solution Architecture Practitioner Framework. Six modules. Two pillars. One loop.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
@@ -34,30 +34,30 @@
   --m5:#EA580C; --m5b:rgba(234,88,12,0.08); --m5e:rgba(234,88,12,0.28);
   --m6:#B45309; --m6b:rgba(180,83,9,0.08); --m6e:rgba(180,83,9,0.28);
 
-  /* VAF master design system tokens */
-  --vaf-bg:             var(--page);
-  --vaf-surface:        var(--panel);
-  --vaf-surface-raised: var(--alt);
-  --vaf-border:         var(--border);
-  --vaf-border-strong:  var(--strong);
-  --vaf-text:           var(--ink);
-  --vaf-text-2:         var(--body);
-  --vaf-text-3:         var(--muted);
-  --vaf-accent:         var(--accent);
-  --vaf-accent-hover:   var(--accentd);
-  --vaf-accent-subtle:  var(--abg);
-  --vaf-accent-border:  var(--aborder);
-  --vaf-navy:           var(--navy);
-  --vaf-navy-dark:      #162D4A;
-  --vaf-font-heading:   'Bebas Neue', 'Playfair Display', Georgia, serif;
-  --vaf-font-body:      'DM Sans', -apple-system, sans-serif;
-  --vaf-font-mono:      'DM Mono', ui-monospace, monospace;
-  --vaf-radius-sm:      2px;
-  --vaf-radius-md:      2px;
-  --vaf-radius-lg:      4px;
-  --vaf-shadow:         0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
-  --vaf-shadow-md:      0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04);
-  --vaf-transition:     200ms ease;
+  /* Velocity™ master design system tokens */
+  --Velocity™-bg:             var(--page);
+  --Velocity™-surface:        var(--panel);
+  --Velocity™-surface-raised: var(--alt);
+  --Velocity™-border:         var(--border);
+  --Velocity™-border-strong:  var(--strong);
+  --Velocity™-text:           var(--ink);
+  --Velocity™-text-2:         var(--body);
+  --Velocity™-text-3:         var(--muted);
+  --Velocity™-accent:         var(--accent);
+  --Velocity™-accent-hover:   var(--accentd);
+  --Velocity™-accent-subtle:  var(--abg);
+  --Velocity™-accent-border:  var(--aborder);
+  --Velocity™-navy:           var(--navy);
+  --Velocity™-navy-dark:      #162D4A;
+  --Velocity™-font-heading:   'Bebas Neue', 'Playfair Display', Georgia, serif;
+  --Velocity™-font-body:      'DM Sans', -apple-system, sans-serif;
+  --Velocity™-font-mono:      'DM Mono', ui-monospace, monospace;
+  --Velocity™-radius-sm:      2px;
+  --Velocity™-radius-md:      2px;
+  --Velocity™-radius-lg:      4px;
+  --Velocity™-shadow:         0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+  --Velocity™-shadow-md:      0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04);
+  --Velocity™-transition:     200ms ease;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -154,20 +154,26 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
   .module-grid,.tool-grid,.engagements,.pathway { grid-template-columns:1fr; }
   .footer-inner { flex-direction:column; align-items:flex-start; }
 }
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="#top">VAF·SA</a>
+    <a class="nav-brand" href="#top">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links">
       <li><a href="preface.html">Preface</a></li>
       <li><a href="lexicon.html">Lexicon</a></li>
       <li><a href="worked-example.html">Worked Example</a></li>
       <li><a href="toolkit.html">SA Toolkit</a></li>
-      <li><a href="cloud-reference/">Cloud Ref</a></li>
-      <li><a class="nav-framework" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">VAF Framework ↗</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="cloud-reference/">Cloud Reference</a></li>
+      <li><a class="nav-framework" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Velocity™ Framework ↗</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
   </div>
 </nav>
@@ -175,7 +181,7 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
   <div class="hero-inner">
     <div>
       <p class="hero-kicker">Velocity Architecture Framework · Solution Architecture</p>
-      <h1>VAF·SA<span>Field Method</span></h1>
+      <h1>Velocity™ SA<span>Field Method</span></h1>
       <p class="hero-lead">A practitioner field framework for solution architects who need to read difficult environments, extract missing intelligence, and deliver the right artefact under pressure.</p>
       <div class="hero-actions">
         <a href="#modules" class="btn btn-primary">Explore the six modules</a>
@@ -198,7 +204,7 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
     <div class="section-head">
       <p class="label">The six modules</p>
       <h2>From context to velocity.</h2>
-      <p>VAF-SA is organised as a sequence of field moves, not a linear documentation method. Each module helps the architect reduce ambiguity and increase decision quality.</p>
+      <p>Velocity™-SA is organised as a sequence of field moves, not a linear documentation method. Each module helps the architect reduce ambiguity and increase decision quality.</p>
     </div>
     <div class="module-grid">
       <a class="module-card" style="--mcolor:var(--m1)" href="modules/module-01-orientation.html"><p class="module-num">MODULE 01</p><h3>Orientation</h3><p>Read the engagement, mandate, politics, constraints, and delivery weather before prescribing architecture activity.</p></a>
@@ -246,7 +252,7 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
   <div class="wrap">
     <div class="section-head">
       <p class="label">Practitioner pathway</p>
-      <h2>How to apply VAF·SA.</h2>
+      <h2>How to apply Velocity™ SA.</h2>
     </div>
     <div class="pathway">
       <div class="path-step"><span>01</span><strong>Orient</strong></div>
@@ -263,14 +269,14 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
   <div class="cta-inner">
     <p class="label">Part of the Velocity Architecture ecosystem</p>
     <h2>Solution architecture without theatre.</h2>
-    <p>VAF-SA connects practical field judgement with the wider Velocity Architecture Framework and the ZenCloud delivery ecosystem.</p>
-    <a class="btn btn-primary" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Return to VAF Framework</a>
+    <p>Velocity™-SA connects practical field judgement with the wider Velocity Architecture Framework and the ZenCloud delivery ecosystem.</p>
+    <a class="btn btn-primary" href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Return to Velocity™ Framework</a>
   </div>
 </section>
 
 <footer>
   <div class="footer-inner">
-    <p class="footer-brand">VAF·SA</p>
+    <p class="footer-brand">Velocity™ SA</p>
     <div class="footer-links">
       <a href="site-map.html">Site Map</a>
       <a href="toolkit.html">Toolkit</a>
@@ -279,12 +285,18 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
       <a href="https://studiosix.com.au/" target="_blank" rel="noopener">StudioSix</a>
       <a href="https://velocityarchitecture.com.au/" target="_blank" rel="noopener">Velocity Academy</a>
       <a href="https://velocityarchitectureframework.com/" target="_blank" rel="noopener">Velocity Architecture</a>
-      <a href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/ZenCloudAU/Velocity™-sa" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="footer-principle">ZenCloud advises. StudioSix produces. Velocity decides.</p>
     <p class="footer-copy">Free to use. Attribution appreciated. © 2026 Phil Myint / ZenCloud Global Consultants</p>
   </div>
 
 </footer>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>

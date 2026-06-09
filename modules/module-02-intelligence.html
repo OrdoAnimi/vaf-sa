@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="VAF·SA Module 02 — Intelligence. Get what you need from people who may not give it. Ten questions, vendor interrogation framework, and gap mapping.">
-<title>VAF·SA — Module 02: Intelligence</title>
+<meta name="description" content="Velocity™ SA Module 02 — Intelligence. Get what you need from people who may not give it. Ten questions, vendor interrogation framework, and gap mapping.">
+<title>Velocity™ SA — Module 02: Intelligence</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -569,30 +569,36 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .nav-cta-btn{font-size:12px;font-weight:700;text-decoration:none;padding:7px 16px;background:var(--amber);color:#fff;border-radius:2px;}
 .nav-cta-btn:hover{background:var(--amber-hot);color:#fff;text-decoration:none;}
 
-</style>
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links.open,.nav-links-bar.open{display:flex!important;}
+}</style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">VAF·SA</a>
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
       <li><a href="../lexicon.html">Lexicon</a></li>
       <li><a href="../worked-example.html">Worked Example</a></li>
       <li><a href="../workshop-playbook.html">Workshop</a></li>
       <li><a href="../escalation-protocol.html">Escalation</a></li>
-      <li><a href="../cloud-reference/">Cloud Ref</a></li>
-      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">VAF Agent ↗</a></li>
+      <li><a href="../cloud-reference/">Cloud Reference</a></li>
+      <li><a href="https://velocityarchitectureframework.com/app/portal.html" target="_blank" rel="noopener">Velocity™ Agent ↗</a></li>
     </ul>
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← VAF·SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← Velocity™ SA Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">VAF·SA — Velocity Architecture Framework · Solution Architecture</div>
+    <div class="doc-brand">Velocity™ SA — Velocity Architecture Framework · Solution Architecture</div>
     <div class="doc-ref">MODULE 02 OF 06<br>VAFSA-M02 · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
   </div>
   <div class="doc-title">MODULE 02<br><span>INTELLIGENCE</span></div>
@@ -1136,7 +1142,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>VAF·SA</span> — Velocity Architecture Framework</div>
+    <div class="footer-brand"><span>Velocity™ SA</span> — Velocity Architecture Framework</div>
     <div class="footer-nav" style="margin-top:4px;">MODULE 02 — INTELLIGENCE · ZENCLOUD GLOBAL CONSULTANTS · v1.0</div>
     <div class="nav-bar">
       <a href="module-01-orientation.html" class="nav-prev">← MODULE 01 — ORIENTATION</a>
@@ -1149,5 +1155,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 </div>
 
 </div>
-</body>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  var menu=document.querySelector('.nav-links-bar,.nav-links');
+  if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}
+})();
+</script></body>
 </html>
