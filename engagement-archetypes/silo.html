@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Silo Engagement — when the solution exists but the people don't connect. Facilitative posture, signals, Velocity™ concepts, and field guidance for solution architects.">
+<title>Velocity™ SA — The Silo Engagement</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
+  --wire:#E2E8F0;--wire-light:#CBD5E1;
+  --amber:#E8630A;--amber-hot:#C24F06;
+  --fog:#64748B;--mist:#475569;--ghost:#334155;--white:#0F172A;
+  --arch-color:#16A34A;--arch-bg:rgba(22,163,74,0.06);--arch-border:rgba(22,163,74,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links-bar{display:none!important;position:absolute;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links-bar.open{display:flex!important;}
+}
+.page{max-width:900px;margin:0 auto;padding:32px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;text-transform:uppercase;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.arch-num-large{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.1em;color:var(--arch-color);margin-bottom:10px;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:12px;}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--wire);color:var(--fog);}
+.tag.primary{border-color:var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
+.intro-block{background:var(--arch-bg);border:1px solid var(--arch-border);border-left:3px solid var(--arch-color);padding:20px 24px;margin-bottom:40px;font-size:15px;color:var(--ghost);line-height:1.75;}
+.section{margin-bottom:48px;}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin:0 0 20px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--wire);}
+.section-title-h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.p{font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:560px){.signal-grid{grid-template-columns:1fr;}}
+.signal-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.signal-list{list-style:none;font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);line-height:1.9;}
+.signal-list li{padding:6px 0;border-bottom:1px solid var(--wire);}
+.signal-list li:last-child{border-bottom:none;}
+.signal-list li::before{content:'→ ';color:var(--arch-color);}
+.posture-block{background:var(--forge);border:1px solid var(--wire);border-left:4px solid var(--arch-color);padding:20px 24px;margin-bottom:24px;}
+.posture-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.posture-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.75;}
+.posture-text strong{color:var(--white);}
+.field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+@media(max-width:560px){.field-grid{grid-template-columns:1fr;}}
+.field-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--arch-color);padding:16px 18px;}
+.field-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.field-card-value{font-size:13px;color:var(--white);font-weight:600;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.combination-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.combination-grid{grid-template-columns:1fr;}}
+.combo-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.combo-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+.combo-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);margin-bottom:16px;}
+.footer-brand span{color:var(--amber);}
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
+.nav-prev:hover,.nav-next:hover{text-decoration:none;opacity:0.8;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../modules/module-01-orientation.html">Modules</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../toolkit.html">SA Toolkit</a></li>
+      <li><a href="../cloud-reference/">Cloud Reference</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+  <a class="back" href="../index.html">← Velocity™ SA / Engagement Archetypes</a>
+
+  <div class="doc-header">
+    <div class="doc-meta">
+      <div class="doc-brand">Velocity™ SA · Engagement Archetypes</div>
+      <div class="doc-ref">ARCHETYPE 04 · MODULE 01</div>
+    </div>
+    <div class="arch-num-large">ARCHETYPE 04</div>
+    <h1 class="doc-title">The Silo Engagement</h1>
+    <div class="doc-subtitle">The solution exists. The people have never been in the same room.</div>
+    <div class="doc-tags">
+      <span class="tag primary">Human</span>
+      <span class="tag">Facilitative Posture</span>
+      <span class="tag">Module 01</span>
+    </div>
+  </div>
+
+  <div class="intro-block">
+    Capability exists. The solution is achievable. The parties who need to collaborate have never been in the same room. The problem is <strong>human and structural, not technical</strong>. The defining characteristic is proximity — the answer is present in the organisation, distributed across people who have not been connected. Architecture follows alignment.
+  </div>
+
+  <div class="field-grid">
+    <div class="field-card"><div class="field-card-label">Posture</div><div class="field-card-value">Facilitative</div></div>
+    <div class="field-card"><div class="field-card-label">Primary Risk</div><div class="field-card-value">Designing before connecting</div></div>
+    <div class="field-card"><div class="field-card-label">Velocity Target</div><div class="field-card-value">10–20 days to CIS</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Detection</div>
+    <h2 class="section-title-h2">Signals</h2>
+    <div class="signal-grid">
+      <div>
+        <div class="signal-col-label">Observable Signals</div>
+        <ul class="signal-list">
+          <li>Business units with overlapping requirements who have never spoken</li>
+          <li>Technical teams with relevant capability never engaged</li>
+          <li>"We didn't know they were doing that"</li>
+          <li>No shared vocabulary between business and technical</li>
+          <li>Duplicate solutions being built in parallel</li>
+          <li>Decisions made in isolation that contradict each other</li>
+        </ul>
+      </div>
+      <div>
+        <div class="signal-col-label">Velocity™ Concepts Activated</div>
+        <ul class="signal-list">
+          <li>Silo Architecture</li>
+          <li>Decision Altitude Collapse</li>
+          <li>De-siloing Instrument</li>
+          <li>Information Asymmetry</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Operating Posture</div>
+    <h2 class="section-title-h2">Facilitative</h2>
+    <div class="posture-block">
+      <div class="posture-label">Field Instruction</div>
+      <div class="posture-text"><strong>The workshop is the solution.</strong> Getting the right people together and establishing a shared language solves 70% of the problem before design begins. Architecture follows alignment. Do not produce technical artefacts before the human connections are established — they will be rejected or ignored.</div>
+    </div>
+    <p class="p">The Silo Engagement is the most resolvable of the four archetypes — if you get the room right. Capability and intent exist. The only missing ingredient is coordination.</p>
+    <p class="p">The risk is skipping facilitation and going straight to design. A solution designed in isolation from one silo will be rejected by the others.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Field Execution</div>
+    <h2 class="section-title-h2">Tactical Guidance</h2>
+    <div class="callout">Map every stakeholder before you run the first workshop. The most common failure in the Silo Engagement is running a session without the one person whose absence makes every decision provisional.</div>
+    <p class="p"><strong>Build the vocabulary before the workshop.</strong> One-on-one conversations before the group session let you identify and neutralise terminology conflicts. Bring a working glossary into the room.</p>
+    <p class="p"><strong>Use the heat map as a neutral surface.</strong> In the Silo Engagement, the heat map is not an interrogation instrument — it is a shared object. Everyone fills it in together. The blanks are collaborative problems, not accusations.</p>
+    <p class="p"><strong>Document every decision made in the room.</strong> Silo organisations forget cross-boundary agreements quickly. The artefact produced in the workshop is the record of alignment. Circulate it within 24 hours.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Combination Patterns</div>
+    <h2 class="section-title-h2">When Archetypes Combine</h2>
+    <p class="p">Common combinations with the Silo Engagement:</p>
+    <div class="combination-grid">
+      <div class="combo-card">
+        <div class="combo-name">Silo + Negligent Void</div>
+        <div class="combo-text">People need to connect AND no foundation exists. Build the foundation collaboratively through the workshop. The shared creation process is part of the de-siloing.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">Silo + Institutional Paralysis</div>
+        <div class="combo-text">Siloed stakeholders AND a history of failed attempts. Each silo has its own version of why previous attempts failed. Establishing shared history is the first workshop objective.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="footer-brand">Velocity™ <span>SA</span></div>
+    <div class="nav-bar">
+      <a class="nav-prev" href="institutional-paralysis.html">← Institutional Paralysis</a>
+      <a class="nav-next" href="../modules/module-01-orientation.html">Module 01 →</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){var btn=document.querySelector('.nav-toggle');var menu=document.querySelector('.nav-links-bar');if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}})();
+</script>
+</body>
+</html>

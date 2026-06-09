@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Obfuscation Engagement — when information is deliberately withheld. Forensic posture, signals, Velocity™ concepts, and field guidance for solution architects.">
+<title>Velocity™ SA — The Obfuscation Engagement</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
+  --wire:#E2E8F0;--wire-light:#CBD5E1;
+  --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);
+  --fog:#64748B;--mist:#475569;--ghost:#334155;--white:#0F172A;
+  --arch-color:#DC2626;--arch-bg:rgba(220,38,38,0.06);--arch-border:rgba(220,38,38,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
+.site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand:hover{text-decoration:none;}
+.nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
+.nav-links-bar a:hover{color:var(--amber);text-decoration:none;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
+@media(max-width:680px){
+  .nav-toggle{display:flex;align-items:center;justify-content:center;}
+  .nav-links-bar{display:none!important;position:absolute;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid #E2E8F0;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(15,23,42,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links-bar.open{display:flex!important;}
+}
+.page{max-width:900px;margin:0 auto;padding:32px 32px 96px;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;text-transform:uppercase;}
+.back:hover{color:var(--amber);}
+.doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
+.doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
+.arch-num-large{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.1em;color:var(--arch-color);margin-bottom:10px;}
+.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:12px;}
+.doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
+.doc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--wire);color:var(--fog);}
+.tag.primary{border-color:var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
+.intro-block{background:var(--arch-bg);border:1px solid var(--arch-border);border-left:3px solid var(--arch-color);padding:20px 24px;margin-bottom:40px;font-size:15px;color:var(--ghost);line-height:1.75;}
+.section{margin-bottom:48px;}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin:0 0 20px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--wire);}
+.section-title-h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.p{font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
+.p strong{color:var(--white);font-weight:600;}
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:560px){.signal-grid{grid-template-columns:1fr;}}
+.signal-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.signal-list{list-style:none;font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);line-height:1.9;}
+.signal-list li{padding:6px 0;border-bottom:1px solid var(--wire);}
+.signal-list li:last-child{border-bottom:none;}
+.signal-list li::before{content:'→ ';color:var(--arch-color);}
+.posture-block{background:var(--forge);border:1px solid var(--wire);border-left:4px solid var(--arch-color);padding:20px 24px;margin-bottom:24px;}
+.posture-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.posture-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.75;}
+.posture-text strong{color:var(--white);}
+.field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+@media(max-width:560px){.field-grid{grid-template-columns:1fr;}}
+.field-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--arch-color);padding:16px 18px;}
+.field-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.field-card-value{font-size:13px;color:var(--white);font-weight:600;}
+.callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
+.combination-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.combination-grid{grid-template-columns:1fr;}}
+.combo-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
+.combo-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+.combo-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
+.doc-footer{border-top:1px solid var(--wire);padding-top:24px;margin-top:64px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);margin-bottom:16px;}
+.footer-brand span{color:var(--amber);}
+.nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
+.nav-prev:hover,.nav-next:hover{text-decoration:none;opacity:0.8;}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links-bar">
+      <li><a href="../preface.html">Preface</a></li>
+      <li><a href="../lexicon.html">Lexicon</a></li>
+      <li><a href="../modules/module-01-orientation.html">Modules</a></li>
+      <li><a href="../worked-example.html">Worked Example</a></li>
+      <li><a href="../toolkit.html">SA Toolkit</a></li>
+      <li><a href="../cloud-reference/">Cloud Reference</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+  <a class="back" href="../index.html">← Velocity™ SA / Engagement Archetypes</a>
+
+  <div class="doc-header">
+    <div class="doc-meta">
+      <div class="doc-brand">Velocity™ SA · Engagement Archetypes</div>
+      <div class="doc-ref">ARCHETYPE 01 · MODULE 01</div>
+    </div>
+    <div class="arch-num-large">ARCHETYPE 01</div>
+    <h1 class="doc-title">The Obfuscation Engagement</h1>
+    <div class="doc-subtitle">Information exists and is being deliberately withheld</div>
+    <div class="doc-tags">
+      <span class="tag primary">Deliberate</span>
+      <span class="tag">Forensic Posture</span>
+      <span class="tag">Module 01</span>
+    </div>
+  </div>
+
+  <div class="intro-block">
+    Information critical to the solution is being deliberately withheld by a vendor, internal party, or stakeholder with a vested interest in preventing full disclosure. The defining characteristic is <strong>intent</strong> — the withholding is purposeful. This is not structural absence. Someone knows. Someone is choosing not to tell you.
+  </div>
+
+  <div class="field-grid">
+    <div class="field-card"><div class="field-card-label">Posture</div><div class="field-card-value">Forensic</div></div>
+    <div class="field-card"><div class="field-card-label">Primary Risk</div><div class="field-card-value">Design on false premises</div></div>
+    <div class="field-card"><div class="field-card-label">Velocity Target</div><div class="field-card-value">10–20 days to CIS</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Detection</div>
+    <h2 class="section-title-h2">Signals</h2>
+    <div class="signal-grid">
+      <div>
+        <div class="signal-col-label">Observable Signals</div>
+        <ul class="signal-list">
+          <li>Vendor confidence without documentation</li>
+          <li>Vague answers to direct data flow questions</li>
+          <li>Completed POC not being shared</li>
+          <li>Decisions made with no audit trail</li>
+          <li>Egress described as ingress</li>
+          <li>Architecture diagrams contradicted by system behaviour</li>
+          <li>Escalation treated as personal attack</li>
+        </ul>
+      </div>
+      <div>
+        <div class="signal-col-label">Velocity™ Concepts Activated</div>
+        <ul class="signal-list">
+          <li>Information Asymmetry</li>
+          <li>Governance Drag — Deliberate</li>
+          <li>Decision Altitude Collapse</li>
+          <li>The Blank Cell</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Operating Posture</div>
+    <h2 class="section-title-h2">Forensic</h2>
+    <div class="posture-block">
+      <div class="posture-label">Field Instruction</div>
+      <div class="posture-text"><strong>Every answer is a hypothesis until independently verified.</strong> The heat map is the interrogation instrument. Every blank cell is deliberate, not accidental. Go to unofficial channels. Cross-reference vendor claims against observable system behaviour. Hold the line until every cell is answered. Do not design until the asymmetry is resolved or formally acknowledged.</div>
+    </div>
+    <p class="p">In the Obfuscation Engagement, the standard intake process will not surface what you need. Formal workshops and discovery sessions are managed performances. You extract the real picture from documentation discrepancies, informal conversations, and observable system behaviour that contradicts the stated position.</p>
+    <p class="p">The heat map is your primary instrument. Every blank cell is a deliberate choice. Map the blanks before you map the answers.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Field Execution</div>
+    <h2 class="section-title-h2">Tactical Guidance</h2>
+    <div class="callout">Never confront the obfuscation directly in formal settings. Confrontation triggers defensive escalation. Build the picture independently and present your findings as a gap analysis, not an accusation.</div>
+    <p class="p"><strong>Go to unofficial channels.</strong> The person withholding information in the formal engagement is rarely withholding it in every conversation. Find the practitioner who built the system, not the person managing the relationship.</p>
+    <p class="p"><strong>Log everything.</strong> Every question asked, every non-answer received, every document requested and not provided. This log becomes your escalation artefact if the engagement deteriorates.</p>
+    <p class="p"><strong>Use the vendor's own documentation against the verbal position.</strong> Vendors withholding information frequently contradict themselves between their public product documentation and their stated configuration. Find the contradiction.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Combination Patterns</div>
+    <h2 class="section-title-h2">When Archetypes Combine</h2>
+    <p class="p">The Obfuscation Engagement rarely appears in isolation. Common combinations:</p>
+    <div class="combination-grid">
+      <div class="combo-card">
+        <div class="combo-name">Obfuscation + Negligent Void</div>
+        <div class="combo-text">Information is being withheld AND no architectural foundation exists. Hardest combination. You cannot build on what you cannot see and what does not exist.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">Obfuscation + Institutional Paralysis</div>
+        <div class="combo-text">History is being withheld and the organisation has failed before. The obfuscation is protecting prior failures from scrutiny. Escalation is heavily politicised.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="footer-brand">Velocity™ <span>SA</span></div>
+    <div class="nav-bar">
+      <a class="nav-prev" href="../index.html">← Archetypes Overview</a>
+      <a class="nav-next" href="negligent-void.html">Negligent Void →</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){var btn=document.querySelector('.nav-toggle');var menu=document.querySelector('.nav-links-bar');if(btn&&menu){btn.addEventListener('click',function(){menu.classList.toggle('open');btn.textContent=menu.classList.contains('open')?'✕':'☰';});}})();
+</script>
+</body>
+</html>

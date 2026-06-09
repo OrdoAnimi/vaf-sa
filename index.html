@@ -121,6 +121,7 @@ h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(42px,6vw,72px); line-h
 .eng-card { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--navy); border-radius:9px; padding:22px; }
 .eng-card h3 { font-size:16px; color:var(--ink); margin-bottom:8px; }
 .eng-card p { font-size:13px; color:var(--muted); line-height:1.55; }
+a.eng-card:hover { border-top-color:var(--accent); box-shadow:0 4px 12px rgba(15,23,42,.08); transform:translateY(-2px); transition:all .18s ease; }
 
 .pathway { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
 .path-step { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:16px; text-align:center; }
@@ -240,10 +241,10 @@ footer { background:#0F172A; color:#94A3B8; padding:36px 32px; }
       <h2>Know the terrain before choosing the artefact.</h2>
     </div>
     <div class="engagements">
-      <div class="eng-card"><h3>Obfuscation</h3><p>When complexity, language, or politics hide the real issue.</p></div>
-      <div class="eng-card"><h3>Negligent Void</h3><p>When documentation, ownership, and controls should exist but do not.</p></div>
-      <div class="eng-card"><h3>Institutional Paralysis</h3><p>When decisions are known but cannot move through the system.</p></div>
-      <div class="eng-card"><h3>Silo Engagement</h3><p>When local optimisation blocks enterprise-level architecture fitness.</p></div>
+      <a class="eng-card" href="engagement-archetypes/obfuscation.html" style="text-decoration:none;color:inherit;display:block;"><h3>Obfuscation</h3><p>When complexity, language, or politics hide the real issue.</p></a>
+      <a class="eng-card" href="engagement-archetypes/negligent-void.html" style="text-decoration:none;color:inherit;display:block;"><h3>Negligent Void</h3><p>When documentation, ownership, and controls should exist but do not.</p></a>
+      <a class="eng-card" href="engagement-archetypes/institutional-paralysis.html" style="text-decoration:none;color:inherit;display:block;"><h3>Institutional Paralysis</h3><p>When decisions are known but cannot move through the system.</p></a>
+      <a class="eng-card" href="engagement-archetypes/silo.html" style="text-decoration:none;color:inherit;display:block;"><h3>Silo Engagement</h3><p>When local optimisation blocks enterprise-level architecture fitness.</p></a>
     </div>
   </div>
 </section>
