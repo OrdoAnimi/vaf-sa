@@ -162,4 +162,4 @@ The VAF-SA method, terminology, modules, diagrams, templates, toolkit material, 
 This repository is proprietary and all rights are reserved. See [LICENSE](LICENSE).
 
 ---
-© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
+© 2026 Zencloud Advisory. All rights reserved. Proprietary and confidential.
