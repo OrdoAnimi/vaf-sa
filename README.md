@@ -158,3 +158,8 @@ The worked example is described in the site as NDA-clean. Do not add client-iden
 Usage terms are documented in [USAGE-TERMS.md](USAGE-TERMS.md).
 
 The VAF-SA method, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the ZenCloud / Velocity Architecture ecosystem.
+
+This repository is proprietary and all rights are reserved. See [LICENSE](LICENSE).
+
+---
+© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
