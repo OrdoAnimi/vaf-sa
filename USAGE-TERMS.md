@@ -22,7 +22,7 @@ Recommended attribution:
 
 ```text
 VAF-SA — Velocity Architecture Framework: Solution Architecture
-Phil Myint / ZenCloud Global Consultants
+Phil Myint / ZenCloud Advisory
 https://zencloudau.github.io/vaf-sa/
 ```
 
