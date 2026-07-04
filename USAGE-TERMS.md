@@ -1,16 +1,16 @@
-# VAF-SA Usage Terms
+# OrdoAnimi SA Usage Terms
 
 ## Purpose
 
-VAF-SA is published as a public practitioner reference for solution architecture field practice.
+OrdoAnimi SA is published as a public practitioner reference for solution architecture field practice.
 
-The repository is intended to support learning, reference, citation, and ecosystem navigation. It is not intended to transfer ownership of the VAF-SA method, name, templates, diagrams, modules, or practitioner content.
+The repository is intended to support learning, reference, citation, and ecosystem navigation. It is not intended to transfer ownership of the OrdoAnimi SA method, name, templates, diagrams, modules, or practitioner content.
 
 ## Intended Use
 
 You may use this repository to:
 
-- Read the VAF-SA method.
+- Read the OrdoAnimi SA method.
 - Link to the public site.
 - Cite short excerpts with attribution.
 - Use the material for personal learning and professional development.
@@ -21,24 +21,24 @@ You may use this repository to:
 Recommended attribution:
 
 ```text
-VAF-SA — Velocity Architecture Framework: Solution Architecture
-Phil Myint / ZenCloud Advisory
+OrdoAnimi SA — The OrdoAnimi Framework: Solution Architecture
+Phil Myint / OrdoAnimi
 https://zencloudau.github.io/vaf-sa/
 ```
 
 ## Method and Content
 
-The VAF-SA framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the ZenCloud / Velocity Architecture ecosystem.
+The OrdoAnimi SA framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi / OrdoAnimi ecosystem.
 
-Do not present the VAF-SA method, name, diagrams, templates, or content as your own work.
+Do not present the OrdoAnimi SA method, name, diagrams, templates, or content as your own work.
 
 ## Commercial Use
 
-For commercial use, training integration, derivative products, or consulting use beyond ordinary reference, contact ZenCloud Advisory.
+For commercial use, training integration, derivative products, or consulting use beyond ordinary reference, contact OrdoAnimi.
 
-## Relationship to Velocity Architecture Framework
+## Relationship to The OrdoAnimi Framework
 
-VAF-SA is the solution architecture practitioner method within the broader Velocity Architecture ecosystem.
+OrdoAnimi SA is the solution architecture practitioner method within the broader OrdoAnimi ecosystem.
 
 Framework and research authority:
 

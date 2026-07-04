@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Velocity™ SA Cloud Reference — Enterprise Landing Zone Blueprint. Vendor-neutral 14-domain blueprint covering identity, account structure, network, security, policy, logging, backup, cost, shared services, deployment, workload onboarding, operations, exceptions, and compliance evidence.">
-<title>Velocity™ SA — Enterprise Landing Zone Blueprint</title>
+<meta name="description" content="OrdoAnimi SA Cloud Reference — Enterprise Landing Zone Blueprint. Vendor-neutral 14-domain blueprint covering identity, account structure, network, security, policy, logging, backup, cost, shared services, deployment, workload onboarding, operations, exceptions, and compliance evidence.">
+<title>OrdoAnimi SA — Enterprise Landing Zone Blueprint</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
@@ -80,8 +80,8 @@ a:hover{text-decoration:underline;}
 .vt-tag.azure{color:var(--azure);border-color:rgba(0,120,212,0.3);}
 .vt-tag.gcp{color:var(--gcp);border-color:rgba(26,115,232,0.3);}
 .vt-tag.oci{color:var(--oci);border-color:rgba(199,70,52,0.3);}
-/* Velocity™ NOTES */
-.Velocity™-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
+/* OrdoAnimi NOTES */
+.OrdoAnimi-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
 .vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
 .vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
@@ -109,7 +109,7 @@ a:hover{text-decoration:underline;}
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">Velocity™ SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -128,7 +128,7 @@ a:hover{text-decoration:underline;}
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">Velocity™ SA — Cloud Reference · Enterprise Landing Zone Blueprint</div>
+    <div class="doc-brand">OrdoAnimi SA — Cloud Reference · Enterprise Landing Zone Blueprint</div>
     <div class="doc-ref">VENDOR-NEUTRAL<br>VAFSA-CRL-LZ · v1.0</div>
   </div>
   <div class="doc-title">ENTERPRISE<br><span>LANDING ZONE</span></div>
@@ -140,7 +140,7 @@ a:hover{text-decoration:underline;}
     <span class="tag">Network</span>
     <span class="tag">Security</span>
     <span class="tag">Governance</span>
-    <span class="tag amber">Velocity™ SA</span>
+    <span class="tag amber">OrdoAnimi SA</span>
   </div>
 </div>
 
@@ -157,7 +157,7 @@ a:hover{text-decoration:underline;}
   <p class="p">An enterprise landing zone is the pre-built, governed cloud foundation into which workloads are deployed. It is not a workload — it is the environment a workload expects to find. A well-designed landing zone means teams deploying workloads do not need to solve identity, network, security, or compliance problems from scratch. Those decisions have been made, documented, and enforced at the foundation level.</p>
   <p class="p">Every major cloud vendor publishes its own landing zone guidance — AWS Landing Zone (via Control Tower), Azure Landing Zones (via CAF), Google Cloud Landing Zones, and OCI Landing Zone patterns. These differ in terminology, tooling, and structure. The 14 domains below describe what a landing zone must address regardless of vendor. The vendor mapping in Section 03 shows how each platform implements those domains.</p>
   <p class="p">A landing zone is an architecture decision, not a deployment script. The script is an output of that decision. Decisions made here — about account structure, network topology, identity federation, and security policy — are extremely difficult to change once workloads are running. They warrant ADRs, not just configurations.</p>
-  <div class="callout lz">Velocity™ SA treats the landing zone as an artefact-producing engagement, not a deployment task. Module 04 (Artefacts) is the primary instrument. Each domain below should be traceable to a recorded decision — not assumed to be inherited from a vendor template.</div>
+  <div class="callout lz">OrdoAnimi SA treats the landing zone as an artefact-producing engagement, not a deployment task. Module 04 (Artefacts) is the primary instrument. Each domain below should be traceable to a recorded decision — not assumed to be inherited from a vendor template.</div>
 </div>
 
 <div class="divider"></div>
@@ -314,27 +314,27 @@ a:hover{text-decoration:underline;}
       </tr>
     </tbody>
   </table>
-  <div class="callout">Vendor mapping is a starting point, not a prescription. The correct set of services for any engagement depends on what is already deployed, what the client's teams know how to operate, and what governance constraints apply. Velocity™ SA does not recommend vendor tooling — it helps practitioners work with what is in front of them.</div>
+  <div class="callout">Vendor mapping is a starting point, not a prescription. The correct set of services for any engagement depends on what is already deployed, what the client's teams know how to operate, and what governance constraints apply. OrdoAnimi SA does not recommend vendor tooling — it helps practitioners work with what is in front of them.</div>
 </div>
 
 <div class="divider"></div>
 
-<!-- Velocity™ SA USAGE NOTES -->
+<!-- OrdoAnimi SA USAGE NOTES -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">04</div>
     <div>
-      <div class="section-eyebrow">Velocity™ SA Usage Notes</div>
-      <div class="section-title">Applying Velocity™ SA in Landing Zone Engagements</div>
+      <div class="section-eyebrow">OrdoAnimi SA Usage Notes</div>
+      <div class="section-title">Applying OrdoAnimi SA in Landing Zone Engagements</div>
       <div class="section-desc">Where the practitioner method adds value when landing zones are the subject of the engagement.</div>
     </div>
   </div>
-  <div class="Velocity™-notes">
-    <div class="vn-label">Velocity™ SA Practitioner Notes — Landing Zone</div>
+  <div class="OrdoAnimi-notes">
+    <div class="vn-label">OrdoAnimi SA Practitioner Notes — Landing Zone</div>
     <ul class="vn-list">
       <li><strong>Landing zones are rarely built from zero.</strong> Most engagements involve a landing zone that already exists — built by a previous team, modified over time, and partially documented. Module 02 (Intelligence) is the instrument for establishing what is actually deployed versus what the vendor template assumed. Do not document the template; document the deviation from it.</li>
-      <li><strong>The 14 domains are decision prompts, not a deployment checklist.</strong> Each domain surfaces a decision that should be recorded as an Architecture Decision Record (ADR) under Module 04 (Artefacts). If a landing zone engagement cannot produce an ADR for each domain, the decisions have been made implicitly — which is the condition Velocity™ SA exists to address.</li>
-      <li><strong>Account structure and network topology decisions are foundational constraints.</strong> Changes to these domains after workloads are running are high-risk and expensive. Module 01 (Orientation) establishes whether the landing zone is in a greenfield, brownfield, or contested state before any recommendations are made. The engagement type determines what Velocity™ SA can actually change versus what it can only document.</li>
+      <li><strong>The 14 domains are decision prompts, not a deployment checklist.</strong> Each domain surfaces a decision that should be recorded as an Architecture Decision Record (ADR) under Module 04 (Artefacts). If a landing zone engagement cannot produce an ADR for each domain, the decisions have been made implicitly — which is the condition OrdoAnimi SA exists to address.</li>
+      <li><strong>Account structure and network topology decisions are foundational constraints.</strong> Changes to these domains after workloads are running are high-risk and expensive. Module 01 (Orientation) establishes whether the landing zone is in a greenfield, brownfield, or contested state before any recommendations are made. The engagement type determines what OrdoAnimi SA can actually change versus what it can only document.</li>
       <li><strong>Exception handling is an indicator of governance health.</strong> A landing zone with no formal exception register does not have no exceptions — it has undocumented ones. Module 05 (Communication) includes communicating exception risk to the appropriate stakeholders. The exception register produced in Module 04 (Artefacts) is often the most actionable governance output of a landing zone engagement.</li>
       <li><strong>The Velocity Loop applies to landing zone drift.</strong> A landing zone that was correct at build time will drift unless there is a mechanism to detect and correct it. Module 06 (The Velocity Loop) is the practitioner framework for maintaining posture across engagement cycles — applicable to ongoing landing zone health reviews as much as to workload delivery engagements.</li>
     </ul>
@@ -347,7 +347,7 @@ a:hover{text-decoration:underline;}
 </div>
 
 <div class="doc-footer">
-  <div class="footer-brand"><span>Velocity™ SA</span> — Enterprise Landing Zone Blueprint</div>
+  <div class="footer-brand"><span>OrdoAnimi SA</span> — Enterprise Landing Zone Blueprint</div>
   <div class="footer-nav"><a href="index.html">Cloud Reference</a> · <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a></div>
 </div>
 
