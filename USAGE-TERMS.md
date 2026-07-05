@@ -28,7 +28,7 @@ https://zencloudau.github.io/vaf-sa/
 
 ## Method and Content
 
-The OrdoAnimi Architecture framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi / OrdoAnimi ecosystem.
+The OrdoAnimi Architecture framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi ecosystem.
 
 Do not present the OrdoAnimi Architecture method, name, diagrams, templates, or content as your own work.
 

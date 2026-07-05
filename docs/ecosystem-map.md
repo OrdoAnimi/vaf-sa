@@ -20,7 +20,7 @@ VSF Match = career readiness and capability-gap engine
 
 ## Positioning
 
-OrdoAnimi Architecture translates the broader The OrdoAnimi Framework into practical field behaviour for solution architects.
+OrdoAnimi Architecture translates the broader OrdoAnimi Framework into practical field behaviour for solution architects.
 
 It is designed for engagements where:
 
