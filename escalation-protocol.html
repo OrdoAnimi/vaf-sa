@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Escalation Protocol — three escalation layers, the boundary statement, time guidance per module, and pattern locking for difficult engagements.">
-<title>OrdoAnimi SA — Escalation Protocol and Time Guidance</title>
+<meta name="description" content="OrdoAnimi Architecture Escalation Protocol — three escalation layers, the boundary statement, time guidance per module, and pattern locking for difficult engagements.">
+<title>OrdoAnimi Architecture — Escalation Protocol and Time Guidance</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
   --wire:#E2E8F0;--wire-light:#CBD5E1;
@@ -23,16 +23,16 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .back:hover{color:var(--signal);}
 .doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
 .doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
-.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--signal);text-transform:uppercase;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--signal);}
 .doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,66px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
+.doc-title{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,5.5vw,66px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:8px;}
 .doc-title span{color:var(--signal);}
 .doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
 .section{margin-bottom:52px;}
 .section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--wire);}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(220,38,38,0.2);min-width:44px;padding-top:2px;}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--signal);margin-bottom:4px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);line-height:1;}
+.section-num{font-family:'Archivo Black',sans-serif;font-size:42px;line-height:1;color:rgba(220,38,38,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;color:var(--signal);margin-bottom:4px;}
+.section-title{font-family:'Archivo Black',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--white);line-height:1;}
 .section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);margin-top:4px;letter-spacing:0.05em;}
 .p{font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
 .p strong{color:var(--white);font-weight:600;}
@@ -46,11 +46,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .esc-layer:nth-child(1) .el-label{background:rgba(220,38,38,0.08);}
 .esc-layer:nth-child(2) .el-label{background:rgba(232,99,10,0.08);}
 .esc-layer:nth-child(3) .el-label{background:rgba(37,99,235,0.08);}
-.el-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;margin-bottom:4px;}
+.el-num{font-family:'Archivo Black',sans-serif;font-size:28px;line-height:1;margin-bottom:4px;}
 .esc-layer:nth-child(1) .el-num{color:var(--signal);}
 .esc-layer:nth-child(2) .el-num{color:var(--amber);}
 .esc-layer:nth-child(3) .el-num{color:var(--cold-light);}
-.el-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;}
+.el-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;}
 .esc-layer:nth-child(1) .el-name{color:var(--signal);}
 .esc-layer:nth-child(2) .el-name{color:var(--amber);}
 .esc-layer:nth-child(3) .el-name{color:var(--cold-light);}
@@ -63,32 +63,32 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .esc-layer:nth-child(3) .el-say{color:var(--cold-light);border-left:2px solid rgba(37,99,235,0.3);}
 .el-say::before{content:'SAY: ';font-style:normal;opacity:0.6;font-weight:500;}
 .boundary-block{background:var(--steel);border:1px solid var(--wire);border-left:3px solid var(--green);padding:20px 24px;margin:20px 0;}
-.bb-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:8px;}
+.bb-title{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:8px;}
 .bb-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
 .bb-example{margin-top:12px;padding:10px 14px;background:var(--steel);border:1px solid var(--wire);font-family:'DM Mono',monospace;font-size:10px;color:var(--green-light);line-height:1.6;font-style:italic;}
 .bb-example::before{content:'SAY: ';font-style:normal;color:rgba(22,163,74,0.6);font-weight:500;}
 .time-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:20px 0;}
 @media(max-width:600px){.time-grid{grid-template-columns:1fr 1fr;}}
 .time-cell{background:var(--forge);border:1px solid var(--wire);padding:14px 12px;}
-.tc-module{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.tc-module{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;color:var(--fog);margin-bottom:6px;}
 .tc-name{font-weight:600;font-size:11px;color:var(--white);margin-bottom:8px;line-height:1.3;}
-.tc-time{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--amber);line-height:1;margin-bottom:4px;}
+.tc-time{font-family:'Archivo Black',sans-serif;font-size:22px;color:var(--amber);line-height:1;margin-bottom:4px;}
 .tc-unit{font-family:'DM Mono',monospace;font-size:8px;color:var(--fog);}
 .tc-estop{margin-top:8px;padding:4px 8px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);font-family:'DM Mono',monospace;font-size:8px;color:var(--signal);}
 .lock-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
 @media(max-width:480px){.lock-grid{grid-template-columns:1fr;}}
 .lock-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
-.lc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.lc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--amber);margin-bottom:6px;}
 .lc-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
 .lc-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
 .doc-footer{border-top:1px solid var(--wire);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:64px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
+.footer-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);}
 .footer-brand span{color:var(--signal);}
 .footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.1em;}
-.next-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);font-family:'DM Mono',monospace;font-size:10px;color:var(--signal);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;text-decoration:none;}
+.next-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);font-family:'DM Mono',monospace;font-size:10px;color:var(--signal);letter-spacing:0.08em;margin-top:8px;text-decoration:none;}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
@@ -105,7 +105,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="preface.html">Preface</a></li>
@@ -120,13 +120,13 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   </div>
 </nav>
 <div class="page">
-<a class="back" href="index.html">← OrdoAnimi SA Framework</a>
+<a class="back" href="index.html">← OrdoAnimi Architecture Framework</a>
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — Supplements to Communication and Velocity Loop Modules</div>
-    <div class="doc-ref">VAFSA-ESCALATION-TIME<br>ORDOANIMI</div>
+    <div class="doc-brand">OrdoAnimi Architecture — Supplements to Communication and Velocity Loop Modules</div>
+    <div class="doc-ref">ORDOANIMI-ESCALATION-TIME<br>OrdoAnimi</div>
   </div>
-  <div class="doc-title"><span>ESCALATION</span><br>PROTOCOL<br>+ TIME<br>GUIDANCE</div>
+  <div class="doc-title"><span>Escalation</span><br>Protocol<br>+ Time<br>Guidance</div>
   <div class="doc-subtitle">What to do when documentation is not enough. How long each module should run.</div>
 </div>
 
@@ -305,11 +305,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>OrdoAnimi SA</span> — The OrdoAnimi Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">ESCALATION PROTOCOL + TIME GUIDANCE · ORDOANIMI</div>
-    <a class="next-link" href="worked-example.html">→ THE WORKED EXAMPLE</a>
+    <div class="footer-brand"><span>OrdoAnimi Architecture</span> — The OrdoAnimi Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">Escalation Protocol + Time Guidance · OrdoAnimi</div>
+    <a class="next-link" href="worked-example.html">→ The Worked Example</a>
   </div>
-  <div style="text-align:right;"><div class="footer-nav">ORDOANIMI</div></div>
+  <div style="text-align:right;"><div class="footer-nav">OrdoAnimi</div></div>
 </div>
 </div>
 <script>

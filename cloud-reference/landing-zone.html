@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Cloud Reference — Enterprise Landing Zone Blueprint. Vendor-neutral 14-domain blueprint covering identity, account structure, network, security, policy, logging, backup, cost, shared services, deployment, workload onboarding, operations, exceptions, and compliance evidence.">
-<title>OrdoAnimi SA — Enterprise Landing Zone Blueprint</title>
+<meta name="description" content="OrdoAnimi Architecture Cloud Reference — Enterprise Landing Zone Blueprint. Vendor-neutral 14-domain blueprint covering identity, account structure, network, security, policy, logging, backup, cost, shared services, deployment, workload onboarding, operations, exceptions, and compliance evidence.">
+<title>OrdoAnimi Architecture — Enterprise Landing Zone Blueprint</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
   --lz:#1E6FD9;--lz-dim:rgba(30,111,217,0.07);--lz-border:rgba(30,111,217,0.26);
@@ -23,7 +23,7 @@ a:hover{text-decoration:underline;}
 .page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
@@ -35,20 +35,20 @@ a:hover{text-decoration:underline;}
 .back:hover{color:var(--amber);}
 .doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
 .doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
-.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);}
 .doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
 .doc-title span{color:var(--lz);}
 .doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
 .doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
 .tag.lz{border-color:var(--lz-border);color:var(--lz);}
 .tag.amber{border-color:var(--amber-border);color:var(--amber);}
 .section{margin-bottom:52px;}
 .section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(30,111,217,0.14);min-width:44px;padding-top:2px;}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--lz);margin-bottom:4px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-num{font-family:'Archivo Black',sans-serif;font-size:42px;line-height:1;color:rgba(30,111,217,0.14);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;color:var(--lz);margin-bottom:4px;}
+.section-title{font-family:'Archivo Black',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
 .section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
 .p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
 .p strong{color:var(--ink);font-weight:600;}
@@ -60,12 +60,12 @@ a:hover{text-decoration:underline;}
 .domain-item{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--border);}
 .domain-item:last-child{border-bottom:none;}
 .di-key{padding:14px 16px;background:var(--alt);border-right:1px solid var(--border);font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--ink);letter-spacing:0.04em;display:flex;flex-direction:column;gap:4px;}
-.di-num{font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;color:rgba(30,111,217,0.3);}
+.di-num{font-family:'Archivo Black',sans-serif;font-size:18px;line-height:1;color:rgba(30,111,217,0.3);}
 .di-val{padding:14px 18px;font-size:12.5px;color:var(--body);line-height:1.55;}
 @media(max-width:600px){.domain-item{grid-template-columns:1fr;}.di-key{border-right:none;border-bottom:1px solid var(--border);}}
 /* VENDOR MAPPING TABLE */
 .vendor-table{width:100%;border-collapse:collapse;border:1px solid var(--border);margin:20px 0;font-size:12.5px;}
-.vendor-table th{padding:10px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;background:var(--alt);border-bottom:1px solid var(--border);border-right:1px solid var(--border);color:var(--muted);}
+.vendor-table th{padding:10px 14px;text-align:left;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;background:var(--alt);border-bottom:1px solid var(--border);border-right:1px solid var(--border);color:var(--muted);}
 .vendor-table th:last-child{border-right:none;}
 .vendor-table td{padding:12px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--body);}
 .vendor-table td:last-child{border-right:none;}
@@ -82,17 +82,17 @@ a:hover{text-decoration:underline;}
 .vt-tag.oci{color:var(--oci);border-color:rgba(199,70,52,0.3);}
 /* OrdoAnimi NOTES */
 .OrdoAnimi-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
-.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--amber);margin-bottom:12px;}
 .vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
 .vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
 /* PAGE NAV */
 .page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
-.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
 .pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
 .pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
 .doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
 .footer-brand span{color:var(--amber);}
 .footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
 .footer-nav a{color:var(--muted);text-decoration:none;}
@@ -109,7 +109,7 @@ a:hover{text-decoration:underline;}
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -128,10 +128,10 @@ a:hover{text-decoration:underline;}
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — Cloud Reference · Enterprise Landing Zone Blueprint</div>
-    <div class="doc-ref">VENDOR-NEUTRAL<br>VAFSA-CRL-LZ · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — Cloud Reference · Enterprise Landing Zone Blueprint</div>
+    <div class="doc-ref">Vendor-Neutral<br>ORDOANIMI-CRL-LZ · v1.0</div>
   </div>
-  <div class="doc-title">ENTERPRISE<br><span>LANDING ZONE</span></div>
+  <div class="doc-title">Enterprise<br><span>Landing Zone</span></div>
   <div class="doc-subtitle">Vendor-Neutral Blueprint · 14 Domains · AWS · Azure · Google Cloud · OCI Mapping</div>
   <div class="doc-tags">
     <span class="tag lz">Vendor-Neutral</span>
@@ -140,7 +140,7 @@ a:hover{text-decoration:underline;}
     <span class="tag">Network</span>
     <span class="tag">Security</span>
     <span class="tag">Governance</span>
-    <span class="tag amber">OrdoAnimi SA</span>
+    <span class="tag amber">OrdoAnimi Architecture</span>
   </div>
 </div>
 
@@ -157,7 +157,7 @@ a:hover{text-decoration:underline;}
   <p class="p">An enterprise landing zone is the pre-built, governed cloud foundation into which workloads are deployed. It is not a workload — it is the environment a workload expects to find. A well-designed landing zone means teams deploying workloads do not need to solve identity, network, security, or compliance problems from scratch. Those decisions have been made, documented, and enforced at the foundation level.</p>
   <p class="p">Every major cloud vendor publishes its own landing zone guidance — AWS Landing Zone (via Control Tower), Azure Landing Zones (via CAF), Google Cloud Landing Zones, and OCI Landing Zone patterns. These differ in terminology, tooling, and structure. The 14 domains below describe what a landing zone must address regardless of vendor. The vendor mapping in Section 03 shows how each platform implements those domains.</p>
   <p class="p">A landing zone is an architecture decision, not a deployment script. The script is an output of that decision. Decisions made here — about account structure, network topology, identity federation, and security policy — are extremely difficult to change once workloads are running. They warrant ADRs, not just configurations.</p>
-  <div class="callout lz">OrdoAnimi SA treats the landing zone as an artefact-producing engagement, not a deployment task. Module 04 (Artefacts) is the primary instrument. Each domain below should be traceable to a recorded decision — not assumed to be inherited from a vendor template.</div>
+  <div class="callout lz">OrdoAnimi Architecture treats the landing zone as an artefact-producing engagement, not a deployment task. Module 04 (Artefacts) is the primary instrument. Each domain below should be traceable to a recorded decision — not assumed to be inherited from a vendor template.</div>
 </div>
 
 <div class="divider"></div>
@@ -314,27 +314,27 @@ a:hover{text-decoration:underline;}
       </tr>
     </tbody>
   </table>
-  <div class="callout">Vendor mapping is a starting point, not a prescription. The correct set of services for any engagement depends on what is already deployed, what the client's teams know how to operate, and what governance constraints apply. OrdoAnimi SA does not recommend vendor tooling — it helps practitioners work with what is in front of them.</div>
+  <div class="callout">Vendor mapping is a starting point, not a prescription. The correct set of services for any engagement depends on what is already deployed, what the client's teams know how to operate, and what governance constraints apply. OrdoAnimi Architecture does not recommend vendor tooling — it helps practitioners work with what is in front of them.</div>
 </div>
 
 <div class="divider"></div>
 
-<!-- OrdoAnimi SA USAGE NOTES -->
+<!-- OrdoAnimi Architecture USAGE NOTES -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">04</div>
     <div>
-      <div class="section-eyebrow">OrdoAnimi SA Usage Notes</div>
-      <div class="section-title">Applying OrdoAnimi SA in Landing Zone Engagements</div>
+      <div class="section-eyebrow">OrdoAnimi Architecture Usage Notes</div>
+      <div class="section-title">Applying OrdoAnimi Architecture in Landing Zone Engagements</div>
       <div class="section-desc">Where the practitioner method adds value when landing zones are the subject of the engagement.</div>
     </div>
   </div>
   <div class="OrdoAnimi-notes">
-    <div class="vn-label">OrdoAnimi SA Practitioner Notes — Landing Zone</div>
+    <div class="vn-label">OrdoAnimi Architecture Practitioner Notes — Landing Zone</div>
     <ul class="vn-list">
       <li><strong>Landing zones are rarely built from zero.</strong> Most engagements involve a landing zone that already exists — built by a previous team, modified over time, and partially documented. Module 02 (Intelligence) is the instrument for establishing what is actually deployed versus what the vendor template assumed. Do not document the template; document the deviation from it.</li>
-      <li><strong>The 14 domains are decision prompts, not a deployment checklist.</strong> Each domain surfaces a decision that should be recorded as an Architecture Decision Record (ADR) under Module 04 (Artefacts). If a landing zone engagement cannot produce an ADR for each domain, the decisions have been made implicitly — which is the condition OrdoAnimi SA exists to address.</li>
-      <li><strong>Account structure and network topology decisions are foundational constraints.</strong> Changes to these domains after workloads are running are high-risk and expensive. Module 01 (Orientation) establishes whether the landing zone is in a greenfield, brownfield, or contested state before any recommendations are made. The engagement type determines what OrdoAnimi SA can actually change versus what it can only document.</li>
+      <li><strong>The 14 domains are decision prompts, not a deployment checklist.</strong> Each domain surfaces a decision that should be recorded as an Architecture Decision Record (ADR) under Module 04 (Artefacts). If a landing zone engagement cannot produce an ADR for each domain, the decisions have been made implicitly — which is the condition OrdoAnimi Architecture exists to address.</li>
+      <li><strong>Account structure and network topology decisions are foundational constraints.</strong> Changes to these domains after workloads are running are high-risk and expensive. Module 01 (Orientation) establishes whether the landing zone is in a greenfield, brownfield, or contested state before any recommendations are made. The engagement type determines what OrdoAnimi Architecture can actually change versus what it can only document.</li>
       <li><strong>Exception handling is an indicator of governance health.</strong> A landing zone with no formal exception register does not have no exceptions — it has undocumented ones. Module 05 (Communication) includes communicating exception risk to the appropriate stakeholders. The exception register produced in Module 04 (Artefacts) is often the most actionable governance output of a landing zone engagement.</li>
       <li><strong>The Velocity Loop applies to landing zone drift.</strong> A landing zone that was correct at build time will drift unless there is a mechanism to detect and correct it. Module 06 (The Velocity Loop) is the practitioner framework for maintaining posture across engagement cycles — applicable to ongoing landing zone health reviews as much as to workload delivery engagements.</li>
     </ul>
@@ -347,7 +347,7 @@ a:hover{text-decoration:underline;}
 </div>
 
 <div class="doc-footer">
-  <div class="footer-brand"><span>OrdoAnimi SA</span> — Enterprise Landing Zone Blueprint</div>
+  <div class="footer-brand"><span>OrdoAnimi Architecture</span> — Enterprise Landing Zone Blueprint</div>
   <div class="footer-nav"><a href="index.html">Cloud Reference</a> · <a href="aws.html">AWS</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a></div>
 </div>
 

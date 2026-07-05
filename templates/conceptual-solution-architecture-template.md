@@ -1,6 +1,6 @@
 # Conceptual Solution Architecture (CSA)
 
-**VAF·SA Template** · Module 03 — Design
+**OrdoAnimi Template** · Module 03 — Design
 Logical design. Tooling-agnostic. Decisions visible.
 
 ---
@@ -172,4 +172,4 @@ The CSA answers:
 
 ---
 
-*VAF·SA · Conceptual Solution Architecture · v1.0*
+*OrdoAnimi · Conceptual Solution Architecture · v1.0*

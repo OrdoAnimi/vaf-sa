@@ -121,4 +121,4 @@
 
 ---
 
-*VAF·SA · Architecture Decision Record · v1.0*
+*OrdoAnimi · Architecture Decision Record · v1.0*

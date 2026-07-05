@@ -1,6 +1,6 @@
 # TRA Readiness Checklist
 
-**VAF·SA Governance & TRA Toolkit**
+**OrdoAnimi Governance & TRA Toolkit**
 Use before submitting to the TRA body. Every unchecked item is a rejection risk.
 
 ---
@@ -164,4 +164,4 @@ Use before submitting to the TRA body. Every unchecked item is a rejection risk.
 
 ---
 
-*VAF·SA · TRA Readiness Checklist · v1.0*
+*OrdoAnimi · TRA Readiness Checklist · v1.0*

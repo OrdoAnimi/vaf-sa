@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="The Negligent Void — when no architectural foundation exists. Constructive posture, signals, OrdoAnimi concepts, and field guidance for solution architects.">
-<title>OrdoAnimi SA — The Negligent Void</title>
+<title>OrdoAnimi Architecture — The Negligent Void</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
   --wire:#E2E8F0;--wire-light:#CBD5E1;
@@ -18,7 +18,7 @@
 body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
@@ -30,81 +30,81 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   .nav-links-bar.open{display:flex!important;}
 }
 .page{max-width:900px;margin:0 auto;padding:32px 32px 96px;}
-.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;text-transform:uppercase;}
+.back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--fog);text-decoration:none;display:inline-block;margin-bottom:32px;}
 .back:hover{color:var(--amber);}
 .doc-header{border-bottom:1px solid var(--wire);padding-bottom:32px;margin-bottom:48px;}
 .doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
-.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);}
 .doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);letter-spacing:0.15em;text-align:right;}
-.arch-num-large{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.1em;color:var(--arch-color);margin-bottom:10px;}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:12px;}
+.arch-num-large{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.1em;color:var(--arch-color);margin-bottom:10px;}
+.doc-title{font-family:'Archivo Black',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:0.04em;line-height:0.92;color:var(--white);margin-bottom:12px;}
 .doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);letter-spacing:0.1em;margin-bottom:20px;}
 .doc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
-.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--wire);color:var(--fog);}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;padding:4px 10px;border:1px solid var(--wire);color:var(--fog);}
 .tag.primary{border-color:var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
 .intro-block{background:var(--arch-bg);border:1px solid var(--arch-border);border-left:3px solid var(--arch-color);padding:20px 24px;margin-bottom:40px;font-size:15px;color:var(--ghost);line-height:1.75;}
 .section{margin-bottom:48px;}
-.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--fog);display:flex;align-items:center;gap:12px;margin:0 0 20px;}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;color:var(--fog);display:flex;align-items:center;gap:12px;margin:0 0 20px;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--wire);}
-.section-title-h2{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.section-title-h2{font-family:'Archivo Black',sans-serif;font-size:32px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
 .p{font-size:13.5px;color:var(--ghost);line-height:1.65;margin-bottom:14px;}
 .p strong{color:var(--white);font-weight:600;}
 .signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
 @media(max-width:560px){.signal-grid{grid-template-columns:1fr;}}
-.signal-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.signal-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--fog);margin-bottom:10px;}
 .signal-list{list-style:none;font-family:'DM Mono',monospace;font-size:11px;color:var(--fog);line-height:1.9;}
 .signal-list li{padding:6px 0;border-bottom:1px solid var(--wire);}
 .signal-list li:last-child{border-bottom:none;}
 .signal-list li::before{content:'→ ';color:var(--arch-color);}
 .posture-block{background:var(--forge);border:1px solid var(--wire);border-left:4px solid var(--arch-color);padding:20px 24px;margin-bottom:24px;}
-.posture-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fog);margin-bottom:10px;}
+.posture-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--fog);margin-bottom:10px;}
 .posture-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.75;}
 .posture-text strong{color:var(--white);}
 .field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
 @media(max-width:560px){.field-grid{grid-template-columns:1fr;}}
 .field-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--arch-color);padding:16px 18px;}
-.field-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fog);margin-bottom:6px;}
+.field-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;color:var(--fog);margin-bottom:6px;}
 .field-card-value{font-size:13px;color:var(--white);font-weight:600;}
 .callout{background:var(--forge);border:1px solid var(--wire);border-left:3px solid var(--amber);padding:16px 20px;margin:20px 0;font-family:'DM Mono',monospace;font-size:11px;color:var(--mist);line-height:1.7;}
 .combination-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:560px){.combination-grid{grid-template-columns:1fr;}}
 .combo-card{background:var(--forge);border:1px solid var(--wire);padding:16px 18px;}
-.combo-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+.combo-name{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
 .combo-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
 .doc-footer{border-top:1px solid var(--wire);padding-top:24px;margin-top:64px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);margin-bottom:16px;}
+.footer-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--wire-light);margin-bottom:16px;}
 .footer-brand span{color:var(--amber);}
 .nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
-.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--arch-border);color:var(--arch-color);background:var(--arch-bg);}
 .nav-prev:hover,.nav-next:hover{text-decoration:none;opacity:0.8;}
 </style>
 </head>
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
       <li><a href="../lexicon.html">Lexicon</a></li>
       <li><a href="../modules/module-01-orientation.html">Modules</a></li>
       <li><a href="../worked-example.html">Worked Example</a></li>
-      <li><a href="../toolkit.html">SA Toolkit</a></li>
+      <li><a href="../toolkit.html">Architecture Toolkit</a></li>
       <li><a href="../cloud-reference/">Cloud Reference</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="page">
-  <a class="back" href="../index.html">← OrdoAnimi SA / Engagement Archetypes</a>
+  <a class="back" href="../index.html">← OrdoAnimi Architecture / Engagement Archetypes</a>
 
   <div class="doc-header">
     <div class="doc-meta">
-      <div class="doc-brand">OrdoAnimi SA · Engagement Archetypes</div>
-      <div class="doc-ref">ARCHETYPE 02 · MODULE 01</div>
+      <div class="doc-brand">OrdoAnimi Architecture · Engagement Archetypes</div>
+      <div class="doc-ref">Archetype 02 · Module 01</div>
     </div>
-    <div class="arch-num-large">ARCHETYPE 02</div>
+    <div class="arch-num-large">Archetype 02</div>
     <h1 class="doc-title">The Negligent Void</h1>
     <div class="doc-subtitle">Nothing has been done. No foundation exists.</div>
     <div class="doc-tags">
@@ -189,7 +189,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   </div>
 
   <div class="doc-footer">
-    <div class="footer-brand">OrdoAnimi <span>SA</span></div>
+    <div class="footer-brand">OrdoAnimi <span>Architecture</span></div>
     <div class="nav-bar">
       <a class="nav-prev" href="obfuscation.html">← Obfuscation</a>
       <a class="nav-next" href="institutional-paralysis.html">Institutional Paralysis →</a>

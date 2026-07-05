@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Cloud Reference — Microsoft Azure. Cloud Adoption Framework, Well-Architected Framework, Azure Landing Zones, management groups, Azure Policy, and OrdoAnimi SA usage notes.">
-<title>OrdoAnimi SA — Azure Cloud Reference</title>
+<meta name="description" content="OrdoAnimi Architecture Cloud Reference — Microsoft Azure. Cloud Adoption Framework, Well-Architected Framework, Azure Landing Zones, management groups, Azure Policy, and OrdoAnimi Architecture usage notes.">
+<title>OrdoAnimi Architecture — Azure Cloud Reference</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
   --azure:#0078D4;--azure-dim:rgba(0,120,212,0.07);--azure-border:rgba(0,120,212,0.28);
@@ -22,7 +22,7 @@ a:hover{text-decoration:underline;}
 .page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
@@ -34,20 +34,20 @@ a:hover{text-decoration:underline;}
 .back:hover{color:var(--amber);}
 .doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
 .doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
-.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);}
 .doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
 .doc-title span{color:var(--azure);}
 .doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
 .doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
 .tag.azure{border-color:var(--azure-border);color:var(--azure);}
 .tag.amber{border-color:var(--amber-border);color:var(--amber);}
 .section{margin-bottom:52px;}
 .section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(0,120,212,0.18);min-width:44px;padding-top:2px;}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--azure);margin-bottom:4px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-num{font-family:'Archivo Black',sans-serif;font-size:42px;line-height:1;color:rgba(0,120,212,0.18);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;color:var(--azure);margin-bottom:4px;}
+.section-title{font-family:'Archivo Black',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
 .section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
 .p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
 .p strong{color:var(--ink);font-weight:600;}
@@ -73,24 +73,24 @@ a:hover{text-decoration:underline;}
 .ref-links{display:flex;flex-direction:column;gap:6px;margin:20px 0;}
 .ref-link{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px 16px;text-decoration:none;color:inherit;transition:border-color 0.15s;}
 .ref-link:hover{border-color:var(--strong);text-decoration:none;}
-.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--azure);white-space:nowrap;padding-top:2px;min-width:60px;}
+.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;color:var(--azure);white-space:nowrap;padding-top:2px;min-width:60px;}
 .rl-body{flex:1;}
 .rl-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .rl-url{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
 /* OrdoAnimi NOTES */
 .OrdoAnimi-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
-.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--amber);margin-bottom:12px;}
 .vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
 .vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
 /* PAGE NAV */
 .page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
-.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
 .pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
 .pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
 /* FOOTER */
 .doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
 .footer-brand span{color:var(--amber);}
 .footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
 .footer-nav a{color:var(--muted);text-decoration:none;}
@@ -107,7 +107,7 @@ a:hover{text-decoration:underline;}
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -126,10 +126,10 @@ a:hover{text-decoration:underline;}
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — Cloud Reference · Microsoft Azure</div>
-    <div class="doc-ref">VENDOR REFERENCE<br>VAFSA-CRL-AZ · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — Cloud Reference · Microsoft Azure</div>
+    <div class="doc-ref">Vendor Reference<br>ORDOANIMI-CRL-AZ · v1.0</div>
   </div>
-  <div class="doc-title">MICROSOFT<br><span>AZURE</span></div>
+  <div class="doc-title">Microsoft<br><span>Azure</span></div>
   <div class="doc-subtitle">Cloud Adoption Framework · Well-Architected Framework · Azure Landing Zones · Azure Policy</div>
   <div class="doc-tags">
     <span class="tag azure">Azure</span>
@@ -152,7 +152,7 @@ a:hover{text-decoration:underline;}
   </div>
   <p class="p">Microsoft's cloud architecture guidance is organised around two primary frameworks. The <strong>Microsoft Cloud Adoption Framework for Azure (CAF)</strong> addresses the end-to-end journey — strategy, planning, readiness, migration, governance, and management. The <strong>Azure Well-Architected Framework (WAF)</strong> focuses on workload quality across five pillars. <strong>Azure Landing Zones</strong> provide the reference architecture and implementation patterns for a governed Azure environment.</p>
   <p class="p">Azure Landing Zones distinguish between <em>platform landing zones</em> — the shared services and governance foundation — and <em>application landing zones</em> — the subscription and resource group structure for individual workloads. This two-layer model is important for enterprise architects to understand early, because it determines accountability boundaries and the pace of workload onboarding.</p>
-  <div class="callout azure">Azure engagements often surface ambiguity between what the CAF recommends and what the organisation has actually built. OrdoAnimi SA Module 02 (Intelligence) is the instrument for establishing the real gap — not the gap the vendor documentation implies.</div>
+  <div class="callout azure">Azure engagements often surface ambiguity between what the CAF recommends and what the organisation has actually built. OrdoAnimi Architecture Module 02 (Intelligence) is the instrument for establishing the real gap — not the gap the vendor documentation implies.</div>
 </div>
 
 <div class="divider"></div>
@@ -169,14 +169,14 @@ a:hover{text-decoration:underline;}
   </div>
   <p class="p">The Microsoft CAF organises cloud adoption into eight phases, covering the full lifecycle from initial strategy through ongoing operations. The framework is iterative — organisations do not complete phases sequentially and then stop. Governance and management disciplines run in parallel with all other phases.</p>
   <div class="phase-grid">
-    <div class="phase-card"><div class="ph-num">PHASE 01</div><div class="ph-name">Strategy</div><div class="ph-body">Motivations, business outcomes, financial justification, prioritisation.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 02</div><div class="ph-name">Plan</div><div class="ph-body">Digital estate assessment, skills readiness, cloud adoption plan.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 03</div><div class="ph-name">Ready</div><div class="ph-body">Landing zone design and deployment, environment readiness.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 04</div><div class="ph-name">Migrate</div><div class="ph-body">Workload migration, modernisation, first adoption project.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 05</div><div class="ph-name">Innovate</div><div class="ph-body">Cloud-native development, data and AI, application modernisation.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 06</div><div class="ph-name">Secure</div><div class="ph-body">Security posture, Zero Trust model, security operations.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 07</div><div class="ph-name">Govern</div><div class="ph-body">Policy, cost management, identity baseline, resource consistency.</div></div>
-    <div class="phase-card"><div class="ph-num">PHASE 08</div><div class="ph-name">Manage</div><div class="ph-body">Business commitments, operations baseline, workload management.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 01</div><div class="ph-name">Strategy</div><div class="ph-body">Motivations, business outcomes, financial justification, prioritisation.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 02</div><div class="ph-name">Plan</div><div class="ph-body">Digital estate assessment, skills readiness, cloud adoption plan.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 03</div><div class="ph-name">Ready</div><div class="ph-body">Landing zone design and deployment, environment readiness.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 04</div><div class="ph-name">Migrate</div><div class="ph-body">Workload migration, modernisation, first adoption project.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 05</div><div class="ph-name">Innovate</div><div class="ph-body">Cloud-native development, data and AI, application modernisation.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 06</div><div class="ph-name">Secure</div><div class="ph-body">Security posture, Zero Trust model, security operations.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 07</div><div class="ph-name">Govern</div><div class="ph-body">Policy, cost management, identity baseline, resource consistency.</div></div>
+    <div class="phase-card"><div class="ph-num">Phase 08</div><div class="ph-name">Manage</div><div class="ph-body">Business commitments, operations baseline, workload management.</div></div>
   </div>
 </div>
 
@@ -225,18 +225,18 @@ a:hover{text-decoration:underline;}
 
 <div class="divider"></div>
 
-<!-- OrdoAnimi SA USAGE NOTES -->
+<!-- OrdoAnimi Architecture USAGE NOTES -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">05</div>
     <div>
-      <div class="section-eyebrow">OrdoAnimi SA Usage Notes</div>
-      <div class="section-title">Applying OrdoAnimi SA in Azure Engagements</div>
+      <div class="section-eyebrow">OrdoAnimi Architecture Usage Notes</div>
+      <div class="section-title">Applying OrdoAnimi Architecture in Azure Engagements</div>
       <div class="section-desc">Where the practitioner method adds value in an Azure-heavy environment.</div>
     </div>
   </div>
   <div class="OrdoAnimi-notes">
-    <div class="vn-label">OrdoAnimi SA Practitioner Notes — Azure</div>
+    <div class="vn-label">OrdoAnimi Architecture Practitioner Notes — Azure</div>
     <ul class="vn-list">
       <li><strong>CAF phase mismatch is a common presenting problem.</strong> Organisations frequently begin migration before the landing zone is ready, or begin governance before strategy is clear. Module 01 (Orientation) establishes which CAF phases have actually been completed — not which the project plan says are complete.</li>
       <li><strong>Management group design decisions are often undocumented.</strong> Module 04 (Artefacts) produces a landing-zone decision pack capturing why the management group hierarchy is structured as it is — what options were evaluated, what constraints drove the decision, and what the exception process is for workloads that do not fit the standard model.</li>
@@ -289,7 +289,7 @@ a:hover{text-decoration:underline;}
 </div>
 
 <div class="doc-footer">
-  <div class="footer-brand"><span>OrdoAnimi SA</span> — Azure Cloud Reference</div>
+  <div class="footer-brand"><span>OrdoAnimi Architecture</span> — Azure Cloud Reference</div>
   <div class="footer-nav"><a href="index.html">Cloud Reference</a> · <a href="aws.html">AWS</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone</a></div>
 </div>
 

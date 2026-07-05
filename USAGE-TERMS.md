@@ -1,16 +1,16 @@
-# OrdoAnimi SA Usage Terms
+# OrdoAnimi Architecture Usage Terms
 
 ## Purpose
 
-OrdoAnimi SA is published as a public practitioner reference for solution architecture field practice.
+OrdoAnimi Architecture is published as a public practitioner reference for solution architecture field practice.
 
-The repository is intended to support learning, reference, citation, and ecosystem navigation. It is not intended to transfer ownership of the OrdoAnimi SA method, name, templates, diagrams, modules, or practitioner content.
+The repository is intended to support learning, reference, citation, and ecosystem navigation. It is not intended to transfer ownership of the OrdoAnimi Architecture method, name, templates, diagrams, modules, or practitioner content.
 
 ## Intended Use
 
 You may use this repository to:
 
-- Read the OrdoAnimi SA method.
+- Read the OrdoAnimi Architecture method.
 - Link to the public site.
 - Cite short excerpts with attribution.
 - Use the material for personal learning and professional development.
@@ -21,16 +21,16 @@ You may use this repository to:
 Recommended attribution:
 
 ```text
-OrdoAnimi SA — The OrdoAnimi Framework: Solution Architecture
+OrdoAnimi Architecture — The OrdoAnimi Framework: Solution Architecture
 Phil Myint / OrdoAnimi
 https://zencloudau.github.io/vaf-sa/
 ```
 
 ## Method and Content
 
-The OrdoAnimi SA framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi / OrdoAnimi ecosystem.
+The OrdoAnimi Architecture framework, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi / OrdoAnimi ecosystem.
 
-Do not present the OrdoAnimi SA method, name, diagrams, templates, or content as your own work.
+Do not present the OrdoAnimi Architecture method, name, diagrams, templates, or content as your own work.
 
 ## Commercial Use
 
@@ -38,7 +38,7 @@ For commercial use, training integration, derivative products, or consulting use
 
 ## Relationship to The OrdoAnimi Framework
 
-OrdoAnimi SA is the solution architecture practitioner method within the broader OrdoAnimi ecosystem.
+OrdoAnimi Architecture is the solution architecture practitioner method within the broader OrdoAnimi ecosystem.
 
 Framework and research authority:
 

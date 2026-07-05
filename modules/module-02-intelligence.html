@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Module 02 — Intelligence. Get what you need from people who may not give it. Ten questions, vendor interrogation framework, and gap mapping.">
-<title>OrdoAnimi SA — Module 02: Intelligence</title>
+<meta name="description" content="OrdoAnimi Architecture Module 02 — Intelligence. Get what you need from people who may not give it. Ten questions, vendor interrogation framework, and gap mapping.">
+<title>OrdoAnimi Architecture — Module 02: Intelligence</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root{
   --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
@@ -39,7 +39,6 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .doc-brand {
   font-family:'DM Mono', monospace;
   font-size:10px; letter-spacing:0.25em; color:var(--amber);
-  text-transform:uppercase;
 }
 
 .doc-ref {
@@ -49,7 +48,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 }
 
 .doc-title {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size: clamp(40px,6vw,72px);
   letter-spacing:0.04em; line-height:0.92;
   color:var(--white); margin-bottom:8px;
@@ -69,7 +68,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .tag {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.15em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.15em;
   padding:4px 10px;
   border:1px solid var(--wire); color:var(--fog);
 }
@@ -87,7 +86,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 }
 
 .section-num {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:42px; line-height:1;
   color:rgba(61,143,181,0.2); min-width:44px;
   padding-top:2px;
@@ -95,12 +94,12 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .section-eyebrow {
   font-family:'DM Mono', monospace;
-  font-size:9px; letter-spacing:0.25em; text-transform:uppercase;
+  font-size:9px; letter-spacing:0.25em;
   color:var(--cold-light); margin-bottom:4px;
 }
 
 .section-title {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:28px; letter-spacing:0.04em;
   color:var(--white); line-height:1;
 }
@@ -159,7 +158,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .pillar-label {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.25em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.25em;
   margin-bottom:6px;
 }
 
@@ -167,7 +166,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .pillar.talk .pillar-label { color:var(--cold-light); }
 
 .pillar-title {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:24px; letter-spacing:0.04em;
   color:var(--white); margin-bottom:12px;
 }
@@ -201,7 +200,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   background:rgba(61,143,181,0.1);
   border-right:1px solid rgba(61,143,181,0.2);
   display:flex; align-items:center; justify-content:center;
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:22px; color:var(--cold-light);
   padding:14px 0;
 }
@@ -218,7 +217,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   display:flex; align-items:center;
   font-family:'DM Mono', monospace;
   font-size:8px; letter-spacing:0.12em;
-  color:var(--fog); text-transform:uppercase;
+  color:var(--fog);
   border-left:1px solid var(--wire);
   writing-mode:horizontal-tb;
   white-space:nowrap;
@@ -239,7 +238,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .q-intent-label {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.2em;
   color:var(--cold-light); margin-bottom:6px;
 }
 
@@ -254,7 +253,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .q-signal-label {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.2em;
   color:var(--amber); margin-bottom:6px;
 }
 
@@ -279,7 +278,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .response-type {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.2em;
   margin-bottom:8px;
 }
 
@@ -332,7 +331,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   background:var(--steel);
   border:1px solid var(--wire);
   display:flex; align-items:center; justify-content:center;
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:14px; color:var(--cold-light);
   position:relative; z-index:1;
 }
@@ -394,7 +393,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .gap-type {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.2em;
   margin-bottom:6px;
 }
 
@@ -436,7 +435,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .speech-label {
   font-family:'DM Mono', monospace;
-  font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  font-size:8px; letter-spacing:0.2em;
   margin-bottom:10px;
 }
 
@@ -466,7 +465,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 }
 
 .checklist-header {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:22px; letter-spacing:0.04em;
   color:var(--white); margin-bottom:4px;
 }
@@ -507,7 +506,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 }
 
 .footer-brand {
-  font-family:'Bebas Neue', sans-serif;
+  font-family:'Archivo Black', sans-serif;
   font-size:18px; letter-spacing:0.08em;
   color:var(--wire-light);
 }
@@ -536,7 +535,6 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   text-decoration: none;
   border: 1px solid;
 }
@@ -551,17 +549,17 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   border:1px solid rgba(61,143,181,0.3);
   font-family:'DM Mono', monospace;
   font-size:10px; color:var(--cold-light);
-  letter-spacing:0.08em; text-transform:uppercase;
+  letter-spacing:0.08em;
   margin-top:8px;
 }
 
 .nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
-.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
 .nav-prev:hover{color:var(--white);}
-.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
@@ -579,7 +577,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -593,15 +591,15 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi Architecture Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — The OrdoAnimi Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 02 OF 06<br>VAFSA-M02 · ORDOANIMI · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — The OrdoAnimi Framework · Solution Architecture</div>
+    <div class="doc-ref">Module 02 of 06<br>ORDOANIMI-M02 · OrdoAnimi · v1.0</div>
   </div>
-  <div class="doc-title">MODULE 02<br><span>INTELLIGENCE</span></div>
+  <div class="doc-title">Module 02<br><span>Intelligence</span></div>
   <div class="doc-subtitle">How to get what you need from any room — in plain language, without authority</div>
   <div class="doc-tags">
     <span class="tag cold">Influence Without Authority</span>
@@ -1098,7 +1096,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
   <div class="checklist">
     <div class="checklist-header">Intelligence Gate</div>
-    <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED OR FORMALLY DOCUMENTED AS OPEN BEFORE PROCEEDING TO MODULE 3</div>
+    <div class="checklist-sub">All items below must be confirmed or formally documented as open before proceeding to Module 3</div>
 
     <div class="check-item">
       <div class="check-box"></div>
@@ -1142,15 +1140,15 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>OrdoAnimi SA</span> — The OrdoAnimi Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 02 — INTELLIGENCE · ORDOANIMI · v1.0</div>
+    <div class="footer-brand"><span>OrdoAnimi Architecture</span> — The OrdoAnimi Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">Module 02 — Intelligence · OrdoAnimi · v1.0</div>
     <div class="nav-bar">
-      <a href="module-01-orientation.html" class="nav-prev">← MODULE 01 — ORIENTATION</a>
-      <a href="module-03-design.html" class="nav-next">MODULE 03 — DESIGN →</a>
+      <a href="module-01-orientation.html" class="nav-prev">← Module 01 — Orientation</a>
+      <a href="module-03-design.html" class="nav-next">Module 03 — Design →</a>
     </div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M02 · ORDOANIMI · v1.0</div>
+    <div class="footer-nav">ORDOANIMI-M02 · OrdoAnimi · v1.0</div>
   </div>
 </div>
 

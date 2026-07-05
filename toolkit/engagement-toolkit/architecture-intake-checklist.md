@@ -1,6 +1,6 @@
 # Architecture Intake Checklist
 
-**VAF·SA Engagement Toolkit**
+**OrdoAnimi Engagement Toolkit**
 Use at the start of every engagement before producing any artefact.
 
 ---

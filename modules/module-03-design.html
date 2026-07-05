@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Module 03 — Design. Design instrument selection, context diagram framework, heat map forensic analysis, three-altitude design stack, embedded security and observability.">
-<title>OrdoAnimi SA — Module 03: Design</title>
+<meta name="description" content="OrdoAnimi Architecture Module 03 — Design. Design instrument selection, context diagram framework, heat map forensic analysis, three-altitude design stack, embedded security and observability.">
+<title>OrdoAnimi Architecture — Module 03: Design</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root{
   --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
@@ -30,11 +30,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
 
-.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--green); text-transform:uppercase; }
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--green); }
 
 .doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
 
-.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+.doc-title { font-family:'Archivo Black', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
 
 .doc-title span { color:var(--green-light); }
 
@@ -42,7 +42,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
 
-.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
 .tag.green { border-color:rgba(22,163,74,0.3); color:var(--green-light); }
 .tag.amber { border-color:rgba(232,99,10,0.3); color:var(--amber); }
 
@@ -51,11 +51,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
 
-.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(22,163,74,0.2); min-width:44px; padding-top:2px; }
+.section-num { font-family:'Archivo Black', sans-serif; font-size:42px; line-height:1; color:rgba(22,163,74,0.2); min-width:44px; padding-top:2px; }
 
-.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--green-light); margin-bottom:4px; }
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; color:var(--green-light); margin-bottom:4px; }
 
-.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.section-title { font-family:'Archivo Black', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
 
 .section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
 
@@ -75,9 +75,9 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .phil-card { background:var(--forge); border:1px solid var(--wire); border-top:2px solid var(--green); padding:18px 20px; }
 
-.phil-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+.phil-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--green-light); margin-bottom:6px; }
 
-.phil-title { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:8px; }
+.phil-title { font-family:'Archivo Black', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:8px; }
 
 .phil-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
 
@@ -90,19 +90,19 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .tool-name-block { background:var(--green-dim); border-right:1px solid rgba(22,163,74,0.2); padding:16px 18px; display:flex; flex-direction:column; justify-content:center; }
 
-.tool-name { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.04em; color:var(--green-light); line-height:1; margin-bottom:4px; }
+.tool-name { font-family:'Archivo Black', sans-serif; font-size:18px; letter-spacing:0.04em; color:var(--green-light); line-height:1; margin-bottom:4px; }
 
 .tool-type { font-family:'DM Mono', monospace; font-size:8px; color:var(--fog); letter-spacing:0.1em; }
 
 .tool-when { padding:14px 18px; border-right:1px solid var(--wire); }
 
-.tool-when-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+.tool-when-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; color:var(--green-light); margin-bottom:6px; }
 
 .tool-when-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
 
 .tool-not { padding:14px 18px; }
 
-.tool-not-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--signal); margin-bottom:6px; }
+.tool-not-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; color:var(--signal); margin-bottom:6px; }
 
 .tool-not-text { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
 
@@ -115,7 +115,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .c4-level.conditional { border-color:rgba(232,99,10,0.3); }
 .c4-level.never { border-color:rgba(220,38,38,0.2); }
 
-.c4-num { display:flex; align-items:center; justify-content:center; padding:0; font-family:'Bebas Neue', sans-serif; font-size:20px; border-right:1px solid; }
+.c4-num { display:flex; align-items:center; justify-content:center; padding:0; font-family:'Archivo Black', sans-serif; font-size:20px; border-right:1px solid; }
 
 .c4-level.use .c4-num { background:rgba(22,163,74,0.1); border-color:rgba(22,163,74,0.2); color:var(--green-light); }
 .c4-level.conditional .c4-num { background:rgba(232,99,10,0.08); border-color:rgba(232,99,10,0.2); color:var(--amber); }
@@ -127,7 +127,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .c4-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.6; }
 
-.c4-verdict { display:flex; align-items:center; justify-content:center; padding:0 18px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; white-space:nowrap; }
+.c4-verdict { display:flex; align-items:center; justify-content:center; padding:0 18px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; white-space:nowrap; }
 
 .c4-level.use .c4-verdict { color:var(--green-light); }
 .c4-level.conditional .c4-verdict { color:var(--amber); }
@@ -154,7 +154,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .hm-domain { background:var(--forge); border:1px solid var(--wire); padding:14px 16px; }
 
-.hm-domain-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+.hm-domain-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--green-light); margin-bottom:6px; }
 
 .hm-domain-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:6px; }
 
@@ -178,13 +178,13 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .alt-label-block { padding:20px 18px; border-right:1px solid var(--wire); display:flex; flex-direction:column; justify-content:center; }
 
-.alt-num { font-family:'Bebas Neue', sans-serif; font-size:32px; line-height:1; margin-bottom:4px; }
+.alt-num { font-family:'Archivo Black', sans-serif; font-size:32px; line-height:1; margin-bottom:4px; }
 
 .altitude-level:nth-child(1) .alt-num { color:rgba(232,99,10,0.3); }
 .altitude-level:nth-child(2) .alt-num { color:rgba(22,163,74,0.3); }
 .altitude-level:nth-child(3) .alt-num { color:rgba(37,99,235,0.3); }
 
-.alt-name { font-family:'Bebas Neue', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1; }
+.alt-name { font-family:'Archivo Black', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1; }
 
 .altitude-level:nth-child(1) .alt-name { color:var(--amber); }
 .altitude-level:nth-child(2) .alt-name { color:var(--green-light); }
@@ -196,7 +196,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 @media(max-width:560px) { .alt-body { grid-template-columns:1fr; } }
 
-.alt-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--fog); margin-bottom:6px; }
+.alt-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; color:var(--fog); margin-bottom:6px; }
 
 .alt-col-value { font-family:'DM Sans', sans-serif; font-size:12px; font-weight:600; color:var(--white); margin-bottom:4px; }
 
@@ -209,15 +209,15 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .ctg-block { background:var(--forge); border:1px solid var(--wire); padding:18px 20px; }
 
-.ctg-arrow { display:flex; align-items:center; justify-content:center; padding:0 12px; font-family:'Bebas Neue', sans-serif; font-size:24px; color:var(--wire-light); }
+.ctg-arrow { display:flex; align-items:center; justify-content:center; padding:0 12px; font-family:'Archivo Black', sans-serif; font-size:24px; color:var(--wire-light); }
 
-.ctg-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:8px; }
+.ctg-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; margin-bottom:8px; }
 
 .ctg-block:nth-child(1) .ctg-label { color:var(--signal); }
 .ctg-block:nth-child(3) .ctg-label { color:var(--green-light); }
 .ctg-block:nth-child(5) .ctg-label { color:var(--amber); }
 
-.ctg-title { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:10px; }
+.ctg-title { font-family:'Archivo Black', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:10px; }
 
 .ctg-list { list-style:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.8; }
 
@@ -230,7 +230,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .sec-card { background:var(--forge); border:1px solid var(--wire); border-left:2px solid var(--signal); padding:16px 18px; }
 
-.sec-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--signal); margin-bottom:6px; }
+.sec-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--signal); margin-bottom:6px; }
 
 .sec-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
 
@@ -245,7 +245,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
 .pattern-card { background:var(--forge); border:1px solid var(--wire); padding:16px 18px; }
 
-.pattern-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--cold-light); margin-bottom:6px; }
+.pattern-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--cold-light); margin-bottom:6px; }
 
 .pattern-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
 
@@ -258,7 +258,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 /* CHECKLIST */
 .checklist { background:var(--forge); border:1px solid var(--wire); padding:24px 28px; margin:20px 0; }
 
-.checklist-header { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
+.checklist-header { font-family:'Archivo Black', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
 
 .checklist-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
 
@@ -273,7 +273,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 /* FOOTER */
 .doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
 
-.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+.footer-brand { font-family:'Archivo Black', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
 
 .footer-brand span { color:var(--green-light); }
 
@@ -296,7 +296,6 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   text-decoration: none;
   border: 1px solid;
 }
@@ -304,15 +303,15 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .nav-link.prev:hover { color: var(--white); }
 .nav-link.next { background: var(--amber-dim); border-color: rgba(232,99,10,0.2); color: var(--amber-hot); }
 
-.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--green-dim); border:1px solid rgba(22,163,74,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--green-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--green-dim); border:1px solid rgba(22,163,74,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--green-light); letter-spacing:0.08em; margin-top:8px; }
 
 .nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
-.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
 .nav-prev:hover{color:var(--white);}
-.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
@@ -324,12 +323,12 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .register-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
 @media(max-width:540px){.register-grid{grid-template-columns:1fr;}}
 .register-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--amber);padding:16px 18px;}
-.register-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.register-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--amber);margin-bottom:6px;}
 .register-title{font-weight:600;font-size:12px;color:var(--white);margin-bottom:8px;}
 .register-body{font-family:'DM Mono',monospace;font-size:10px;color:var(--fog);line-height:1.7;}
 .risk-table{background:var(--forge);border:1px solid var(--wire);overflow:hidden;margin:20px 0;}
 .risk-header-row{display:grid;grid-template-columns:1.5fr 2fr 1.5fr 80px 1.5fr 100px;gap:0;background:var(--steel);border-bottom:1px solid var(--wire);}
-.risk-col-head{padding:10px 12px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-light);border-right:1px solid var(--wire);}
+.risk-col-head{padding:10px 12px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;color:var(--green-light);border-right:1px solid var(--wire);}
 .risk-col-head:last-child{border-right:none;}
 .risk-example-row{display:grid;grid-template-columns:1.5fr 2fr 1.5fr 80px 1.5fr 100px;gap:0;border-bottom:1px solid var(--wire);}
 .risk-example-row:last-child{border-bottom:none;}
@@ -341,7 +340,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 .response-four{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin:16px 0;}
 @media(max-width:600px){.response-four{grid-template-columns:1fr 1fr;}}
 .r4-card{background:var(--forge);border:1px solid var(--wire);border-top:2px solid var(--green);padding:14px 16px;}
-.r4-label{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:6px;}
+.r4-label{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);margin-bottom:6px;}
 .r4-body{font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.6;}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#0F172A;}
 @media(max-width:680px){
@@ -353,7 +352,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -367,15 +366,15 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi Architecture Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — The OrdoAnimi Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 03 OF 06<br>VAFSA-M03 · ORDOANIMI · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — The OrdoAnimi Framework · Solution Architecture</div>
+    <div class="doc-ref">Module 03 of 06<br>ORDOANIMI-M03 · OrdoAnimi · v1.0</div>
   </div>
-  <div class="doc-title">MODULE 03<br><span>DESIGN</span></div>
+  <div class="doc-title">Module 03<br><span>Design</span></div>
   <div class="doc-subtitle">Right tool. Right level. Right audience. How to build the solution that solves the actual problem.</div>
   <div class="doc-tags">
     <span class="tag green">structural diagram approach</span>
@@ -396,11 +395,11 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <div class="section-title-block">
       <div class="section-eyebrow">Foundation</div>
       <div class="section-title">Purpose</div>
-      <div class="section-desc">What design means in OrdoAnimi SA — and what it does not mean</div>
+      <div class="section-desc">What design means in OrdoAnimi Architecture — and what it does not mean</div>
     </div>
   </div>
 
-  <p class="body-text">Design in OrdoAnimi SA is not about producing the most detailed diagram. It is not about demonstrating the full depth of your technical knowledge. It is not about filling every box in a framework template.</p>
+  <p class="body-text">Design in OrdoAnimi Architecture is not about producing the most detailed diagram. It is not about demonstrating the full depth of your technical knowledge. It is not about filling every box in a framework template.</p>
 
   <p class="body-text"><strong>Design is about producing the clearest possible picture of the solution — for the audience that needs to act on it — using the minimum tool necessary to achieve that clarity.</strong></p>
 
@@ -537,7 +536,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">The context-to-component structural approach is the primary design instrument in OrdoAnimi SA. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
+  <p class="body-text">The context-to-component structural approach is the primary design instrument in OrdoAnimi Architecture. It provides a shared vocabulary — Context, Container, Component, Code — that any audience can navigate once they understand which level they are looking at. The power is in the discipline: <strong>start at Context. Go deeper only when the audience and purpose require it.</strong></p>
 
   <p class="body-text">Most architectural presentations fail because they start at the wrong level. Too detailed for the executive. Too abstract for the developer. context diagram solves this by making the level explicit and the zoom deliberate.</p>
 
@@ -760,7 +759,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
   </div>
 
   <div class="callout amber">
-    A heat map with no red cells is not evidence of a complete design. It is evidence that the cells were answered without being challenged. The architect's job is to verify every green cell independently before it leaves the map. Trust but verify is not OrdoAnimi SA. Verify, then trust.
+    A heat map with no red cells is not evidence of a complete design. It is evidence that the cells were answered without being challenged. The architect's job is to verify every green cell independently before it leaves the map. Trust but verify is not OrdoAnimi Architecture. Verify, then trust.
   </div>
 </div>
 
@@ -777,7 +776,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">Every design decision in OrdoAnimi SA belongs to an altitude. Making the wrong decision at the wrong altitude — or letting the wrong audience make a decision that belongs at a different level — produces the failure modes the four archetypes describe. The three-altitude stack is the structural discipline that prevents that.</p>
+  <p class="body-text">Every design decision in OrdoAnimi Architecture belongs to an altitude. Making the wrong decision at the wrong altitude — or letting the wrong audience make a decision that belongs at a different level — produces the failure modes the four archetypes describe. The three-altitude stack is the structural discipline that prevents that.</p>
 
   <div class="altitude-stack">
 
@@ -936,7 +935,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     </div>
   </div>
 
-  <p class="body-text">Security architecture in OrdoAnimi SA is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first context diagram context box. security architecture practice provides the threat and risk lens. information security management and security control baseline provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
+  <p class="body-text">Security architecture in OrdoAnimi Architecture is not a review that happens after design is complete. It is a constraint that shapes every design decision from the first context diagram context box. security architecture practice provides the threat and risk lens. information security management and security control baseline provide the control framework. The heat map ensures no security domain is left unaddressed.</p>
 
   <div class="security-grid">
     <div class="sec-card">
@@ -973,7 +972,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
     <div class="sec-card">
       <div class="sec-label">Zero Trust — Added 2025</div>
       <div class="sec-title">Trust No Connection by Default</div>
-      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in OrdoAnimi SA at every named connection in the context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
+      <div class="sec-body">Zero Trust architecture assumes that no user, device, or system — inside or outside the network perimeter — is trusted by default. Every access request must be verified. Every connection must be authenticated. Every privilege must be the minimum required. Applied in OrdoAnimi Architecture at every named connection in the context diagram. Before a relationship arrow is finalised, the Zero Trust question is answered: how is this connection verified, and what is the minimum privilege it requires?</div>
       <div class="sec-principle">Ask: if this connection were compromised, what could an attacker reach from here — and is that acceptable?</div>
     </div>
   </div>
@@ -1050,7 +1049,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
       <div class="pattern-label">Pillar 03</div>
       <div class="pattern-title">Traces</div>
       <div class="pattern-use">End-to-end request tracing across distributed systems and integration points. Required when the solution includes multiple services or APIs. Enables rapid incident diagnosis without manual log correlation across systems.</div>
-      <div class="pattern-when">the solution crosses more than one system boundary — which in OrdoAnimi SA is almost every engagement.</div>
+      <div class="pattern-when">the solution crosses more than one system boundary — which in OrdoAnimi Architecture is almost every engagement.</div>
     </div>
   </div>
 
@@ -1230,7 +1229,7 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 
   <div class="checklist">
     <div class="checklist-header">Design Gate</div>
-    <div class="checklist-sub">ALL ITEMS BELOW MUST BE CONFIRMED BEFORE PROCEEDING TO MODULE 4</div>
+    <div class="checklist-sub">All items below must be confirmed before proceeding to Module 4</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>context diagram produced</strong> — all systems named, all users named, all connections named and directional.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Heat map complete</strong> — all eight domains addressed. No blank cells. Red cells documented with owner and deadline. All green cells independently verified.</div></div>
@@ -1254,16 +1253,16 @@ body{background:#F8FAFC;color:#0F172A;font-family:'DM Sans',sans-serif;font-size
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>OrdoAnimi SA</span> — The OrdoAnimi Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 03 — DESIGN · ORDOANIMI · v1.0</div>
+    <div class="footer-brand"><span>OrdoAnimi Architecture</span> — The OrdoAnimi Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">Module 03 — Design · OrdoAnimi · v1.0</div>
     <div class="nav-bar">
-      <a href="module-02-intelligence.html" class="nav-prev">← MODULE 02 — INTELLIGENCE</a>
-      <a href="module-04-artefacts.html" class="nav-next">MODULE 04 — ARTEFACTS →</a>
+      <a href="module-02-intelligence.html" class="nav-prev">← Module 02 — Intelligence</a>
+      <a href="module-04-artefacts.html" class="nav-next">Module 04 — Artefacts →</a>
     </div>
-    <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 04 — ARTEFACTS · The Three Templates. One Page. Every Time.</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: Module 04 — Artefacts · The Three Templates. One Page. Every Time.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M03 · ORDOANIMI · v1.0</div>
+    <div class="footer-nav">ORDOANIMI-M03 · OrdoAnimi · v1.0</div>
   </div>
 </div>
 

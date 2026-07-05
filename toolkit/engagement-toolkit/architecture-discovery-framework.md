@@ -1,6 +1,6 @@
 # Architecture Discovery Framework
 
-**VAF·SA Engagement Toolkit**
+**OrdoAnimi Engagement Toolkit**
 Use during Module 02 — Intelligence Gathering. Structured questions to surface the Current Intent Statement (CIS).
 
 ---

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Module 04 — Artefacts. Five practitioner artefacts: Customer Impact Statement, Architecture on a Page, Heat Map, Architecture Decision Record, Stakeholder Concern Register.">
-<title>OrdoAnimi SA — Module 04: Artefacts</title>
+<meta name="description" content="OrdoAnimi Architecture Module 04 — Artefacts. Five practitioner artefacts: Customer Impact Statement, Architecture on a Page, Heat Map, Architecture Decision Record, Stakeholder Concern Register.">
+<title>OrdoAnimi Architecture — Module 04: Artefacts</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root{
   --ink:#F8FAFC;--forge:#FFFFFF;--steel:#F1F5F9;
@@ -37,22 +37,22 @@ body::before {
 /* HEADER */
 .doc-header { border-bottom:1px solid var(--wire); padding-bottom:32px; margin-bottom:48px; }
 .doc-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
-.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--purple-light); text-transform:uppercase; }
+.doc-brand { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.25em; color:var(--purple-light); }
 .doc-ref { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.15em; text-align:right; }
-.doc-title { font-family:'Bebas Neue', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
+.doc-title { font-family:'Archivo Black', sans-serif; font-size:clamp(40px,6vw,72px); letter-spacing:0.04em; line-height:0.92; color:var(--white); margin-bottom:8px; }
 .doc-title span { color:var(--purple-light); }
 .doc-subtitle { font-family:'DM Mono', monospace; font-size:11px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
 .doc-tags { display:flex; flex-wrap:wrap; gap:8px; }
-.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
+.tag { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; padding:4px 10px; border:1px solid var(--wire); color:var(--fog); }
 .tag.purple { border-color:rgba(124,92,191,0.4); color:var(--purple-light); }
 .tag.amber { border-color:rgba(232,99,10,0.3); color:var(--amber); }
 
 /* SECTION */
 .section { margin-bottom:52px; }
 .section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--wire); }
-.section-num { font-family:'Bebas Neue', sans-serif; font-size:42px; line-height:1; color:rgba(124,92,191,0.2); min-width:44px; padding-top:2px; }
-.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--purple-light); margin-bottom:4px; }
-.section-title { font-family:'Bebas Neue', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
+.section-num { font-family:'Archivo Black', sans-serif; font-size:42px; line-height:1; color:rgba(124,92,191,0.2); min-width:44px; padding-top:2px; }
+.section-eyebrow { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.25em; color:var(--purple-light); margin-bottom:4px; }
+.section-title { font-family:'Archivo Black', sans-serif; font-size:28px; letter-spacing:0.04em; color:var(--white); line-height:1; }
 .section-desc { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); margin-top:4px; letter-spacing:0.05em; }
 .body-text { font-family:'DM Sans', sans-serif; font-size:13.5px; color:var(--ghost); line-height:1.75; margin-bottom:16px; }
 .body-text strong { color:var(--white); font-weight:600; }
@@ -67,7 +67,7 @@ body::before {
 .alt-row { display:grid; grid-template-columns:120px 1fr 1fr 1fr; gap:0; border:1px solid var(--wire); overflow:hidden; }
 @media(max-width:600px) { .alt-row { grid-template-columns:1fr; } }
 .alt-label { padding:16px 18px; border-right:1px solid var(--wire); display:flex; align-items:center; }
-.alt-label-text { font-family:'Bebas Neue', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1.2; }
+.alt-label-text { font-family:'Archivo Black', sans-serif; font-size:16px; letter-spacing:0.04em; line-height:1.2; }
 .alt-row.ba .alt-label { background:rgba(232,99,10,0.08); }
 .alt-row.sa .alt-label { background:rgba(22,163,74,0.08); }
 .alt-row.del .alt-label { background:rgba(37,99,235,0.08); }
@@ -78,24 +78,24 @@ body::before {
 .alt-row.ea .alt-label-text { color:var(--purple-light); }
 .alt-cell { padding:14px 16px; border-right:1px solid var(--wire); }
 .alt-cell:last-child { border-right:none; }
-.alt-cell-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--fog); margin-bottom:4px; }
+.alt-cell-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.15em; color:var(--fog); margin-bottom:4px; }
 .alt-cell-value { font-weight:600; font-size:11px; color:var(--white); }
 .alt-cell-desc { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); margin-top:3px; line-height:1.5; }
 
 /* ARTEFACT CARDS */
 .artefact-card { background:var(--forge); border:1px solid var(--wire); margin-bottom:20px; overflow:hidden; }
 .artefact-header { display:grid; grid-template-columns:64px 1fr auto; border-bottom:1px solid var(--wire); }
-.art-num { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--wire); font-family:'Bebas Neue', sans-serif; font-size:28px; padding:20px 0; }
+.art-num { display:flex; align-items:center; justify-content:center; border-right:1px solid var(--wire); font-family:'Archivo Black', sans-serif; font-size:28px; padding:20px 0; }
 .artefact-card:nth-child(1) .art-num { background:rgba(232,99,10,0.08); color:var(--amber); }
 .artefact-card:nth-child(2) .art-num { background:rgba(22,163,74,0.08); color:var(--green-light); }
 .artefact-card:nth-child(3) .art-num { background:rgba(220,38,38,0.08); color:var(--signal); }
 .artefact-card:nth-child(4) .art-num { background:rgba(37,99,235,0.08); color:var(--cold-light); }
 .art-title-block { padding:16px 20px; }
-.art-eyebrow { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fog); margin-bottom:4px; }
-.art-name { font-family:'Bebas Neue', sans-serif; font-size:24px; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:4px; }
+.art-eyebrow { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--fog); margin-bottom:4px; }
+.art-name { font-family:'Archivo Black', sans-serif; font-size:24px; letter-spacing:0.04em; color:var(--white); line-height:1; margin-bottom:4px; }
 .art-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
 .art-badge { display:flex; align-items:center; justify-content:center; padding:0 20px; border-left:1px solid var(--wire); }
-.badge-pill { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.12em; text-transform:uppercase; padding:5px 10px; border:1px solid; white-space:nowrap; }
+.badge-pill { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.12em; padding:5px 10px; border:1px solid; white-space:nowrap; }
 .artefact-card:nth-child(1) .badge-pill { color:var(--amber); border-color:rgba(232,99,10,0.3); }
 .artefact-card:nth-child(2) .badge-pill { color:var(--green-light); border-color:rgba(22,163,74,0.3); }
 .artefact-card:nth-child(3) .badge-pill { color:var(--signal); border-color:rgba(220,38,38,0.3); }
@@ -104,7 +104,7 @@ body::before {
 .art-desc { font-family:'DM Sans', sans-serif; font-size:13px; color:var(--ghost); line-height:1.7; margin-bottom:16px; }
 .art-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
 @media(max-width:540px) { .art-grid { grid-template-columns:1fr; } }
-.art-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--fog); margin-bottom:6px; }
+.art-col-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--fog); margin-bottom:6px; }
 .art-col-list { list-style:none; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.9; }
 .art-col-list li::before { content:'→ '; color:var(--wire-light); }
 .art-rule { padding:12px 16px; background:var(--steel); border-left:2px solid var(--purple); font-family:'DM Mono', monospace; font-size:10px; color:var(--mist); line-height:1.6; }
@@ -116,11 +116,11 @@ body::before {
 /* TEMPLATE BLOCKS */
 .template-block { background:var(--steel); border:1px solid var(--wire-light); margin:20px 0; overflow:hidden; }
 .template-header { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:var(--forge); border-bottom:1px solid var(--wire); }
-.template-label { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--purple-light); }
+.template-label { font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.2em; color:var(--purple-light); }
 .template-size { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); }
 .template-body { padding:20px 24px; }
 .template-section { margin-bottom:16px; }
-.tpl-heading { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; display:inline-block; margin-bottom:8px; }
+.tpl-heading { font-family:'DM Mono', monospace; font-size:10px; letter-spacing:0.15em; padding:4px 10px; display:inline-block; margin-bottom:8px; }
 .tpl-cis-1 { background:rgba(232,99,10,0.07); color:var(--amber); }
 .tpl-cis-2 { background:rgba(220,38,38,0.07); color:var(--signal); }
 .tpl-cis-3 { background:rgba(22,163,74,0.07); color:var(--green-light); }
@@ -133,20 +133,20 @@ body::before {
 .adr-grid { display:grid; grid-template-columns:1fr; gap:8px; margin:16px 0; }
 .adr-field { display:grid; grid-template-columns:160px 1fr; gap:0; border:1px solid var(--wire); overflow:hidden; }
 @media(max-width:540px) { .adr-field { grid-template-columns:1fr; } }
-.adr-key { background:rgba(37,99,235,0.08); border-right:1px solid rgba(37,99,235,0.2); padding:10px 14px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--cold-light); display:flex; align-items:center; }
+.adr-key { background:rgba(37,99,235,0.08); border-right:1px solid rgba(37,99,235,0.2); padding:10px 14px; font-family:'DM Mono', monospace; font-size:9px; letter-spacing:0.12em; color:var(--cold-light); display:flex; align-items:center; }
 .adr-val { padding:10px 16px; font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.6; }
 
 /* LIVING DOC */
 .living-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:20px 0; }
 @media(max-width:540px) { .living-grid { grid-template-columns:1fr; } }
 .living-card { background:var(--forge); border:1px solid var(--wire); padding:16px 18px; }
-.living-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-light); margin-bottom:6px; }
+.living-label { font-family:'DM Mono', monospace; font-size:8px; letter-spacing:0.2em; color:var(--green-light); margin-bottom:6px; }
 .living-title { font-weight:600; font-size:12px; color:var(--white); margin-bottom:8px; }
 .living-body { font-family:'DM Mono', monospace; font-size:10px; color:var(--fog); line-height:1.7; }
 
 /* CHECKLIST */
 .checklist { background:var(--forge); border:1px solid var(--wire); padding:24px 28px; margin:20px 0; }
-.checklist-header { font-family:'Bebas Neue', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
+.checklist-header { font-family:'Archivo Black', sans-serif; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:4px; }
 .checklist-sub { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; margin-bottom:20px; }
 .check-item { display:flex; align-items:flex-start; gap:12px; padding:10px 14px; margin-bottom:8px; background:var(--steel); border:1px solid var(--wire); }
 .check-box { width:16px; height:16px; min-width:16px; border:1px solid var(--wire-light); margin-top:1px; }
@@ -155,7 +155,7 @@ body::before {
 
 /* FOOTER */
 .doc-footer { border-top:1px solid var(--wire); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:64px; }
-.footer-brand { font-family:'Bebas Neue', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
+.footer-brand { font-family:'Archivo Black', sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--wire-light); }
 .footer-brand span { color:var(--purple-light); }
 .footer-nav { font-family:'DM Mono', monospace; font-size:9px; color:var(--fog); letter-spacing:0.1em; }
 
@@ -175,7 +175,6 @@ body::before {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   text-decoration: none;
   border: 1px solid;
 }
@@ -183,15 +182,15 @@ body::before {
 .nav-link.prev:hover { color: var(--white); }
 .nav-link.next { background: var(--amber-dim); border-color: rgba(232,99,10,0.2); color: var(--amber-hot); }
 
-.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--purple-dim); border:1px solid rgba(124,92,191,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--purple-light); letter-spacing:0.08em; text-transform:uppercase; margin-top:8px; }
+.next-module { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; background:var(--purple-dim); border:1px solid rgba(124,92,191,0.3); font-family:'DM Mono', monospace; font-size:10px; color:var(--purple-light); letter-spacing:0.08em; margin-top:8px; }
 
 .nav-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;}
-.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
+.nav-prev{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--wire-light);color:var(--fog);background:rgba(203,213,225,0.5);}
 .nav-prev:hover{color:var(--white);}
-.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
+.nav-next{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;border:1px solid rgba(232,99,10,0.2);color:#E8630A;background:rgba(232,99,10,0.07);}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--wire);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--fog);text-decoration:none;white-space:nowrap;}
@@ -202,14 +201,14 @@ body::before {
 
 .scr-template{background:var(--steel);border:1px solid var(--wire);overflow:hidden;margin:20px 0;}
 .scr-header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--forge);border-bottom:1px solid var(--wire);}
-.scr-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);}
+.scr-title{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:0.04em;color:var(--green-light);}
 .scr-meta{font-family:'DM Mono',monospace;font-size:8px;color:var(--fog);}
 .scr-row{display:grid;grid-template-columns:120px 2fr 1.5fr 80px 70px;gap:0;border-bottom:1px solid var(--wire);}
 .scr-row:last-child{border-bottom:none;}
 .scr-head-row{background:rgba(22,163,74,0.08);}
 .scr-cell{padding:10px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--fog);line-height:1.5;border-right:1px solid var(--wire);}
 .scr-cell:last-child{border-right:none;}
-.scr-head{color:var(--green-light);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;}
+.scr-head{color:var(--green-light);font-size:8px;letter-spacing:0.15em;}
 .scr-italic{font-style:italic;color:var(--mist);}
 .scr-open{color:var(--signal);font-weight:600;display:flex;align-items:center;}
 .scr-done{color:var(--green-light);font-weight:600;display:flex;align-items:center;}
@@ -224,7 +223,7 @@ body::before {
 <body>
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -238,15 +237,15 @@ body::before {
     <a class="nav-cta-btn" href="module-01-orientation.html">Start Module 01 →</a>
   </div>
 </nav>
-<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi SA Framework</a>
+<div class="page"><a style="font-family:DM Mono,monospace;font-size:9px;letter-spacing:0.15em;color:#64748B;text-decoration:none;display:inline-block;margin-bottom:32px;" href="../index.html">← OrdoAnimi Architecture Framework</a>
 
 <!-- HEADER -->
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — The OrdoAnimi Framework · Solution Architecture</div>
-    <div class="doc-ref">MODULE 04 OF 06<br>VAFSA-M04 · ORDOANIMI · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — The OrdoAnimi Framework · Solution Architecture</div>
+    <div class="doc-ref">Module 04 of 06<br>ORDOANIMI-M04 · OrdoAnimi · v1.0</div>
   </div>
-  <div class="doc-title">MODULE 04<br><span>ARTEFACTS</span></div>
+  <div class="doc-title">Module 04<br><span>Artefacts</span></div>
   <div class="doc-subtitle">Five deliverables. One principle. Everything the engagement needs. Nothing it does not.</div>
   <div class="doc-tags">
     <span class="tag purple">Four Artefacts</span>
@@ -265,21 +264,21 @@ body::before {
     <div class="section-title-block">
       <div class="section-eyebrow">Foundation</div>
       <div class="section-title">Purpose</div>
-      <div class="section-desc">What artefacts do, what they do not do, and where OrdoAnimi SA sits in the broader OrdoAnimi ecosystem</div>
+      <div class="section-desc">What artefacts do, what they do not do, and where OrdoAnimi Architecture sits in the broader OrdoAnimi ecosystem</div>
     </div>
   </div>
 
   <p class="body-text">Documentation records what happened. An artefact drives what happens next. They are not the same thing. Every artefact in this framework produces a decision, unlocks an action, or protects an outcome. Anything that does none of those three things is overhead.</p>
 
-  <p class="body-text">OrdoAnimi SA produces five artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
+  <p class="body-text">OrdoAnimi Architecture produces five artefacts. No more. Each one has a named audience, a named purpose, and a size limit of one page. <strong>If it does not fit on one page, the thinking is not done.</strong> The temptation to add more pages is always a signal that the architect has not yet found the answer — they are still working through the problem in the document instead of before it.</p>
 
   <div class="callout">
-    The OrdoAnimi Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. OrdoAnimi SA produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
+    The OrdoAnimi Enterprise Architecture framework produces six artefact types at EA altitude — Guardrail Canvas, Trade-off Matrix, Architecture Decision Record with fitness functions, Reference Architecture, Site Risk Matrix, and Programme Overview. OrdoAnimi Architecture produces the delivery-altitude equivalents of four of those. Different altitude. Same purpose. Less governance weight. Faster production.
   </div>
 
   <p class="body-text">Where a Proof of Concept has been conducted — by the architect, the client, or the vendor — its outputs belong in this artefact set. A PoC without structured outputs is an experiment. A PoC with named success criteria, a heat map contribution, and a resulting Architecture Decision Record is a design instrument. The PoC output does not become a separate artefact — it populates the heat map cells it confirms and generates the ADR that records what the PoC determined.</p>
 
-<p class="body-text">The relationship between OrdoAnimi EA and OrdoAnimi SA artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, OrdoAnimi SA artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — OrdoAnimi SA artefacts stand alone as the authoritative record of the engagement.</p>
+<p class="body-text">The relationship between OrdoAnimi EA and OrdoAnimi Architecture artefacts is not hierarchy — it is altitude. The EA practitioner operates at a different level of the organisation to the SA practitioner. The artefacts reflect that. When the EA is present and functional, OrdoAnimi Architecture artefacts feed upward into the EA governance layer. When the EA is absent — which is the common condition in the four engagement archetypes — OrdoAnimi Architecture artefacts stand alone as the authoritative record of the engagement.</p>
 
   <div class="altitude-map">
     <div class="alt-row ea">
@@ -289,19 +288,19 @@ body::before {
       <div class="alt-cell"><div class="alt-cell-label">Artefact</div><div class="alt-cell-value">ADR + Fitness Functions</div><div class="alt-cell-desc">Governed architectural decisions</div></div>
     </div>
     <div class="alt-row ba">
-      <div class="alt-label"><div class="alt-label-text">OrdoAnimi SA BA</div></div>
+      <div class="alt-label"><div class="alt-label-text">OrdoAnimi Architecture BA</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 01</div><div class="alt-cell-value">Customer Impact Statement</div><div class="alt-cell-desc">Business intent locked in plain language</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">Executive · Business Leads</div><div class="alt-cell-desc">Anyone who funds or approves</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page</div><div class="alt-cell-desc">No exceptions</div></div>
     </div>
     <div class="alt-row sa">
-      <div class="alt-label"><div class="alt-label-text">OrdoAnimi SA SA</div></div>
+      <div class="alt-label"><div class="alt-label-text">OrdoAnimi Architecture SA</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 02</div><div class="alt-cell-value">Architecture on a Page</div><div class="alt-cell-desc">Solution visible to all audiences</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 03</div><div class="alt-cell-value">Heat Map</div><div class="alt-cell-desc">Nine domains. Forensic instrument.</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Each</div><div class="alt-cell-desc">No exceptions</div></div>
     </div>
     <div class="alt-row del">
-      <div class="alt-label"><div class="alt-label-text">OrdoAnimi SA Delivery</div></div>
+      <div class="alt-label"><div class="alt-label-text">OrdoAnimi Architecture Delivery</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Artefact 04</div><div class="alt-cell-value">Architecture Decision Record</div><div class="alt-cell-desc">SA-level. Why this was decided.</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Audience</div><div class="alt-cell-value">All · Future Architects</div><div class="alt-cell-desc">Decision rationale preserved</div></div>
       <div class="alt-cell"><div class="alt-cell-label">Size</div><div class="alt-cell-value">One Page Per Decision</div><div class="alt-cell-desc">No exceptions</div></div>
@@ -555,7 +554,7 @@ body::before {
     <div class="artefact-body">
       <p class="art-desc">The ADR solves the most pervasive problem in solution architecture: decision rationale gets lost. Systems are built to reflect decisions nobody on the current team remembers making. New architects repeat analysis already completed. Governance reviews lack evidence of past reasoning. Vendors exploit the gap between what was decided and what was documented.</p>
       <p class="art-desc">In every one of the four engagement archetypes, the absence of ADRs contributed to the failure. The vendor who obfuscated did so partly because no prior decision about data egress had been formally recorded. The organisation with institutional paralysis had no record of why prior attempts failed. The ADR exists so that the next architect, the next audit, and the next vendor engagement has the evidence in writing.</p>
-      <p class="art-desc"><strong>OrdoAnimi SA ADRs are SA-level.</strong> They are lighter than the EA-level ADR with fitness functions. One page. Written at the time of the decision. Numbered. Versioned. Status tracked. Never modified — only superseded by a new ADR that references the original.</p>
+      <p class="art-desc"><strong>OrdoAnimi Architecture ADRs are SA-level.</strong> They are lighter than the EA-level ADR with fitness functions. One page. Written at the time of the decision. Numbered. Versioned. Status tracked. Never modified — only superseded by a new ADR that references the original.</p>
       <div class="art-rule"><strong>When to write an ADR:</strong> Any decision that, if reversed, would require significant rework. Any decision that could be challenged in governance. Any decision involving a vendor commitment. Any decision about data flow, security controls, or integration patterns. When in doubt — write one. The cost of writing one is minutes. The cost of not having one can be months.</div>
     </div>
   </div>
@@ -717,7 +716,7 @@ body::before {
     </div>
   </div>
 
-  <p class="body-text">A document that is accurate on the day it is produced and outdated within a month is not a living artefact. It is a historical record with a future expiry date. Every artefact produced in OrdoAnimi SA is treated as a living document — versioned, dated, and updated when the engagement conditions change.</p>
+  <p class="body-text">A document that is accurate on the day it is produced and outdated within a month is not a living artefact. It is a historical record with a future expiry date. Every artefact produced in OrdoAnimi Architecture is treated as a living document — versioned, dated, and updated when the engagement conditions change.</p>
 
   <p class="body-text">This is not about maintaining a documentation system. It is about maintaining the integrity of the artefact as the authoritative record of what was decided and why. A CIS that reflects the original intent and not the evolved one has failed its purpose. An ADR marked Accepted for a decision that has since been superseded — without a new ADR referencing it — has broken the decision chain.</p>
 
@@ -745,7 +744,7 @@ body::before {
   </div>
 
   <div class="callout green">
-    The OrdoAnimi Agentic Architect already generates and commits VP1, VP2, and VP3 artefacts to GitHub automatically. OrdoAnimi SA artefacts — CIS, AoaP, Heat Map, ADR — are the next generation of targets for agentic generation. The framework teaches the human method first. The agent automates it second.
+    The OrdoAnimi Agentic Architect already generates and commits VP1, VP2, and VP3 artefacts to GitHub automatically. OrdoAnimi Architecture artefacts — CIS, AoaP, Heat Map, ADR — are the next generation of targets for agentic generation. The framework teaches the human method first. The agent automates it second.
   </div>
 </div>
 
@@ -764,7 +763,7 @@ body::before {
 
   <div class="checklist">
     <div class="checklist-header">Artefact Gate</div>
-    <div class="checklist-sub">ALL FIVE ARTEFACTS MUST EXIST AND ALL ITEMS CONFIRMED BEFORE PROCEEDING TO MODULE 5</div>
+    <div class="checklist-sub">All five artefacts must exist and all items confirmed before proceeding to Module 5</div>
 
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Customer Impact Statement produced</strong> — one page, plain language, no technical content, named decision required from named person by named date.</div></div>
     <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>CIS test passed</strong> — most senior non-technical stakeholder can read it, understand it, and state the decision required without explanation.</div></div>
@@ -783,16 +782,16 @@ body::before {
 <!-- FOOTER -->
 <div class="doc-footer">
   <div>
-    <div class="footer-brand"><span>OrdoAnimi SA</span> — The OrdoAnimi Framework</div>
-    <div class="footer-nav" style="margin-top:4px;">MODULE 04 — ARTEFACTS · ORDOANIMI · v1.0</div>
+    <div class="footer-brand"><span>OrdoAnimi Architecture</span> — The OrdoAnimi Framework</div>
+    <div class="footer-nav" style="margin-top:4px;">Module 04 — Artefacts · OrdoAnimi · v1.0</div>
     <div class="nav-bar">
-      <a href="module-03-design.html" class="nav-prev">← MODULE 03 — DESIGN</a>
-      <a href="module-05-communication.html" class="nav-next">MODULE 05 — COMMUNICATION →</a>
+      <a href="module-03-design.html" class="nav-prev">← Module 03 — Design</a>
+      <a href="module-05-communication.html" class="nav-next">Module 05 — Communication →</a>
     </div>
-    <div class="next-module" style="margin-top:12px;">→ NEXT: MODULE 05 — COMMUNICATION · Every Room. Every Audience. Plain Language. Every Time.</div>
+    <div class="next-module" style="margin-top:12px;">→ NEXT: Module 05 — Communication · Every Room. Every Audience. Plain Language. Every Time.</div>
   </div>
   <div style="text-align:right;">
-    <div class="footer-nav">VAFSA-M04 · ORDOANIMI · v1.0</div>
+    <div class="footer-nav">ORDOANIMI-M04 · OrdoAnimi · v1.0</div>
   </div>
 </div>
 

@@ -1,15 +1,15 @@
-# OrdoAnimi SA
+# OrdoAnimi Architecture
 
-The OrdoAnimi Framework - Solution Architecture is a practitioner framework for solution architects focused on practical delivery, architecture decisions, governance, and execution.
+OrdoAnimi Architecture is a practitioner framework for solution architects focused on practical delivery, architecture decisions, governance, and execution.
 
 ## Start Here
 
-If you landed in this repository from OrdoAnimi, OrdoAnimi, LinkedIn, or search, use the reader-facing site first.
+If you landed in this repository from OrdoAnimi, LinkedIn, or search, use the reader-facing site first.
 
 | Need | Use this |
 |---|---|
-| Understand OrdoAnimi SA | [OrdoAnimi SA home](https://zencloudau.github.io/vaf-sa/) |
-| Navigate the full public site | [OrdoAnimi SA site map](https://zencloudau.github.io/vaf-sa/site-map.html) |
+| Understand OrdoAnimi Architecture | [OrdoAnimi Architecture home](https://zencloudau.github.io/vaf-sa/) |
+| Navigate the full public site | [OrdoAnimi Architecture site map](https://zencloudau.github.io/vaf-sa/site-map.html) |
 | Start the practitioner method | [Module 01 - Orientation](https://zencloudau.github.io/vaf-sa/modules/module-01-orientation.html) |
 | Use the toolkit | [Solution Architecture Toolkit](https://zencloudau.github.io/vaf-sa/toolkit.html) |
 | Use cloud reference material | [Cloud Architecture Reference](https://zencloudau.github.io/vaf-sa/cloud-reference/) |
@@ -21,7 +21,7 @@ GitHub is the source of truth. GitHub Pages is the reader-facing publication lay
 
 ## Purpose
 
-OrdoAnimi SA exists to help solution architects operate in difficult delivery conditions: stalled engagements, unclear ownership, incomplete documentation, vendor pressure, weak governance, and political ambiguity.
+OrdoAnimi Architecture exists to help solution architects operate in difficult delivery conditions: stalled engagements, unclear ownership, incomplete documentation, vendor pressure, weak governance, and political ambiguity.
 
 It is practical rather than theoretical. The framework gives practitioners a structured way to read the environment, extract the information that matters, design at the right altitude, produce usable artefacts, communicate across stakeholder groups, and keep delivery moving.
 
@@ -31,7 +31,7 @@ It is practical rather than theoretical. The framework gives practitioners a str
 - Enterprise architects who need a delivery-level companion to architecture governance.
 - Delivery leads who need architecture decisions converted into executable work.
 - Architecture reviewers assessing whether a design is grounded, traceable, and fit for governance.
-- Consultants using The OrdoAnimi Framework or methods in client engagements.
+- Consultants using OrdoAnimi methods in client engagements.
 
 ## What It Does
 
@@ -63,27 +63,27 @@ The current repository provides a static framework site with:
 
 ## Live Demo
 
-[OrdoAnimi SA](https://zencloudau.github.io/vaf-sa/)
+[OrdoAnimi Architecture](https://zencloudau.github.io/vaf-sa/)
 
 ## Screenshots
 
-![OrdoAnimi SA home](docs/screenshots/vaf-sa-home.png)
+![OrdoAnimi Architecture home](docs/screenshots/vaf-sa-home.png)
 
-![OrdoAnimi SA module view](docs/screenshots/vaf-sa-modules.png)
+![OrdoAnimi Architecture module view](docs/screenshots/vaf-sa-modules.png)
 
-![OrdoAnimi SA practitioner view](docs/screenshots/vaf-sa-practitioner-view.png)
+![OrdoAnimi Architecture practitioner view](docs/screenshots/vaf-sa-practitioner-view.png)
 
 ## How It Fits the Ecosystem
 
-OrdoAnimi SA is the solution architecture delivery module of the broader OrdoAnimi ecosystem.
+OrdoAnimi Architecture is the solution architecture delivery module of the broader OrdoAnimi ecosystem.
 
 - **The OrdoAnimi Framework** provides the enterprise architecture, decision-governance, and architecture operating model context — and is also the commercial advisory front door and delivery wrapper for architecture-led AI delivery.
-- **OrdoAnimi SA** translates that context into field practice for solution architects.
+- **OrdoAnimi Architecture** translates that context into field practice for solution architects.
 - **EA Artefact Generator** can support the creation of structured artefacts and export-ready architecture content aligned to the framework.
 - **PMO Portal** connects architecture decisions to delivery governance and execution visibility.
 - **Velocity Academy** provides learning, courses, certification, books, and practitioner pathways.
 
-OrdoAnimi SA should stay focused on practitioner guidance and solution architecture execution. It should link to the broader framework and tools rather than duplicate them.
+OrdoAnimi Architecture should stay focused on practitioner guidance and solution architecture execution. It should link to the broader framework and tools rather than duplicate them.
 
 See [docs/ecosystem-map.md](docs/ecosystem-map.md) for the full ecosystem map.
 
@@ -155,7 +155,7 @@ The worked example is described in the site as NDA-clean. Do not add client-iden
 
 Usage terms are documented in [USAGE-TERMS.md](USAGE-TERMS.md).
 
-The OrdoAnimi SA method, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi ecosystem.
+The OrdoAnimi Architecture method, terminology, modules, diagrams, templates, toolkit material, and practitioner guidance are part of the OrdoAnimi ecosystem.
 
 This repository is licensed under CC BY 4.0 — free to use, attribution appreciated. See [LICENSE](LICENSE).
 

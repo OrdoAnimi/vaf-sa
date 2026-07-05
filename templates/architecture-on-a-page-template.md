@@ -1,6 +1,6 @@
 # Architecture on a Page (AoAP)
 
-**VAF·SA Template** · Module 03 — Design
+**OrdoAnimi Template** · Module 03 — Design
 One page. One view. No ambiguity.
 
 ---
@@ -144,4 +144,4 @@ One page. One view. No ambiguity.
 
 ---
 
-*VAF·SA · Architecture on a Page · v1.0*
+*OrdoAnimi · Architecture on a Page · v1.0*

@@ -1,6 +1,6 @@
 # Solution Architecture Summary (SAS)
 
-**VAF·SA Template** · Module 04 — Artefacts
+**OrdoAnimi Template** · Module 04 — Artefacts
 For stakeholders. One read. No ambiguity.
 
 ---
@@ -124,4 +124,4 @@ For stakeholders. One read. No ambiguity.
 
 ---
 
-*VAF·SA · Solution Architecture Summary · v1.0*
+*OrdoAnimi · Solution Architecture Summary · v1.0*

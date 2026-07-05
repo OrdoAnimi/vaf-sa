@@ -1,7 +1,7 @@
 # Solution Architecture Document (SAD)
 ## TRA-Ready Format
 
-**VAF·SA Template** · Module 04 — Artefacts
+**OrdoAnimi Template** · Module 04 — Artefacts
 Structured for Architecture Review Board and Technical Risk Assessment submission.
 
 ---
@@ -253,4 +253,4 @@ Structured for Architecture Review Board and Technical Risk Assessment submissio
 
 ---
 
-*VAF·SA · Solution Architecture Document (SAD) — TRA-Ready Format · v1.0*
+*OrdoAnimi · Solution Architecture Document (SAD) — TRA-Ready Format · v1.0*

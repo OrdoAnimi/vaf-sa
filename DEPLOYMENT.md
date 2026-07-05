@@ -13,7 +13,7 @@ Role: Velocity solution architecture practitioner method
 
 ## Hosting Model
 
-OrdoAnimi SA is a static HTML site served through GitHub Pages.
+OrdoAnimi Architecture is a static HTML site served through GitHub Pages.
 
 There is currently no package manager, no build pipeline, and no runtime environment required for the public site.
 
@@ -99,4 +99,4 @@ Do not commit:
 
 ## Content Boundary
 
-OrdoAnimi SA is a public practitioner method. Keep client-specific content, confidential artefacts, and private delivery notes outside this repository.
+OrdoAnimi Architecture is a public practitioner method. Keep client-specific content, confidential artefacts, and private delivery notes outside this repository.

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="OrdoAnimi SA Cloud Reference — Amazon Web Services. Well-Architected Framework, Cloud Adoption Framework, Landing Zones, Control Tower, and OrdoAnimi SA usage notes.">
-<title>OrdoAnimi SA — AWS Cloud Reference</title>
+<meta name="description" content="OrdoAnimi Architecture Cloud Reference — Amazon Web Services. Well-Architected Framework, Cloud Adoption Framework, Landing Zones, Control Tower, and OrdoAnimi Architecture usage notes.">
+<title>OrdoAnimi Architecture — AWS Cloud Reference</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   --amber:#E8630A;--amber-hot:#C24F06;--amber-dim:rgba(232,99,10,0.07);--amber-border:rgba(232,99,10,0.22);
   --aws:#FF9900;--aws-dim:rgba(255,153,0,0.08);--aws-border:rgba(255,153,0,0.3);
@@ -22,7 +22,7 @@ a:hover{text-decoration:underline;}
 .page{max-width:960px;margin:0 auto;padding:32px 32px 96px;}
 .site-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(15,23,42,0.07);}
 .nav-inner{max-width:1140px;margin:0 auto;padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.nav-brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:0.06em;color:var(--amber);text-decoration:none;white-space:nowrap;flex-shrink:0;}
 .nav-brand:hover{text-decoration:none;}
 .nav-links-bar{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
 .nav-links-bar a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;}
@@ -34,20 +34,20 @@ a:hover{text-decoration:underline;}
 .back:hover{color:var(--amber);}
 .doc-header{border-bottom:1px solid var(--border);padding-bottom:32px;margin-bottom:48px;}
 .doc-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
-.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);text-transform:uppercase;}
+.doc-brand{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.25em;color:var(--amber);}
 .doc-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.15em;text-align:right;}
-.doc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
+.doc-title{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:0.04em;line-height:0.92;color:var(--ink);margin-bottom:10px;}
 .doc-title span{color:var(--aws);}
 .doc-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:20px;}
 .doc-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
+.tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.15em;padding:4px 10px;border:1px solid var(--border);color:var(--muted);}
 .tag.aws{border-color:var(--aws-border);color:var(--aws);}
 .tag.amber{border-color:var(--amber-border);color:var(--amber);}
 .section{margin-bottom:52px;}
 .section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.section-num{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:rgba(255,153,0,0.2);min-width:44px;padding-top:2px;}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--aws);margin-bottom:4px;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
+.section-num{font-family:'Archivo Black',sans-serif;font-size:42px;line-height:1;color:rgba(255,153,0,0.2);min-width:44px;padding-top:2px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;color:var(--aws);margin-bottom:4px;}
+.section-title{font-family:'Archivo Black',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--ink);line-height:1;}
 .section-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:0.05em;}
 .p{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:14px;}
 .p strong{color:var(--ink);font-weight:600;}
@@ -72,24 +72,24 @@ a:hover{text-decoration:underline;}
 .ref-links{display:flex;flex-direction:column;gap:6px;margin:20px 0;}
 .ref-link{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--border);padding:12px 16px;text-decoration:none;color:inherit;transition:border-color 0.15s;}
 .ref-link:hover{border-color:var(--strong);text-decoration:none;}
-.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--aws);white-space:nowrap;padding-top:2px;min-width:60px;}
+.rl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;color:var(--aws);white-space:nowrap;padding-top:2px;min-width:60px;}
 .rl-body{flex:1;}
 .rl-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .rl-url{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
 /* OrdoAnimi NOTES */
 .OrdoAnimi-notes{background:var(--amber-dim);border:1px solid var(--amber-border);padding:20px 24px;margin:20px 0;}
-.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.vn-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--amber);margin-bottom:12px;}
 .vn-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
 .vn-list li{font-size:13px;color:var(--body);line-height:1.55;padding-left:16px;position:relative;}
 .vn-list li::before{content:'→';color:var(--amber);font-size:11px;position:absolute;left:0;top:2px;}
 /* NAV LINKS */
 .page-nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border);}
-.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
+.pn-prev,.pn-next{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-decoration:none;padding:10px 16px;border:1px solid var(--border);color:var(--muted);}
 .pn-prev:hover,.pn-next:hover{color:var(--amber);border-color:var(--amber-border);text-decoration:none;}
 .pn-next{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber);}
 /* FOOTER */
 .doc-footer{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:32px;}
-.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
+.footer-brand{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:0.08em;color:var(--strong);}
 .footer-brand span{color:var(--amber);}
 .footer-nav{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;}
 .footer-nav a{color:var(--muted);text-decoration:none;}
@@ -106,7 +106,7 @@ a:hover{text-decoration:underline;}
 
 <nav class="site-nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="../index.html">OrdoAnimi SA</a>
+    <a class="nav-brand" href="../index.html">OrdoAnimi Architecture</a>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     <ul class="nav-links-bar">
       <li><a href="../preface.html">Preface</a></li>
@@ -125,10 +125,10 @@ a:hover{text-decoration:underline;}
 
 <div class="doc-header">
   <div class="doc-meta">
-    <div class="doc-brand">OrdoAnimi SA — Cloud Reference · Amazon Web Services</div>
-    <div class="doc-ref">VENDOR REFERENCE<br>VAFSA-CRL-AWS · v1.0</div>
+    <div class="doc-brand">OrdoAnimi Architecture — Cloud Reference · Amazon Web Services</div>
+    <div class="doc-ref">Vendor Reference<br>ORDOANIMI-CRL-AWS · v1.0</div>
   </div>
-  <div class="doc-title">AMAZON<br><span>WEB SERVICES</span></div>
+  <div class="doc-title">Amazon<br><span>Web Services</span></div>
   <div class="doc-subtitle">Well-Architected Framework · Cloud Adoption Framework · Landing Zones · Control Tower</div>
   <div class="doc-tags">
     <span class="tag aws">AWS</span>
@@ -151,7 +151,7 @@ a:hover{text-decoration:underline;}
   </div>
   <p class="p">AWS provides a layered set of architecture and adoption guidance. The <strong>Well-Architected Framework</strong> defines what good cloud workload design looks like across six pillars. The <strong>Cloud Adoption Framework</strong> (CAF) addresses the broader organisational challenge of cloud adoption — strategy, people, process, governance, and platform readiness. <strong>Landing Zone</strong> and <strong>Control Tower</strong> provide the reference patterns and automation tooling for establishing a governed multi-account AWS environment.</p>
   <p class="p">These frameworks complement each other. CAF addresses adoption readiness. WAF addresses workload quality. Landing Zone addresses the platform foundation. An enterprise engagement typically requires all three to be understood and appropriately applied.</p>
-  <div class="callout aws">OrdoAnimi SA applies before and across all three: establishing what the organisation is actually trying to decide, surfacing the constraints the vendor frameworks do not reveal, and producing the artefacts that make platform and workload decisions traceable.</div>
+  <div class="callout aws">OrdoAnimi Architecture applies before and across all three: establishing what the organisation is actually trying to decide, surfacing the constraints the vendor frameworks do not reveal, and producing the artefacts that make platform and workload decisions traceable.</div>
 </div>
 
 <div class="divider"></div>
@@ -169,32 +169,32 @@ a:hover{text-decoration:underline;}
   <p class="p">The AWS Well-Architected Framework organises cloud workload design quality into six pillars. The Well-Architected Tool allows teams to conduct structured workload reviews against each pillar, identifying high-risk issues (HRIs) and improvement opportunities.</p>
   <div class="pillar-grid">
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 01</div>
+      <div class="pc-num">Pillar 01</div>
       <div class="pc-name">Operational Excellence</div>
       <div class="pc-body">Running and monitoring systems to deliver business value, and continually improving processes and procedures.</div>
     </div>
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 02</div>
+      <div class="pc-num">Pillar 02</div>
       <div class="pc-name">Security</div>
       <div class="pc-body">Protecting information, systems, and assets — identity, detection, infrastructure protection, data protection, incident response.</div>
     </div>
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 03</div>
+      <div class="pc-num">Pillar 03</div>
       <div class="pc-name">Reliability</div>
       <div class="pc-body">Ability to perform intended functions correctly and consistently — recovery, infrastructure, change management.</div>
     </div>
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 04</div>
+      <div class="pc-num">Pillar 04</div>
       <div class="pc-name">Performance Efficiency</div>
       <div class="pc-body">Using computing resources efficiently and maintaining that efficiency as demand changes and technology evolves.</div>
     </div>
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 05</div>
+      <div class="pc-num">Pillar 05</div>
       <div class="pc-name">Cost Optimisation</div>
       <div class="pc-body">Avoiding unnecessary costs — understanding expenditure, selecting appropriate resource types, scaling to meet business needs.</div>
     </div>
     <div class="pillar-card">
-      <div class="pc-num">PILLAR 06</div>
+      <div class="pc-num">Pillar 06</div>
       <div class="pc-name">Sustainability</div>
       <div class="pc-body">Minimising the environmental impact of running cloud workloads — understanding impacts, establishing targets, improving over time.</div>
     </div>
@@ -285,18 +285,18 @@ a:hover{text-decoration:underline;}
 
 <div class="divider"></div>
 
-<!-- OrdoAnimi SA USAGE NOTES -->
+<!-- OrdoAnimi Architecture USAGE NOTES -->
 <div class="section">
   <div class="section-header">
     <div class="section-num">05</div>
     <div>
-      <div class="section-eyebrow">OrdoAnimi SA Usage Notes</div>
-      <div class="section-title">Applying OrdoAnimi SA in AWS Engagements</div>
+      <div class="section-eyebrow">OrdoAnimi Architecture Usage Notes</div>
+      <div class="section-title">Applying OrdoAnimi Architecture in AWS Engagements</div>
       <div class="section-desc">Where the practitioner method adds value in an AWS-heavy environment.</div>
     </div>
   </div>
   <div class="OrdoAnimi-notes">
-    <div class="vn-label">OrdoAnimi SA Practitioner Notes — AWS</div>
+    <div class="vn-label">OrdoAnimi Architecture Practitioner Notes — AWS</div>
     <ul class="vn-list">
       <li><strong>Ownership ambiguity is common.</strong> AWS environments with multiple teams often have unclear boundaries between account owners, platform teams, and workload teams. Module 01 (Orientation) surfaces who actually owns the landing zone, who approves account vending, and who controls SCP policy — before assuming the vendor documentation reflects the real operating model.</li>
       <li><strong>Control Tower configuration drift.</strong> Module 02 (Intelligence) surfaces whether Control Tower guardrails are actually enforced — or whether exceptions have been approved informally and not recorded. The governance gap is often between what Control Tower shows and what is actually in production.</li>
@@ -364,7 +364,7 @@ a:hover{text-decoration:underline;}
 </div>
 
 <div class="doc-footer">
-  <div class="footer-brand"><span>OrdoAnimi SA</span> — AWS Cloud Reference</div>
+  <div class="footer-brand"><span>OrdoAnimi Architecture</span> — AWS Cloud Reference</div>
   <div class="footer-nav">
     <a href="index.html">Cloud Reference</a> · <a href="azure.html">Azure</a> · <a href="google-cloud.html">Google Cloud</a> · <a href="oci.html">OCI</a> · <a href="landing-zone.html">Landing Zone</a>
   </div>
