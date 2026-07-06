@@ -11,22 +11,22 @@
 <meta property="og:title" content="OrdoAnimi Architecture — Architecture Toolkit">
 <meta property="og:description" content="OrdoAnimi Architecture Toolkit — Solution architecture templates, Mermaid diagrams, C4 diagrams, UML, data flow, governance, and TRA-ready artefacts for practitioners.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
   --page:    #f2ede0;
   --panel:   #faf7ef;
   --alt:     #ebe4d2;
-  --ink:     #16231c;
+  --ink:     #0b0e11;
   --body:    #3d4536;
   --muted:   #6e7460;
   --border:  #ded7c4;
   --strong:  #c9bfa6;
-  --accent:  #b58a34;
-  --accentd: #8c6a26;
-  --abg:     rgba(181,138,52,0.07);
-  --aborder: rgba(181,138,52,0.22);
-  --navy:    #16231c;
+  --accent:  #b8924e;
+  --accentd: #96753a;
+  --abg:     rgba(184,146,78,0.07);
+  --aborder: rgba(184,146,78,0.22);
+  --navy:    #0b0e11;
   --blue:    #2563EB;
   --green:   #16A34A;
   --purple:  #7C3AED;
@@ -41,21 +41,21 @@ a:hover { text-decoration:underline; }
 /* ── NAV ───────────────────────── */
 .site-nav {
   position:sticky; top:0; z-index:100;
-  background:rgba(22,35,28,0.96); border-bottom:1px solid rgba(250,247,239,0.12);
-  box-shadow:0 1px 4px rgba(22,35,28,0.07);
+  background:rgba(11,14,17,0.96); border-bottom:1px solid rgba(250,247,239,0.12);
+  box-shadow:0 1px 4px rgba(11,14,17,0.07);
 }
 .nav-inner {
   max-width:1140px; margin:0 auto; padding:0 32px;
   height:52px; display:flex; align-items:center; justify-content:space-between; gap:24px;
 }
-.nav-brand { font-family:'Archivo Black',sans-serif; font-size:20px; letter-spacing:0.06em; color:#faf7ef; text-decoration:none; white-space:nowrap; flex-shrink:0; }
+.nav-brand { font-family:'Playfair Display',Georgia,serif; font-size:20px; letter-spacing:0.06em; color:#faf7ef; text-decoration:none; white-space:nowrap; flex-shrink:0; }
 .nav-brand:hover { text-decoration:none; }
 .nav-links { display:flex; align-items:center; gap:20px; list-style:none; flex-wrap:wrap; }
 .nav-links a { font-size:12px; font-weight:600; color:#ebe4d2; text-decoration:none; white-space:nowrap; }
-.nav-links a:hover { color:#ddb35c; text-decoration:none; }
+.nav-links a:hover { color:#d4b36a; text-decoration:none; }
 .nav-links a.active { color:var(--accent); }
-.nav-cta { font-size:12px; font-weight:700; text-decoration:none; padding:7px 16px; background:var(--accent); color:#16231c; border-radius:2px; }
-.nav-cta:hover { background:var(--accentd); color:#16231c; text-decoration:none; }
+.nav-cta { font-size:12px; font-weight:700; text-decoration:none; padding:7px 16px; background:var(--accent); color:#0b0e11; border-radius:2px; }
+.nav-cta:hover { background:var(--accentd); color:#0b0e11; text-decoration:none; }
 
 /* ── PAGE ──────────────────────── */
 .page { max-width:1140px; margin:0 auto; padding:0 32px 96px; }
@@ -65,7 +65,7 @@ a:hover { text-decoration:underline; }
 /* ── HERO ──────────────────────── */
 .hero { padding:48px 0 44px; border-bottom:1px solid var(--border); margin-bottom:48px; }
 .hero-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); margin-bottom:12px; }
-.hero-title { font-family:'Archivo Black',sans-serif; font-size:clamp(52px,8vw,96px); letter-spacing:0.03em; line-height:0.88; color:var(--ink); margin-bottom:14px; }
+.hero-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(52px,8vw,96px); letter-spacing:0.03em; line-height:0.88; color:var(--ink); margin-bottom:14px; }
 .hero-title .accent { color:var(--accent); }
 .hero-strip { display:flex; gap:4px; height:3px; max-width:220px; margin-bottom:14px; }
 .hero-strip div { flex:1; }
@@ -107,7 +107,7 @@ a:hover { text-decoration:underline; }
   padding:20px 22px; display:flex; flex-direction:column; gap:10px;
   transition:border-color 0.15s, box-shadow 0.15s;
 }
-.tk-card:hover { border-color:var(--strong); box-shadow:0 2px 8px rgba(22,35,28,0.06); }
+.tk-card:hover { border-color:var(--strong); box-shadow:0 2px 8px rgba(11,14,17,0.06); }
 .tk-card.accent  { border-top-color:var(--accent); }
 .tk-card.navy    { border-top-color:var(--navy); }
 .tk-card.blue    { border-top-color:var(--blue); }
@@ -149,7 +149,7 @@ a:hover { text-decoration:underline; }
 /* ── FOOTER ────────────────────── */
 .site-footer { border-top:1px solid var(--border); padding:32px 0 0; margin-top:48px; }
 .footer-inner { max-width:1140px; margin:0 auto; padding:0 32px 32px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px; }
-.footer-brand { font-family:'Archivo Black',sans-serif; font-size:18px; letter-spacing:0.08em; color:var(--strong); }
+.footer-brand { font-family:'Playfair Display',Georgia,serif; font-size:18px; letter-spacing:0.08em; color:var(--strong); }
 .footer-brand span { color:var(--accent); }
 .footer-links { display:flex; flex-wrap:wrap; gap:12px 20px; margin-top:8px; }
 .footer-link { font-size:12px; color:var(--muted); text-decoration:none; }
@@ -158,7 +158,7 @@ a:hover { text-decoration:underline; }
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#faf7ef;}
 @media(max-width:680px){
   .nav-toggle{display:flex;align-items:center;justify-content:center;}
-  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf7ef;border-bottom:1px solid #ded7c4;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(22,35,28,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf7ef;border-bottom:1px solid #ded7c4;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(11,14,17,.10);z-index:99;flex-wrap:nowrap!important;}
   .nav-links.open,.nav-links-bar.open{display:flex!important;}
 }</style>
 </head>

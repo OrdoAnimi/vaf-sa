@@ -8,26 +8,27 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>OrdoAnimi Architecture — Solution Architecture Practitioner Framework</title>
 <meta property="og:url" content="https://architecture.ordoanimi.com/">
+<meta property="og:image" content="https://architecture.ordoanimi.com/og-card.png">
 <meta property="og:title" content="OrdoAnimi Architecture — Solution Architecture Practitioner Framework">
 <meta property="og:description" content="OrdoAnimi Architecture — Solution Architecture Practitioner Framework. Six modules. Two pillars. One loop.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
   --page:    #f2ede0;
   --panel:   #faf7ef;
   --alt:     #ebe4d2;
-  --ink:     #16231c;
+  --ink:     #0b0e11;
   --body:    #3d4536;
   --muted:   #6e7460;
   --border:  #ded7c4;
   --strong:  #c9bfa6;
-  --accent:  #b58a34;
-  --accentd: #8c6a26;
-  --abg:     rgba(181,138,52,0.07);
-  --aborder: rgba(181,138,52,0.22);
-  --navy:    #16231c;
-  --blue:    #2563EB; --m1b:rgba(217,119,6,0.08); --m1e:rgba(217,119,6,0.28); --m2b:rgba(37,99,235,0.08); --m2e:rgba(37,99,235,0.28); --m3b:rgba(22,163,74,0.08); --m3e:rgba(22,163,74,0.28); --m4b:rgba(124,58,237,0.08); --m4e:rgba(124,58,237,0.28); --m5b:rgba(181,138,52,0.08); --m5e:rgba(181,138,52,0.28); --m6b:rgba(180,83,9,0.08); --m6e:rgba(180,83,9,0.28);
+  --accent:  #b8924e;
+  --accentd: #96753a;
+  --abg:     rgba(184,146,78,0.07);
+  --aborder: rgba(184,146,78,0.22);
+  --navy:    #0b0e11;
+  --blue:    #2563EB; --m1b:rgba(217,119,6,0.08); --m1e:rgba(217,119,6,0.28); --m2b:rgba(37,99,235,0.08); --m2e:rgba(37,99,235,0.28); --m3b:rgba(22,163,74,0.08); --m3e:rgba(22,163,74,0.28); --m4b:rgba(124,58,237,0.08); --m4e:rgba(124,58,237,0.28); --m5b:rgba(184,146,78,0.08); --m5e:rgba(184,146,78,0.28); --m6b:rgba(180,83,9,0.08); --m6e:rgba(180,83,9,0.28);
 
   /* OrdoAnimi master design system tokens */
   --OrdoAnimi-bg:             var(--page);
@@ -43,15 +44,15 @@
   --OrdoAnimi-accent-subtle:  var(--abg);
   --OrdoAnimi-accent-border:  var(--aborder);
   --OrdoAnimi-navy:           var(--navy);
-  --OrdoAnimi-navy-dark:      #16231c;
-  --OrdoAnimi-font-heading:   'Archivo Black', 'Playfair Display', Georgia, serif;
+  --OrdoAnimi-navy-dark:      #0b0e11;
+  --OrdoAnimi-font-heading:   'Playfair Display', 'Playfair Display', Georgia, serif;
   --OrdoAnimi-font-body:      'DM Sans', -apple-system, sans-serif;
   --OrdoAnimi-font-mono:      'DM Mono', ui-monospace, monospace;
   --OrdoAnimi-radius-sm:      2px;
   --OrdoAnimi-radius-md:      2px;
   --OrdoAnimi-radius-lg:      4px;
-  --OrdoAnimi-shadow:         0 1px 3px rgba(22,35,28,0.06), 0 1px 2px rgba(22,35,28,0.04);
-  --OrdoAnimi-shadow-md:      0 4px 12px rgba(22,35,28,0.08), 0 2px 4px rgba(22,35,28,0.04);
+  --OrdoAnimi-shadow:         0 1px 3px rgba(11,14,17,0.06), 0 1px 2px rgba(11,14,17,0.04);
+  --OrdoAnimi-shadow-md:      0 4px 12px rgba(11,14,17,0.08), 0 2px 4px rgba(11,14,17,0.04);
   --OrdoAnimi-transition:     200ms ease;
 }
 
@@ -61,30 +62,30 @@ body { background:var(--page); color:var(--body); font-family:'DM Sans',sans-ser
 a { color:var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; }
 
-.site-nav { position:sticky; top:0; z-index:100; background:rgba(22,35,28,0.96); backdrop-filter:blur(10px); border-bottom:1px solid rgba(250,247,239,0.12); box-shadow:0 1px 4px rgba(22,35,28,0.06); }
+.site-nav { position:sticky; top:0; z-index:100; background:rgba(11,14,17,0.96); backdrop-filter:blur(10px); border-bottom:1px solid rgba(250,247,239,0.12); box-shadow:0 1px 4px rgba(11,14,17,0.06); }
 .nav-inner { max-width:1180px; margin:0 auto; padding:0 32px; height:54px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-.nav-brand { font-family:'Archivo Black',sans-serif; font-size:22px; letter-spacing:0.06em; color:#faf7ef; white-space:nowrap; }
+.nav-brand { font-family:'Playfair Display',Georgia,serif; font-size:22px; letter-spacing:0.06em; color:#faf7ef; white-space:nowrap; }
 .nav-links { display:flex; gap:20px; list-style:none; align-items:center; }
 .nav-links a { font-size:12px; font-weight:500; color:#ebe4d2; text-decoration:none; transition:color .18s ease; }
-.nav-links a:hover { color:#ddb35c; }
+.nav-links a:hover { color:#d4b36a; }
 .nav-framework { padding:7px 12px; border:1px solid var(--border); border-radius:6px; color:var(--navy)!important; background:var(--panel); }
 
 .hero { min-height:calc(100vh - 54px); display:flex; align-items:center; padding:70px 32px 80px; background:linear-gradient(180deg,#f2ede0 0%,#ebe4d2 100%); border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
-.hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 1px 1px,rgba(22,35,28,.08) 1px,transparent 0); background-size:36px 36px; mask-image:linear-gradient(to bottom,black,transparent); pointer-events:none; }
+.hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 1px 1px,rgba(11,14,17,.08) 1px,transparent 0); background-size:36px 36px; mask-image:linear-gradient(to bottom,black,transparent); pointer-events:none; }
 .brand-watermark { position:absolute; right:-3%; bottom:-6%; width:34%; max-width:420px; opacity:0.035; pointer-events:none; z-index:0; }
 .hero-inner { max-width:1180px; margin:0 auto; width:100%; display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:70px; align-items:center; position:relative; z-index:1; }
 .hero-kicker { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.22em; color:var(--accent); margin-bottom:22px; }
-.hero h1 { font-family:'Archivo Black',sans-serif; font-size:clamp(74px,10vw,150px); line-height:.86; letter-spacing:.025em; color:var(--ink); margin-bottom:24px; }
+.hero h1 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(74px,10vw,150px); line-height:.86; letter-spacing:.025em; color:var(--ink); margin-bottom:24px; }
 .hero h1 span { display:block; color:transparent; -webkit-text-stroke:1.5px var(--accent); }
 .hero-lead { max-width:650px; font-size:18px; line-height:1.72; color:var(--body); margin-bottom:34px; }
 .hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
 .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:7px; font-size:13px; font-weight:600; text-decoration:none; transition:all .18s ease; }
-.btn-primary { background:var(--accent); color:#16231c; }
+.btn-primary { background:var(--accent); color:#0b0e11; }
 .btn-primary:hover { background:var(--accentd); text-decoration:none; transform:translateY(-1px); }
 .btn-secondary { background:var(--panel); color:var(--ink); border:1px solid var(--border); }
 .btn-secondary:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
 
-.hero-panel { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:28px; box-shadow:0 18px 50px rgba(22,35,28,.10); }
+.hero-panel { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:28px; box-shadow:0 18px 50px rgba(11,14,17,.10); }
 .panel-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.18em; color:var(--muted); margin-bottom:18px; }
 .axis { display:grid; gap:12px; }
 .axis-item { display:flex; gap:12px; padding:14px; border-radius:8px; background:var(--alt); border-left:3px solid var(--accent); }
@@ -97,12 +98,12 @@ section.alt { background:var(--alt); }
 .wrap { max-width:1180px; margin:0 auto; }
 .section-head { max-width:760px; margin-bottom:42px; }
 .label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); margin-bottom:12px; }
-h2 { font-family:'Archivo Black',sans-serif; font-size:clamp(42px,6vw,72px); line-height:.94; letter-spacing:.035em; color:var(--ink); margin-bottom:18px; }
+h2 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(42px,6vw,72px); line-height:.94; letter-spacing:.035em; color:var(--ink); margin-bottom:18px; }
 .section-head p { font-size:17px; color:var(--body); line-height:1.75; }
 
 .module-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
 .module-card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:24px; position:relative; overflow:hidden; transition:all .18s ease; text-decoration:none; color:inherit; }
-.module-card:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(22,35,28,.10); text-decoration:none; }
+.module-card:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(11,14,17,.10); text-decoration:none; }
 .module-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--mcolor,var(--accent)); }
 .module-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--mcolor,var(--accent)); font-weight:600; margin-bottom:14px; }
 .module-card h3 { font-size:18px; color:var(--ink); margin-bottom:10px; }
@@ -117,7 +118,7 @@ h2 { font-family:'Archivo Black',sans-serif; font-size:clamp(42px,6vw,72px); lin
 .eng-card { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--navy); border-radius:9px; padding:22px; }
 .eng-card h3 { font-size:16px; color:var(--ink); margin-bottom:8px; }
 .eng-card p { font-size:13px; color:var(--muted); line-height:1.55; }
-a.eng-card:hover { border-top-color:var(--accent); box-shadow:0 4px 12px rgba(22,35,28,.08); transform:translateY(-2px); transition:all .18s ease; }
+a.eng-card:hover { border-top-color:var(--accent); box-shadow:0 4px 12px rgba(11,14,17,.08); transform:translateY(-2px); transition:all .18s ease; }
 
 .pathway { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
 .path-step { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:16px; text-align:center; }
@@ -129,9 +130,9 @@ a.eng-card:hover { border-top-color:var(--accent); box-shadow:0 4px 12px rgba(22
 .cta h2 { color:#faf7ef; }
 .cta p { color:#c9bfa6; font-size:17px; margin-bottom:28px; }
 
-footer { background:#16231c; color:#8c9184; padding:36px 32px; }
+footer { background:#0b0e11; color:#8c9184; padding:36px 32px; }
 .footer-inner { max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
-.footer-brand { font-family:'Archivo Black',sans-serif; font-size:20px; color:#ded7c4; letter-spacing:.06em; }
+.footer-brand { font-family:'Playfair Display',Georgia,serif; font-size:20px; color:#ded7c4; letter-spacing:.06em; }
 .footer-links { display:flex; gap:16px; flex-wrap:wrap; }
 .footer-links a { color:#8c9184; font-size:12px; text-decoration:none; }
 .footer-links a:hover { color:#ded7c4; }
@@ -154,7 +155,7 @@ footer { background:#16231c; color:#8c9184; padding:36px 32px; }
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#faf7ef;}
 @media(max-width:680px){
   .nav-toggle{display:flex;align-items:center;justify-content:center;}
-  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf7ef;border-bottom:1px solid #ded7c4;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(22,35,28,.10);z-index:99;flex-wrap:nowrap!important;}
+  .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf7ef;border-bottom:1px solid #ded7c4;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(11,14,17,.10);z-index:99;flex-wrap:nowrap!important;}
   .nav-links.open,.nav-links-bar.open{display:flex!important;}
 }</style>
 </head>
@@ -174,7 +175,7 @@ footer { background:#16231c; color:#8c9184; padding:36px 32px; }
   </div>
 </nav>
 <section class="hero" id="top">
-  <svg class="brand-watermark" viewBox="0 0 64 64" aria-hidden="true"><text x="32" y="47" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#16231c">OA</text></svg>
+  <img class="brand-watermark" src="/oa-mark.png" alt="" aria-hidden="true">
   <div class="hero-inner">
     <div>
       <p class="hero-kicker">The OrdoAnimi Framework · Solution Architecture</p>
