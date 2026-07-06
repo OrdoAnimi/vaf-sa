@@ -8,12 +8,12 @@ If you landed in this repository from OrdoAnimi, LinkedIn, or search, use the re
 
 | Need | Use this |
 |---|---|
-| Understand OrdoAnimi Architecture | [OrdoAnimi Architecture home](https://zencloudau.github.io/vaf-sa/) |
-| Navigate the full public site | [OrdoAnimi Architecture site map](https://zencloudau.github.io/vaf-sa/site-map.html) |
-| Start the practitioner method | [Module 01 - Orientation](https://zencloudau.github.io/vaf-sa/modules/module-01-orientation.html) |
-| Use the toolkit | [Solution Architecture Toolkit](https://zencloudau.github.io/vaf-sa/toolkit.html) |
-| Use cloud reference material | [Cloud Architecture Reference](https://zencloudau.github.io/vaf-sa/cloud-reference/) |
-| Read the worked example | [Worked Example](https://zencloudau.github.io/vaf-sa/worked-example.html) |
+| Understand OrdoAnimi Architecture | [OrdoAnimi Architecture home](https://architecture.ordoanimi.com/) |
+| Navigate the full public site | [OrdoAnimi Architecture site map](https://architecture.ordoanimi.com/site-map.html) |
+| Start the practitioner method | [Module 01 - Orientation](https://architecture.ordoanimi.com/modules/module-01-orientation.html) |
+| Use the toolkit | [Solution Architecture Toolkit](https://architecture.ordoanimi.com/toolkit.html) |
+| Use cloud reference material | [Cloud Architecture Reference](https://architecture.ordoanimi.com/cloud-reference/) |
+| Read the worked example | [Worked Example](https://architecture.ordoanimi.com/worked-example.html) |
 | Understand ecosystem placement | [Ecosystem Map](docs/ecosystem-map.md) |
 | Review usage terms | [Usage Terms](USAGE-TERMS.md) |
 
@@ -63,7 +63,7 @@ The current repository provides a static framework site with:
 
 ## Live Demo
 
-[OrdoAnimi Architecture](https://zencloudau.github.io/vaf-sa/)
+[OrdoAnimi Architecture](https://architecture.ordoanimi.com/)
 
 ## Screenshots
 
@@ -127,7 +127,7 @@ Deployment is documented in [DEPLOYMENT.md](DEPLOYMENT.md).
 Production URL:
 
 ```text
-https://zencloudau.github.io/vaf-sa/
+https://architecture.ordoanimi.com/
 ```
 
 ## Project Status

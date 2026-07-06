@@ -23,7 +23,7 @@ Recommended attribution:
 ```text
 OrdoAnimi Architecture — The OrdoAnimi Framework: Solution Architecture
 Phil Myint / OrdoAnimi
-https://zencloudau.github.io/vaf-sa/
+https://architecture.ordoanimi.com/
 ```
 
 ## Method and Content
@@ -43,7 +43,7 @@ OrdoAnimi Architecture is the solution architecture practitioner method within t
 Framework and research authority:
 
 ```text
-https://zencloudau.github.io/velocity-architecture/
+https://framework.ordoanimi.com/
 ```
 
 ## Disclaimer

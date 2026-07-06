@@ -46,19 +46,19 @@ It is designed for engagements where:
 
 ```text
 OrdoAnimi Architecture:
-https://zencloudau.github.io/vaf-sa/
+https://architecture.ordoanimi.com/
 
 The OrdoAnimi Framework:
-https://zencloudau.github.io/velocity-architecture/
+https://framework.ordoanimi.com/
 
 VAF Agentic Architect:
-https://velocityarchitectureframework.com/
+https://framework.ordoanimi.com/
 
 EA Artefact Generator:
 https://ea.velocityarchitecture.com.au/
 
 OrdoAnimi:
-https://www.zencloud.com.au/
+https://www.ordoanimi.com/
 
 ZenCloudAU GitHub:
 https://github.com/ZenCloudAU

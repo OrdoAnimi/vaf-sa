@@ -3,7 +3,7 @@
 ## Production
 
 ```text
-Production URL: https://zencloudau.github.io/vaf-sa/
+Production URL: https://architecture.ordoanimi.com/
 Platform: GitHub Pages
 Source branch: main
 Site source: static site
@@ -72,12 +72,12 @@ After each update, verify:
 ## Manual Verification URLs
 
 ```text
-https://zencloudau.github.io/vaf-sa/
-https://zencloudau.github.io/vaf-sa/site-map.html
-https://zencloudau.github.io/vaf-sa/toolkit.html
-https://zencloudau.github.io/vaf-sa/cloud-reference/
-https://zencloudau.github.io/vaf-sa/modules/module-01-orientation.html
-https://zencloudau.github.io/vaf-sa/worked-example.html
+https://architecture.ordoanimi.com/
+https://architecture.ordoanimi.com/site-map.html
+https://architecture.ordoanimi.com/toolkit.html
+https://architecture.ordoanimi.com/cloud-reference/
+https://architecture.ordoanimi.com/modules/module-01-orientation.html
+https://architecture.ordoanimi.com/worked-example.html
 ```
 
 ## Rollback
