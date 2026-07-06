@@ -61,12 +61,12 @@ body { background:var(--page); color:var(--body); font-family:'DM Sans',sans-ser
 a { color:var(--accent); text-decoration:none; }
 a:hover { text-decoration:underline; }
 
-.site-nav { position:sticky; top:0; z-index:100; background:rgba(250,247,239,0.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); box-shadow:0 1px 4px rgba(22,35,28,0.06); }
+.site-nav { position:sticky; top:0; z-index:100; background:rgba(22,35,28,0.96); backdrop-filter:blur(10px); border-bottom:1px solid rgba(250,247,239,0.12); box-shadow:0 1px 4px rgba(22,35,28,0.06); }
 .nav-inner { max-width:1180px; margin:0 auto; padding:0 32px; height:54px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-.nav-brand { font-family:'Archivo Black',sans-serif; font-size:22px; letter-spacing:0.06em; color:var(--accent); white-space:nowrap; }
+.nav-brand { font-family:'Archivo Black',sans-serif; font-size:22px; letter-spacing:0.06em; color:#faf7ef; white-space:nowrap; }
 .nav-links { display:flex; gap:20px; list-style:none; align-items:center; }
-.nav-links a { font-size:12px; font-weight:500; color:var(--muted); text-decoration:none; transition:color .18s ease; }
-.nav-links a:hover { color:var(--ink); }
+.nav-links a { font-size:12px; font-weight:500; color:#ebe4d2; text-decoration:none; transition:color .18s ease; }
+.nav-links a:hover { color:#ddb35c; }
 .nav-framework { padding:7px 12px; border:1px solid var(--border); border-radius:6px; color:var(--navy)!important; background:var(--panel); }
 
 .hero { min-height:calc(100vh - 54px); display:flex; align-items:center; padding:70px 32px 80px; background:linear-gradient(180deg,#f2ede0 0%,#ebe4d2 100%); border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
@@ -151,7 +151,7 @@ footer { background:#16231c; color:#8c9184; padding:36px 32px; }
   .module-grid,.tool-grid,.engagements,.pathway { grid-template-columns:1fr; }
   .footer-inner { flex-direction:column; align-items:flex-start; }
 }
-.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#16231c;}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;line-height:1;font-size:20px;color:#faf7ef;}
 @media(max-width:680px){
   .nav-toggle{display:flex;align-items:center;justify-content:center;}
   .nav-links,.nav-links-bar{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf7ef;border-bottom:1px solid #ded7c4;flex-direction:column!important;padding:16px 24px;gap:14px!important;box-shadow:0 4px 12px rgba(22,35,28,.10);z-index:99;flex-wrap:nowrap!important;}
@@ -278,13 +278,15 @@ footer { background:#16231c; color:#8c9184; padding:36px 32px; }
       <a href="site-map.html">Site Map</a>
       <a href="toolkit.html">Toolkit</a>
       <a href="cloud-reference/">Cloud Reference</a>
-      <a href="https://www.ordoanimi.com/" target="_blank" rel="noopener">OrdoAnimi</a>
-      <a href="https://academy.ordoanimi.com/" target="_blank" rel="noopener">OrdoAnimi Academy</a>
-      <a href="https://framework.ordoanimi.com/" target="_blank" rel="noopener">OrdoAnimi Framework</a>
+      <a href="https://www.ordoanimi.com/" target="_blank" rel="noopener">Home</a>
+      <a href="https://framework.ordoanimi.com/" target="_blank" rel="noopener">Framework</a>
+      <a href="https://academy.ordoanimi.com/" target="_blank" rel="noopener">Academy</a>
+      <a href="https://valour.ordoanimi.com/" target="_blank" rel="noopener">Valour&trade;</a>
+      <a href="https://executive.ordoanimi.com/" target="_blank" rel="noopener">Executive</a>
       <a href="https://github.com/ZenCloudAU/vaf-sa" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <p class="footer-principle">OrdoAnimi advises, builds, and decides.</p>
-    <p class="footer-copy">Free to use. Attribution appreciated. © 2026 Phil Myint / OrdoAnimi</p>
+    <p class="footer-principle">Writing on architecture, technology, and the profession.</p>
+    <p class="footer-copy">&copy; 2026 OrdoAnimi &middot; Phil Myint &middot; Brisbane, Australia &middot; Free to use, attribution appreciated</p>
   </div>
 
 </footer>
