@@ -7,7 +7,7 @@ on:
 
 jobs:
   check:
-    uses: ZenCloudAU/velocity-architecture/.github/workflows/link-integrity.yml@main
+    uses: OrdoAnimi/framework/.github/workflows/link-integrity.yml@main
     with:
       site_url: 'https://architecture.ordoanimi.com/'
       repo_name: 'vaf-sa'
