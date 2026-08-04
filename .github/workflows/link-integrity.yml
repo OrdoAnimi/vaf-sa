@@ -4,10 +4,43 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
 
 jobs:
-  check:
-    uses: OrdoAnimi/framework/.github/workflows/link-integrity.yml@main
-    with:
-      site_url: 'https://architecture.ordoanimi.com/'
-      repo_name: 'vaf-sa'
+  check-public-routes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://architecture.ordoanimi.com'
+          routes=(
+            '/'
+            '/preface.html'
+            '/site-map.html'
+            '/toolkit.html'
+            '/lexicon.html'
+            '/escalation-protocol.html'
+            '/worked-example.html'
+            '/workshop-playbook.html'
+            '/modules/module-01-orientation.html'
+            '/modules/module-06-velocity-loop.html'
+            '/cloud-reference/'
+            '/engagement-archetypes/silo.html'
+          )
+
+          failed=0
+          for route in "${routes[@]}"; do
+            url="${base}${route}"
+            status=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 -L "$url" || true)
+            if [[ "$status" -ge 200 && "$status" -lt 400 ]]; then
+              echo "OK [$status] $url"
+            else
+              echo "::error::FAIL [$status] $url"
+              failed=1
+            fi
+          done
+
+          exit "$failed"
